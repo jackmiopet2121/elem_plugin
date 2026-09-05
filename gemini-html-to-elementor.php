@@ -405,51 +405,37 @@ class HCV_Universal_Plugin {
             update_post_meta($post_id, '_elementor_version', '3.20.0');
 
             // =========================================================================
-            // NEW: Apply responsive normalization to HTML + CSS
+            // Save V2 scoped CSS exactly as generated.
+            // Do not apply generic responsive normalization here: it previously added
+            // fixed widths to every nested Elementor container and broke mobile layouts.
             // =========================================================================
 
-            // Initialize CSS variables
-            $normalized_css = '';
+            $scoped_css = '';
+
+            if (!empty($v2['scoped_css_preview']['css_preview'])) {
+                $scoped_css = $v2['scoped_css_preview']['css_preview'];
+            } elseif (!empty($v2['scoped_css_preview']['css_readable'])) {
+                $scoped_css = $v2['scoped_css_preview']['css_readable'];
+            }
+
             $css_hash = '';
 
-            // Extract V2 CSS (scoped) from build_v2 result
-            $scoped_css_from_v2 = '';
+            if ($scoped_css !== '') {
+                $css_hash = md5($scoped_css);
 
-            if (!empty($v2['scoped_css_preview']['css_minified'])) {
-                $scoped_css_from_v2 = $v2['scoped_css_preview']['css_minified'];
-            } elseif (!empty($v2['scoped_css_preview']['css_readable'])) {
-                $scoped_css_from_v2 = $v2['scoped_css_preview']['css_readable'];
-            }
+                update_post_meta($post_id, '_hcv_v2_scoped_css', $scoped_css);
+                update_post_meta($post_id, '_hcv_v2_scoped_css_hash', $css_hash);
 
-            // Apply responsive normalization if CSS exists
-            if (!empty($scoped_css_from_v2)) {
-                try {
-                    $normalized_result = HCV_Scoped_Style_Generator::apply_responsive_normalization(
-                        $html_code,
-                        $scoped_css_from_v2,
-                        $post_id
-                    );
-                    $normalized_html = $normalized_result['html'];
-                    $normalized_css = $normalized_result['css'];
-                    $css_hash = md5($normalized_css);
-
-                    // Save normalized CSS for reference
-                    update_post_meta($post_id, '_hcv_v2_scoped_css', $normalized_css);
-                    update_post_meta($post_id, '_hcv_v2_scoped_css_hash', $css_hash);
-
-                    error_log('HCV V2: Responsive normalization applied, CSS length: ' . strlen($normalized_css));
-                } catch (Throwable $css_error) {
-                    error_log('HCV V2: Responsive normalization failed: ' . $css_error->getMessage());
-                    // Fallback: save original CSS without normalization
-                    update_post_meta($post_id, '_hcv_v2_scoped_css', $scoped_css_from_v2);
-                    update_post_meta($post_id, '_hcv_v2_scoped_css_hash', md5($scoped_css_from_v2));
-                    $css_hash = md5($scoped_css_from_v2);
-                }
+                error_log(
+                    'HCV V2: Scoped CSS saved without global responsive normalization. ' .
+                    'CSS length: ' . strlen($scoped_css)
+                );
             } else {
-                error_log('HCV V2: No scoped CSS to normalize');
-            }
+                delete_post_meta($post_id, '_hcv_v2_scoped_css');
+                delete_post_meta($post_id, '_hcv_v2_scoped_css_hash');
 
-            // =========================================================================
+                error_log('HCV V2: No scoped CSS was generated.');
+            }
 
             // Set Elementor template based on Header/Footer mode.
             $template = ($hf_mode === 'code_hf')
