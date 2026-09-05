@@ -1,22 +1,28 @@
 <?php
-if (!defined('ABSPATH')) exit;
+/**
+ * Legacy HCV frontend injector.
+ *
+ * Kept as a no-op for backward compatibility. Do not add HCV classes to
+ * generic Elementor containers: theme, header, footer, and popup containers
+ * must never be modified by the converter.
+ *
+ * @package Gemini_HTML_to_Elementor_Universal_Pro
+ */
 
-class HCV_JS_Injector {
-    public static function init() {
-        add_action('wp_footer', array(__CLASS__, 'inject_class_script'), 9999);
-    }
-
-    public static function inject_class_script() {
-        ?>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll(".e-con").forEach(function(el) {
-                el.classList.add("hcv-v2-root");
-            });
-        });
-        </script>
-        <?php
-    }
+if (!defined('ABSPATH')) {
+    exit;
 }
 
-HCV_JS_Injector::init();
+class HCV_JS_Injector {
+
+    /**
+     * Kept for callers from older plugin versions.
+     * Responsive behavior is generated as scoped CSS by
+     * HCV_Scoped_Style_Generator, not through global frontend JavaScript.
+     *
+     * @return void
+     */
+    public static function init() {
+        // Intentionally empty.
+    }
+}
