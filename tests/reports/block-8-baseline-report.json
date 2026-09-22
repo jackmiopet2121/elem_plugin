@@ -4,8 +4,8 @@
   "viewportConfiguration": [
     {
       "name": "desktop",
-      "width": 1200,
-      "height": 900
+      "width": 1280,
+      "height": 800
     },
     {
       "name": "tablet",
@@ -14,14 +14,14 @@
     },
     {
       "name": "mobile",
-      "width": 375,
-      "height": 812
+      "width": 370,
+      "height": 667
     }
   ],
   "totalFixtures": 8,
   "passedCompilations": 8,
   "failedCompilations": 0,
-  "invariantViolationsCount": 0,
+  "invariantViolationsCount": 8,
   "fixtures": [
     {
       "fixtureId": "corpus/01-pricing-table",
@@ -44,16 +44,37 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 4,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 1,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 2,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "NON_ELEMENTOR_PRIMITIVE:switch",
           "NON_ELEMENTOR_PRIMITIVE:pseudo-content",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 93,
         "microCssSizeBytes": 4571,
         "scriptSizeBytes": 10552,
+        "missingSidBreakdown": {
+          "containers": 0,
+          "nativeWidgets": 2,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 2
+        },
         "missingSidCount": 2,
+        "idMetrics": {
+          "totalIds": 87,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -61,8 +82,10 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)"
+        ]
       }
     },
     {
@@ -86,6 +109,11 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 8,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 1,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 6,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
@@ -96,10 +124,26 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 83,
         "microCssSizeBytes": 8469,
         "scriptSizeBytes": 6236,
+        "missingSidBreakdown": {
+          "containers": 0,
+          "nativeWidgets": 0,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 2
+        },
         "missingSidCount": 0,
+        "idMetrics": {
+          "totalIds": 75,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -116,7 +160,7 @@
       "relativePath": "tests/corpus/03-faq-accordion/input.html",
       "contentHash": "73c22a922e23",
       "compilationStatus": "SUCCESS (ADVISORY)",
-      "errorMessage": "[AUDIT NOTICE] Quality Contract Advisories detected (1):\n  ! Badge container 8b65531d (.faq-pill-badge e-sid-5) lacks _flex_size: 'none'. May stretch on flex parents!\nProceeding with template generation...\n\n\n========================================================================\n  ! [ADVISORY EXPOR",
+      "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 0,
         "viewportFidelity": null,
@@ -132,6 +176,11 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 9,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 1,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 7,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
@@ -143,10 +192,33 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [
+          "HTML widget a54315f6 contains standard button markup that must be native",
+          "HTML widget f37478b2 contains standard button markup that must be native",
+          "HTML widget 0ea1545b contains standard button markup that must be native",
+          "HTML widget 034334cd contains standard button markup that must be native",
+          "HTML widget 8d3a3359 contains standard button markup that must be native",
+          "HTML widget 1fdf3047 contains standard button markup that must be native"
+        ],
         "nativeEditabilityPercentage": 84,
         "microCssSizeBytes": 4769,
         "scriptSizeBytes": 13768,
+        "missingSidBreakdown": {
+          "containers": 0,
+          "nativeWidgets": 20,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 2
+        },
         "missingSidCount": 20,
+        "idMetrics": {
+          "totalIds": 114,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -154,8 +226,11 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "20 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 20, customWidgets: 0, contentHtml: 0)",
+          "6 HTML widget contract violation(s) (e.g., HTML widget a54315f6 contains standard button markup that must be native)"
+        ]
       }
     },
     {
@@ -163,7 +238,7 @@
       "relativePath": "tests/corpus/04-pricing-calculator/input.html",
       "contentHash": "ad6445cfd6ff",
       "compilationStatus": "SUCCESS (ADVISORY)",
-      "errorMessage": "[AUDIT NOTICE] Quality Contract Advisories detected (1):\n  ! Badge container dc3bdc0c (.calc-badge e-sid-5) lacks _flex_size: 'none'. May stretch on flex parents!\nProceeding with template generation...\n\n\n========================================================================\n  ! [ADVISORY EXPORT (n",
+      "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 39,
         "viewportFidelity": null,
@@ -179,6 +254,11 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 9,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 2,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 6,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "SYSTEM:stylesheet-engine",
@@ -190,10 +270,26 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 80,
         "microCssSizeBytes": 7301,
         "scriptSizeBytes": 19219,
+        "missingSidBreakdown": {
+          "containers": 0,
+          "nativeWidgets": 2,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 3
+        },
         "missingSidCount": 2,
+        "idMetrics": {
+          "totalIds": 86,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -201,8 +297,10 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)"
+        ]
       }
     },
     {
@@ -226,6 +324,11 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 6,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 1,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 4,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
@@ -234,10 +337,26 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
+        "missingSidBreakdown": {
+          "containers": 0,
+          "nativeWidgets": 3,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 2
+        },
         "missingSidCount": 3,
+        "idMetrics": {
+          "totalIds": 203,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -245,8 +364,10 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
+        ]
       }
     },
     {
@@ -270,16 +391,37 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 4,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 1,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 2,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 83,
         "microCssSizeBytes": 5452,
         "scriptSizeBytes": 6662,
+        "missingSidBreakdown": {
+          "containers": 0,
+          "nativeWidgets": 0,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 2
+        },
         "missingSidCount": 0,
+        "idMetrics": {
+          "totalIds": 36,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -312,6 +454,11 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 6,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 1,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 4,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
@@ -320,10 +467,26 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
+        "missingSidBreakdown": {
+          "containers": 0,
+          "nativeWidgets": 3,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 2
+        },
         "missingSidCount": 3,
+        "idMetrics": {
+          "totalIds": 203,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -331,8 +494,10 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
+        ]
       }
     },
     {
@@ -340,7 +505,7 @@
       "relativePath": "landingv2.html",
       "contentHash": "9c98c99b11c6",
       "compilationStatus": "SUCCESS (ADVISORY)",
-      "errorMessage": "[AUDIT NOTICE] Quality Contract Advisories detected (1):\n  ! Badge container 5d6e3f8e (.badge-pill e-sid-6) lacks _flex_size: 'none'. May stretch on flex parents!\nProceeding with template generation...\n\n\n========================================================================\n  ! [ADVISORY EXPORT (n",
+      "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 84,
         "viewportFidelity": null,
@@ -356,6 +521,11 @@
         "customPluginWidgetsCount": null,
         "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
         "htmlWidgetsCount": 13,
+        "systemHtmlWidgetsCount": {
+          "stylesheet": 1,
+          "script": 1
+        },
+        "contentHtmlWidgetsCount": 11,
         "htmlWidgetReasons": [
           "SYSTEM:stylesheet-engine",
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
@@ -371,10 +541,39 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
+        "htmlReasonViolations": [
+          "HTML widget d35e4e80 contains standard heading markup that must be native",
+          "HTML widget d35e4e80 contains standard button markup that must be native",
+          "HTML widget d35e4e80 contains standard structural card/grid layout that must be native",
+          "HTML widget f136f38c contains standard heading markup that must be native",
+          "HTML widget f136f38c contains standard button markup that must be native",
+          "HTML widget f136f38c contains standard structural card/grid layout that must be native",
+          "HTML widget 3ce54161 contains standard heading markup that must be native",
+          "HTML widget 3ce54161 contains standard button markup that must be native",
+          "HTML widget 3ce54161 contains standard structural card/grid layout that must be native",
+          "HTML widget 0667dbd3 contains standard heading markup that must be native",
+          "HTML widget 0667dbd3 contains standard button markup that must be native",
+          "HTML widget 0667dbd3 contains standard structural card/grid layout that must be native"
+        ],
         "nativeEditabilityPercentage": 88,
         "microCssSizeBytes": 18095,
         "scriptSizeBytes": 6155,
-        "missingSidCount": 1,
+        "missingSidBreakdown": {
+          "containers": 1,
+          "nativeWidgets": 1,
+          "customWidgets": 0,
+          "contentHtmlWidgets": 0,
+          "exemptSystemWidgets": 2
+        },
+        "missingSidCount": 2,
+        "idMetrics": {
+          "totalIds": 209,
+          "malformed": 0,
+          "duplicates": 0,
+          "missing": 0
+        },
+        "scalarViolationsCount": 0,
+        "scalarViolations": [],
         "consoleErrorsCount": 0,
         "unverifiedNodeCount": null,
         "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
@@ -382,8 +581,11 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "2 non-exempt element(s) missing SID (containers: 1, nativeWidgets: 1, customWidgets: 0, contentHtml: 0)",
+          "12 HTML widget contract violation(s) (e.g., HTML widget d35e4e80 contains standard heading markup that must be native)"
+        ]
       }
     }
   ]

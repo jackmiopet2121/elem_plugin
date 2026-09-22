@@ -4,7 +4,7 @@
   "type": "page",
   "content": [
     {
-      "id": "859a86cf",
+      "id": "0aea3a7b",
       "elType": "container",
       "isInner": false,
       "_sid": "sid-2",
@@ -115,12 +115,12 @@
       },
       "elements": [
         {
-          "id": "d8888ef3",
+          "id": "9a90ad8e",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<style>\n/* SCOPED_R2_HEALING */\n.billing-opt-btn .elementor-button { interactive-behavior: interaction-active !important; }\n\n.addon-card { interactive-behavior: interaction-active !important; }\n\n.switch-wrap { interactive-behavior: interaction-active !important; }\n\n.e-sid-53 { interactive-behavior: interaction-active !important; }\n\n.switch-slider { interactive-behavior: interaction-active !important; }\n</style>",
-            "css_classes": "scoped-r2-healing-engine e-sid-d8888ef3",
+            "css_classes": "scoped-r2-healing-engine e-sid-9a90ad8e",
             "_html_reason": "SYSTEM:stylesheet-engine",
             "_margin": {
               "unit": "px",
@@ -138,17 +138,17 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "scoped-r2-healing-engine e-sid-d8888ef3"
+            "_css_classes": "scoped-r2-healing-engine e-sid-9a90ad8e"
           },
           "elements": []
         },
         {
-          "id": "bc24f98a",
+          "id": "ec8d0860",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<style>\n.billing-opt-btn {\n  cursor: pointer;\n  transition: background-color 0.2s ease, color 0.2s ease;\n  user-select: none;\n}\n\n#btn-monthly.is-active, #btn-annual.is-active {\n  background-color: #0F172A !important;\n  color: #FFFFFF !important;\n}\n\n#btn-annual.is-active .save-badge .elementor-button:hover, #btn-annual.is-active .save-badge.elementor-widget-button .elementor-button:hover {\n  background-color: #FFFFFF !important;\n  color: #0F172A !important;\n}\n\n.calc-controls-card {\n  flex: 1 1 58%;\n}\n\n.slider-track-wrap {\n  position: relative;\n}\n\n#slider-tooltip {\n  position: absolute;\n  top: -18px;\n  left: 10%;\n  transform: translateX(-50%);\n  white-space: nowrap;\n  pointer-events: none;\n  z-index: 5;\n}\n\n#slider-tooltip::after, #slider-tooltip .elementor-heading-title::after, #slider-tooltip .elementor-icon::after {\n  content: '';\n  position: absolute;\n  bottom: -4px;\n  left: 50%;\n  transform: translateX(-50%) !important;\n  border-width: 4px 4px 0 4px;\n  border-style: solid;\n  border-color: #0F172A transparent transparent transparent !important;\n}\n\n.custom-range-slider {\n  -webkit-appearance: none;\n  appearance: none;\n  outline: none;\n  cursor: grab;\n  position: relative;\n  z-index: 2;\n}\n\n.custom-range-slider:active {\n  cursor: grabbing;\n}\n\n.custom-range-slider::-webkit-slider-thumb {\n  -webkit-appearance: none;\n  appearance: none;\n  cursor: grab;\n  transition: transform 0.2s ease;\n}\n\n.custom-range-slider::-webkit-slider-thumb:hover {\n  transform: scale(1.15) !important;\n}\n\n.custom-range-slider::-moz-range-thumb {\n  cursor: grab;\n  transition: transform 0.2s ease;\n}\n\n.milestone-node {\n  cursor: pointer;\n  user-select: none;\n  transition: color 0.2s ease;\n}\n\n.milestone-node:hover {\n  color: #2563EB !important;\n}\n\n.milestone-node:hover .milestone-tick, .milestone-node:hover .milestone-tick .elementor-heading-title, .milestone-node:hover .milestone-tick .elementor-icon, .milestone-node:hover .milestone-tick .elementor-button {\n  background-color: #2563EB !important;\n}\n\n.addon-card {\n  cursor: pointer;\n  transition: background-color 0.2s ease;\n}\n\n.addon-card:hover {\n  background-color: #F1F5F9 !important;\n}\n\n.switch-wrap {\n  position: relative;\n  flex-shrink: 0;\n}\n\n.switch-slider {\n  position: absolute;\n  cursor: pointer;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background-color: #CBD5E1;\n  border-radius: 9999px;\n  transition: background-color 0.2s ease;\n}\n\n.switch-slider::before {\n  position: absolute;\n  content: '';\n  height: 18px;\n  width: 18px;\n  left: 3px;\n  bottom: 3px;\n  background-color: #FFFFFF !important;\n  border-radius: 9999px;\n  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.2) !important;\n  transition: transform 0.2s ease;\n}\n\n.switch-wrap input:checked + .switch-slider {\n  background-color: #2563EB !important;\n}\n\n.switch-wrap input:checked + .switch-slider::before {\n  transform: translateX(20px) !important;\n}\n\n.calc-summary-card {\n  flex: 1 1 42%;\n}\n\n.features-list {\n  list-style: none;\n}\n\n.feature-item i {\n  flex-shrink: 0;\n}\n\n.cta-submit-btn {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  gap: 10px;\n  width: 100%;\n  padding: 16px 24px;\n  background-color: #2563EB;\n  border: 1.5px solid #2563EB;\n  border-radius: 14px;\n  color: #FFFFFF;\n  font-family: inherit;\n  font-size: 15px;\n  font-weight: 700;\n  cursor: pointer;\n  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);\n  transition: background-color 0.2s ease, transform 0.2s ease;\n}\n\n.cta-submit-btn:hover {\n  background-color: #1D4ED8 !important;\n  border-color: #1D4ED8 !important;\n}\n\n.cta-submit-btn:active {\n  transform: scale(0.98) !important;\n}\n\n.elementor-widget-heading[class*=\"badge\"] .elementor-heading-title,\n.elementor-widget-heading[class*=\"pill\"] .elementor-heading-title,\n[class*=\"badge\"] .elementor-heading-title,\n[class*=\"pill\"] .elementor-heading-title {\n  line-height: 1 !important;\n  display: inline-flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n  margin: 0 !important;\n}\n\n[class*=\"track-wrap\"], [class*=\"track-wrap\"] input[type=\"range\"] { width: 100% !important; max-width: 100% !important; display: block !important; box-sizing: border-box !important; }\n\n.switch-wrap, [class*=\"switch-wrap\"] { cursor: pointer; display: inline-flex; align-items: center; }\n\n.switch-wrap input[type=\"checkbox\"], [class*=\"switch-wrap\"] input[type=\"checkbox\"] { cursor: pointer; }\n\n.milestone-node,\n.milestone-node > .e-con-inner {\n  width: 30px !important;\n  height: 30px !important;\n  max-height: 30px !important;\n  flex-shrink: 0 !important;\n  align-self: center !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.milestone-node,\n.milestone-node > .e-con-inner {\n  width: 31px !important;\n  height: 31px !important;\n  max-height: 31px !important;\n  flex-shrink: 0 !important;\n  align-self: center !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.milestone-node,\n.milestone-node > .e-con-inner {\n  width: 40px !important;\n  height: 40px !important;\n  max-height: 40px !important;\n  flex-shrink: 0 !important;\n  align-self: center !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.addon-icon-box,\n.addon-icon-box .elementor-widget-container,\n.addon-icon-box .elementor-icon-wrapper,\n.addon-icon-box .elementor-icon {\n  width: 36px !important;\n  height: 36px !important;\n  max-height: 36px !important;\n  flex-shrink: 0 !important;\n  align-self: center !important;\n  border-radius: 8px !important;\n  background: #ffffff !important;\n  border: 1px solid #e2e8f0 !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.e-sid-73,\n.e-sid-73 .elementor-widget-container,\n.e-sid-73 .elementor-heading-title {\n  width: 74px !important;\n  height: 74px !important;\n  max-height: 74px !important;\n  flex-shrink: 0 !important;\n  align-self: center !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.cta-submit-btn button,\n.cta-submit-btn .composite-trigger {\n  appearance: none !important;\n  background: #2563eb !important;\n  border: 1px solid #2563eb !important;\n  color: #ffffff !important;\n  padding: 16px 24px !important;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: center !important;\n  font: inherit;\n  cursor: pointer;\n  border-radius: 14px !important;\n}\n\n@media (max-width: 1024px) {\n  .calc-controls-card,\n  .calc-summary-card {\n  flex: 1 1 100%;\n  }\n}\n</style>",
-            "css_classes": "embedded-stylesheet-engine e-sid-bc24f98a",
+            "css_classes": "embedded-stylesheet-engine e-sid-ec8d0860",
             "_html_reason": "SYSTEM:stylesheet-engine",
             "_margin": {
               "unit": "px",
@@ -166,12 +166,12 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-stylesheet-engine e-sid-bc24f98a"
+            "_css_classes": "embedded-stylesheet-engine e-sid-ec8d0860"
           },
           "elements": []
         },
         {
-          "id": "8523ce49",
+          "id": "0e1e5387",
           "elType": "container",
           "isInner": true,
           "_sid": "sid-3",
@@ -288,7 +288,7 @@
           },
           "elements": [
             {
-              "id": "4cde9109",
+              "id": "cd99c709",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-4",
@@ -409,7 +409,7 @@
               },
               "elements": [
                 {
-                  "id": "dc3bdc0c",
+                  "id": "458c945e",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-5",
@@ -559,7 +559,7 @@
                   },
                   "elements": [
                     {
-                      "id": "de8a5fbc",
+                      "id": "9cf6c01c",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "_sid": "sid-5-inline",
@@ -611,7 +611,7 @@
                   ]
                 },
                 {
-                  "id": "5ef20896",
+                  "id": "541f6fca",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-8",
@@ -697,7 +697,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "0a4015c7",
+                  "id": "a1419217",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-9",
@@ -750,7 +750,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "16e9ca29",
+                  "id": "c55427fc",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-10",
@@ -892,7 +892,7 @@
                   },
                   "elements": [
                     {
-                      "id": "fa10adb8",
+                      "id": "9870ec42",
                       "elType": "widget",
                       "widgetType": "button",
                       "_sid": "sid-11",
@@ -1060,7 +1060,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "e7ba3d42",
+                      "id": "39d327f3",
                       "elType": "widget",
                       "widgetType": "button",
                       "_sid": "sid-12",
@@ -1232,7 +1232,7 @@
               ]
             },
             {
-              "id": "5fce5759",
+              "id": "2ff65c50",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-14",
@@ -1347,7 +1347,7 @@
               },
               "elements": [
                 {
-                  "id": "37e1b5b6",
+                  "id": "90d0b947",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-15",
@@ -1523,7 +1523,7 @@
                   },
                   "elements": [
                     {
-                      "id": "a6b79dfd",
+                      "id": "a4c19bb8",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-16",
@@ -1632,7 +1632,7 @@
                       },
                       "elements": [
                         {
-                          "id": "eadb0f46",
+                          "id": "c20538ef",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-17",
@@ -1751,7 +1751,7 @@
                           },
                           "elements": [
                             {
-                              "id": "aba538ff",
+                              "id": "c612eb25",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-18",
@@ -1800,7 +1800,7 @@
                               "isInner": false
                             },
                             {
-                              "id": "a3394e67",
+                              "id": "8a8ae306",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-19",
@@ -1847,7 +1847,7 @@
                           ]
                         },
                         {
-                          "id": "5bdf8198",
+                          "id": "b1271108",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-20",
@@ -1984,7 +1984,7 @@
                           },
                           "elements": [
                             {
-                              "id": "998cefb1",
+                              "id": "dadd00b8",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-20-inline",
@@ -2041,7 +2041,7 @@
                       ]
                     },
                     {
-                      "id": "a6358646",
+                      "id": "21c75af3",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-23",
@@ -2150,7 +2150,7 @@
                       },
                       "elements": [
                         {
-                          "id": "db293ad2",
+                          "id": "aeeaf32e",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-24",
@@ -2259,7 +2259,7 @@
                           },
                           "elements": [
                             {
-                              "id": "17fc026c",
+                              "id": "dc96771c",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-25",
@@ -2360,7 +2360,7 @@
                               "isInner": false
                             },
                             {
-                              "id": "3356c6a5",
+                              "id": "958f9880",
                               "elType": "widget",
                               "widgetType": "html",
                               "_sid": "sid-26",
@@ -2443,7 +2443,7 @@
                           ]
                         },
                         {
-                          "id": "dd0d9514",
+                          "id": "9ed75d16",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-27",
@@ -2552,7 +2552,7 @@
                           },
                           "elements": [
                             {
-                              "id": "3f8bf17e",
+                              "id": "06f62ec1",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-28",
@@ -2682,7 +2682,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "86a14a12",
+                                  "id": "075541d8",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-28-inline",
@@ -2729,7 +2729,7 @@
                               ]
                             },
                             {
-                              "id": "4c45bba4",
+                              "id": "16ecfbc0",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-31",
@@ -2865,7 +2865,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "151e3196",
+                                  "id": "73ad3c86",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-31-inline",
@@ -2912,7 +2912,7 @@
                               ]
                             },
                             {
-                              "id": "57cb6902",
+                              "id": "a393aa3a",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-34",
@@ -3055,7 +3055,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "e0bb8fe1",
+                                  "id": "b947499d",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-34-inline",
@@ -3102,7 +3102,7 @@
                               ]
                             },
                             {
-                              "id": "b45284aa",
+                              "id": "0b4d2c33",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-37",
@@ -3245,7 +3245,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "3f4f2a1f",
+                                  "id": "a2bdf9d3",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-37-inline",
@@ -3292,7 +3292,7 @@
                               ]
                             },
                             {
-                              "id": "dc86ef4e",
+                              "id": "a518f6e5",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-40",
@@ -3435,7 +3435,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "7b18cde6",
+                                  "id": "e0dd81c0",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-40-inline",
@@ -3486,7 +3486,7 @@
                       ]
                     },
                     {
-                      "id": "6d572c35",
+                      "id": "b8118187",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-43",
@@ -3605,7 +3605,7 @@
                       },
                       "elements": [
                         {
-                          "id": "befa61c7",
+                          "id": "b8b3765e",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-44",
@@ -3654,7 +3654,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "5b2ee4f6",
+                          "id": "ad129996",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-45",
@@ -3781,7 +3781,7 @@
                           },
                           "elements": [
                             {
-                              "id": "b91aa29f",
+                              "id": "d7f7e438",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-46",
@@ -3900,7 +3900,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "06f9e750",
+                                  "id": "f2be51ed",
                                   "elType": "widget",
                                   "widgetType": "icon",
                                   "_sid": "sid-47",
@@ -3982,7 +3982,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "bcda1800",
+                                  "id": "52233145",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-49",
@@ -4097,7 +4097,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "51c3c90e",
+                                      "id": "13f8684f",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-50",
@@ -4150,7 +4150,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "862c5787",
+                                      "id": "3680f5d5",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-51",
@@ -4207,7 +4207,7 @@
                               ]
                             },
                             {
-                              "id": "ee3d09b7",
+                              "id": "8448ca5d",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-52",
@@ -4296,7 +4296,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "3a0c69a6",
+                                  "id": "f96fc3d4",
                                   "elType": "widget",
                                   "widgetType": "html",
                                   "_sid": "sid-53",
@@ -4349,7 +4349,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "0c88ac20",
+                                  "id": "938b7b04",
                                   "elType": "widget",
                                   "widgetType": "html",
                                   "_sid": "sid-54",
@@ -4400,7 +4400,7 @@
                           ]
                         },
                         {
-                          "id": "cef21645",
+                          "id": "f09a6594",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-55",
@@ -4527,7 +4527,7 @@
                           },
                           "elements": [
                             {
-                              "id": "c6d87adb",
+                              "id": "418a9cf4",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-56",
@@ -4646,7 +4646,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "35ddba4d",
+                                  "id": "99a56e3c",
                                   "elType": "widget",
                                   "widgetType": "icon",
                                   "_sid": "sid-57",
@@ -4728,7 +4728,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "2920ef01",
+                                  "id": "15953627",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-59",
@@ -4839,7 +4839,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "46a850a9",
+                                      "id": "7520ee66",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-60",
@@ -4888,7 +4888,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "32ff2728",
+                                      "id": "2e8ad32b",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-61",
@@ -4941,7 +4941,7 @@
                               ]
                             },
                             {
-                              "id": "888cfe92",
+                              "id": "b3a3bea0",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-62",
@@ -5030,7 +5030,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "2a052e6c",
+                                  "id": "4b0e6947",
                                   "elType": "widget",
                                   "widgetType": "html",
                                   "_sid": "sid-63",
@@ -5083,7 +5083,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "12ec7834",
+                                  "id": "3a4369ed",
                                   "elType": "widget",
                                   "widgetType": "html",
                                   "_sid": "sid-64",
@@ -5138,7 +5138,7 @@
                   ]
                 },
                 {
-                  "id": "cee0815c",
+                  "id": "62d89255",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-65",
@@ -5315,7 +5315,7 @@
                   },
                   "elements": [
                     {
-                      "id": "1bd9522b",
+                      "id": "6c0d60d5",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-66",
@@ -5425,7 +5425,7 @@
                       },
                       "elements": [
                         {
-                          "id": "160baee5",
+                          "id": "97e44fac",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-67",
@@ -5535,7 +5535,7 @@
                           },
                           "elements": [
                             {
-                              "id": "d2326213",
+                              "id": "8a8b6059",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-67-inline",
@@ -5595,7 +5595,7 @@
                           ]
                         },
                         {
-                          "id": "852a1ccf",
+                          "id": "8c798193",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-70",
@@ -5705,7 +5705,7 @@
                           },
                           "elements": [
                             {
-                              "id": "12d661d2",
+                              "id": "834a1f26",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-71",
@@ -5815,7 +5815,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "f3d7dc41",
+                                  "id": "e1505a3a",
                                   "elType": "widget",
                                   "widgetType": "heading",
                                   "_sid": "sid-72",
@@ -5865,7 +5865,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "a1a6c62b",
+                                  "id": "cc944826",
                                   "elType": "widget",
                                   "widgetType": "heading",
                                   "_sid": "sid-73",
@@ -5970,7 +5970,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "893369a4",
+                                  "id": "1b45e46c",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-74",
@@ -6023,7 +6023,7 @@
                               ]
                             },
                             {
-                              "id": "c098c6a2",
+                              "id": "e55e1af3",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-75",
@@ -6116,7 +6116,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "e5f85d8c",
+                                  "id": "1d0744c0",
                                   "elType": "widget",
                                   "widgetType": "heading",
                                   "settings": {
@@ -6141,15 +6141,15 @@
                                       "left": "0",
                                       "isLinked": false
                                     },
-                                    "_css_classes": "e-sid-e5f85d8c",
-                                    "css_classes": "e-sid-e5f85d8c",
+                                    "_css_classes": "e-sid-1d0744c0",
+                                    "css_classes": "e-sid-1d0744c0",
                                     "_element_width": "auto"
                                   },
                                   "elements": [],
                                   "isInner": false
                                 },
                                 {
-                                  "id": "a35e7d3d",
+                                  "id": "7f137dcf",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-76",
@@ -6204,7 +6204,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "de315c46",
+                                  "id": "d46ecb98",
                                   "elType": "widget",
                                   "widgetType": "heading",
                                   "settings": {
@@ -6229,15 +6229,15 @@
                                       "left": "0",
                                       "isLinked": false
                                     },
-                                    "_css_classes": "e-sid-de315c46",
-                                    "css_classes": "e-sid-de315c46",
+                                    "_css_classes": "e-sid-d46ecb98",
+                                    "css_classes": "e-sid-d46ecb98",
                                     "_element_width": "auto"
                                   },
                                   "elements": [],
                                   "isInner": false
                                 },
                                 {
-                                  "id": "cb6bb9e1",
+                                  "id": "b8eef9bb",
                                   "elType": "widget",
                                   "widgetType": "heading",
                                   "_sid": "sid-77",
@@ -6294,7 +6294,7 @@
                           ]
                         },
                         {
-                          "id": "af53d47b",
+                          "id": "f026308d",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-78",
@@ -6375,7 +6375,7 @@
                           "elements": []
                         },
                         {
-                          "id": "745cc3ad",
+                          "id": "49b88da4",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-79",
@@ -6485,7 +6485,7 @@
                           },
                           "elements": [
                             {
-                              "id": "925f1abe",
+                              "id": "fd78a12d",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-80",
@@ -6534,7 +6534,7 @@
                               "isInner": false
                             },
                             {
-                              "id": "f72c9958",
+                              "id": "89904a57",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-81",
@@ -6644,7 +6644,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "d36c7525",
+                                  "id": "0afdd8ee",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-82",
@@ -6767,7 +6767,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "72c16573",
+                                      "id": "548169a6",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-82-inline",
@@ -6822,7 +6822,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "481c496e",
+                                  "id": "3c35bbcb",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-85",
@@ -6945,7 +6945,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "5dcf038b",
+                                      "id": "f9e4e96b",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-85-inline",
@@ -7000,7 +7000,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "b65ea09b",
+                                  "id": "30ed242d",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-88",
@@ -7123,7 +7123,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "1cb4ad54",
+                                      "id": "6860f5a9",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-88-inline",
@@ -7178,7 +7178,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "3982f0da",
+                                  "id": "f9773252",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-91",
@@ -7301,7 +7301,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "65970cbd",
+                                      "id": "f52d6d94",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-91-inline",
@@ -7362,7 +7362,7 @@
                       ]
                     },
                     {
-                      "id": "7c761903",
+                      "id": "56077926",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-94",
@@ -7472,7 +7472,7 @@
                       },
                       "elements": [
                         {
-                          "id": "02eab97f",
+                          "id": "00c28a2f",
                           "elType": "widget",
                           "widgetType": "html",
                           "_sid": "sid-95",
@@ -7523,7 +7523,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "d5762194",
+                          "id": "433fec85",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-97",
@@ -7646,7 +7646,7 @@
                           },
                           "elements": [
                             {
-                              "id": "4c080a24",
+                              "id": "0a3478fc",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-97-inline",
@@ -7701,12 +7701,12 @@
           ]
         },
         {
-          "id": "81740be9",
+          "id": "a1ae36b4",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<script>\n(function() {\n  // 1. Universal DOM Lifecycle Polyfill:\n  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,\n  // immediately invoke the callback so dynamic scripts never enter a deadzone.\n  try {\n    var _origDocAdd = Document.prototype.addEventListener;\n    var _lifecycleAdd = function(type, fn, opts) {\n      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {\n        try {\n          setTimeout(function() { fn.call(document, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origDocAdd.call(this, type, fn, opts);\n    };\n    Document.prototype.addEventListener = _lifecycleAdd;\n    try { document.addEventListener = _lifecycleAdd; } catch(e) {}\n\n    var _origWinAdd = Window.prototype.addEventListener;\n    Window.prototype.addEventListener = function(type, fn, opts) {\n      if (type === 'load' && document.readyState === 'complete') {\n        try {\n          setTimeout(function() { fn.call(window, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origWinAdd.call(this, type, fn, opts);\n    };\n  } catch(e) {\n    console.warn('[LIFECYCLE POLYFILL ERROR]', e);\n  }\n\n  function initDynamicComponentLogic() {\n    // 2. Universal Data-Attribute Hydration Bridge:\n    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases\n    // (e.g. data-category--design -> el.dataset.category = \"design\", el.setAttribute(\"data-category\", \"design\"))\n    try {\n      document.querySelectorAll('*').forEach(function(el) {\n        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;\n        if (el.dataset && el.dataset.__hasDataHydrated) return;\n        if (el.dataset) el.dataset.__hasDataHydrated = 'true';\n        if (el.classList) {\n          el.classList.forEach(function(cls) {\n            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {\n              var sepIdx = cls.indexOf('--');\n              var attrName = cls.slice(0, sepIdx);\n              var rawVal = cls.slice(sepIdx + 2);\n              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)\n              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {\n                return String.fromCharCode(parseInt(hex, 16));\n              });\n              el.setAttribute(attrName, attrVal);\n              if (el.dataset) {\n                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });\n                el.dataset[prop] = attrVal;\n              }\n            }\n          });\n        }\n      });\n    } catch(e) {\n      console.warn('[DATA HYDRATION ERROR]', e);\n    }\n\n    try {\n      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title\n      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {\n        var inner = widget.querySelector('.elementor-heading-title');\n        if (inner && !widget.__hasTextProxy) {\n          widget.__hasTextProxy = true;\n          Object.defineProperty(widget, 'textContent', {\n            get: function() { return inner.textContent; },\n            set: function(val) { inner.textContent = val; },\n            configurable: true\n          });\n          Object.defineProperty(widget, 'innerText', {\n            get: function() { return inner.innerText; },\n            set: function(val) { inner.innerText = val; },\n            configurable: true\n          });\n        }\n      });\n\n      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)\n      \n      if (!window.__delegatedBridgesBound) {\n        window.__delegatedBridgesBound = true;\n        \n      (function(){\n        var k = \"bridge_#btn-annual|.billing-opt-btn\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#btn-annual\");\n            if (!trig) return;\n            var anc = trig.closest(\".billing-opt-btn\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#btn-annual\");\n          if (!trig) return;\n          var anc = trig.closest(\".billing-opt-btn\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_.addon-card|.addon-card\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\".addon-card\");\n            if (!trig) return;\n            var anc = trig.closest(\".addon-card\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\".addon-card\");\n          if (!trig) return;\n          var anc = trig.closest(\".addon-card\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_.switch-wrap|.switch-wrap\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\".switch-wrap\");\n            if (!trig) return;\n            var anc = trig.closest(\".switch-wrap\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\".switch-wrap\");\n          if (!trig) return;\n          var anc = trig.closest(\".switch-wrap\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_#addon-ssl|.switch-wrap\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#addon-ssl\");\n            if (!trig) return;\n            var anc = trig.closest(\".switch-wrap\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#addon-ssl\");\n          if (!trig) return;\n          var anc = trig.closest(\".switch-wrap\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_.switch-slider|.switch-wrap\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\".switch-slider\");\n            if (!trig) return;\n            var anc = trig.closest(\".switch-wrap\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\".switch-slider\");\n          if (!trig) return;\n          var anc = trig.closest(\".switch-wrap\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n      }\n  \n    } catch(err) {\n      console.warn('[COMPILER BRIDGE]', err);\n    }\n\n    // Execute Application Business Logic with Idempotency Protection\n    if (!window.__appLogicInitialized) {\n      window.__appLogicInitialized = true;\n      try {\n        (function () {\n      'use strict';\n\n      // DOM Elements Cache\n      const slider = document.getElementById('volume-slider');\n      const tooltip = document.getElementById('slider-tooltip');\n      const counterVal = document.getElementById('metric-counter-val');\n      const btnMonthly = document.getElementById('btn-monthly');\n      const btnAnnual = document.getElementById('btn-annual');\n      const addonSsl = document.getElementById('addon-ssl');\n      const addonSla = document.getElementById('addon-sla');\n\n      const tierBadge = document.getElementById('tier-badge');\n      const tierSub = document.getElementById('tier-summary-sub');\n      const priceTotal = document.getElementById('price-total');\n      const priceCadence = document.getElementById('price-cadence');\n      const bdBase = document.getElementById('bd-base');\n      const bdAddons = document.getElementById('bd-addons');\n\n      const feat1 = document.getElementById('feat-1');\n      const feat2 = document.getElementById('feat-2');\n      const feat3 = document.getElementById('feat-3');\n      const feat4 = document.getElementById('feat-4');\n      const milestones = document.querySelectorAll('.milestone-node');\n\n      // State\n      let isAnnual = false;\n\n      // Tier Feature Configurations (Text Content Only)\n      const TIER_DATA = {\n        starter: {\n          badge: 'Starter Plan',\n          sub: 'Best for prototypes & side projects',\n          feat1: '2 Concurrent Isolated Workers',\n          feat2: 'Community Discord & Standard Docs',\n          feat3: '7-Day Rolling Telemetry Buffer',\n          feat4: 'Shared Edge CDN Network'\n        },\n        growth: {\n          badge: 'Growth Plan',\n          sub: 'Most Popular - scaling teams',\n          feat1: '8 High-Concurrency Dedicated Workers',\n          feat2: 'Priority Email Support (< 6h Response SLA)',\n          feat3: '30-Day Metric & Deep Trace Ingestion',\n          feat4: 'Automated Edge Cache Purge Rules'\n        },\n        scale: {\n          badge: 'Scale Plan',\n          sub: 'High-throughput mission critical workloads',\n          feat1: '24 High-Performance Parallel Workers',\n          feat2: 'Priority Incident Response (< 1h SLA)',\n          feat3: '90-Day Full Telemetry Retention',\n          feat4: 'Automated Multi-Region Node Failover'\n        },\n        enterprise: {\n          badge: 'Enterprise Fleet',\n          sub: 'Dedicated cluster isolation & strict SLA',\n          feat1: 'Unlimited Elastic Workers & Node Pools',\n          feat2: '15-Minute Critical Enterprise SLA',\n          feat3: '365-Day Immutable Compliance Vault',\n          feat4: 'Dedicated Virtual Private Cloud (VPC) Peering'\n        }\n      };\n\n      /**\n       * Calculates base pricing curve\n       * (Yields exactly $116 at 50,000 requests)\n       */\n      function calculateBasePrice(volume) {\n        if (volume <= 20000) {\n          const progress = (volume - 1000) / 19000;\n          return Math.round(19 + progress * 30);\n        } else if (volume <= 100000) {\n          const progress = (volume - 20000) / 80000;\n          return Math.round(49 + progress * 179);\n        } else if (volume <= 300000) {\n          const progress = (volume - 100000) / 200000;\n          return Math.round(228 + progress * 220);\n        } else {\n          const progress = (volume - 300000) / 200000;\n          return Math.round(448 + progress * 350);\n        }\n      }\n\n      /**\n       * Resolves active tier key from request volume\n       */\n      function resolveTier(volume) {\n        if (volume <= 20000) return 'starter';\n        if (volume <= 100000) return 'growth';\n        if (volume <= 300000) return 'scale';\n        return 'enterprise';\n      }\n\n      /**\n       * Master calculation & DOM update routine\n       * ONLY mutates .textContent, .style, and classes. ZERO DOM creation.\n       */\n      function updateCalculator() {\n        const volume = parseInt(slider.value, 10);\n        const min = parseInt(slider.min, 10);\n        const max = parseInt(slider.max, 10);\n        const pct = ((volume - min) / (max - min)) * 100;\n\n        // 1. Update slider track fill & tooltip position\n        slider.style.background = 'linear-gradient(to right, #2563EB 0%, #2563EB ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';\n\n        const thumbOffset = (pct / 100) * (slider.offsetWidth - 24) + 12;\n        tooltip.style.left = thumbOffset + 'px';\n\n        const kValue = volume >= 1000 ? Math.round(volume / 1000) + 'K' : volume;\n        tooltip.textContent = kValue + ' reqs';\n\n        // 2. Update live metric counter\n        counterVal.textContent = volume.toLocaleString('en-US');\n\n        // 3. Calculate baseline & add-ons\n        const rawBase = calculateBasePrice(volume);\n        let rawAddons = 0;\n        if (addonSsl.checked) rawAddons += 19;\n        if (addonSla.checked) rawAddons += 49;\n\n        const subtotal = rawBase + rawAddons;\n        const total = isAnnual ? Math.round(subtotal * 0.75) : subtotal;\n        const displayBase = isAnnual ? Math.round(rawBase * 0.75) : rawBase;\n        const displayAddons = isAnnual ? Math.round(rawAddons * 0.75) : rawAddons;\n\n        // 4. Mutate Price Breakdown Text Elements\n        priceTotal.textContent = total.toLocaleString('en-US');\n        bdBase.textContent = displayBase.toLocaleString('en-US');\n        bdAddons.textContent = displayAddons.toLocaleString('en-US');\n        priceCadence.textContent = isAnnual ? '/ month, billed annually' : '/ month';\n\n        // 5. Mutate Tier Metadata & Checklist Text Elements\n        const tierKey = resolveTier(volume);\n        const tier = TIER_DATA[tierKey];\n\n        tierBadge.textContent = tier.badge;\n        tierSub.textContent = tier.sub;\n        feat1.textContent = tier.feat1;\n        feat2.textContent = tier.feat2;\n        feat3.textContent = tier.feat3;\n        feat4.textContent = tier.feat4;\n      }\n\n      // ======================================================================\n      // EVENT LISTENERS\n      // ======================================================================\n\n      // Slider input\n      slider.addEventListener('input', updateCalculator);\n\n      // Window resize re-aligns tooltip thumb offset\n      window.addEventListener('resize', updateCalculator);\n\n      // Billing switchers\n      btnMonthly.addEventListener('click', function () {\n        if (!isAnnual) return;\n        isAnnual = false;\n        btnMonthly.classList.add('is-active');\n        btnMonthly.setAttribute('aria-checked', 'true');\n        btnAnnual.classList.remove('is-active');\n        btnAnnual.setAttribute('aria-checked', 'false');\n        updateCalculator();\n      });\n\n      btnAnnual.addEventListener('click', function () {\n        if (isAnnual) return;\n        isAnnual = true;\n        btnAnnual.classList.add('is-active');\n        btnAnnual.setAttribute('aria-checked', 'true');\n        btnMonthly.classList.remove('is-active');\n        btnMonthly.setAttribute('aria-checked', 'false');\n        updateCalculator();\n      });\n\n      // Add-on checkboxes\n      addonSsl.addEventListener('change', updateCalculator);\n      addonSla.addEventListener('change', updateCalculator);\n\n      // Milestone clicks\n      milestones.forEach(function (node) {\n        node.addEventListener('click', function () {\n          const targetValue = parseInt(node.getAttribute('data-val'), 10);\n          slider.value = targetValue;\n          updateCalculator();\n        });\n      });\n\n      // Initialize on load\n      updateCalculator();\n    })();\n      } catch(appErr) {\n        console.warn('[APP LOGIC ERROR]', appErr);\n      }\n    }\n  }\n\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);\n  } else {\n    initDynamicComponentLogic();\n  }\n  setTimeout(initDynamicComponentLogic, 200);\n  setTimeout(initDynamicComponentLogic, 800);\n  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);\n})();\n</script>",
-            "css_classes": "embedded-script-engine e-sid-81740be9",
+            "css_classes": "embedded-script-engine e-sid-a1ae36b4",
             "_html_reason": "SYSTEM:script-engine",
             "_margin": {
               "unit": "px",
@@ -7724,7 +7724,7 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-script-engine e-sid-81740be9"
+            "_css_classes": "embedded-script-engine e-sid-a1ae36b4"
           },
           "elements": []
         }

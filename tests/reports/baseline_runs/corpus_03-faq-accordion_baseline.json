@@ -4,7 +4,7 @@
   "type": "page",
   "content": [
     {
-      "id": "08d64089",
+      "id": "69a5bf2f",
       "elType": "container",
       "isInner": false,
       "_sid": "sid-2",
@@ -115,12 +115,12 @@
       },
       "elements": [
         {
-          "id": "cf7a6479",
+          "id": "f14991c6",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<style>\n.faq-pill-badge {\n  user-select: none;\n}\n\n.faq-pill-badge svg {\n  fill: currentColor;\n}\n\n.faq-subtitle a {\n  transition: border-color 0.2s ease, color 0.2s ease;\n}\n\n.faq-subtitle a:hover, .faq-subtitle a:hover .elementor-heading-title, .faq-subtitle a:hover .elementor-icon, .faq-subtitle a:hover .elementor-button {\n  color: #1D4ED8 !important;\n  border-bottom-color: #1D4ED8;\n}\n\n.faq-card {\n  overflow: hidden;\n  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;\n}\n\n.faq-card:hover {\n  border-color: #CBD5E1 !important;\n  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;\n}\n\n.faq-card.is-open {\n  border-color: rgba(37, 99, 235, 0.3) !important;\n  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;\n}\n\n.faq-trigger {\n  width: 100%;\n  min-height: 64px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  gap: 20px;\n  padding: 20px 24px;\n  background: transparent;\n  border: none;\n  font-family: inherit;\n  text-align: left;\n  cursor: pointer;\n  user-select: none;\n  transition: background-color 0.2s ease;\n}\n\n.faq-trigger:hover {\n  background-color: #F8FAFC !important;\n}\n\n.faq-trigger:focus-visible {\n  outline: none;\n  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;\n}\n\n.faq-question {\n  font-size: 17px;\n  font-weight: 700;\n  color: #0F172A;\n  letter-spacing: -0.01em;\n  line-height: 1.4;\n  flex: 1;\n}\n\n.faq-indicator {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 36px;\n  height: 36px;\n  flex-shrink: 0;\n  border-radius: 9999px;\n  background-color: #F8FAFC;\n  border: 1px solid #E2E8F0;\n  color: #64748B;\n  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), \n                  background-color 0.2s ease, \n                  border-color 0.2s ease, \n                  color 0.2s ease;\n}\n\n.faq-indicator svg {\n  width: 16px;\n  height: 16px;\n  stroke-width: 2.2;\n  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);\n}\n\n.faq-trigger:hover .faq-indicator {\n  background-color: #FFFFFF !important;\n  border-color: #CBD5E1 !important;\n  color: #0F172A !important;\n}\n\n.faq-card.is-open .faq-indicator {\n  background-color: rgba(37, 99, 235, 0.08) !important;\n  border-color: rgba(37, 99, 235, 0.2) !important;\n  color: #2563EB !important;\n  transform: rotate(180deg) !important;\n}\n\n.faq-collapse {\n  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);\n}\n\n.faq-collapse-inner {\n  overflow: hidden;\n}\n\n.faq-content a:hover, .faq-content a:hover .elementor-heading-title, .faq-content a:hover .elementor-icon, .faq-content a:hover .elementor-button {\n  text-decoration: underline;\n}\n\n.faq-bullet-list {\n  list-style: none;\n}\n\n.faq-bullet-icon {\n  flex-shrink: 0;\n}\n\n.faq-footer-btn {\n  display: inline-flex;\n  align-items: center;\n  gap: 8px;\n  padding: 10px 20px;\n  background-color: #0F172A;\n  color: #FFFFFF;\n  font-size: 14px;\n  font-weight: 600;\n  border-radius: 12px;\n  text-decoration: none;\n  white-space: nowrap;\n  transition: background-color 0.2s ease, transform 0.15s ease;\n}\n\n.faq-footer-btn:hover {\n  background-color: #334155 !important;\n  transform: translateY(-1px) !important;\n}\n\n.faq-footer-btn svg {\n  width: 14px;\n  height: 14px;\n  fill: none;\n  stroke: currentColor;\n  stroke-width: 2;\n}\n\n.elementor-widget-heading[class*=\"badge\"] .elementor-heading-title,\n.elementor-widget-heading[class*=\"pill\"] .elementor-heading-title,\n[class*=\"badge\"] .elementor-heading-title,\n[class*=\"pill\"] .elementor-heading-title {\n  line-height: 1 !important;\n  display: inline-flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n  margin: 0 !important;\n}\n\n.faq-trigger button,\n.faq-trigger .composite-trigger {\n  appearance: none !important;\n  background: transparent !important;\n  border: none !important;\n  color: #000000 !important;\n  padding: 20px 24px !important;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between !important;\n  font: inherit;\n  cursor: pointer;\n  border-radius: 0px !important;\n}\n\n.faq-footer-btn button,\n.faq-footer-btn .composite-trigger {\n  appearance: none !important;\n  background: #0f172a !important;\n  border: none !important;\n  color: #ffffff !important;\n  padding: 10px 20px !important;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: normal !important;\n  font: inherit;\n  cursor: pointer;\n  border-radius: 12px !important;\n}\n\n@media (max-width: 768px) {\n  .faq-trigger {\n  padding: 18px 18px;\n  min-height: 56px;\n  }\n\n  .faq-question {\n  font-size: 16px;\n  }\n\n  .faq-indicator {\n  width: 32px;\n  height: 32px;\n  }\n\n  .faq-footer-btn {\n  width: 100%;\n  justify-content: center;\n  }\n}\n</style>",
-            "css_classes": "embedded-stylesheet-engine e-sid-cf7a6479",
+            "css_classes": "embedded-stylesheet-engine e-sid-f14991c6",
             "_html_reason": "SYSTEM:stylesheet-engine",
             "_margin": {
               "unit": "px",
@@ -138,12 +138,12 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-stylesheet-engine e-sid-cf7a6479"
+            "_css_classes": "embedded-stylesheet-engine e-sid-f14991c6"
           },
           "elements": []
         },
         {
-          "id": "e1157998",
+          "id": "e615763e",
           "elType": "container",
           "isInner": true,
           "_sid": "sid-3",
@@ -260,7 +260,7 @@
           },
           "elements": [
             {
-              "id": "abc96375",
+              "id": "f242ba2c",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-4",
@@ -373,7 +373,7 @@
               },
               "elements": [
                 {
-                  "id": "8b65531d",
+                  "id": "8362b3db",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-5",
@@ -523,7 +523,7 @@
                   },
                   "elements": [
                     {
-                      "id": "437bfbee",
+                      "id": "0d5b18a1",
                       "elType": "widget",
                       "widgetType": "icon",
                       "_sid": "sid-6",
@@ -583,7 +583,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "41d6f287",
+                      "id": "55373bdd",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "_sid": "sid-8",
@@ -647,7 +647,7 @@
                   ]
                 },
                 {
-                  "id": "710a0db0",
+                  "id": "e201520e",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-9",
@@ -733,7 +733,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "769c65d0",
+                  "id": "168f5071",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-10",
@@ -821,7 +821,7 @@
                   },
                   "elements": [
                     {
-                      "id": "4ce182de",
+                      "id": "00e8c683",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
@@ -846,15 +846,15 @@
                           "left": "0",
                           "isLinked": false
                         },
-                        "_css_classes": "e-sid-4ce182de",
-                        "css_classes": "e-sid-4ce182de",
+                        "_css_classes": "e-sid-00e8c683",
+                        "css_classes": "e-sid-00e8c683",
                         "_element_width": "auto"
                       },
                       "elements": [],
                       "isInner": false
                     },
                     {
-                      "id": "87875cac",
+                      "id": "d80c893f",
                       "elType": "widget",
                       "widgetType": "button",
                       "_sid": "sid-11",
@@ -950,7 +950,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "d951cca4",
+                      "id": "14d143cb",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
@@ -975,8 +975,8 @@
                           "left": "0",
                           "isLinked": false
                         },
-                        "_css_classes": "e-sid-d951cca4",
-                        "css_classes": "e-sid-d951cca4",
+                        "_css_classes": "e-sid-14d143cb",
+                        "css_classes": "e-sid-14d143cb",
                         "_element_width": "auto"
                       },
                       "elements": [],
@@ -987,7 +987,7 @@
               ]
             },
             {
-              "id": "8bd49bf1",
+              "id": "8b9e6d0f",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-12",
@@ -1100,7 +1100,7 @@
               },
               "elements": [
                 {
-                  "id": "d335c5be",
+                  "id": "b76d1355",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-13",
@@ -1209,7 +1209,7 @@
                   },
                   "elements": [
                     {
-                      "id": "96ac7e28",
+                      "id": "710d6f3a",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-14",
@@ -1302,7 +1302,7 @@
                       },
                       "elements": [
                         {
-                          "id": "3515f1e1",
+                          "id": "a54315f6",
                           "elType": "widget",
                           "widgetType": "html",
                           "_sid": "sid-15",
@@ -1394,7 +1394,7 @@
                       ]
                     },
                     {
-                      "id": "acc0daac",
+                      "id": "02f2b42a",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-20",
@@ -1475,7 +1475,7 @@
                       },
                       "elements": [
                         {
-                          "id": "4515b92e",
+                          "id": "494d576c",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-21",
@@ -1550,7 +1550,7 @@
                           },
                           "elements": [
                             {
-                              "id": "bb730a6f",
+                              "id": "b255a679",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-22",
@@ -1671,7 +1671,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "ef74565b",
+                                  "id": "8178b702",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-23",
@@ -1760,7 +1760,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "9790e51d",
+                                      "id": "ea11ecf1",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -1785,15 +1785,15 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-9790e51d",
-                                        "css_classes": "e-sid-9790e51d",
+                                        "_css_classes": "e-sid-ea11ecf1",
+                                        "css_classes": "e-sid-ea11ecf1",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
                                       "isInner": false
                                     },
                                     {
-                                      "id": "d0e1024b",
+                                      "id": "80f72de7",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-24",
@@ -1861,7 +1861,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "22251a59",
+                                      "id": "43a18f05",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -1886,8 +1886,8 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-22251a59",
-                                        "css_classes": "e-sid-22251a59",
+                                        "_css_classes": "e-sid-43a18f05",
+                                        "css_classes": "e-sid-43a18f05",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
@@ -1896,7 +1896,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "8b684fb1",
+                                  "id": "5a6500c1",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-25",
@@ -1989,7 +1989,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "32ea51f4",
+                                      "id": "7714c274",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-26",
@@ -2057,7 +2057,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "d0859c3d",
+                                      "id": "5e0e8068",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -2082,8 +2082,8 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-d0859c3d",
-                                        "css_classes": "e-sid-d0859c3d"
+                                        "_css_classes": "e-sid-5e0e8068",
+                                        "css_classes": "e-sid-5e0e8068"
                                       },
                                       "elements": [],
                                       "isInner": false
@@ -2099,7 +2099,7 @@
                   ]
                 },
                 {
-                  "id": "7e9f5a80",
+                  "id": "9702fbbb",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-27",
@@ -2208,7 +2208,7 @@
                   },
                   "elements": [
                     {
-                      "id": "1f7dab19",
+                      "id": "1e72e3a8",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-28",
@@ -2301,7 +2301,7 @@
                       },
                       "elements": [
                         {
-                          "id": "bc81e590",
+                          "id": "f37478b2",
                           "elType": "widget",
                           "widgetType": "html",
                           "_sid": "sid-29",
@@ -2393,7 +2393,7 @@
                       ]
                     },
                     {
-                      "id": "d1c70328",
+                      "id": "478a7105",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-34",
@@ -2470,7 +2470,7 @@
                       },
                       "elements": [
                         {
-                          "id": "8c14bc51",
+                          "id": "2df081ac",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-35",
@@ -2546,7 +2546,7 @@
                           },
                           "elements": [
                             {
-                              "id": "fa9b7f3f",
+                              "id": "eaacd7aa",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-36",
@@ -2663,7 +2663,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "907c4c45",
+                                  "id": "22b759e4",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-37",
@@ -2724,7 +2724,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "c6e666cf",
+                                  "id": "f89d3c3e",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-38",
@@ -2843,7 +2843,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "e70fc59a",
+                                      "id": "5ff585c4",
                                       "elType": "container",
                                       "isInner": true,
                                       "_sid": "sid-39",
@@ -2966,7 +2966,7 @@
                                       },
                                       "elements": [
                                         {
-                                          "id": "c641d175",
+                                          "id": "8d119efc",
                                           "elType": "widget",
                                           "widgetType": "icon",
                                           "_sid": "sid-40",
@@ -3034,7 +3034,7 @@
                                           "isInner": false
                                         },
                                         {
-                                          "id": "e804c792",
+                                          "id": "0a7272a3",
                                           "elType": "container",
                                           "isInner": true,
                                           "_sid": "sid-42",
@@ -3137,7 +3137,7 @@
                                           },
                                           "elements": [
                                             {
-                                              "id": "11f3961a",
+                                              "id": "9699df81",
                                               "elType": "widget",
                                               "widgetType": "text-editor",
                                               "_sid": "sid-43",
@@ -3189,7 +3189,7 @@
                                               "isInner": false
                                             },
                                             {
-                                              "id": "09a5579a",
+                                              "id": "847b681e",
                                               "elType": "widget",
                                               "widgetType": "heading",
                                               "settings": {
@@ -3214,8 +3214,8 @@
                                                   "left": "0",
                                                   "isLinked": false
                                                 },
-                                                "_css_classes": "e-sid-09a5579a",
-                                                "css_classes": "e-sid-09a5579a",
+                                                "_css_classes": "e-sid-847b681e",
+                                                "css_classes": "e-sid-847b681e",
                                                 "_element_width": "auto"
                                               },
                                               "elements": [],
@@ -3226,7 +3226,7 @@
                                       ]
                                     },
                                     {
-                                      "id": "6401da58",
+                                      "id": "873132cc",
                                       "elType": "container",
                                       "isInner": true,
                                       "_sid": "sid-44",
@@ -3349,7 +3349,7 @@
                                       },
                                       "elements": [
                                         {
-                                          "id": "cad6c298",
+                                          "id": "2372973a",
                                           "elType": "widget",
                                           "widgetType": "icon",
                                           "_sid": "sid-45",
@@ -3420,7 +3420,7 @@
                                           "isInner": false
                                         },
                                         {
-                                          "id": "a145bf97",
+                                          "id": "e48038ce",
                                           "elType": "container",
                                           "isInner": true,
                                           "_sid": "sid-47",
@@ -3521,7 +3521,7 @@
                                           },
                                           "elements": [
                                             {
-                                              "id": "4ea4aa92",
+                                              "id": "d5f2db9f",
                                               "elType": "widget",
                                               "widgetType": "text-editor",
                                               "_sid": "sid-48",
@@ -3573,7 +3573,7 @@
                                               "isInner": false
                                             },
                                             {
-                                              "id": "3a76f507",
+                                              "id": "cb249e47",
                                               "elType": "widget",
                                               "widgetType": "heading",
                                               "settings": {
@@ -3598,8 +3598,8 @@
                                                   "left": "0",
                                                   "isLinked": false
                                                 },
-                                                "_css_classes": "e-sid-3a76f507",
-                                                "css_classes": "e-sid-3a76f507",
+                                                "_css_classes": "e-sid-cb249e47",
+                                                "css_classes": "e-sid-cb249e47",
                                                 "_element_width": "auto"
                                               },
                                               "elements": [],
@@ -3620,7 +3620,7 @@
                   ]
                 },
                 {
-                  "id": "1fe66faf",
+                  "id": "620204d6",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-49",
@@ -3729,7 +3729,7 @@
                   },
                   "elements": [
                     {
-                      "id": "82d8b3d9",
+                      "id": "b4f0f61d",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-50",
@@ -3822,7 +3822,7 @@
                       },
                       "elements": [
                         {
-                          "id": "82615fc8",
+                          "id": "0ea1545b",
                           "elType": "widget",
                           "widgetType": "html",
                           "_sid": "sid-51",
@@ -3914,7 +3914,7 @@
                       ]
                     },
                     {
-                      "id": "e6503385",
+                      "id": "e656e33b",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-56",
@@ -3991,7 +3991,7 @@
                       },
                       "elements": [
                         {
-                          "id": "ecfaf040",
+                          "id": "6387dcd0",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-57",
@@ -4067,7 +4067,7 @@
                           },
                           "elements": [
                             {
-                              "id": "eeab14c8",
+                              "id": "5da19071",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-58",
@@ -4184,7 +4184,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "d7bb36b8",
+                                  "id": "9197ed13",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-59",
@@ -4245,7 +4245,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "3859b5c2",
+                                  "id": "a5c23a7e",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-60",
@@ -4364,7 +4364,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "ec6e9005",
+                                      "id": "8f97fd53",
                                       "elType": "container",
                                       "isInner": true,
                                       "_sid": "sid-61",
@@ -4487,7 +4487,7 @@
                                       },
                                       "elements": [
                                         {
-                                          "id": "c000a110",
+                                          "id": "0d1384e5",
                                           "elType": "widget",
                                           "widgetType": "icon",
                                           "_sid": "sid-62",
@@ -4555,7 +4555,7 @@
                                           "isInner": false
                                         },
                                         {
-                                          "id": "b7258d22",
+                                          "id": "c75009db",
                                           "elType": "container",
                                           "isInner": true,
                                           "_sid": "sid-64",
@@ -4658,7 +4658,7 @@
                                           },
                                           "elements": [
                                             {
-                                              "id": "1b165106",
+                                              "id": "582f9d5d",
                                               "elType": "widget",
                                               "widgetType": "text-editor",
                                               "_sid": "sid-65",
@@ -4710,7 +4710,7 @@
                                               "isInner": false
                                             },
                                             {
-                                              "id": "8da8d9b0",
+                                              "id": "38f5a75f",
                                               "elType": "widget",
                                               "widgetType": "heading",
                                               "settings": {
@@ -4735,8 +4735,8 @@
                                                   "left": "0",
                                                   "isLinked": false
                                                 },
-                                                "_css_classes": "e-sid-8da8d9b0",
-                                                "css_classes": "e-sid-8da8d9b0",
+                                                "_css_classes": "e-sid-38f5a75f",
+                                                "css_classes": "e-sid-38f5a75f",
                                                 "_element_width": "auto"
                                               },
                                               "elements": [],
@@ -4747,7 +4747,7 @@
                                       ]
                                     },
                                     {
-                                      "id": "d2b726b5",
+                                      "id": "ad685ebd",
                                       "elType": "container",
                                       "isInner": true,
                                       "_sid": "sid-66",
@@ -4870,7 +4870,7 @@
                                       },
                                       "elements": [
                                         {
-                                          "id": "82c5ee22",
+                                          "id": "d322587b",
                                           "elType": "widget",
                                           "widgetType": "icon",
                                           "_sid": "sid-67",
@@ -4938,7 +4938,7 @@
                                           "isInner": false
                                         },
                                         {
-                                          "id": "590beb5f",
+                                          "id": "376aeaee",
                                           "elType": "container",
                                           "isInner": true,
                                           "_sid": "sid-69",
@@ -5041,7 +5041,7 @@
                                           },
                                           "elements": [
                                             {
-                                              "id": "78f916e2",
+                                              "id": "dc1ba9a4",
                                               "elType": "widget",
                                               "widgetType": "text-editor",
                                               "_sid": "sid-70",
@@ -5093,7 +5093,7 @@
                                               "isInner": false
                                             },
                                             {
-                                              "id": "6a0bf347",
+                                              "id": "542fbf48",
                                               "elType": "widget",
                                               "widgetType": "heading",
                                               "settings": {
@@ -5118,8 +5118,8 @@
                                                   "left": "0",
                                                   "isLinked": false
                                                 },
-                                                "_css_classes": "e-sid-6a0bf347",
-                                                "css_classes": "e-sid-6a0bf347",
+                                                "_css_classes": "e-sid-542fbf48",
+                                                "css_classes": "e-sid-542fbf48",
                                                 "_element_width": "auto"
                                               },
                                               "elements": [],
@@ -5130,7 +5130,7 @@
                                       ]
                                     },
                                     {
-                                      "id": "4f867c23",
+                                      "id": "27b847f4",
                                       "elType": "container",
                                       "isInner": true,
                                       "_sid": "sid-71",
@@ -5253,7 +5253,7 @@
                                       },
                                       "elements": [
                                         {
-                                          "id": "ff2a5131",
+                                          "id": "84f88f86",
                                           "elType": "widget",
                                           "widgetType": "icon",
                                           "_sid": "sid-72",
@@ -5321,7 +5321,7 @@
                                           "isInner": false
                                         },
                                         {
-                                          "id": "d287e0e5",
+                                          "id": "5b349173",
                                           "elType": "container",
                                           "isInner": true,
                                           "_sid": "sid-74",
@@ -5424,7 +5424,7 @@
                                           },
                                           "elements": [
                                             {
-                                              "id": "f5a4bb6e",
+                                              "id": "c71f7f03",
                                               "elType": "widget",
                                               "widgetType": "text-editor",
                                               "_sid": "sid-75",
@@ -5476,7 +5476,7 @@
                                               "isInner": false
                                             },
                                             {
-                                              "id": "86afe203",
+                                              "id": "b1e5bc58",
                                               "elType": "widget",
                                               "widgetType": "heading",
                                               "settings": {
@@ -5501,8 +5501,8 @@
                                                   "left": "0",
                                                   "isLinked": false
                                                 },
-                                                "_css_classes": "e-sid-86afe203",
-                                                "css_classes": "e-sid-86afe203",
+                                                "_css_classes": "e-sid-b1e5bc58",
+                                                "css_classes": "e-sid-b1e5bc58",
                                                 "_element_width": "auto"
                                               },
                                               "elements": [],
@@ -5523,7 +5523,7 @@
                   ]
                 },
                 {
-                  "id": "0bd2f61b",
+                  "id": "41158056",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-76",
@@ -5632,7 +5632,7 @@
                   },
                   "elements": [
                     {
-                      "id": "359cba56",
+                      "id": "36bbda31",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-77",
@@ -5725,7 +5725,7 @@
                       },
                       "elements": [
                         {
-                          "id": "99dff7a5",
+                          "id": "034334cd",
                           "elType": "widget",
                           "widgetType": "html",
                           "_sid": "sid-78",
@@ -5817,7 +5817,7 @@
                       ]
                     },
                     {
-                      "id": "d6ef3430",
+                      "id": "19f12530",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-83",
@@ -5894,7 +5894,7 @@
                       },
                       "elements": [
                         {
-                          "id": "3ce076e5",
+                          "id": "3f256b33",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-84",
@@ -5970,7 +5970,7 @@
                           },
                           "elements": [
                             {
-                              "id": "6ddece01",
+                              "id": "c3e74312",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-85",
@@ -6087,7 +6087,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "0f451ba9",
+                                  "id": "b112942e",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-86",
@@ -6176,7 +6176,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "43e6b4df",
+                                      "id": "d802d338",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -6201,15 +6201,15 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-43e6b4df",
-                                        "css_classes": "e-sid-43e6b4df",
+                                        "_css_classes": "e-sid-d802d338",
+                                        "css_classes": "e-sid-d802d338",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
                                       "isInner": false
                                     },
                                     {
-                                      "id": "f054e1cb",
+                                      "id": "0e33935c",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-87",
@@ -6277,7 +6277,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "ee9499f5",
+                                      "id": "14d5333c",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -6302,15 +6302,15 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-ee9499f5",
-                                        "css_classes": "e-sid-ee9499f5",
+                                        "_css_classes": "e-sid-14d5333c",
+                                        "css_classes": "e-sid-14d5333c",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
                                       "isInner": false
                                     },
                                     {
-                                      "id": "1e95454b",
+                                      "id": "5b08b4ac",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-88",
@@ -6378,7 +6378,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "dc61fd7a",
+                                      "id": "3576e017",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -6403,15 +6403,15 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-dc61fd7a",
-                                        "css_classes": "e-sid-dc61fd7a",
+                                        "_css_classes": "e-sid-3576e017",
+                                        "css_classes": "e-sid-3576e017",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
                                       "isInner": false
                                     },
                                     {
-                                      "id": "c9764378",
+                                      "id": "af914040",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-89",
@@ -6481,7 +6481,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "04623729",
+                                      "id": "6cd198a7",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -6506,8 +6506,8 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-04623729",
-                                        "css_classes": "e-sid-04623729",
+                                        "_css_classes": "e-sid-6cd198a7",
+                                        "css_classes": "e-sid-6cd198a7",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
@@ -6516,7 +6516,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "cc7a126b",
+                                  "id": "0be67e41",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-90",
@@ -6635,7 +6635,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "9b56f505",
+                                      "id": "5ce098dc",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -6660,14 +6660,14 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-9b56f505",
-                                        "css_classes": "e-sid-9b56f505"
+                                        "_css_classes": "e-sid-5ce098dc",
+                                        "css_classes": "e-sid-5ce098dc"
                                       },
                                       "elements": [],
                                       "isInner": false
                                     },
                                     {
-                                      "id": "8bcd9097",
+                                      "id": "e7ed5775",
                                       "elType": "widget",
                                       "widgetType": "button",
                                       "_sid": "sid-91",
@@ -6734,7 +6734,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "5bfbb551",
+                                      "id": "48936988",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -6759,8 +6759,8 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-5bfbb551",
-                                        "css_classes": "e-sid-5bfbb551"
+                                        "_css_classes": "e-sid-48936988",
+                                        "css_classes": "e-sid-48936988"
                                       },
                                       "elements": [],
                                       "isInner": false
@@ -6776,7 +6776,7 @@
                   ]
                 },
                 {
-                  "id": "8c21c82f",
+                  "id": "e6b96f26",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-92",
@@ -6885,7 +6885,7 @@
                   },
                   "elements": [
                     {
-                      "id": "03ee7d8e",
+                      "id": "240ccbe3",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-93",
@@ -6978,7 +6978,7 @@
                       },
                       "elements": [
                         {
-                          "id": "6bdfbb3f",
+                          "id": "8d3a3359",
                           "elType": "widget",
                           "widgetType": "html",
                           "_sid": "sid-94",
@@ -7070,7 +7070,7 @@
                       ]
                     },
                     {
-                      "id": "50ec9cdc",
+                      "id": "566c3676",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-99",
@@ -7147,7 +7147,7 @@
                       },
                       "elements": [
                         {
-                          "id": "9b5069cc",
+                          "id": "a7295197",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-100",
@@ -7223,7 +7223,7 @@
                           },
                           "elements": [
                             {
-                              "id": "ad726822",
+                              "id": "979470d3",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-101",
@@ -7340,7 +7340,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "d9ef8feb",
+                                  "id": "6fdea0ec",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-102",
@@ -7429,7 +7429,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "e90e9e18",
+                                      "id": "449c9807",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-103",
@@ -7497,7 +7497,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "c9880bc1",
+                                      "id": "08e59d47",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -7522,8 +7522,8 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-c9880bc1",
-                                        "css_classes": "e-sid-c9880bc1"
+                                        "_css_classes": "e-sid-08e59d47",
+                                        "css_classes": "e-sid-08e59d47"
                                       },
                                       "elements": [],
                                       "isInner": false
@@ -7531,7 +7531,7 @@
                                   ]
                                 },
                                 {
-                                  "id": "f3cd3076",
+                                  "id": "59232c04",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-104",
@@ -7600,7 +7600,7 @@
                   ]
                 },
                 {
-                  "id": "1ffd3b25",
+                  "id": "bdf5e39d",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-105",
@@ -7709,7 +7709,7 @@
                   },
                   "elements": [
                     {
-                      "id": "cf629bde",
+                      "id": "3fbe8e0c",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-106",
@@ -7802,7 +7802,7 @@
                       },
                       "elements": [
                         {
-                          "id": "02e8e41b",
+                          "id": "1fdf3047",
                           "elType": "widget",
                           "widgetType": "html",
                           "_sid": "sid-107",
@@ -7894,7 +7894,7 @@
                       ]
                     },
                     {
-                      "id": "514cf1e2",
+                      "id": "73ef35fd",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-112",
@@ -7971,7 +7971,7 @@
                       },
                       "elements": [
                         {
-                          "id": "27c8c6bb",
+                          "id": "68c67b8f",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-113",
@@ -8047,7 +8047,7 @@
                           },
                           "elements": [
                             {
-                              "id": "cbedf033",
+                              "id": "25893a92",
                               "elType": "container",
                               "isInner": true,
                               "_sid": "sid-114",
@@ -8164,7 +8164,7 @@
                               },
                               "elements": [
                                 {
-                                  "id": "2f700a9b",
+                                  "id": "c4d901a5",
                                   "elType": "widget",
                                   "widgetType": "text-editor",
                                   "_sid": "sid-115",
@@ -8225,7 +8225,7 @@
                                   "isInner": false
                                 },
                                 {
-                                  "id": "f6e5dec9",
+                                  "id": "15546f18",
                                   "elType": "container",
                                   "isInner": true,
                                   "_sid": "sid-116",
@@ -8314,7 +8314,7 @@
                                   },
                                   "elements": [
                                     {
-                                      "id": "de6b9db3",
+                                      "id": "5136fec3",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -8339,15 +8339,15 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-de6b9db3",
-                                        "css_classes": "e-sid-de6b9db3",
+                                        "_css_classes": "e-sid-5136fec3",
+                                        "css_classes": "e-sid-5136fec3",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
                                       "isInner": false
                                     },
                                     {
-                                      "id": "bd0fd740",
+                                      "id": "360ff993",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-117",
@@ -8415,7 +8415,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "a72451a3",
+                                      "id": "7a659783",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -8440,15 +8440,15 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-a72451a3",
-                                        "css_classes": "e-sid-a72451a3",
+                                        "_css_classes": "e-sid-7a659783",
+                                        "css_classes": "e-sid-7a659783",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
                                       "isInner": false
                                     },
                                     {
-                                      "id": "e07b78b0",
+                                      "id": "8821c81f",
                                       "elType": "widget",
                                       "widgetType": "text-editor",
                                       "_sid": "sid-118",
@@ -8516,7 +8516,7 @@
                                       "isInner": false
                                     },
                                     {
-                                      "id": "879e7f5c",
+                                      "id": "e8b3c120",
                                       "elType": "widget",
                                       "widgetType": "heading",
                                       "settings": {
@@ -8541,8 +8541,8 @@
                                           "left": "0",
                                           "isLinked": false
                                         },
-                                        "_css_classes": "e-sid-879e7f5c",
-                                        "css_classes": "e-sid-879e7f5c",
+                                        "_css_classes": "e-sid-e8b3c120",
+                                        "css_classes": "e-sid-e8b3c120",
                                         "_element_width": "auto"
                                       },
                                       "elements": [],
@@ -8561,7 +8561,7 @@
               ]
             },
             {
-              "id": "fc670c69",
+              "id": "51693453",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-119",
@@ -8733,7 +8733,7 @@
               },
               "elements": [
                 {
-                  "id": "c7e9d9f0",
+                  "id": "cee7ab9a",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-120",
@@ -8852,7 +8852,7 @@
                   },
                   "elements": [
                     {
-                      "id": "0683019f",
+                      "id": "9c24d21c",
                       "elType": "widget",
                       "widgetType": "heading",
                       "_sid": "sid-121",
@@ -8898,7 +8898,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "5d082258",
+                      "id": "89bfcbee",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "_sid": "sid-122",
@@ -8945,7 +8945,7 @@
                   ]
                 },
                 {
-                  "id": "7b75abc6",
+                  "id": "bfbaf1c4",
                   "elType": "widget",
                   "widgetType": "html",
                   "_sid": "sid-123",
@@ -9007,12 +9007,12 @@
           ]
         },
         {
-          "id": "8656c162",
+          "id": "fe1837d0",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<script>\n(function() {\n  // 1. Universal DOM Lifecycle Polyfill:\n  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,\n  // immediately invoke the callback so dynamic scripts never enter a deadzone.\n  try {\n    var _origDocAdd = Document.prototype.addEventListener;\n    var _lifecycleAdd = function(type, fn, opts) {\n      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {\n        try {\n          setTimeout(function() { fn.call(document, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origDocAdd.call(this, type, fn, opts);\n    };\n    Document.prototype.addEventListener = _lifecycleAdd;\n    try { document.addEventListener = _lifecycleAdd; } catch(e) {}\n\n    var _origWinAdd = Window.prototype.addEventListener;\n    Window.prototype.addEventListener = function(type, fn, opts) {\n      if (type === 'load' && document.readyState === 'complete') {\n        try {\n          setTimeout(function() { fn.call(window, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origWinAdd.call(this, type, fn, opts);\n    };\n  } catch(e) {\n    console.warn('[LIFECYCLE POLYFILL ERROR]', e);\n  }\n\n  function initDynamicComponentLogic() {\n    // 2. Universal Data-Attribute Hydration Bridge:\n    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases\n    // (e.g. data-category--design -> el.dataset.category = \"design\", el.setAttribute(\"data-category\", \"design\"))\n    try {\n      document.querySelectorAll('*').forEach(function(el) {\n        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;\n        if (el.dataset && el.dataset.__hasDataHydrated) return;\n        if (el.dataset) el.dataset.__hasDataHydrated = 'true';\n        if (el.classList) {\n          el.classList.forEach(function(cls) {\n            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {\n              var sepIdx = cls.indexOf('--');\n              var attrName = cls.slice(0, sepIdx);\n              var rawVal = cls.slice(sepIdx + 2);\n              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)\n              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {\n                return String.fromCharCode(parseInt(hex, 16));\n              });\n              el.setAttribute(attrName, attrVal);\n              if (el.dataset) {\n                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });\n                el.dataset[prop] = attrVal;\n              }\n            }\n          });\n        }\n      });\n    } catch(e) {\n      console.warn('[DATA HYDRATION ERROR]', e);\n    }\n\n    try {\n      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title\n      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {\n        var inner = widget.querySelector('.elementor-heading-title');\n        if (inner && !widget.__hasTextProxy) {\n          widget.__hasTextProxy = true;\n          Object.defineProperty(widget, 'textContent', {\n            get: function() { return inner.textContent; },\n            set: function(val) { inner.textContent = val; },\n            configurable: true\n          });\n          Object.defineProperty(widget, 'innerText', {\n            get: function() { return inner.innerText; },\n            set: function(val) { inner.innerText = val; },\n            configurable: true\n          });\n        }\n      });\n\n      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)\n      \n      if (!window.__delegatedBridgesBound) {\n        window.__delegatedBridgesBound = true;\n        \n      (function(){\n        var k = \"bridge_#faq-btn-2|.faq-card\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#faq-btn-2\");\n            if (!trig) return;\n            var anc = trig.closest(\".faq-card\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-open\"] = anc.classList.contains(\"is-open\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#faq-btn-2\");\n          if (!trig) return;\n          var anc = trig.closest(\".faq-card\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-open\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-open\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-open\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_#faq-btn-3|.faq-card\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#faq-btn-3\");\n            if (!trig) return;\n            var anc = trig.closest(\".faq-card\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-open\"] = anc.classList.contains(\"is-open\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#faq-btn-3\");\n          if (!trig) return;\n          var anc = trig.closest(\".faq-card\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-open\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-open\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-open\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_#faq-btn-4|.faq-card\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#faq-btn-4\");\n            if (!trig) return;\n            var anc = trig.closest(\".faq-card\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-open\"] = anc.classList.contains(\"is-open\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#faq-btn-4\");\n          if (!trig) return;\n          var anc = trig.closest(\".faq-card\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-open\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-open\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-open\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_#faq-btn-5|.faq-card\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#faq-btn-5\");\n            if (!trig) return;\n            var anc = trig.closest(\".faq-card\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-open\"] = anc.classList.contains(\"is-open\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#faq-btn-5\");\n          if (!trig) return;\n          var anc = trig.closest(\".faq-card\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-open\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-open\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-open\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_#faq-btn-6|.faq-card\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#faq-btn-6\");\n            if (!trig) return;\n            var anc = trig.closest(\".faq-card\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-open\"] = anc.classList.contains(\"is-open\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#faq-btn-6\");\n          if (!trig) return;\n          var anc = trig.closest(\".faq-card\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-open\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-open\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-open\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n      }\n  \n    } catch(err) {\n      console.warn('[COMPILER BRIDGE]', err);\n    }\n\n    // Execute Application Business Logic with Idempotency Protection\n    if (!window.__appLogicInitialized) {\n      window.__appLogicInitialized = true;\n      try {\n        (function () {\n      'use strict';\n\n      // Cache DOM references\n      const faqCards = document.querySelectorAll('.faq-card');\n\n      /**\n       * Opens a given FAQ card and updates ARIA attributes\n       * @param {HTMLElement} card \n       */\n      function openCard(card) {\n        const trigger = card.querySelector('.faq-trigger');\n        if (!card || !trigger) return;\n\n        card.classList.add('is-open');\n        trigger.setAttribute('aria-expanded', 'true');\n      }\n\n      /**\n       * Closes a given FAQ card and updates ARIA attributes\n       * @param {HTMLElement} card \n       */\n      function closeCard(card) {\n        const trigger = card.querySelector('.faq-trigger');\n        if (!card || !trigger) return;\n\n        card.classList.remove('is-open');\n        trigger.setAttribute('aria-expanded', 'false');\n      }\n\n      /**\n       * Orchestrates single-active accordion logic\n       * @param {HTMLElement} targetCard \n       */\n      function toggleAccordion(targetCard) {\n        const isCurrentlyOpen = targetCard.classList.contains('is-open');\n\n        // Auto-collapse: close all active cards\n        faqCards.forEach(card => {\n          if (card !== targetCard && card.classList.contains('is-open')) {\n            closeCard(card);\n          }\n        });\n\n        // Toggle state of target item\n        if (isCurrentlyOpen) {\n          closeCard(targetCard);\n        } else {\n          openCard(targetCard);\n        }\n      }\n\n      // Initialize event listeners\n      faqCards.forEach(card => {\n        const trigger = card.querySelector('.faq-trigger');\n        if (!trigger) return;\n\n        // Mouse click handler\n        trigger.addEventListener('click', (event) => {\n          event.preventDefault();\n          toggleAccordion(card);\n        });\n\n        // Keyboard accessibility: space & enter handled natively by <button>,\n        // but adding defense against accidental browser scroll on space\n        trigger.addEventListener('keydown', (event) => {\n          if (event.key === ' ' || event.key === 'Spacebar') {\n            event.preventDefault();\n            toggleAccordion(card);\n          }\n        });\n      });\n    })();\n      } catch(appErr) {\n        console.warn('[APP LOGIC ERROR]', appErr);\n      }\n    }\n  }\n\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);\n  } else {\n    initDynamicComponentLogic();\n  }\n  setTimeout(initDynamicComponentLogic, 200);\n  setTimeout(initDynamicComponentLogic, 800);\n  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);\n})();\n</script>",
-            "css_classes": "embedded-script-engine e-sid-8656c162",
+            "css_classes": "embedded-script-engine e-sid-fe1837d0",
             "_html_reason": "SYSTEM:script-engine",
             "_margin": {
               "unit": "px",
@@ -9030,7 +9030,7 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-script-engine e-sid-8656c162"
+            "_css_classes": "embedded-script-engine e-sid-fe1837d0"
           },
           "elements": []
         }

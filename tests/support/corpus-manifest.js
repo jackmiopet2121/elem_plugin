@@ -10,12 +10,16 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
-// Default viewports matching the engine contract
-const DEFAULT_VIEWPORTS = [
-  { name: 'desktop', width: 1200, height: 900 },
-  { name: 'tablet', width: 768, height: 1024 },
-  { name: 'mobile', width: 375, height: 812 }
-];
+const { VIEWPORTS } = require('../../src/smart/style-snapshot');
+
+// Viewports derived directly from production engine contract
+const DEFAULT_VIEWPORTS = Object.freeze(
+  Object.values(VIEWPORTS).map(vp => ({
+    name: vp.name,
+    width: vp.width,
+    height: vp.height
+  }))
+);
 
 /**
  * Derives a stable, deterministic fixture ID from a relative path or file content hash.
@@ -121,10 +125,11 @@ function discoverCorpusFixtures(options = {}) {
 
   // 3. Discover any dynamically provided additional paths
   for (const customPath of additionalPaths) {
-    const resolved = path.resolve(rootDir, customPath);
-    if (fs.existsSync(resolved)) {
-      addFixture(resolved, { tags: ['custom'] });
+    const resolved = path.isAbsolute(customPath) ? customPath : path.resolve(rootDir, customPath);
+    if (!fs.existsSync(resolved)) {
+      throw new Error(`Additional fixture path not found: ${customPath} (resolved: ${resolved})`);
     }
+    addFixture(resolved, { tags: ['custom'] });
   }
 
   // Deterministic sort by fixtureId
