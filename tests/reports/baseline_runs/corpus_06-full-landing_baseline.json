@@ -4,7 +4,7 @@
   "type": "page",
   "content": [
     {
-      "id": "cfa57e02",
+      "id": "afbda651",
       "elType": "container",
       "isInner": false,
       "_sid": "sid-2",
@@ -135,12 +135,12 @@
       },
       "elements": [
         {
-          "id": "bcb0044b",
+          "id": "eb4239dd",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<style>\n.card {\n  transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n\n.card:hover {\n  transform: translateY(-4px) !important;\n  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;\n}\n\n.card-media {\n  overflow: hidden;\n}\n\n.card-media img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n\n.badge {\n  align-self: flex-start;\n}\n\n.card p {\n  flex-grow: 1;\n}\n\n.btn {\n  cursor: pointer;\n  transition: background 0.2s;\n}\n\n.btn .elementor-button:hover, .elementor-widget-button.btn .elementor-button:hover {\n  background: #1d4ed8 !important;\n}\n\n.accordion-item {\n  overflow: hidden;\n}\n\n.accordion-header {\n  width: 100%;\n  text-align: left;\n  padding: 20px 24px;\n  background: transparent;\n  border: none;\n  font-size: 16px;\n  font-weight: 600;\n  color: #0f172a;\n  cursor: pointer;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n\n.accordion-item.is-active .accordion-body, .accordion-item.is-active .accordion-body .elementor-heading-title, .accordion-item.is-active .accordion-body .elementor-icon, .accordion-item.is-active .accordion-body .elementor-button, .accordion-item.is-active .accordion-body * {\n  display: block;\n}\n\n.accordion-icon {\n  font-size: 20px;\n  transition: transform 0.2s;\n}\n\n.accordion-item.is-active .accordion-icon {\n  transform: rotate(45deg) !important;\n}\n\n[class*=\"media\"], [class*=\"thumb\"], [class*=\"cover\"] {\n  overflow: hidden !important;\n}\n\n[class*=\"media\"] .elementor-widget-image,\n[class*=\"media\"] .elementor-widget-image .elementor-widget-container,\n[class*=\"thumb\"] .elementor-widget-image,\n[class*=\"thumb\"] .elementor-widget-image .elementor-widget-container,\n[class*=\"cover\"] .elementor-widget-image,\n[class*=\"cover\"] .elementor-widget-image .elementor-widget-container {\n  height: 100% !important;\n  display: flex !important;\n  width: 100% !important;\n}\n\n[class*=\"media\"] .elementor-widget-image img,\n[class*=\"thumb\"] .elementor-widget-image img,\n[class*=\"cover\"] .elementor-widget-image img {\n  width: 100% !important;\n  height: 100% !important;\n  object-fit: cover !important;\n}\n\n.elementor-widget-heading[class*=\"badge\"] .elementor-heading-title,\n.elementor-widget-heading[class*=\"pill\"] .elementor-heading-title,\n[class*=\"badge\"] .elementor-heading-title,\n[class*=\"pill\"] .elementor-heading-title {\n  line-height: 1 !important;\n  display: inline-flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n  margin: 0 !important;\n}\n\n.e-sid-11,\n.e-sid-11 .elementor-widget-image,\n.e-sid-11 .elementor-widget-container,\n.e-sid-11 .elementor-widget-container img,\n.e-sid-11 img {\n  width: 100% !important;\n  height: 100% !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n}\n\n.e-sid-18,\n.e-sid-18 .elementor-widget-image,\n.e-sid-18 .elementor-widget-container,\n.e-sid-18 .elementor-widget-container img,\n.e-sid-18 img {\n  width: 100% !important;\n  height: 100% !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n}\n\n.e-sid-25,\n.e-sid-25 .elementor-widget-image,\n.e-sid-25 .elementor-widget-container,\n.e-sid-25 .elementor-widget-container img,\n.e-sid-25 img {\n  width: 100% !important;\n  height: 100% !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n}\n\n.accordion-header button,\n.accordion-header .composite-trigger {\n  appearance: none !important;\n  background: transparent !important;\n  border: none !important;\n  color: #0f172a !important;\n  padding: 20px 24px !important;\n  width: 100%;\n  display: flex;\n  align-items: center;\n  justify-content: space-between !important;\n  font: inherit;\n  cursor: pointer;\n  border-radius: 0px !important;\n}\n\n@media (max-width: 1024px) {\n  .e-sid-11,\n  .e-sid-11 .elementor-widget-image,\n  .e-sid-11 .elementor-widget-container,\n  .e-sid-11 .elementor-widget-container img {\n  width: 100% !important;\n  height: 180px !important;\n  max-height: 180px !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n  }\n\n  .e-sid-18,\n  .e-sid-18 .elementor-widget-image,\n  .e-sid-18 .elementor-widget-container,\n  .e-sid-18 .elementor-widget-container img {\n  width: 100% !important;\n  height: 180px !important;\n  max-height: 180px !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n  }\n\n  .e-sid-25,\n  .e-sid-25 .elementor-widget-image,\n  .e-sid-25 .elementor-widget-container,\n  .e-sid-25 .elementor-widget-container img {\n  width: 100% !important;\n  height: 180px !important;\n  max-height: 180px !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n  }\n}\n\n@media (max-width: 767px) {\n  .e-sid-11,\n  .e-sid-11 .elementor-widget-image,\n  .e-sid-11 .elementor-widget-container,\n  .e-sid-11 .elementor-widget-container img {\n  width: 100% !important;\n  height: 180px !important;\n  max-height: 180px !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n  }\n\n  .e-sid-18,\n  .e-sid-18 .elementor-widget-image,\n  .e-sid-18 .elementor-widget-container,\n  .e-sid-18 .elementor-widget-container img {\n  width: 100% !important;\n  height: 180px !important;\n  max-height: 180px !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n  }\n\n  .e-sid-25,\n  .e-sid-25 .elementor-widget-image,\n  .e-sid-25 .elementor-widget-container,\n  .e-sid-25 .elementor-widget-container img {\n  width: 100% !important;\n  height: 180px !important;\n  max-height: 180px !important;\n  min-height: 180px !important;\n  object-fit: cover !important;\n  }\n}\n</style>",
-            "css_classes": "embedded-stylesheet-engine e-sid-bcb0044b",
+            "css_classes": "embedded-stylesheet-engine e-sid-eb4239dd",
             "_html_reason": "SYSTEM:stylesheet-engine",
             "_margin": {
               "unit": "px",
@@ -158,12 +158,12 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-stylesheet-engine e-sid-bcb0044b"
+            "_css_classes": "embedded-stylesheet-engine e-sid-eb4239dd"
           },
           "elements": []
         },
         {
-          "id": "b93dea13",
+          "id": "cf5dc202",
           "elType": "container",
           "isInner": true,
           "_sid": "sid-3",
@@ -280,7 +280,7 @@
           },
           "elements": [
             {
-              "id": "17a5e6d7",
+              "id": "c272b227",
               "elType": "widget",
               "widgetType": "text-editor",
               "_sid": "sid-4",
@@ -383,7 +383,7 @@
               "isInner": false
             },
             {
-              "id": "73b4e3d1",
+              "id": "bc201b87",
               "elType": "widget",
               "widgetType": "heading",
               "_sid": "sid-5",
@@ -441,7 +441,7 @@
               "isInner": false
             },
             {
-              "id": "67abaa46",
+              "id": "b05c73e4",
               "elType": "widget",
               "widgetType": "text-editor",
               "_sid": "sid-6",
@@ -530,7 +530,7 @@
               "isInner": false
             },
             {
-              "id": "04484403",
+              "id": "6ab2af2e",
               "elType": "widget",
               "widgetType": "button",
               "_sid": "sid-7",
@@ -604,7 +604,7 @@
           ]
         },
         {
-          "id": "69774c2d",
+          "id": "f93378c1",
           "elType": "container",
           "isInner": true,
           "_sid": "sid-8",
@@ -725,7 +725,7 @@
           },
           "elements": [
             {
-              "id": "013aa5a5",
+              "id": "c0e81eb7",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-9",
@@ -865,7 +865,7 @@
               },
               "elements": [
                 {
-                  "id": "e3ec98de",
+                  "id": "727ef75c",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-10",
@@ -952,7 +952,7 @@
                   },
                   "elements": [
                     {
-                      "id": "9abe19a5",
+                      "id": "7ddbb730",
                       "elType": "widget",
                       "widgetType": "image",
                       "_sid": "sid-11",
@@ -1041,7 +1041,7 @@
                   ]
                 },
                 {
-                  "id": "69e527d8",
+                  "id": "c8f52a3d",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-12",
@@ -1144,7 +1144,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "3d2bd41a",
+                  "id": "636456e7",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-13",
@@ -1198,7 +1198,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "3a830a9d",
+                  "id": "ce166a7d",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-14",
@@ -1255,7 +1255,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "f5a8c621",
+                  "id": "2a6d5ed2",
                   "elType": "widget",
                   "widgetType": "button",
                   "_sid": "sid-15",
@@ -1342,7 +1342,7 @@
               ]
             },
             {
-              "id": "8da5133e",
+              "id": "a976c1c0",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-16",
@@ -1482,7 +1482,7 @@
               },
               "elements": [
                 {
-                  "id": "80df27df",
+                  "id": "dd9edcc8",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-17",
@@ -1569,7 +1569,7 @@
                   },
                   "elements": [
                     {
-                      "id": "1f71f915",
+                      "id": "473caad2",
                       "elType": "widget",
                       "widgetType": "image",
                       "_sid": "sid-18",
@@ -1658,7 +1658,7 @@
                   ]
                 },
                 {
-                  "id": "579f2e90",
+                  "id": "e1e82ab9",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-19",
@@ -1761,7 +1761,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "965b1f98",
+                  "id": "c7ab55a4",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-20",
@@ -1815,7 +1815,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "3b21ce24",
+                  "id": "0e7570e6",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-21",
@@ -1872,7 +1872,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "d2972613",
+                  "id": "ec916027",
                   "elType": "widget",
                   "widgetType": "button",
                   "_sid": "sid-22",
@@ -1959,7 +1959,7 @@
               ]
             },
             {
-              "id": "16bae2f6",
+              "id": "2f5b2f3b",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-23",
@@ -2099,7 +2099,7 @@
               },
               "elements": [
                 {
-                  "id": "cc82fd5f",
+                  "id": "25c8f74a",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-24",
@@ -2186,7 +2186,7 @@
                   },
                   "elements": [
                     {
-                      "id": "89fd2747",
+                      "id": "67df426b",
                       "elType": "widget",
                       "widgetType": "image",
                       "_sid": "sid-25",
@@ -2275,7 +2275,7 @@
                   ]
                 },
                 {
-                  "id": "6c51b0f9",
+                  "id": "e46d19c0",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-26",
@@ -2378,7 +2378,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "ecd252ec",
+                  "id": "a7236dc3",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-27",
@@ -2432,7 +2432,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "f79bb4c3",
+                  "id": "d39c26e8",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-28",
@@ -2489,7 +2489,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "31fd0dcf",
+                  "id": "62282430",
                   "elType": "widget",
                   "widgetType": "button",
                   "_sid": "sid-29",
@@ -2578,7 +2578,7 @@
           ]
         },
         {
-          "id": "9b644f48",
+          "id": "df1a36b0",
           "elType": "container",
           "isInner": true,
           "_sid": "sid-30",
@@ -2727,7 +2727,7 @@
           },
           "elements": [
             {
-              "id": "603c8540",
+              "id": "87fa5e8e",
               "elType": "widget",
               "widgetType": "heading",
               "_sid": "sid-31",
@@ -2769,7 +2769,7 @@
               "isInner": false
             },
             {
-              "id": "ecfc870a",
+              "id": "50c77fc4",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-32",
@@ -2866,7 +2866,7 @@
               },
               "elements": [
                 {
-                  "id": "3d9fa5ed",
+                  "id": "71c9a549",
                   "elType": "widget",
                   "widgetType": "html",
                   "_sid": "sid-33",
@@ -2918,7 +2918,7 @@
               ]
             },
             {
-              "id": "aa99a1ac",
+              "id": "c5db224d",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-38",
@@ -3015,7 +3015,7 @@
               },
               "elements": [
                 {
-                  "id": "edbcf218",
+                  "id": "17248614",
                   "elType": "widget",
                   "widgetType": "html",
                   "_sid": "sid-39",
@@ -3073,12 +3073,12 @@
           ]
         },
         {
-          "id": "6be608a2",
+          "id": "bd4b07b9",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<script>\n(function() {\n  // 1. Universal DOM Lifecycle Polyfill:\n  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,\n  // immediately invoke the callback so dynamic scripts never enter a deadzone.\n  try {\n    var _origDocAdd = Document.prototype.addEventListener;\n    var _lifecycleAdd = function(type, fn, opts) {\n      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {\n        try {\n          setTimeout(function() { fn.call(document, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origDocAdd.call(this, type, fn, opts);\n    };\n    Document.prototype.addEventListener = _lifecycleAdd;\n    try { document.addEventListener = _lifecycleAdd; } catch(e) {}\n\n    var _origWinAdd = Window.prototype.addEventListener;\n    Window.prototype.addEventListener = function(type, fn, opts) {\n      if (type === 'load' && document.readyState === 'complete') {\n        try {\n          setTimeout(function() { fn.call(window, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origWinAdd.call(this, type, fn, opts);\n    };\n  } catch(e) {\n    console.warn('[LIFECYCLE POLYFILL ERROR]', e);\n  }\n\n  function initDynamicComponentLogic() {\n    // 2. Universal Data-Attribute Hydration Bridge:\n    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases\n    // (e.g. data-category--design -> el.dataset.category = \"design\", el.setAttribute(\"data-category\", \"design\"))\n    try {\n      document.querySelectorAll('*').forEach(function(el) {\n        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;\n        if (el.dataset && el.dataset.__hasDataHydrated) return;\n        if (el.dataset) el.dataset.__hasDataHydrated = 'true';\n        if (el.classList) {\n          el.classList.forEach(function(cls) {\n            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {\n              var sepIdx = cls.indexOf('--');\n              var attrName = cls.slice(0, sepIdx);\n              var rawVal = cls.slice(sepIdx + 2);\n              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)\n              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {\n                return String.fromCharCode(parseInt(hex, 16));\n              });\n              el.setAttribute(attrName, attrVal);\n              if (el.dataset) {\n                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });\n                el.dataset[prop] = attrVal;\n              }\n            }\n          });\n        }\n      });\n    } catch(e) {\n      console.warn('[DATA HYDRATION ERROR]', e);\n    }\n\n    try {\n      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title\n      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {\n        var inner = widget.querySelector('.elementor-heading-title');\n        if (inner && !widget.__hasTextProxy) {\n          widget.__hasTextProxy = true;\n          Object.defineProperty(widget, 'textContent', {\n            get: function() { return inner.textContent; },\n            set: function(val) { inner.textContent = val; },\n            configurable: true\n          });\n          Object.defineProperty(widget, 'innerText', {\n            get: function() { return inner.innerText; },\n            set: function(val) { inner.innerText = val; },\n            configurable: true\n          });\n        }\n      });\n\n      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)\n      \n      if (!window.__delegatedBridgesBound) {\n        window.__delegatedBridgesBound = true;\n        \n      (function(){\n        var k = \"bridge_.accordion-header|.accordion-item\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\".accordion-header\");\n            if (!trig) return;\n            var anc = trig.closest(\".accordion-item\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\".accordion-header\");\n          if (!trig) return;\n          var anc = trig.closest(\".accordion-item\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n      }\n  \n    } catch(err) {\n      console.warn('[COMPILER BRIDGE]', err);\n    }\n\n    // Execute Application Business Logic with Idempotency Protection\n    if (!window.__appLogicInitialized) {\n      window.__appLogicInitialized = true;\n      try {\n        document.addEventListener('DOMContentLoaded', function() {\n      const headers = document.querySelectorAll('.accordion-header');\n      headers.forEach(function(btn) {\n        btn.addEventListener('click', function() {\n          const item = this.parentElement;\n          const isActive = item.classList.contains('is-active');\n          document.querySelectorAll('.accordion-item').forEach(function(el) {\n            el.classList.remove('is-active');\n          });\n          if (!isActive) {\n            item.classList.add('is-active');\n          }\n        });\n      });\n    });\n      } catch(appErr) {\n        console.warn('[APP LOGIC ERROR]', appErr);\n      }\n    }\n  }\n\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);\n  } else {\n    initDynamicComponentLogic();\n  }\n  setTimeout(initDynamicComponentLogic, 200);\n  setTimeout(initDynamicComponentLogic, 800);\n  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);\n})();\n</script>",
-            "css_classes": "embedded-script-engine e-sid-6be608a2",
+            "css_classes": "embedded-script-engine e-sid-bd4b07b9",
             "_html_reason": "SYSTEM:script-engine",
             "_margin": {
               "unit": "px",
@@ -3096,7 +3096,7 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-script-engine e-sid-6be608a2"
+            "_css_classes": "embedded-script-engine e-sid-bd4b07b9"
           },
           "elements": []
         }

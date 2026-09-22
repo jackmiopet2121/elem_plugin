@@ -2,8 +2,8 @@
  * Block 8.0: Universal Regression Baseline Runner & Audit Gate
  * 
  * Compiles all discovered corpus fixtures, extracts honest baseline metrics,
- * enforces universal invariants (Pro widgets, SIDs, HTML reasons, IDs, scalars),
- * prevents stale artifact reuse, and generates deterministic machine-readable reports.
+ * enforces universal invariants (Pro widgets, SIDs, HTML reasons, IDs, scalars, audit integrity),
+ * prevents stale artifact reuse, sanitizes failure messages, and generates deterministic reports.
  */
 
 const fs = require('fs');
@@ -11,10 +11,18 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { discoverCorpusFixtures, DEFAULT_VIEWPORTS } = require('./support/corpus-manifest');
 const { validateTemplate } = require('../src/smart/scalar-contract');
-const { isValidHtmlReason, VALID_HTML_REASONS } = require('../src/smart/style-router');
+const { isValidHtmlReason } = require('../src/smart/style-router');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const REPORTS_DIR = path.join(__dirname, 'reports');
+
+const SID_CLASSIFICATION_RULE =
+  "Nodes are classified into 4 categories: " +
+  "(1) source-derived (nodes representing source DOM elements mapped in Ground Truth, expected to preserve SID); " +
+  "(2) generated helpers (explicit compiler-generated layout helpers, reported separately without invented SIDs); " +
+  "(3) exempt system (stylesheet and script engine widgets); " +
+  "(4) unverifiable (nodes without SID whose source derivation cannot be proven). " +
+  "Missing SIDs on source-derived or unverifiable nodes fail the invariant gate.";
 
 /**
  * Resolves the compiler CLI executable path.
@@ -31,12 +39,84 @@ function resolveCliPath() {
 }
 
 /**
+ * Sanitizes an error message by stripping absolute paths, timestamps, and durations.
+ * @param {string|null} errorMessage 
+ * @param {string} [rootDir]
+ * @returns {string|null}
+ */
+function sanitizeErrorMessage(errorMessage, rootDir = ROOT_DIR) {
+  if (!errorMessage || typeof errorMessage !== 'string') return null;
+
+  let clean = errorMessage;
+
+  if (rootDir) {
+    const rootNormBack = rootDir.replace(/\//g, '\\');
+    const rootNormFwd = rootDir.replace(/\\/g, '/');
+    clean = clean.split(rootNormBack).join('<ROOT>');
+    clean = clean.split(rootNormFwd).join('<ROOT>');
+  }
+
+  // Windows absolute paths
+  clean = clean.replace(/[A-Za-z]:\\[^\\/:*?"<>|\r\n\t]+/g, '<PATH>');
+  clean = clean.replace(/[A-Za-z]:\/[^\\/:*?"<>|\r\n\t]+/g, '<PATH>');
+
+  // Unix absolute paths
+  clean = clean.replace(/\/(?:home|tmp|var|usr|etc|opt)\/[^\s:*?"<>|\r\n\t]+/g, '<PATH>');
+
+  // ISO timestamps
+  clean = clean.replace(/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z?/g, '');
+
+  // Durations (e.g. 45000ms, 12.3s)
+  clean = clean.replace(/\b\d+(?:\.\d+)?\s*(?:ms|seconds|sec|s)\b/gi, '');
+
+  clean = clean.replace(/[ \t]+/g, ' ').replace(/\n\s*\n/g, '\n').trim();
+  return clean.substring(0, 300);
+}
+
+/**
+ * Checks content HTML for forbidden native primitives (headings, paragraphs, images, simple buttons).
+ * @param {string} html 
+ * @param {string} reason 
+ * @returns {Array<string>} List of violations
+ */
+function checkStructuralHtmlViolations(html, reason) {
+  const violations = [];
+  const trimmed = String(html || '').trim();
+
+  // Exempt system widgets
+  if (reason === 'SYSTEM:stylesheet-engine' || reason === 'SYSTEM:script-engine' ||
+      trimmed.startsWith('<style') || trimmed.startsWith('<script')) {
+    return violations;
+  }
+
+  const hasComplexForm = /<input|<select|<textarea|<form/i.test(trimmed);
+
+  if (!hasComplexForm) {
+    if (/<button\b/i.test(trimmed)) {
+      violations.push('contains simple button markup that must be native button widget');
+    }
+    if (/<h[1-6]\b/i.test(trimmed)) {
+      violations.push('contains standard heading markup that must be native heading widget');
+    }
+    if (/<p\b/i.test(trimmed) && !/<svg\b/i.test(trimmed)) {
+      violations.push('contains standard paragraph markup that must be native text-editor widget');
+    }
+    if (/<img\b/i.test(trimmed)) {
+      violations.push('contains standard image markup that must be native image widget');
+    }
+  }
+
+  return violations;
+}
+
+/**
  * Analyzes an Elementor Template content tree for widget classification and invariants.
  * @param {Array} content 
  * @param {Object} [templateJson]
+ * @param {Object} [auditData]
  * @returns {Object}
  */
-function analyzeTemplateTree(content = [], templateJson = null) {
+function analyzeTemplateTree(content = [], templateJson = null, auditData = null) {
   let coreWidgetsCount = 0;
   let htmlWidgetsCount = 0;
   let proWidgetsCount = 0;
@@ -45,12 +125,14 @@ function analyzeTemplateTree(content = [], templateJson = null) {
   let microCssSizeBytes = 0;
   let scriptSizeBytes = 0;
 
-  // SID Tracking
+  // Granular SID Tracking
   let missingSidContainers = 0;
   let missingSidNativeWidgets = 0;
   let missingSidCustomWidgets = 0;
   let missingSidContentHtml = 0;
   let exemptSystemWidgets = 0;
+  let generatedHelperNodes = 0;
+  let unverifiableNodes = 0;
 
   // ID Validation: format /^[a-f0-9]{7,8}$/i, uniqueness, existence
   const ID_FORMAT_REGEX = /^[a-f0-9]{7,8}$/i;
@@ -85,12 +167,23 @@ function analyzeTemplateTree(content = [], templateJson = null) {
       seenIds.add(node.id);
     }
 
-    // Extract SID
+    // Extract SID and class hints
     const sid = node._sid || node.settings?._sid || node._dom_id || node.settings?._dom_id;
+    const classes = String(node.settings?._css_classes || node.settings?.css_classes || '');
+    const hasSidClass = /e-sid-(\d+|[a-zA-Z0-9_-]+)/.test(classes);
+    const isExplicitHelper = Boolean(node.settings?._is_helper || node._is_helper || node.settings?._generated_helper);
 
     if (node.elType === 'container') {
-      if (!sid) {
+      if (sid) {
+        // Preserved SID
+      } else if (isExplicitHelper) {
+        generatedHelperNodes++;
+      } else if (hasSidClass) {
         missingSidContainers++;
+      } else {
+        // Unverifiable container without SID tracking
+        missingSidContainers++;
+        unverifiableNodes++;
       }
     } else if (node.elType === 'widget') {
       const wType = node.widgetType;
@@ -103,16 +196,11 @@ function analyzeTemplateTree(content = [], templateJson = null) {
         if (!reason || reason === 'UNSPECIFIED_HTML_WIDGET') {
           htmlReasonViolations.push(`HTML widget ${node.id || 'unknown'} lacks machine-readable _html_reason`);
           htmlWidgetReasons.push(reason || 'UNSPECIFIED_HTML_WIDGET');
+        } else if (!isValidHtmlReason(reason)) {
+          htmlReasonViolations.push(`HTML widget ${node.id} has unapproved reason: "${reason}"`);
+          htmlWidgetReasons.push(reason);
         } else {
           htmlWidgetReasons.push(reason);
-          const isAllowedCategory = (
-            isValidHtmlReason(reason) ||
-            reason.startsWith('SYSTEM:') ||
-            reason.startsWith('NON_ELEMENTOR_PRIMITIVE:')
-          );
-          if (!isAllowedCategory) {
-            htmlReasonViolations.push(`HTML widget ${node.id} has invalid machine-readable reason: "${reason}"`);
-          }
         }
 
         const isStylesheet = reason === 'SYSTEM:stylesheet-engine' || html.startsWith('<style') || html.includes('</style>');
@@ -128,40 +216,45 @@ function analyzeTemplateTree(content = [], templateJson = null) {
           scriptSizeBytes += Buffer.byteLength(html, 'utf8');
         } else {
           contentHtmlWidgetsCount++;
-          if (!sid) {
+          if (sid) {
+            // Preserved SID
+          } else if (isExplicitHelper) {
+            generatedHelperNodes++;
+          } else if (hasSidClass) {
             missingSidContentHtml++;
+          } else {
+            missingSidContentHtml++;
+            unverifiableNodes++;
           }
 
-          // Check if standard heading, paragraph, image, or simple button is improperly placed in HTML widget
-          const hasInput = /<input|<select|<textarea|<form/i.test(html);
-          if (!hasInput) {
-            if (/<h[1-6]\b[^>]*>.*?<\/h[1-6]>/is.test(html)) {
-              htmlReasonViolations.push(`HTML widget ${node.id} contains standard heading markup that must be native`);
-            }
-            if (/<p\b[^>]*>.*?<\/p>/is.test(html) && !/<svg\b/i.test(html)) {
-              htmlReasonViolations.push(`HTML widget ${node.id} contains standard paragraph markup that must be native`);
-            }
-            if (/<img\b[^>]*>/i.test(html)) {
-              htmlReasonViolations.push(`HTML widget ${node.id} contains standard image markup that must be native`);
-            }
-            if (/<button\b[^>]*>(?:(?!<input|<select|<form)[\s\S])*?<\/button>/i.test(html) && html.length > 250) {
-              htmlReasonViolations.push(`HTML widget ${node.id} contains standard button markup that must be native`);
-            }
-            if (/class=["'][^"']*(?:card|grid|column)[^"']*["']/i.test(html)) {
-              htmlReasonViolations.push(`HTML widget ${node.id} contains standard structural card/grid layout that must be native`);
-            }
+          // Structural Primitive Check
+          const primViolations = checkStructuralHtmlViolations(html, reason);
+          for (const pv of primViolations) {
+            htmlReasonViolations.push(`HTML widget ${node.id} ${pv}`);
           }
         }
       } else if (validFreeWidgets.has(wType)) {
         coreWidgetsCount++;
-        if (!sid) {
+        if (sid) {
+          // Preserved SID
+        } else if (isExplicitHelper) {
+          generatedHelperNodes++;
+        } else if (hasSidClass) {
           missingSidNativeWidgets++;
+        } else {
+          missingSidNativeWidgets++;
+          unverifiableNodes++;
         }
       } else {
         proWidgetsCount++;
         proWidgetTypes.push(wType);
-        if (!sid) {
+        if (sid) {
+          // Preserved SID
+        } else if (isExplicitHelper) {
+          generatedHelperNodes++;
+        } else {
           missingSidCustomWidgets++;
+          unverifiableNodes++;
         }
       }
     }
@@ -205,9 +298,12 @@ function analyzeTemplateTree(content = [], templateJson = null) {
       nativeWidgets: missingSidNativeWidgets,
       customWidgets: missingSidCustomWidgets,
       contentHtmlWidgets: missingSidContentHtml,
-      exemptSystemWidgets
+      exemptSystemWidgets,
+      generatedHelperNodes,
+      unverifiableNodes
     },
     missingSidCount: totalNonExemptMissingSids,
+    unverifiableNodesCount: unverifiableNodes,
     idMetrics: {
       totalIds: seenIds.size,
       malformed: malformedIdCount,
@@ -224,17 +320,24 @@ function analyzeTemplateTree(content = [], templateJson = null) {
  * @param {Object} treeAnalysis 
  * @param {string} compilationStatus 
  * @param {number|null} globalFidelityScore 
+ * @param {string} [auditStatus='VALID']
+ * @param {string|null} [auditError=null]
  * @returns {Array<string>} Invariant violation messages
  */
-function evaluateInvariants(treeAnalysis, compilationStatus, globalFidelityScore) {
+function evaluateInvariants(treeAnalysis, compilationStatus, globalFidelityScore, auditStatus = 'VALID', auditError = null) {
   const violations = [];
 
-  // 1. Pro Widgets
+  // 1. Audit Integrity Check
+  if (compilationStatus.startsWith('SUCCESS') && auditStatus !== 'VALID') {
+    violations.push(`Audit artifact verification failed (${auditStatus}): ${auditError || 'Invalid or missing audit'}`);
+  }
+
+  // 2. Pro Widgets
   if (treeAnalysis.proWidgetsCount > 0) {
     violations.push(`Pro widgets detected: ${treeAnalysis.proWidgetTypes.join(', ')}`);
   }
 
-  // 2. ID Validations
+  // 3. ID Validations
   const idM = treeAnalysis.idMetrics;
   if (idM.missing > 0) {
     violations.push(`${idM.missing} element(s) have missing IDs`);
@@ -246,7 +349,7 @@ function evaluateInvariants(treeAnalysis, compilationStatus, globalFidelityScore
     violations.push(`${idM.duplicates} duplicate ID(s) detected across template tree`);
   }
 
-  // 3. Missing SIDs (non-exempt)
+  // 4. Missing SIDs (non-exempt)
   if (treeAnalysis.missingSidCount > 0) {
     const b = treeAnalysis.missingSidBreakdown;
     violations.push(
@@ -256,7 +359,12 @@ function evaluateInvariants(treeAnalysis, compilationStatus, globalFidelityScore
     );
   }
 
-  // 4. HTML Reason Violations
+  // 5. Unverifiable Nodes
+  if (treeAnalysis.unverifiableNodesCount > 0) {
+    violations.push(`${treeAnalysis.unverifiableNodesCount} unverifiable element(s) detected without source SID tracking`);
+  }
+
+  // 6. HTML Reason Violations
   if (treeAnalysis.htmlReasonViolations.length > 0) {
     violations.push(
       `${treeAnalysis.htmlReasonViolations.length} HTML widget contract violation(s) ` +
@@ -264,7 +372,7 @@ function evaluateInvariants(treeAnalysis, compilationStatus, globalFidelityScore
     );
   }
 
-  // 5. Scalar Contract Violations
+  // 7. Scalar Contract Violations
   if (treeAnalysis.scalarViolationsCount > 0) {
     violations.push(
       `${treeAnalysis.scalarViolationsCount} scalar contract violation(s) ` +
@@ -272,7 +380,7 @@ function evaluateInvariants(treeAnalysis, compilationStatus, globalFidelityScore
     );
   }
 
-  // 6. Fidelity on failed compilation
+  // 8. Fidelity on failed compilation
   if (compilationStatus === 'FAILED' && globalFidelityScore === 100) {
     violations.push('Failed compilation must not report 100% fidelity score');
   }
@@ -300,7 +408,7 @@ function runFixtureBaseline(fixture, cliPath, outputDir) {
   if (fs.existsSync(targetPreview)) fs.unlinkSync(targetPreview);
 
   let compilationStatus = 'SUCCESS';
-  let errorMessage = null;
+  let rawErrorMessage = null;
   let exitCode = 0;
 
   try {
@@ -308,7 +416,7 @@ function runFixtureBaseline(fixture, cliPath, outputDir) {
     execSync(cmd, { cwd: ROOT_DIR, stdio: 'pipe', maxBuffer: 10 * 1024 * 1024 });
   } catch (err) {
     exitCode = err.status !== undefined ? err.status : 1;
-    errorMessage = (err.stderr ? err.stderr.toString() : err.message).trim().substring(0, 300);
+    rawErrorMessage = (err.stderr ? err.stderr.toString() : err.message);
   }
 
   let templateContent = [];
@@ -316,69 +424,108 @@ function runFixtureBaseline(fixture, cliPath, outputDir) {
 
   if (exitCode !== 0 && exitCode !== 2) {
     compilationStatus = 'FAILED';
-    if (!errorMessage) errorMessage = `Compiler exited with non-zero code ${exitCode}`;
+    if (!rawErrorMessage) rawErrorMessage = `Compiler exited with non-zero code ${exitCode}`;
   } else if (fs.existsSync(targetJson)) {
     try {
       parsedJson = JSON.parse(fs.readFileSync(targetJson, 'utf8'));
       templateContent = parsedJson.content || [];
       compilationStatus = exitCode === 0 ? 'SUCCESS' : 'SUCCESS (ADVISORY)';
-      errorMessage = null;
+      rawErrorMessage = null;
     } catch (e) {
       compilationStatus = 'FAILED';
-      errorMessage = `Corrupted JSON output: ${e.message}`;
+      rawErrorMessage = `Corrupted JSON output: ${e.message}`;
     }
   } else {
     compilationStatus = 'FAILED';
-    if (!errorMessage) errorMessage = 'Target JSON file was not generated';
+    if (!rawErrorMessage) rawErrorMessage = 'Target JSON file was not generated';
   }
 
-  // Analyze tree & scalar contract
-  const treeAnalysis = analyzeTemplateTree(templateContent, parsedJson);
-
-  // Read audit file if available and compilation did not fail
+  // Audit Artifact Validation (Task 1)
+  let auditStatus = 'NOT_APPLICABLE';
+  let auditError = null;
   let globalFidelityScore = null;
   let defectCounts = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
   let consoleErrorsCount = 0;
+  let auditData = null;
 
-  if (compilationStatus.startsWith('SUCCESS') && fs.existsSync(targetAudit)) {
-    try {
-      const audit = JSON.parse(fs.readFileSync(targetAudit, 'utf8'));
-      globalFidelityScore = typeof audit.fidelity === 'number'
-        ? audit.fidelity
-        : (typeof audit.global?.fidelity === 'number'
-            ? audit.global.fidelity
-            : (typeof audit.score === 'number' ? audit.score : null));
+  if (compilationStatus.startsWith('SUCCESS')) {
+    if (!fs.existsSync(targetAudit)) {
+      auditStatus = 'MISSING';
+      auditError = 'Audit artifact was not generated by compilation';
+      globalFidelityScore = null;
+    } else {
+      try {
+        auditData = JSON.parse(fs.readFileSync(targetAudit, 'utf8'));
+        if (!auditData || typeof auditData !== 'object') {
+          auditStatus = 'INVALID';
+          auditError = 'Audit JSON root must be an object';
+        } else {
+          const fid = typeof auditData.fidelity === 'number'
+            ? auditData.fidelity
+            : (typeof auditData.global?.fidelity === 'number'
+                ? auditData.global.fidelity
+                : (typeof auditData.score === 'number' ? auditData.score : null));
 
-      if (Array.isArray(audit.defects)) {
-        for (const d of audit.defects) {
-          const sev = (d.severity || 'LOW').toLowerCase();
-          if (d.advisory) {
-            defectCounts.advisory++;
-          } else if (defectCounts[sev] !== undefined) {
-            defectCounts[sev]++;
+          if (fid === null) {
+            auditStatus = 'INVALID';
+            auditError = 'Audit JSON missing required numerical fidelity score';
+          } else {
+            auditStatus = 'VALID';
+            globalFidelityScore = fid;
+
+            if (Array.isArray(auditData.defects)) {
+              for (const d of auditData.defects) {
+                const sev = (d.severity || 'LOW').toLowerCase();
+                if (d.advisory) {
+                  defectCounts.advisory++;
+                } else if (defectCounts[sev] !== undefined) {
+                  defectCounts[sev]++;
+                }
+              }
+            } else if (auditData.counts && typeof auditData.counts === 'object') {
+              defectCounts.critical = auditData.counts.critical || 0;
+              defectCounts.high = auditData.counts.high || 0;
+              defectCounts.medium = auditData.counts.medium || 0;
+              defectCounts.low = auditData.counts.low || 0;
+              defectCounts.advisory = auditData.advisoryDefectCount || 0;
+            }
+
+            if (Array.isArray(auditData.consoleErrors)) {
+              consoleErrorsCount = auditData.consoleErrors.length;
+            }
           }
         }
+      } catch (err) {
+        auditStatus = 'INVALID';
+        auditError = `Corrupted audit JSON: ${err.message}`;
       }
-
-      if (Array.isArray(audit.consoleErrors)) {
-        consoleErrorsCount = audit.consoleErrors.length;
-      }
-    } catch (e) {
-      // Audit parse error ignored
     }
   }
 
+  // Analyze tree & scalar contract
+  const treeAnalysis = analyzeTemplateTree(templateContent, parsedJson, auditData);
+
   // Evaluate baseline invariants
-  const invariantViolations = evaluateInvariants(treeAnalysis, compilationStatus, globalFidelityScore);
+  const invariantViolations = evaluateInvariants(
+    treeAnalysis,
+    compilationStatus,
+    globalFidelityScore,
+    auditStatus,
+    auditError
+  );
+
+  const sanitizedError = sanitizeErrorMessage(rawErrorMessage, ROOT_DIR);
 
   return {
     fixtureId: fixture.fixtureId,
     relativePath: fixture.relativePath,
     contentHash: fixture.contentHash,
     compilationStatus,
-    errorMessage,
+    errorMessage: sanitizedError,
     metrics: {
       globalFidelityScore,
+      auditStatus,
+      auditError,
       viewportFidelity: null,
       viewportFidelityReason: 'Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1',
       defects: defectCounts,
@@ -395,6 +542,7 @@ function runFixtureBaseline(fixture, cliPath, outputDir) {
       scriptSizeBytes: treeAnalysis.scriptSizeBytes,
       missingSidBreakdown: treeAnalysis.missingSidBreakdown,
       missingSidCount: treeAnalysis.missingSidCount,
+      unverifiableNodesCount: treeAnalysis.unverifiableNodesCount,
       idMetrics: treeAnalysis.idMetrics,
       scalarViolationsCount: treeAnalysis.scalarViolationsCount,
       scalarViolations: treeAnalysis.scalarViolations,
@@ -409,6 +557,77 @@ function runFixtureBaseline(fixture, cliPath, outputDir) {
       violations: invariantViolations
     }
   };
+}
+
+/**
+ * Builds a deterministic JSON report object from compiled fixture results.
+ * @param {Array<Object>} results 
+ * @param {Object} [options]
+ * @returns {Object} Deterministic report
+ */
+function buildDeterministicReport(results = [], options = {}) {
+  const viewports = options.viewports || DEFAULT_VIEWPORTS;
+  const invariantFailuresTotal = results.reduce((acc, r) => acc + (r.invariants?.violations?.length || 0), 0);
+
+  return {
+    schemaVersion: '8.0.0',
+    contract: 'Block 8.0 Universal Baseline & Anti-Hardcoding Contract',
+    sidClassificationRule: SID_CLASSIFICATION_RULE,
+    viewportConfiguration: viewports.map(v => ({ name: v.name, width: v.width, height: v.height })),
+    totalFixtures: results.length,
+    passedCompilations: results.filter(r => r.compilationStatus.startsWith('SUCCESS')).length,
+    failedCompilations: results.filter(r => !r.compilationStatus.startsWith('SUCCESS')).length,
+    invariantViolationsCount: invariantFailuresTotal,
+    fixtures: results.map(r => ({
+      fixtureId: r.fixtureId,
+      relativePath: r.relativePath,
+      contentHash: r.contentHash,
+      compilationStatus: r.compilationStatus,
+      errorMessage: r.errorMessage,
+      metrics: {
+        globalFidelityScore: r.metrics.globalFidelityScore,
+        auditStatus: r.metrics.auditStatus,
+        auditError: r.metrics.auditError,
+        viewportFidelity: r.metrics.viewportFidelity,
+        viewportFidelityReason: r.metrics.viewportFidelityReason,
+        defects: r.metrics.defects,
+        coreWidgetsCount: r.metrics.coreWidgetsCount,
+        customPluginWidgetsCount: r.metrics.customPluginWidgetsCount,
+        customPluginWidgetsReason: r.metrics.customPluginWidgetsReason,
+        htmlWidgetsCount: r.metrics.htmlWidgetsCount,
+        systemHtmlWidgetsCount: r.metrics.systemHtmlWidgetsCount,
+        contentHtmlWidgetsCount: r.metrics.contentHtmlWidgetsCount,
+        htmlWidgetReasons: r.metrics.htmlWidgetReasons,
+        htmlReasonViolations: r.metrics.htmlReasonViolations,
+        nativeEditabilityPercentage: r.metrics.nativeEditabilityPercentage,
+        microCssSizeBytes: r.metrics.microCssSizeBytes,
+        scriptSizeBytes: r.metrics.scriptSizeBytes,
+        missingSidBreakdown: r.metrics.missingSidBreakdown,
+        missingSidCount: r.metrics.missingSidCount,
+        unverifiableNodesCount: r.metrics.unverifiableNodesCount,
+        idMetrics: r.metrics.idMetrics,
+        scalarViolationsCount: r.metrics.scalarViolationsCount,
+        scalarViolations: r.metrics.scalarViolations,
+        consoleErrorsCount: r.metrics.consoleErrorsCount,
+        unverifiedNodeCount: r.metrics.unverifiedNodeCount,
+        unverifiedNodeReason: r.metrics.unverifiedNodeReason,
+        unsupportedCapabilityCount: r.metrics.unsupportedCapabilityCount,
+        unsupportedCapabilityReason: r.metrics.unsupportedCapabilityReason
+      },
+      invariants: r.invariants
+    }))
+  };
+}
+
+/**
+ * Computes baseline suite exit code based on compilation and invariant results.
+ * @param {Array<Object>} results 
+ * @param {number} invariantFailuresTotal 
+ * @returns {number} 0 for clean pass, 1 for failure
+ */
+function computeBaselineExitCode(results, invariantFailuresTotal) {
+  const failedCompilationsCount = results.filter(r => !r.compilationStatus.startsWith('SUCCESS')).length;
+  return (failedCompilationsCount > 0 || invariantFailuresTotal > 0) ? 1 : 0;
 }
 
 /**
@@ -496,58 +715,15 @@ function runBaselineSuite(options = {}) {
   }
   console.log('------------------------------------------------------------------------------------------------------------------\n');
 
-  // Build Deterministic JSON Report (ZERO timestamps, ZERO duration, ZERO absolute paths)
-  const deterministicReport = {
-    schemaVersion: '8.0.0',
-    contract: 'Block 8.0 Universal Baseline & Anti-Hardcoding Contract',
-    viewportConfiguration: DEFAULT_VIEWPORTS.map(v => ({ name: v.name, width: v.width, height: v.height })),
-    totalFixtures: results.length,
-    passedCompilations: results.filter(r => r.compilationStatus.startsWith('SUCCESS')).length,
-    failedCompilations: results.filter(r => !r.compilationStatus.startsWith('SUCCESS')).length,
-    invariantViolationsCount: invariantFailuresTotal,
-    fixtures: results.map(r => ({
-      fixtureId: r.fixtureId,
-      relativePath: r.relativePath,
-      contentHash: r.contentHash,
-      compilationStatus: r.compilationStatus,
-      errorMessage: r.errorMessage,
-      metrics: {
-        globalFidelityScore: r.metrics.globalFidelityScore,
-        viewportFidelity: r.metrics.viewportFidelity,
-        viewportFidelityReason: r.metrics.viewportFidelityReason,
-        defects: r.metrics.defects,
-        coreWidgetsCount: r.metrics.coreWidgetsCount,
-        customPluginWidgetsCount: r.metrics.customPluginWidgetsCount,
-        customPluginWidgetsReason: r.metrics.customPluginWidgetsReason,
-        htmlWidgetsCount: r.metrics.htmlWidgetsCount,
-        systemHtmlWidgetsCount: r.metrics.systemHtmlWidgetsCount,
-        contentHtmlWidgetsCount: r.metrics.contentHtmlWidgetsCount,
-        htmlWidgetReasons: r.metrics.htmlWidgetReasons,
-        htmlReasonViolations: r.metrics.htmlReasonViolations,
-        nativeEditabilityPercentage: r.metrics.nativeEditabilityPercentage,
-        microCssSizeBytes: r.metrics.microCssSizeBytes,
-        scriptSizeBytes: r.metrics.scriptSizeBytes,
-        missingSidBreakdown: r.metrics.missingSidBreakdown,
-        missingSidCount: r.metrics.missingSidCount,
-        idMetrics: r.metrics.idMetrics,
-        scalarViolationsCount: r.metrics.scalarViolationsCount,
-        scalarViolations: r.metrics.scalarViolations,
-        consoleErrorsCount: r.metrics.consoleErrorsCount,
-        unverifiedNodeCount: r.metrics.unverifiedNodeCount,
-        unverifiedNodeReason: r.metrics.unverifiedNodeReason,
-        unsupportedCapabilityCount: r.metrics.unsupportedCapabilityCount,
-        unsupportedCapabilityReason: r.metrics.unsupportedCapabilityReason
-      },
-      invariants: r.invariants
-    }))
-  };
+  // Build Deterministic JSON Report
+  const deterministicReport = buildDeterministicReport(results, { viewports: DEFAULT_VIEWPORTS });
 
   const reportPath = path.join(REPORTS_DIR, 'block-8-baseline-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(deterministicReport, null, 2), 'utf8');
   console.log(`✓ Deterministic Baseline Report saved: ${path.relative(ROOT_DIR, reportPath)}`);
 
+  const exitCode = computeBaselineExitCode(results, invariantFailuresTotal);
   const failedCompilationsCount = results.filter(r => !r.compilationStatus.startsWith('SUCCESS')).length;
-  const exitCode = (failedCompilationsCount > 0 || invariantFailuresTotal > 0) ? 1 : 0;
 
   return {
     reportPath,
@@ -598,8 +774,12 @@ if (require.main === module) {
 
 module.exports = {
   resolveCliPath,
+  sanitizeErrorMessage,
+  checkStructuralHtmlViolations,
   analyzeTemplateTree,
   evaluateInvariants,
+  buildDeterministicReport,
+  computeBaselineExitCode,
   runFixtureBaseline,
   runBaselineSuite,
   main

@@ -1,6 +1,6 @@
 {
   "title": "Elementor Free Template",
-  "timestamp": "2026-09-22T01:06:52.903Z",
+  "timestamp": "2026-09-22T01:51:09.433Z",
   "engineMode": "Single-Pass Ground Truth (Chromium, local)",
   "gatekeeperPassed": false,
   "cleanPass": false,
@@ -96,7 +96,7 @@
   },
   "defects": [
     {
-      "id": "defect-695",
+      "id": "defect-696",
       "nodeSid": "sid-5",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -107,7 +107,7 @@
       "advisory": true
     },
     {
-      "id": "defect-696",
+      "id": "defect-697",
       "nodeSid": "sid-9",
       "viewport": "desktop",
       "property": "color",
@@ -118,7 +118,7 @@
       "advisory": true
     },
     {
-      "id": "defect-697",
+      "id": "defect-698",
       "nodeSid": "sid-9",
       "viewport": "desktop",
       "property": "borderColor",
@@ -129,7 +129,7 @@
       "advisory": true
     },
     {
-      "id": "defect-698",
+      "id": "defect-699",
       "nodeSid": "sid-10",
       "viewport": "desktop",
       "property": "lineCount",
@@ -140,7 +140,7 @@
       "advisory": true
     },
     {
-      "id": "defect-699",
+      "id": "defect-700",
       "nodeSid": "sid-11",
       "viewport": "desktop",
       "property": "lineCount",
@@ -151,7 +151,7 @@
       "advisory": true
     },
     {
-      "id": "defect-700",
+      "id": "defect-701",
       "nodeSid": "sid-12",
       "viewport": "desktop",
       "property": "lineCount",
@@ -162,7 +162,7 @@
       "advisory": true
     },
     {
-      "id": "defect-701",
+      "id": "defect-702",
       "nodeSid": "sid-12",
       "viewport": "desktop",
       "property": "width",
@@ -173,7 +173,7 @@
       "advisory": true
     },
     {
-      "id": "defect-702",
+      "id": "defect-703",
       "nodeSid": "sid-17",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -184,7 +184,7 @@
       "advisory": true
     },
     {
-      "id": "defect-703",
+      "id": "defect-704",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -195,7 +195,7 @@
       "advisory": false
     },
     {
-      "id": "defect-704",
+      "id": "defect-705",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "width",
@@ -206,7 +206,7 @@
       "advisory": false
     },
     {
-      "id": "defect-705",
+      "id": "defect-706",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -217,7 +217,7 @@
       "advisory": false
     },
     {
-      "id": "defect-706",
+      "id": "defect-707",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -228,7 +228,7 @@
       "advisory": false
     },
     {
-      "id": "defect-707",
+      "id": "defect-708",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -239,7 +239,7 @@
       "advisory": false
     },
     {
-      "id": "defect-708",
+      "id": "defect-709",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "width",
@@ -250,7 +250,7 @@
       "advisory": false
     },
     {
-      "id": "defect-709",
+      "id": "defect-710",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -261,7 +261,7 @@
       "advisory": false
     },
     {
-      "id": "defect-710",
+      "id": "defect-711",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -272,7 +272,7 @@
       "advisory": false
     },
     {
-      "id": "defect-711",
+      "id": "defect-712",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -283,7 +283,7 @@
       "advisory": false
     },
     {
-      "id": "defect-712",
+      "id": "defect-713",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "width",
@@ -294,7 +294,7 @@
       "advisory": false
     },
     {
-      "id": "defect-713",
+      "id": "defect-714",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -305,7 +305,7 @@
       "advisory": false
     },
     {
-      "id": "defect-714",
+      "id": "defect-715",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -316,7 +316,7 @@
       "advisory": false
     },
     {
-      "id": "defect-715",
+      "id": "defect-716",
       "nodeSid": "sid-26",
       "viewport": "desktop",
       "property": "lineCount",
@@ -327,7 +327,7 @@
       "advisory": true
     },
     {
-      "id": "defect-716",
+      "id": "defect-717",
       "nodeSid": "sid-30",
       "viewport": "desktop",
       "property": "lineCount",
@@ -338,7 +338,7 @@
       "advisory": true
     },
     {
-      "id": "defect-717",
+      "id": "defect-718",
       "nodeSid": "sid-30",
       "viewport": "desktop",
       "property": "width",
@@ -349,7 +349,7 @@
       "advisory": true
     },
     {
-      "id": "defect-718",
+      "id": "defect-719",
       "nodeSid": "sid-30",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -360,7 +360,7 @@
       "advisory": true
     },
     {
-      "id": "defect-719",
+      "id": "defect-720",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -371,7 +371,7 @@
       "advisory": false
     },
     {
-      "id": "defect-720",
+      "id": "defect-721",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "width",
@@ -382,7 +382,7 @@
       "advisory": false
     },
     {
-      "id": "defect-721",
+      "id": "defect-722",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -393,7 +393,7 @@
       "advisory": false
     },
     {
-      "id": "defect-722",
+      "id": "defect-723",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -404,7 +404,7 @@
       "advisory": false
     },
     {
-      "id": "defect-723",
+      "id": "defect-724",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -415,7 +415,7 @@
       "advisory": false
     },
     {
-      "id": "defect-724",
+      "id": "defect-725",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "width",
@@ -426,7 +426,7 @@
       "advisory": false
     },
     {
-      "id": "defect-725",
+      "id": "defect-726",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -437,7 +437,7 @@
       "advisory": false
     },
     {
-      "id": "defect-726",
+      "id": "defect-727",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -448,7 +448,7 @@
       "advisory": false
     },
     {
-      "id": "defect-727",
+      "id": "defect-728",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -459,7 +459,7 @@
       "advisory": false
     },
     {
-      "id": "defect-728",
+      "id": "defect-729",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "width",
@@ -470,7 +470,7 @@
       "advisory": false
     },
     {
-      "id": "defect-729",
+      "id": "defect-730",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -481,7 +481,7 @@
       "advisory": false
     },
     {
-      "id": "defect-730",
+      "id": "defect-731",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -492,7 +492,7 @@
       "advisory": false
     },
     {
-      "id": "defect-731",
+      "id": "defect-732",
       "nodeSid": "sid-39",
       "viewport": "desktop",
       "property": "lineCount",
@@ -503,7 +503,7 @@
       "advisory": true
     },
     {
-      "id": "defect-732",
+      "id": "defect-733",
       "nodeSid": "sid-43",
       "viewport": "desktop",
       "property": "width",
@@ -514,7 +514,7 @@
       "advisory": true
     },
     {
-      "id": "defect-733",
+      "id": "defect-734",
       "nodeSid": "sid-43",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -525,7 +525,7 @@
       "advisory": true
     },
     {
-      "id": "defect-734",
+      "id": "defect-735",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -536,7 +536,7 @@
       "advisory": false
     },
     {
-      "id": "defect-735",
+      "id": "defect-736",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "width",
@@ -547,7 +547,7 @@
       "advisory": false
     },
     {
-      "id": "defect-736",
+      "id": "defect-737",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -558,7 +558,7 @@
       "advisory": false
     },
     {
-      "id": "defect-737",
+      "id": "defect-738",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -569,7 +569,7 @@
       "advisory": false
     },
     {
-      "id": "defect-738",
+      "id": "defect-739",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -580,7 +580,7 @@
       "advisory": false
     },
     {
-      "id": "defect-739",
+      "id": "defect-740",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "width",
@@ -591,7 +591,7 @@
       "advisory": false
     },
     {
-      "id": "defect-740",
+      "id": "defect-741",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -602,7 +602,7 @@
       "advisory": false
     },
     {
-      "id": "defect-741",
+      "id": "defect-742",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -613,7 +613,7 @@
       "advisory": false
     },
     {
-      "id": "defect-742",
+      "id": "defect-743",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -624,7 +624,7 @@
       "advisory": false
     },
     {
-      "id": "defect-743",
+      "id": "defect-744",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "width",
@@ -635,7 +635,7 @@
       "advisory": false
     },
     {
-      "id": "defect-744",
+      "id": "defect-745",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -646,7 +646,7 @@
       "advisory": false
     },
     {
-      "id": "defect-745",
+      "id": "defect-746",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -657,7 +657,7 @@
       "advisory": false
     },
     {
-      "id": "defect-746",
+      "id": "defect-747",
       "nodeSid": "sid-52",
       "viewport": "desktop",
       "property": "lineCount",
@@ -668,7 +668,7 @@
       "advisory": true
     },
     {
-      "id": "defect-747",
+      "id": "defect-748",
       "nodeSid": "sid-56",
       "viewport": "desktop",
       "property": "width",
@@ -679,7 +679,7 @@
       "advisory": true
     },
     {
-      "id": "defect-748",
+      "id": "defect-749",
       "nodeSid": "sid-56",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -690,7 +690,7 @@
       "advisory": true
     },
     {
-      "id": "defect-749",
+      "id": "defect-750",
       "nodeSid": "sid-57",
       "viewport": "desktop",
       "property": "height",
@@ -701,7 +701,7 @@
       "advisory": true
     },
     {
-      "id": "defect-750",
+      "id": "defect-751",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -712,7 +712,7 @@
       "advisory": false
     },
     {
-      "id": "defect-751",
+      "id": "defect-752",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "width",
@@ -723,7 +723,7 @@
       "advisory": false
     },
     {
-      "id": "defect-752",
+      "id": "defect-753",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -734,7 +734,7 @@
       "advisory": false
     },
     {
-      "id": "defect-753",
+      "id": "defect-754",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -745,7 +745,7 @@
       "advisory": false
     },
     {
-      "id": "defect-754",
+      "id": "defect-755",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -756,7 +756,7 @@
       "advisory": false
     },
     {
-      "id": "defect-755",
+      "id": "defect-756",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "width",
@@ -767,7 +767,7 @@
       "advisory": false
     },
     {
-      "id": "defect-756",
+      "id": "defect-757",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -778,7 +778,7 @@
       "advisory": false
     },
     {
-      "id": "defect-757",
+      "id": "defect-758",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -789,7 +789,7 @@
       "advisory": false
     },
     {
-      "id": "defect-758",
+      "id": "defect-759",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -800,7 +800,7 @@
       "advisory": false
     },
     {
-      "id": "defect-759",
+      "id": "defect-760",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "width",
@@ -811,7 +811,7 @@
       "advisory": false
     },
     {
-      "id": "defect-760",
+      "id": "defect-761",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -822,7 +822,7 @@
       "advisory": false
     },
     {
-      "id": "defect-761",
+      "id": "defect-762",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -833,7 +833,7 @@
       "advisory": false
     },
     {
-      "id": "defect-762",
+      "id": "defect-763",
       "nodeSid": "sid-65",
       "viewport": "desktop",
       "property": "lineCount",
@@ -844,7 +844,7 @@
       "advisory": true
     },
     {
-      "id": "defect-763",
+      "id": "defect-764",
       "nodeSid": "sid-69",
       "viewport": "desktop",
       "property": "width",
@@ -855,7 +855,7 @@
       "advisory": true
     },
     {
-      "id": "defect-764",
+      "id": "defect-765",
       "nodeSid": "sid-69",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -866,7 +866,7 @@
       "advisory": true
     },
     {
-      "id": "defect-765",
+      "id": "defect-766",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -877,7 +877,7 @@
       "advisory": false
     },
     {
-      "id": "defect-766",
+      "id": "defect-767",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "width",
@@ -888,7 +888,7 @@
       "advisory": false
     },
     {
-      "id": "defect-767",
+      "id": "defect-768",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -899,7 +899,7 @@
       "advisory": false
     },
     {
-      "id": "defect-768",
+      "id": "defect-769",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -910,7 +910,7 @@
       "advisory": false
     },
     {
-      "id": "defect-769",
+      "id": "defect-770",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -921,7 +921,7 @@
       "advisory": false
     },
     {
-      "id": "defect-770",
+      "id": "defect-771",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "width",
@@ -932,7 +932,7 @@
       "advisory": false
     },
     {
-      "id": "defect-771",
+      "id": "defect-772",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -943,7 +943,7 @@
       "advisory": false
     },
     {
-      "id": "defect-772",
+      "id": "defect-773",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -954,7 +954,7 @@
       "advisory": false
     },
     {
-      "id": "defect-773",
+      "id": "defect-774",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -965,7 +965,7 @@
       "advisory": false
     },
     {
-      "id": "defect-774",
+      "id": "defect-775",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "width",
@@ -976,7 +976,7 @@
       "advisory": false
     },
     {
-      "id": "defect-775",
+      "id": "defect-776",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -987,7 +987,7 @@
       "advisory": false
     },
     {
-      "id": "defect-776",
+      "id": "defect-777",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -998,7 +998,7 @@
       "advisory": false
     },
     {
-      "id": "defect-777",
+      "id": "defect-778",
       "nodeSid": "sid-78",
       "viewport": "desktop",
       "property": "lineCount",
@@ -1009,7 +1009,7 @@
       "advisory": true
     },
     {
-      "id": "defect-778",
+      "id": "defect-779",
       "nodeSid": "sid-82",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -1020,7 +1020,7 @@
       "advisory": true
     },
     {
-      "id": "defect-779",
+      "id": "defect-780",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -1031,7 +1031,7 @@
       "advisory": false
     },
     {
-      "id": "defect-780",
+      "id": "defect-781",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "width",
@@ -1042,7 +1042,7 @@
       "advisory": false
     },
     {
-      "id": "defect-781",
+      "id": "defect-782",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -1053,7 +1053,7 @@
       "advisory": false
     },
     {
-      "id": "defect-782",
+      "id": "defect-783",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -1064,7 +1064,7 @@
       "advisory": false
     },
     {
-      "id": "defect-783",
+      "id": "defect-784",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -1075,7 +1075,7 @@
       "advisory": false
     },
     {
-      "id": "defect-784",
+      "id": "defect-785",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "width",
@@ -1086,7 +1086,7 @@
       "advisory": false
     },
     {
-      "id": "defect-785",
+      "id": "defect-786",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -1097,7 +1097,7 @@
       "advisory": false
     },
     {
-      "id": "defect-786",
+      "id": "defect-787",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -1108,7 +1108,7 @@
       "advisory": false
     },
     {
-      "id": "defect-787",
+      "id": "defect-788",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -1119,7 +1119,7 @@
       "advisory": false
     },
     {
-      "id": "defect-788",
+      "id": "defect-789",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "width",
@@ -1130,7 +1130,7 @@
       "advisory": false
     },
     {
-      "id": "defect-789",
+      "id": "defect-790",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -1141,7 +1141,7 @@
       "advisory": false
     },
     {
-      "id": "defect-790",
+      "id": "defect-791",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -1152,7 +1152,7 @@
       "advisory": false
     },
     {
-      "id": "defect-791",
+      "id": "defect-792",
       "nodeSid": "sid-91",
       "viewport": "desktop",
       "property": "lineCount",
@@ -1163,7 +1163,7 @@
       "advisory": true
     },
     {
-      "id": "defect-792",
+      "id": "defect-793",
       "nodeSid": "sid-5",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1174,7 +1174,7 @@
       "advisory": true
     },
     {
-      "id": "defect-793",
+      "id": "defect-794",
       "nodeSid": "sid-9",
       "viewport": "tablet",
       "property": "color",
@@ -1185,7 +1185,7 @@
       "advisory": true
     },
     {
-      "id": "defect-794",
+      "id": "defect-795",
       "nodeSid": "sid-9",
       "viewport": "tablet",
       "property": "borderColor",
@@ -1196,7 +1196,7 @@
       "advisory": true
     },
     {
-      "id": "defect-795",
+      "id": "defect-796",
       "nodeSid": "sid-10",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1207,7 +1207,7 @@
       "advisory": true
     },
     {
-      "id": "defect-796",
+      "id": "defect-797",
       "nodeSid": "sid-11",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1218,7 +1218,7 @@
       "advisory": true
     },
     {
-      "id": "defect-797",
+      "id": "defect-798",
       "nodeSid": "sid-12",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1229,7 +1229,7 @@
       "advisory": true
     },
     {
-      "id": "defect-798",
+      "id": "defect-799",
       "nodeSid": "sid-12",
       "viewport": "tablet",
       "property": "width",
@@ -1240,7 +1240,7 @@
       "advisory": true
     },
     {
-      "id": "defect-799",
+      "id": "defect-800",
       "nodeSid": "sid-13",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1251,7 +1251,7 @@
       "advisory": true
     },
     {
-      "id": "defect-800",
+      "id": "defect-801",
       "nodeSid": "sid-17",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1262,7 +1262,7 @@
       "advisory": true
     },
     {
-      "id": "defect-801",
+      "id": "defect-802",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1273,7 +1273,7 @@
       "advisory": false
     },
     {
-      "id": "defect-802",
+      "id": "defect-803",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1284,7 +1284,7 @@
       "advisory": false
     },
     {
-      "id": "defect-803",
+      "id": "defect-804",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "width",
@@ -1295,7 +1295,7 @@
       "advisory": false
     },
     {
-      "id": "defect-804",
+      "id": "defect-805",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1306,7 +1306,7 @@
       "advisory": false
     },
     {
-      "id": "defect-805",
+      "id": "defect-806",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1317,7 +1317,7 @@
       "advisory": false
     },
     {
-      "id": "defect-806",
+      "id": "defect-807",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1328,7 +1328,7 @@
       "advisory": false
     },
     {
-      "id": "defect-807",
+      "id": "defect-808",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1339,7 +1339,7 @@
       "advisory": false
     },
     {
-      "id": "defect-808",
+      "id": "defect-809",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "width",
@@ -1350,7 +1350,7 @@
       "advisory": false
     },
     {
-      "id": "defect-809",
+      "id": "defect-810",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1361,7 +1361,7 @@
       "advisory": false
     },
     {
-      "id": "defect-810",
+      "id": "defect-811",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1372,7 +1372,7 @@
       "advisory": false
     },
     {
-      "id": "defect-811",
+      "id": "defect-812",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1383,7 +1383,7 @@
       "advisory": false
     },
     {
-      "id": "defect-812",
+      "id": "defect-813",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1394,7 +1394,7 @@
       "advisory": false
     },
     {
-      "id": "defect-813",
+      "id": "defect-814",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "width",
@@ -1405,7 +1405,7 @@
       "advisory": false
     },
     {
-      "id": "defect-814",
+      "id": "defect-815",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1416,7 +1416,7 @@
       "advisory": false
     },
     {
-      "id": "defect-815",
+      "id": "defect-816",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1427,7 +1427,7 @@
       "advisory": false
     },
     {
-      "id": "defect-816",
+      "id": "defect-817",
       "nodeSid": "sid-26",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1438,7 +1438,7 @@
       "advisory": true
     },
     {
-      "id": "defect-817",
+      "id": "defect-818",
       "nodeSid": "sid-30",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1449,7 +1449,7 @@
       "advisory": true
     },
     {
-      "id": "defect-818",
+      "id": "defect-819",
       "nodeSid": "sid-30",
       "viewport": "tablet",
       "property": "width",
@@ -1460,7 +1460,7 @@
       "advisory": true
     },
     {
-      "id": "defect-819",
+      "id": "defect-820",
       "nodeSid": "sid-30",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1471,7 +1471,7 @@
       "advisory": true
     },
     {
-      "id": "defect-820",
+      "id": "defect-821",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1482,7 +1482,7 @@
       "advisory": false
     },
     {
-      "id": "defect-821",
+      "id": "defect-822",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1493,7 +1493,7 @@
       "advisory": false
     },
     {
-      "id": "defect-822",
+      "id": "defect-823",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "width",
@@ -1504,7 +1504,7 @@
       "advisory": false
     },
     {
-      "id": "defect-823",
+      "id": "defect-824",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1515,7 +1515,7 @@
       "advisory": false
     },
     {
-      "id": "defect-824",
+      "id": "defect-825",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1526,7 +1526,7 @@
       "advisory": false
     },
     {
-      "id": "defect-825",
+      "id": "defect-826",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1537,7 +1537,7 @@
       "advisory": false
     },
     {
-      "id": "defect-826",
+      "id": "defect-827",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1548,7 +1548,7 @@
       "advisory": false
     },
     {
-      "id": "defect-827",
+      "id": "defect-828",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1559,7 +1559,7 @@
       "advisory": false
     },
     {
-      "id": "defect-828",
+      "id": "defect-829",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1570,7 +1570,7 @@
       "advisory": false
     },
     {
-      "id": "defect-829",
+      "id": "defect-830",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1581,7 +1581,7 @@
       "advisory": false
     },
     {
-      "id": "defect-830",
+      "id": "defect-831",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1592,7 +1592,7 @@
       "advisory": false
     },
     {
-      "id": "defect-831",
+      "id": "defect-832",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "width",
@@ -1603,7 +1603,7 @@
       "advisory": false
     },
     {
-      "id": "defect-832",
+      "id": "defect-833",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1614,7 +1614,7 @@
       "advisory": false
     },
     {
-      "id": "defect-833",
+      "id": "defect-834",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1625,7 +1625,7 @@
       "advisory": false
     },
     {
-      "id": "defect-834",
+      "id": "defect-835",
       "nodeSid": "sid-39",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1636,7 +1636,7 @@
       "advisory": true
     },
     {
-      "id": "defect-835",
+      "id": "defect-836",
       "nodeSid": "sid-43",
       "viewport": "tablet",
       "property": "width",
@@ -1647,7 +1647,7 @@
       "advisory": true
     },
     {
-      "id": "defect-836",
+      "id": "defect-837",
       "nodeSid": "sid-43",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1658,7 +1658,7 @@
       "advisory": true
     },
     {
-      "id": "defect-837",
+      "id": "defect-838",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1669,7 +1669,7 @@
       "advisory": false
     },
     {
-      "id": "defect-838",
+      "id": "defect-839",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1680,7 +1680,7 @@
       "advisory": false
     },
     {
-      "id": "defect-839",
+      "id": "defect-840",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "width",
@@ -1691,7 +1691,7 @@
       "advisory": false
     },
     {
-      "id": "defect-840",
+      "id": "defect-841",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1702,7 +1702,7 @@
       "advisory": false
     },
     {
-      "id": "defect-841",
+      "id": "defect-842",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1713,7 +1713,7 @@
       "advisory": false
     },
     {
-      "id": "defect-842",
+      "id": "defect-843",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1724,7 +1724,7 @@
       "advisory": false
     },
     {
-      "id": "defect-843",
+      "id": "defect-844",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1735,7 +1735,7 @@
       "advisory": false
     },
     {
-      "id": "defect-844",
+      "id": "defect-845",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1746,7 +1746,7 @@
       "advisory": false
     },
     {
-      "id": "defect-845",
+      "id": "defect-846",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1757,7 +1757,7 @@
       "advisory": false
     },
     {
-      "id": "defect-846",
+      "id": "defect-847",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1768,7 +1768,7 @@
       "advisory": false
     },
     {
-      "id": "defect-847",
+      "id": "defect-848",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1779,7 +1779,7 @@
       "advisory": false
     },
     {
-      "id": "defect-848",
+      "id": "defect-849",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "width",
@@ -1790,7 +1790,7 @@
       "advisory": false
     },
     {
-      "id": "defect-849",
+      "id": "defect-850",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1801,7 +1801,7 @@
       "advisory": false
     },
     {
-      "id": "defect-850",
+      "id": "defect-851",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1812,7 +1812,7 @@
       "advisory": false
     },
     {
-      "id": "defect-851",
+      "id": "defect-852",
       "nodeSid": "sid-52",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1823,7 +1823,7 @@
       "advisory": true
     },
     {
-      "id": "defect-852",
+      "id": "defect-853",
       "nodeSid": "sid-56",
       "viewport": "tablet",
       "property": "width",
@@ -1834,7 +1834,7 @@
       "advisory": true
     },
     {
-      "id": "defect-853",
+      "id": "defect-854",
       "nodeSid": "sid-56",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1845,7 +1845,7 @@
       "advisory": true
     },
     {
-      "id": "defect-854",
+      "id": "defect-855",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1856,7 +1856,7 @@
       "advisory": false
     },
     {
-      "id": "defect-855",
+      "id": "defect-856",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1867,7 +1867,7 @@
       "advisory": false
     },
     {
-      "id": "defect-856",
+      "id": "defect-857",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1878,7 +1878,7 @@
       "advisory": false
     },
     {
-      "id": "defect-857",
+      "id": "defect-858",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1889,7 +1889,7 @@
       "advisory": false
     },
     {
-      "id": "defect-858",
+      "id": "defect-859",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1900,7 +1900,7 @@
       "advisory": false
     },
     {
-      "id": "defect-859",
+      "id": "defect-860",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1911,7 +1911,7 @@
       "advisory": false
     },
     {
-      "id": "defect-860",
+      "id": "defect-861",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "width",
@@ -1922,7 +1922,7 @@
       "advisory": false
     },
     {
-      "id": "defect-861",
+      "id": "defect-862",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1933,7 +1933,7 @@
       "advisory": false
     },
     {
-      "id": "defect-862",
+      "id": "defect-863",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1944,7 +1944,7 @@
       "advisory": false
     },
     {
-      "id": "defect-863",
+      "id": "defect-864",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -1955,7 +1955,7 @@
       "advisory": false
     },
     {
-      "id": "defect-864",
+      "id": "defect-865",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "fontSize",
@@ -1966,7 +1966,7 @@
       "advisory": false
     },
     {
-      "id": "defect-865",
+      "id": "defect-866",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -1977,7 +1977,7 @@
       "advisory": false
     },
     {
-      "id": "defect-866",
+      "id": "defect-867",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -1988,7 +1988,7 @@
       "advisory": false
     },
     {
-      "id": "defect-867",
+      "id": "defect-868",
       "nodeSid": "sid-65",
       "viewport": "tablet",
       "property": "lineCount",
@@ -1999,7 +1999,7 @@
       "advisory": true
     },
     {
-      "id": "defect-868",
+      "id": "defect-869",
       "nodeSid": "sid-69",
       "viewport": "tablet",
       "property": "width",
@@ -2010,7 +2010,7 @@
       "advisory": true
     },
     {
-      "id": "defect-869",
+      "id": "defect-870",
       "nodeSid": "sid-69",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2021,7 +2021,7 @@
       "advisory": true
     },
     {
-      "id": "defect-870",
+      "id": "defect-871",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -2032,7 +2032,7 @@
       "advisory": false
     },
     {
-      "id": "defect-871",
+      "id": "defect-872",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "fontSize",
@@ -2043,7 +2043,7 @@
       "advisory": false
     },
     {
-      "id": "defect-872",
+      "id": "defect-873",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2054,7 +2054,7 @@
       "advisory": false
     },
     {
-      "id": "defect-873",
+      "id": "defect-874",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -2065,7 +2065,7 @@
       "advisory": false
     },
     {
-      "id": "defect-874",
+      "id": "defect-875",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -2076,7 +2076,7 @@
       "advisory": false
     },
     {
-      "id": "defect-875",
+      "id": "defect-876",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "fontSize",
@@ -2087,7 +2087,7 @@
       "advisory": false
     },
     {
-      "id": "defect-876",
+      "id": "defect-877",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "width",
@@ -2098,7 +2098,7 @@
       "advisory": false
     },
     {
-      "id": "defect-877",
+      "id": "defect-878",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2109,7 +2109,7 @@
       "advisory": false
     },
     {
-      "id": "defect-878",
+      "id": "defect-879",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -2120,7 +2120,7 @@
       "advisory": false
     },
     {
-      "id": "defect-879",
+      "id": "defect-880",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -2131,7 +2131,7 @@
       "advisory": false
     },
     {
-      "id": "defect-880",
+      "id": "defect-881",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "fontSize",
@@ -2142,7 +2142,7 @@
       "advisory": false
     },
     {
-      "id": "defect-881",
+      "id": "defect-882",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2153,7 +2153,7 @@
       "advisory": false
     },
     {
-      "id": "defect-882",
+      "id": "defect-883",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -2164,7 +2164,7 @@
       "advisory": false
     },
     {
-      "id": "defect-883",
+      "id": "defect-884",
       "nodeSid": "sid-78",
       "viewport": "tablet",
       "property": "lineCount",
@@ -2175,7 +2175,7 @@
       "advisory": true
     },
     {
-      "id": "defect-884",
+      "id": "defect-885",
       "nodeSid": "sid-82",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2186,7 +2186,7 @@
       "advisory": true
     },
     {
-      "id": "defect-885",
+      "id": "defect-886",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -2197,7 +2197,7 @@
       "advisory": false
     },
     {
-      "id": "defect-886",
+      "id": "defect-887",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "fontSize",
@@ -2208,7 +2208,7 @@
       "advisory": false
     },
     {
-      "id": "defect-887",
+      "id": "defect-888",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2219,7 +2219,7 @@
       "advisory": false
     },
     {
-      "id": "defect-888",
+      "id": "defect-889",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -2230,7 +2230,7 @@
       "advisory": false
     },
     {
-      "id": "defect-889",
+      "id": "defect-890",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -2241,7 +2241,7 @@
       "advisory": false
     },
     {
-      "id": "defect-890",
+      "id": "defect-891",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "fontSize",
@@ -2252,7 +2252,7 @@
       "advisory": false
     },
     {
-      "id": "defect-891",
+      "id": "defect-892",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "width",
@@ -2263,7 +2263,7 @@
       "advisory": false
     },
     {
-      "id": "defect-892",
+      "id": "defect-893",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2274,7 +2274,7 @@
       "advisory": false
     },
     {
-      "id": "defect-893",
+      "id": "defect-894",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -2285,7 +2285,7 @@
       "advisory": false
     },
     {
-      "id": "defect-894",
+      "id": "defect-895",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -2296,7 +2296,7 @@
       "advisory": false
     },
     {
-      "id": "defect-895",
+      "id": "defect-896",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "fontSize",
@@ -2307,7 +2307,7 @@
       "advisory": false
     },
     {
-      "id": "defect-896",
+      "id": "defect-897",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -2318,7 +2318,7 @@
       "advisory": false
     },
     {
-      "id": "defect-897",
+      "id": "defect-898",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -2329,7 +2329,7 @@
       "advisory": false
     },
     {
-      "id": "defect-898",
+      "id": "defect-899",
       "nodeSid": "sid-91",
       "viewport": "tablet",
       "property": "lineCount",
@@ -2340,7 +2340,7 @@
       "advisory": true
     },
     {
-      "id": "defect-899",
+      "id": "defect-900",
       "nodeSid": "sid-5",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2351,7 +2351,7 @@
       "advisory": true
     },
     {
-      "id": "defect-900",
+      "id": "defect-901",
       "nodeSid": "sid-9",
       "viewport": "mobile",
       "property": "color",
@@ -2362,7 +2362,7 @@
       "advisory": true
     },
     {
-      "id": "defect-901",
+      "id": "defect-902",
       "nodeSid": "sid-9",
       "viewport": "mobile",
       "property": "borderColor",
@@ -2373,7 +2373,7 @@
       "advisory": true
     },
     {
-      "id": "defect-902",
+      "id": "defect-903",
       "nodeSid": "sid-10",
       "viewport": "mobile",
       "property": "lineCount",
@@ -2384,7 +2384,7 @@
       "advisory": true
     },
     {
-      "id": "defect-903",
+      "id": "defect-904",
       "nodeSid": "sid-11",
       "viewport": "mobile",
       "property": "lineCount",
@@ -2395,7 +2395,7 @@
       "advisory": true
     },
     {
-      "id": "defect-904",
+      "id": "defect-905",
       "nodeSid": "sid-12",
       "viewport": "mobile",
       "property": "lineCount",
@@ -2406,7 +2406,7 @@
       "advisory": true
     },
     {
-      "id": "defect-905",
+      "id": "defect-906",
       "nodeSid": "sid-12",
       "viewport": "mobile",
       "property": "width",
@@ -2417,7 +2417,7 @@
       "advisory": true
     },
     {
-      "id": "defect-906",
+      "id": "defect-907",
       "nodeSid": "sid-13",
       "viewport": "mobile",
       "property": "lineCount",
@@ -2428,7 +2428,7 @@
       "advisory": true
     },
     {
-      "id": "defect-907",
+      "id": "defect-908",
       "nodeSid": "sid-17",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2439,7 +2439,7 @@
       "advisory": true
     },
     {
-      "id": "defect-908",
+      "id": "defect-909",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2450,7 +2450,7 @@
       "advisory": false
     },
     {
-      "id": "defect-909",
+      "id": "defect-910",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2461,7 +2461,7 @@
       "advisory": false
     },
     {
-      "id": "defect-910",
+      "id": "defect-911",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "width",
@@ -2472,7 +2472,7 @@
       "advisory": false
     },
     {
-      "id": "defect-911",
+      "id": "defect-912",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2483,7 +2483,7 @@
       "advisory": false
     },
     {
-      "id": "defect-912",
+      "id": "defect-913",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2494,7 +2494,7 @@
       "advisory": false
     },
     {
-      "id": "defect-913",
+      "id": "defect-914",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2505,7 +2505,7 @@
       "advisory": false
     },
     {
-      "id": "defect-914",
+      "id": "defect-915",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2516,7 +2516,7 @@
       "advisory": false
     },
     {
-      "id": "defect-915",
+      "id": "defect-916",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "width",
@@ -2527,7 +2527,7 @@
       "advisory": false
     },
     {
-      "id": "defect-916",
+      "id": "defect-917",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2538,7 +2538,7 @@
       "advisory": false
     },
     {
-      "id": "defect-917",
+      "id": "defect-918",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2549,7 +2549,7 @@
       "advisory": false
     },
     {
-      "id": "defect-918",
+      "id": "defect-919",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2560,7 +2560,7 @@
       "advisory": false
     },
     {
-      "id": "defect-919",
+      "id": "defect-920",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2571,7 +2571,7 @@
       "advisory": false
     },
     {
-      "id": "defect-920",
+      "id": "defect-921",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "width",
@@ -2582,7 +2582,7 @@
       "advisory": false
     },
     {
-      "id": "defect-921",
+      "id": "defect-922",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2593,7 +2593,7 @@
       "advisory": false
     },
     {
-      "id": "defect-922",
+      "id": "defect-923",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2604,7 +2604,7 @@
       "advisory": false
     },
     {
-      "id": "defect-923",
+      "id": "defect-924",
       "nodeSid": "sid-26",
       "viewport": "mobile",
       "property": "lineCount",
@@ -2615,7 +2615,7 @@
       "advisory": true
     },
     {
-      "id": "defect-924",
+      "id": "defect-925",
       "nodeSid": "sid-30",
       "viewport": "mobile",
       "property": "lineCount",
@@ -2626,7 +2626,7 @@
       "advisory": true
     },
     {
-      "id": "defect-925",
+      "id": "defect-926",
       "nodeSid": "sid-30",
       "viewport": "mobile",
       "property": "width",
@@ -2637,7 +2637,7 @@
       "advisory": true
     },
     {
-      "id": "defect-926",
+      "id": "defect-927",
       "nodeSid": "sid-30",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2648,7 +2648,7 @@
       "advisory": true
     },
     {
-      "id": "defect-927",
+      "id": "defect-928",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2659,7 +2659,7 @@
       "advisory": false
     },
     {
-      "id": "defect-928",
+      "id": "defect-929",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2670,7 +2670,7 @@
       "advisory": false
     },
     {
-      "id": "defect-929",
+      "id": "defect-930",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "width",
@@ -2681,7 +2681,7 @@
       "advisory": false
     },
     {
-      "id": "defect-930",
+      "id": "defect-931",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2692,7 +2692,7 @@
       "advisory": false
     },
     {
-      "id": "defect-931",
+      "id": "defect-932",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2703,7 +2703,7 @@
       "advisory": false
     },
     {
-      "id": "defect-932",
+      "id": "defect-933",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2714,7 +2714,7 @@
       "advisory": false
     },
     {
-      "id": "defect-933",
+      "id": "defect-934",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2725,7 +2725,7 @@
       "advisory": false
     },
     {
-      "id": "defect-934",
+      "id": "defect-935",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2736,7 +2736,7 @@
       "advisory": false
     },
     {
-      "id": "defect-935",
+      "id": "defect-936",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2747,7 +2747,7 @@
       "advisory": false
     },
     {
-      "id": "defect-936",
+      "id": "defect-937",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2758,7 +2758,7 @@
       "advisory": false
     },
     {
-      "id": "defect-937",
+      "id": "defect-938",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2769,7 +2769,7 @@
       "advisory": false
     },
     {
-      "id": "defect-938",
+      "id": "defect-939",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "width",
@@ -2780,7 +2780,7 @@
       "advisory": false
     },
     {
-      "id": "defect-939",
+      "id": "defect-940",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2791,7 +2791,7 @@
       "advisory": false
     },
     {
-      "id": "defect-940",
+      "id": "defect-941",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2802,7 +2802,7 @@
       "advisory": false
     },
     {
-      "id": "defect-941",
+      "id": "defect-942",
       "nodeSid": "sid-39",
       "viewport": "mobile",
       "property": "lineCount",
@@ -2813,7 +2813,7 @@
       "advisory": true
     },
     {
-      "id": "defect-942",
+      "id": "defect-943",
       "nodeSid": "sid-43",
       "viewport": "mobile",
       "property": "width",
@@ -2824,7 +2824,7 @@
       "advisory": true
     },
     {
-      "id": "defect-943",
+      "id": "defect-944",
       "nodeSid": "sid-43",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2835,7 +2835,7 @@
       "advisory": true
     },
     {
-      "id": "defect-944",
+      "id": "defect-945",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2846,7 +2846,7 @@
       "advisory": false
     },
     {
-      "id": "defect-945",
+      "id": "defect-946",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2857,7 +2857,7 @@
       "advisory": false
     },
     {
-      "id": "defect-946",
+      "id": "defect-947",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "width",
@@ -2868,7 +2868,7 @@
       "advisory": false
     },
     {
-      "id": "defect-947",
+      "id": "defect-948",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2879,7 +2879,7 @@
       "advisory": false
     },
     {
-      "id": "defect-948",
+      "id": "defect-949",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2890,7 +2890,7 @@
       "advisory": false
     },
     {
-      "id": "defect-949",
+      "id": "defect-950",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2901,7 +2901,7 @@
       "advisory": false
     },
     {
-      "id": "defect-950",
+      "id": "defect-951",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2912,7 +2912,7 @@
       "advisory": false
     },
     {
-      "id": "defect-951",
+      "id": "defect-952",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2923,7 +2923,7 @@
       "advisory": false
     },
     {
-      "id": "defect-952",
+      "id": "defect-953",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2934,7 +2934,7 @@
       "advisory": false
     },
     {
-      "id": "defect-953",
+      "id": "defect-954",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -2945,7 +2945,7 @@
       "advisory": false
     },
     {
-      "id": "defect-954",
+      "id": "defect-955",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "fontSize",
@@ -2956,7 +2956,7 @@
       "advisory": false
     },
     {
-      "id": "defect-955",
+      "id": "defect-956",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "width",
@@ -2967,7 +2967,7 @@
       "advisory": false
     },
     {
-      "id": "defect-956",
+      "id": "defect-957",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -2978,7 +2978,7 @@
       "advisory": false
     },
     {
-      "id": "defect-957",
+      "id": "defect-958",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -2989,7 +2989,7 @@
       "advisory": false
     },
     {
-      "id": "defect-958",
+      "id": "defect-959",
       "nodeSid": "sid-52",
       "viewport": "mobile",
       "property": "lineCount",
@@ -3000,7 +3000,7 @@
       "advisory": true
     },
     {
-      "id": "defect-959",
+      "id": "defect-960",
       "nodeSid": "sid-56",
       "viewport": "mobile",
       "property": "width",
@@ -3011,7 +3011,7 @@
       "advisory": true
     },
     {
-      "id": "defect-960",
+      "id": "defect-961",
       "nodeSid": "sid-56",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3022,7 +3022,7 @@
       "advisory": true
     },
     {
-      "id": "defect-961",
+      "id": "defect-962",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3033,7 +3033,7 @@
       "advisory": false
     },
     {
-      "id": "defect-962",
+      "id": "defect-963",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3044,7 +3044,7 @@
       "advisory": false
     },
     {
-      "id": "defect-963",
+      "id": "defect-964",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3055,7 +3055,7 @@
       "advisory": false
     },
     {
-      "id": "defect-964",
+      "id": "defect-965",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3066,7 +3066,7 @@
       "advisory": false
     },
     {
-      "id": "defect-965",
+      "id": "defect-966",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3077,7 +3077,7 @@
       "advisory": false
     },
     {
-      "id": "defect-966",
+      "id": "defect-967",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3088,7 +3088,7 @@
       "advisory": false
     },
     {
-      "id": "defect-967",
+      "id": "defect-968",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "width",
@@ -3099,7 +3099,7 @@
       "advisory": false
     },
     {
-      "id": "defect-968",
+      "id": "defect-969",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3110,7 +3110,7 @@
       "advisory": false
     },
     {
-      "id": "defect-969",
+      "id": "defect-970",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3121,7 +3121,7 @@
       "advisory": false
     },
     {
-      "id": "defect-970",
+      "id": "defect-971",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3132,7 +3132,7 @@
       "advisory": false
     },
     {
-      "id": "defect-971",
+      "id": "defect-972",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3143,7 +3143,7 @@
       "advisory": false
     },
     {
-      "id": "defect-972",
+      "id": "defect-973",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3154,7 +3154,7 @@
       "advisory": false
     },
     {
-      "id": "defect-973",
+      "id": "defect-974",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3165,7 +3165,7 @@
       "advisory": false
     },
     {
-      "id": "defect-974",
+      "id": "defect-975",
       "nodeSid": "sid-65",
       "viewport": "mobile",
       "property": "lineCount",
@@ -3176,7 +3176,7 @@
       "advisory": true
     },
     {
-      "id": "defect-975",
+      "id": "defect-976",
       "nodeSid": "sid-69",
       "viewport": "mobile",
       "property": "width",
@@ -3187,7 +3187,7 @@
       "advisory": true
     },
     {
-      "id": "defect-976",
+      "id": "defect-977",
       "nodeSid": "sid-69",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3198,7 +3198,7 @@
       "advisory": true
     },
     {
-      "id": "defect-977",
+      "id": "defect-978",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3209,7 +3209,7 @@
       "advisory": false
     },
     {
-      "id": "defect-978",
+      "id": "defect-979",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3220,7 +3220,7 @@
       "advisory": false
     },
     {
-      "id": "defect-979",
+      "id": "defect-980",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3231,7 +3231,7 @@
       "advisory": false
     },
     {
-      "id": "defect-980",
+      "id": "defect-981",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3242,7 +3242,7 @@
       "advisory": false
     },
     {
-      "id": "defect-981",
+      "id": "defect-982",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3253,7 +3253,7 @@
       "advisory": false
     },
     {
-      "id": "defect-982",
+      "id": "defect-983",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3264,7 +3264,7 @@
       "advisory": false
     },
     {
-      "id": "defect-983",
+      "id": "defect-984",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "width",
@@ -3275,7 +3275,7 @@
       "advisory": false
     },
     {
-      "id": "defect-984",
+      "id": "defect-985",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3286,7 +3286,7 @@
       "advisory": false
     },
     {
-      "id": "defect-985",
+      "id": "defect-986",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3297,7 +3297,7 @@
       "advisory": false
     },
     {
-      "id": "defect-986",
+      "id": "defect-987",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3308,7 +3308,7 @@
       "advisory": false
     },
     {
-      "id": "defect-987",
+      "id": "defect-988",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3319,7 +3319,7 @@
       "advisory": false
     },
     {
-      "id": "defect-988",
+      "id": "defect-989",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3330,7 +3330,7 @@
       "advisory": false
     },
     {
-      "id": "defect-989",
+      "id": "defect-990",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3341,7 +3341,7 @@
       "advisory": false
     },
     {
-      "id": "defect-990",
+      "id": "defect-991",
       "nodeSid": "sid-78",
       "viewport": "mobile",
       "property": "lineCount",
@@ -3352,7 +3352,7 @@
       "advisory": true
     },
     {
-      "id": "defect-991",
+      "id": "defect-992",
       "nodeSid": "sid-82",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3363,7 +3363,7 @@
       "advisory": true
     },
     {
-      "id": "defect-992",
+      "id": "defect-993",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3374,7 +3374,7 @@
       "advisory": false
     },
     {
-      "id": "defect-993",
+      "id": "defect-994",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3385,7 +3385,7 @@
       "advisory": false
     },
     {
-      "id": "defect-994",
+      "id": "defect-995",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3396,7 +3396,7 @@
       "advisory": false
     },
     {
-      "id": "defect-995",
+      "id": "defect-996",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3407,7 +3407,7 @@
       "advisory": false
     },
     {
-      "id": "defect-996",
+      "id": "defect-997",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3418,7 +3418,7 @@
       "advisory": false
     },
     {
-      "id": "defect-997",
+      "id": "defect-998",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3429,7 +3429,7 @@
       "advisory": false
     },
     {
-      "id": "defect-998",
+      "id": "defect-999",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "width",
@@ -3440,7 +3440,7 @@
       "advisory": false
     },
     {
-      "id": "defect-999",
+      "id": "defect-1000",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3451,7 +3451,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1000",
+      "id": "defect-1001",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3462,7 +3462,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1001",
+      "id": "defect-1002",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -3473,7 +3473,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1002",
+      "id": "defect-1003",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "fontSize",
@@ -3484,7 +3484,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1003",
+      "id": "defect-1004",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -3495,7 +3495,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1004",
+      "id": "defect-1005",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -3506,7 +3506,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1005",
+      "id": "defect-1006",
       "nodeSid": "sid-91",
       "viewport": "mobile",
       "property": "lineCount",
@@ -3519,7 +3519,7 @@
   ],
   "unresolvedDefects": [
     {
-      "id": "defect-695",
+      "id": "defect-696",
       "nodeSid": "sid-5",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3530,7 +3530,7 @@
       "advisory": true
     },
     {
-      "id": "defect-696",
+      "id": "defect-697",
       "nodeSid": "sid-9",
       "viewport": "desktop",
       "property": "color",
@@ -3541,7 +3541,7 @@
       "advisory": true
     },
     {
-      "id": "defect-697",
+      "id": "defect-698",
       "nodeSid": "sid-9",
       "viewport": "desktop",
       "property": "borderColor",
@@ -3552,7 +3552,7 @@
       "advisory": true
     },
     {
-      "id": "defect-698",
+      "id": "defect-699",
       "nodeSid": "sid-10",
       "viewport": "desktop",
       "property": "lineCount",
@@ -3563,7 +3563,7 @@
       "advisory": true
     },
     {
-      "id": "defect-699",
+      "id": "defect-700",
       "nodeSid": "sid-11",
       "viewport": "desktop",
       "property": "lineCount",
@@ -3574,7 +3574,7 @@
       "advisory": true
     },
     {
-      "id": "defect-700",
+      "id": "defect-701",
       "nodeSid": "sid-12",
       "viewport": "desktop",
       "property": "lineCount",
@@ -3585,7 +3585,7 @@
       "advisory": true
     },
     {
-      "id": "defect-701",
+      "id": "defect-702",
       "nodeSid": "sid-12",
       "viewport": "desktop",
       "property": "width",
@@ -3596,7 +3596,7 @@
       "advisory": true
     },
     {
-      "id": "defect-702",
+      "id": "defect-703",
       "nodeSid": "sid-17",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3607,7 +3607,7 @@
       "advisory": true
     },
     {
-      "id": "defect-703",
+      "id": "defect-704",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -3618,7 +3618,7 @@
       "advisory": false
     },
     {
-      "id": "defect-704",
+      "id": "defect-705",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "width",
@@ -3629,7 +3629,7 @@
       "advisory": false
     },
     {
-      "id": "defect-705",
+      "id": "defect-706",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3640,7 +3640,7 @@
       "advisory": false
     },
     {
-      "id": "defect-706",
+      "id": "defect-707",
       "nodeSid": "sid-23",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -3651,7 +3651,7 @@
       "advisory": false
     },
     {
-      "id": "defect-707",
+      "id": "defect-708",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -3662,7 +3662,7 @@
       "advisory": false
     },
     {
-      "id": "defect-708",
+      "id": "defect-709",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "width",
@@ -3673,7 +3673,7 @@
       "advisory": false
     },
     {
-      "id": "defect-709",
+      "id": "defect-710",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3684,7 +3684,7 @@
       "advisory": false
     },
     {
-      "id": "defect-710",
+      "id": "defect-711",
       "nodeSid": "sid-24",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -3695,7 +3695,7 @@
       "advisory": false
     },
     {
-      "id": "defect-711",
+      "id": "defect-712",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -3706,7 +3706,7 @@
       "advisory": false
     },
     {
-      "id": "defect-712",
+      "id": "defect-713",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "width",
@@ -3717,7 +3717,7 @@
       "advisory": false
     },
     {
-      "id": "defect-713",
+      "id": "defect-714",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3728,7 +3728,7 @@
       "advisory": false
     },
     {
-      "id": "defect-714",
+      "id": "defect-715",
       "nodeSid": "sid-25",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -3739,7 +3739,7 @@
       "advisory": false
     },
     {
-      "id": "defect-715",
+      "id": "defect-716",
       "nodeSid": "sid-26",
       "viewport": "desktop",
       "property": "lineCount",
@@ -3750,7 +3750,7 @@
       "advisory": true
     },
     {
-      "id": "defect-716",
+      "id": "defect-717",
       "nodeSid": "sid-30",
       "viewport": "desktop",
       "property": "lineCount",
@@ -3761,7 +3761,7 @@
       "advisory": true
     },
     {
-      "id": "defect-717",
+      "id": "defect-718",
       "nodeSid": "sid-30",
       "viewport": "desktop",
       "property": "width",
@@ -3772,7 +3772,7 @@
       "advisory": true
     },
     {
-      "id": "defect-718",
+      "id": "defect-719",
       "nodeSid": "sid-30",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3783,7 +3783,7 @@
       "advisory": true
     },
     {
-      "id": "defect-719",
+      "id": "defect-720",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -3794,7 +3794,7 @@
       "advisory": false
     },
     {
-      "id": "defect-720",
+      "id": "defect-721",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "width",
@@ -3805,7 +3805,7 @@
       "advisory": false
     },
     {
-      "id": "defect-721",
+      "id": "defect-722",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3816,7 +3816,7 @@
       "advisory": false
     },
     {
-      "id": "defect-722",
+      "id": "defect-723",
       "nodeSid": "sid-36",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -3827,7 +3827,7 @@
       "advisory": false
     },
     {
-      "id": "defect-723",
+      "id": "defect-724",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -3838,7 +3838,7 @@
       "advisory": false
     },
     {
-      "id": "defect-724",
+      "id": "defect-725",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "width",
@@ -3849,7 +3849,7 @@
       "advisory": false
     },
     {
-      "id": "defect-725",
+      "id": "defect-726",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3860,7 +3860,7 @@
       "advisory": false
     },
     {
-      "id": "defect-726",
+      "id": "defect-727",
       "nodeSid": "sid-37",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -3871,7 +3871,7 @@
       "advisory": false
     },
     {
-      "id": "defect-727",
+      "id": "defect-728",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -3882,7 +3882,7 @@
       "advisory": false
     },
     {
-      "id": "defect-728",
+      "id": "defect-729",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "width",
@@ -3893,7 +3893,7 @@
       "advisory": false
     },
     {
-      "id": "defect-729",
+      "id": "defect-730",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3904,7 +3904,7 @@
       "advisory": false
     },
     {
-      "id": "defect-730",
+      "id": "defect-731",
       "nodeSid": "sid-38",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -3915,7 +3915,7 @@
       "advisory": false
     },
     {
-      "id": "defect-731",
+      "id": "defect-732",
       "nodeSid": "sid-39",
       "viewport": "desktop",
       "property": "lineCount",
@@ -3926,7 +3926,7 @@
       "advisory": true
     },
     {
-      "id": "defect-732",
+      "id": "defect-733",
       "nodeSid": "sid-43",
       "viewport": "desktop",
       "property": "width",
@@ -3937,7 +3937,7 @@
       "advisory": true
     },
     {
-      "id": "defect-733",
+      "id": "defect-734",
       "nodeSid": "sid-43",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3948,7 +3948,7 @@
       "advisory": true
     },
     {
-      "id": "defect-734",
+      "id": "defect-735",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -3959,7 +3959,7 @@
       "advisory": false
     },
     {
-      "id": "defect-735",
+      "id": "defect-736",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "width",
@@ -3970,7 +3970,7 @@
       "advisory": false
     },
     {
-      "id": "defect-736",
+      "id": "defect-737",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -3981,7 +3981,7 @@
       "advisory": false
     },
     {
-      "id": "defect-737",
+      "id": "defect-738",
       "nodeSid": "sid-49",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -3992,7 +3992,7 @@
       "advisory": false
     },
     {
-      "id": "defect-738",
+      "id": "defect-739",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4003,7 +4003,7 @@
       "advisory": false
     },
     {
-      "id": "defect-739",
+      "id": "defect-740",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "width",
@@ -4014,7 +4014,7 @@
       "advisory": false
     },
     {
-      "id": "defect-740",
+      "id": "defect-741",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4025,7 +4025,7 @@
       "advisory": false
     },
     {
-      "id": "defect-741",
+      "id": "defect-742",
       "nodeSid": "sid-50",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4036,7 +4036,7 @@
       "advisory": false
     },
     {
-      "id": "defect-742",
+      "id": "defect-743",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4047,7 +4047,7 @@
       "advisory": false
     },
     {
-      "id": "defect-743",
+      "id": "defect-744",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "width",
@@ -4058,7 +4058,7 @@
       "advisory": false
     },
     {
-      "id": "defect-744",
+      "id": "defect-745",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4069,7 +4069,7 @@
       "advisory": false
     },
     {
-      "id": "defect-745",
+      "id": "defect-746",
       "nodeSid": "sid-51",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4080,7 +4080,7 @@
       "advisory": false
     },
     {
-      "id": "defect-746",
+      "id": "defect-747",
       "nodeSid": "sid-52",
       "viewport": "desktop",
       "property": "lineCount",
@@ -4091,7 +4091,7 @@
       "advisory": true
     },
     {
-      "id": "defect-747",
+      "id": "defect-748",
       "nodeSid": "sid-56",
       "viewport": "desktop",
       "property": "width",
@@ -4102,7 +4102,7 @@
       "advisory": true
     },
     {
-      "id": "defect-748",
+      "id": "defect-749",
       "nodeSid": "sid-56",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4113,7 +4113,7 @@
       "advisory": true
     },
     {
-      "id": "defect-749",
+      "id": "defect-750",
       "nodeSid": "sid-57",
       "viewport": "desktop",
       "property": "height",
@@ -4124,7 +4124,7 @@
       "advisory": true
     },
     {
-      "id": "defect-750",
+      "id": "defect-751",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4135,7 +4135,7 @@
       "advisory": false
     },
     {
-      "id": "defect-751",
+      "id": "defect-752",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "width",
@@ -4146,7 +4146,7 @@
       "advisory": false
     },
     {
-      "id": "defect-752",
+      "id": "defect-753",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4157,7 +4157,7 @@
       "advisory": false
     },
     {
-      "id": "defect-753",
+      "id": "defect-754",
       "nodeSid": "sid-62",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4168,7 +4168,7 @@
       "advisory": false
     },
     {
-      "id": "defect-754",
+      "id": "defect-755",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4179,7 +4179,7 @@
       "advisory": false
     },
     {
-      "id": "defect-755",
+      "id": "defect-756",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "width",
@@ -4190,7 +4190,7 @@
       "advisory": false
     },
     {
-      "id": "defect-756",
+      "id": "defect-757",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4201,7 +4201,7 @@
       "advisory": false
     },
     {
-      "id": "defect-757",
+      "id": "defect-758",
       "nodeSid": "sid-63",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4212,7 +4212,7 @@
       "advisory": false
     },
     {
-      "id": "defect-758",
+      "id": "defect-759",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4223,7 +4223,7 @@
       "advisory": false
     },
     {
-      "id": "defect-759",
+      "id": "defect-760",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "width",
@@ -4234,7 +4234,7 @@
       "advisory": false
     },
     {
-      "id": "defect-760",
+      "id": "defect-761",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4245,7 +4245,7 @@
       "advisory": false
     },
     {
-      "id": "defect-761",
+      "id": "defect-762",
       "nodeSid": "sid-64",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4256,7 +4256,7 @@
       "advisory": false
     },
     {
-      "id": "defect-762",
+      "id": "defect-763",
       "nodeSid": "sid-65",
       "viewport": "desktop",
       "property": "lineCount",
@@ -4267,7 +4267,7 @@
       "advisory": true
     },
     {
-      "id": "defect-763",
+      "id": "defect-764",
       "nodeSid": "sid-69",
       "viewport": "desktop",
       "property": "width",
@@ -4278,7 +4278,7 @@
       "advisory": true
     },
     {
-      "id": "defect-764",
+      "id": "defect-765",
       "nodeSid": "sid-69",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4289,7 +4289,7 @@
       "advisory": true
     },
     {
-      "id": "defect-765",
+      "id": "defect-766",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4300,7 +4300,7 @@
       "advisory": false
     },
     {
-      "id": "defect-766",
+      "id": "defect-767",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "width",
@@ -4311,7 +4311,7 @@
       "advisory": false
     },
     {
-      "id": "defect-767",
+      "id": "defect-768",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4322,7 +4322,7 @@
       "advisory": false
     },
     {
-      "id": "defect-768",
+      "id": "defect-769",
       "nodeSid": "sid-75",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4333,7 +4333,7 @@
       "advisory": false
     },
     {
-      "id": "defect-769",
+      "id": "defect-770",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4344,7 +4344,7 @@
       "advisory": false
     },
     {
-      "id": "defect-770",
+      "id": "defect-771",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "width",
@@ -4355,7 +4355,7 @@
       "advisory": false
     },
     {
-      "id": "defect-771",
+      "id": "defect-772",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4366,7 +4366,7 @@
       "advisory": false
     },
     {
-      "id": "defect-772",
+      "id": "defect-773",
       "nodeSid": "sid-76",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4377,7 +4377,7 @@
       "advisory": false
     },
     {
-      "id": "defect-773",
+      "id": "defect-774",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4388,7 +4388,7 @@
       "advisory": false
     },
     {
-      "id": "defect-774",
+      "id": "defect-775",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "width",
@@ -4399,7 +4399,7 @@
       "advisory": false
     },
     {
-      "id": "defect-775",
+      "id": "defect-776",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4410,7 +4410,7 @@
       "advisory": false
     },
     {
-      "id": "defect-776",
+      "id": "defect-777",
       "nodeSid": "sid-77",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4421,7 +4421,7 @@
       "advisory": false
     },
     {
-      "id": "defect-777",
+      "id": "defect-778",
       "nodeSid": "sid-78",
       "viewport": "desktop",
       "property": "lineCount",
@@ -4432,7 +4432,7 @@
       "advisory": true
     },
     {
-      "id": "defect-778",
+      "id": "defect-779",
       "nodeSid": "sid-82",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4443,7 +4443,7 @@
       "advisory": true
     },
     {
-      "id": "defect-779",
+      "id": "defect-780",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4454,7 +4454,7 @@
       "advisory": false
     },
     {
-      "id": "defect-780",
+      "id": "defect-781",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "width",
@@ -4465,7 +4465,7 @@
       "advisory": false
     },
     {
-      "id": "defect-781",
+      "id": "defect-782",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4476,7 +4476,7 @@
       "advisory": false
     },
     {
-      "id": "defect-782",
+      "id": "defect-783",
       "nodeSid": "sid-88",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4487,7 +4487,7 @@
       "advisory": false
     },
     {
-      "id": "defect-783",
+      "id": "defect-784",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4498,7 +4498,7 @@
       "advisory": false
     },
     {
-      "id": "defect-784",
+      "id": "defect-785",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "width",
@@ -4509,7 +4509,7 @@
       "advisory": false
     },
     {
-      "id": "defect-785",
+      "id": "defect-786",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4520,7 +4520,7 @@
       "advisory": false
     },
     {
-      "id": "defect-786",
+      "id": "defect-787",
       "nodeSid": "sid-89",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4531,7 +4531,7 @@
       "advisory": false
     },
     {
-      "id": "defect-787",
+      "id": "defect-788",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "backgroundColor",
@@ -4542,7 +4542,7 @@
       "advisory": false
     },
     {
-      "id": "defect-788",
+      "id": "defect-789",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "width",
@@ -4553,7 +4553,7 @@
       "advisory": false
     },
     {
-      "id": "defect-789",
+      "id": "defect-790",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "paddingTop",
@@ -4564,7 +4564,7 @@
       "advisory": false
     },
     {
-      "id": "defect-790",
+      "id": "defect-791",
       "nodeSid": "sid-90",
       "viewport": "desktop",
       "property": "borderTopLeftRadius",
@@ -4575,7 +4575,7 @@
       "advisory": false
     },
     {
-      "id": "defect-791",
+      "id": "defect-792",
       "nodeSid": "sid-91",
       "viewport": "desktop",
       "property": "lineCount",
@@ -4586,7 +4586,7 @@
       "advisory": true
     },
     {
-      "id": "defect-792",
+      "id": "defect-793",
       "nodeSid": "sid-5",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4597,7 +4597,7 @@
       "advisory": true
     },
     {
-      "id": "defect-793",
+      "id": "defect-794",
       "nodeSid": "sid-9",
       "viewport": "tablet",
       "property": "color",
@@ -4608,7 +4608,7 @@
       "advisory": true
     },
     {
-      "id": "defect-794",
+      "id": "defect-795",
       "nodeSid": "sid-9",
       "viewport": "tablet",
       "property": "borderColor",
@@ -4619,7 +4619,7 @@
       "advisory": true
     },
     {
-      "id": "defect-795",
+      "id": "defect-796",
       "nodeSid": "sid-10",
       "viewport": "tablet",
       "property": "lineCount",
@@ -4630,7 +4630,7 @@
       "advisory": true
     },
     {
-      "id": "defect-796",
+      "id": "defect-797",
       "nodeSid": "sid-11",
       "viewport": "tablet",
       "property": "lineCount",
@@ -4641,7 +4641,7 @@
       "advisory": true
     },
     {
-      "id": "defect-797",
+      "id": "defect-798",
       "nodeSid": "sid-12",
       "viewport": "tablet",
       "property": "lineCount",
@@ -4652,7 +4652,7 @@
       "advisory": true
     },
     {
-      "id": "defect-798",
+      "id": "defect-799",
       "nodeSid": "sid-12",
       "viewport": "tablet",
       "property": "width",
@@ -4663,7 +4663,7 @@
       "advisory": true
     },
     {
-      "id": "defect-799",
+      "id": "defect-800",
       "nodeSid": "sid-13",
       "viewport": "tablet",
       "property": "lineCount",
@@ -4674,7 +4674,7 @@
       "advisory": true
     },
     {
-      "id": "defect-800",
+      "id": "defect-801",
       "nodeSid": "sid-17",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4685,7 +4685,7 @@
       "advisory": true
     },
     {
-      "id": "defect-801",
+      "id": "defect-802",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -4696,7 +4696,7 @@
       "advisory": false
     },
     {
-      "id": "defect-802",
+      "id": "defect-803",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "fontSize",
@@ -4707,7 +4707,7 @@
       "advisory": false
     },
     {
-      "id": "defect-803",
+      "id": "defect-804",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "width",
@@ -4718,7 +4718,7 @@
       "advisory": false
     },
     {
-      "id": "defect-804",
+      "id": "defect-805",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4729,7 +4729,7 @@
       "advisory": false
     },
     {
-      "id": "defect-805",
+      "id": "defect-806",
       "nodeSid": "sid-23",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -4740,7 +4740,7 @@
       "advisory": false
     },
     {
-      "id": "defect-806",
+      "id": "defect-807",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -4751,7 +4751,7 @@
       "advisory": false
     },
     {
-      "id": "defect-807",
+      "id": "defect-808",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "fontSize",
@@ -4762,7 +4762,7 @@
       "advisory": false
     },
     {
-      "id": "defect-808",
+      "id": "defect-809",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "width",
@@ -4773,7 +4773,7 @@
       "advisory": false
     },
     {
-      "id": "defect-809",
+      "id": "defect-810",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4784,7 +4784,7 @@
       "advisory": false
     },
     {
-      "id": "defect-810",
+      "id": "defect-811",
       "nodeSid": "sid-24",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -4795,7 +4795,7 @@
       "advisory": false
     },
     {
-      "id": "defect-811",
+      "id": "defect-812",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -4806,7 +4806,7 @@
       "advisory": false
     },
     {
-      "id": "defect-812",
+      "id": "defect-813",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "fontSize",
@@ -4817,7 +4817,7 @@
       "advisory": false
     },
     {
-      "id": "defect-813",
+      "id": "defect-814",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "width",
@@ -4828,7 +4828,7 @@
       "advisory": false
     },
     {
-      "id": "defect-814",
+      "id": "defect-815",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4839,7 +4839,7 @@
       "advisory": false
     },
     {
-      "id": "defect-815",
+      "id": "defect-816",
       "nodeSid": "sid-25",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -4850,7 +4850,7 @@
       "advisory": false
     },
     {
-      "id": "defect-816",
+      "id": "defect-817",
       "nodeSid": "sid-26",
       "viewport": "tablet",
       "property": "lineCount",
@@ -4861,7 +4861,7 @@
       "advisory": true
     },
     {
-      "id": "defect-817",
+      "id": "defect-818",
       "nodeSid": "sid-30",
       "viewport": "tablet",
       "property": "lineCount",
@@ -4872,7 +4872,7 @@
       "advisory": true
     },
     {
-      "id": "defect-818",
+      "id": "defect-819",
       "nodeSid": "sid-30",
       "viewport": "tablet",
       "property": "width",
@@ -4883,7 +4883,7 @@
       "advisory": true
     },
     {
-      "id": "defect-819",
+      "id": "defect-820",
       "nodeSid": "sid-30",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4894,7 +4894,7 @@
       "advisory": true
     },
     {
-      "id": "defect-820",
+      "id": "defect-821",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -4905,7 +4905,7 @@
       "advisory": false
     },
     {
-      "id": "defect-821",
+      "id": "defect-822",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "fontSize",
@@ -4916,7 +4916,7 @@
       "advisory": false
     },
     {
-      "id": "defect-822",
+      "id": "defect-823",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "width",
@@ -4927,7 +4927,7 @@
       "advisory": false
     },
     {
-      "id": "defect-823",
+      "id": "defect-824",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4938,7 +4938,7 @@
       "advisory": false
     },
     {
-      "id": "defect-824",
+      "id": "defect-825",
       "nodeSid": "sid-36",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -4949,7 +4949,7 @@
       "advisory": false
     },
     {
-      "id": "defect-825",
+      "id": "defect-826",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -4960,7 +4960,7 @@
       "advisory": false
     },
     {
-      "id": "defect-826",
+      "id": "defect-827",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "fontSize",
@@ -4971,7 +4971,7 @@
       "advisory": false
     },
     {
-      "id": "defect-827",
+      "id": "defect-828",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -4982,7 +4982,7 @@
       "advisory": false
     },
     {
-      "id": "defect-828",
+      "id": "defect-829",
       "nodeSid": "sid-37",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -4993,7 +4993,7 @@
       "advisory": false
     },
     {
-      "id": "defect-829",
+      "id": "defect-830",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5004,7 +5004,7 @@
       "advisory": false
     },
     {
-      "id": "defect-830",
+      "id": "defect-831",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5015,7 +5015,7 @@
       "advisory": false
     },
     {
-      "id": "defect-831",
+      "id": "defect-832",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "width",
@@ -5026,7 +5026,7 @@
       "advisory": false
     },
     {
-      "id": "defect-832",
+      "id": "defect-833",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5037,7 +5037,7 @@
       "advisory": false
     },
     {
-      "id": "defect-833",
+      "id": "defect-834",
       "nodeSid": "sid-38",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5048,7 +5048,7 @@
       "advisory": false
     },
     {
-      "id": "defect-834",
+      "id": "defect-835",
       "nodeSid": "sid-39",
       "viewport": "tablet",
       "property": "lineCount",
@@ -5059,7 +5059,7 @@
       "advisory": true
     },
     {
-      "id": "defect-835",
+      "id": "defect-836",
       "nodeSid": "sid-43",
       "viewport": "tablet",
       "property": "width",
@@ -5070,7 +5070,7 @@
       "advisory": true
     },
     {
-      "id": "defect-836",
+      "id": "defect-837",
       "nodeSid": "sid-43",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5081,7 +5081,7 @@
       "advisory": true
     },
     {
-      "id": "defect-837",
+      "id": "defect-838",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5092,7 +5092,7 @@
       "advisory": false
     },
     {
-      "id": "defect-838",
+      "id": "defect-839",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5103,7 +5103,7 @@
       "advisory": false
     },
     {
-      "id": "defect-839",
+      "id": "defect-840",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "width",
@@ -5114,7 +5114,7 @@
       "advisory": false
     },
     {
-      "id": "defect-840",
+      "id": "defect-841",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5125,7 +5125,7 @@
       "advisory": false
     },
     {
-      "id": "defect-841",
+      "id": "defect-842",
       "nodeSid": "sid-49",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5136,7 +5136,7 @@
       "advisory": false
     },
     {
-      "id": "defect-842",
+      "id": "defect-843",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5147,7 +5147,7 @@
       "advisory": false
     },
     {
-      "id": "defect-843",
+      "id": "defect-844",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5158,7 +5158,7 @@
       "advisory": false
     },
     {
-      "id": "defect-844",
+      "id": "defect-845",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5169,7 +5169,7 @@
       "advisory": false
     },
     {
-      "id": "defect-845",
+      "id": "defect-846",
       "nodeSid": "sid-50",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5180,7 +5180,7 @@
       "advisory": false
     },
     {
-      "id": "defect-846",
+      "id": "defect-847",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5191,7 +5191,7 @@
       "advisory": false
     },
     {
-      "id": "defect-847",
+      "id": "defect-848",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5202,7 +5202,7 @@
       "advisory": false
     },
     {
-      "id": "defect-848",
+      "id": "defect-849",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "width",
@@ -5213,7 +5213,7 @@
       "advisory": false
     },
     {
-      "id": "defect-849",
+      "id": "defect-850",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5224,7 +5224,7 @@
       "advisory": false
     },
     {
-      "id": "defect-850",
+      "id": "defect-851",
       "nodeSid": "sid-51",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5235,7 +5235,7 @@
       "advisory": false
     },
     {
-      "id": "defect-851",
+      "id": "defect-852",
       "nodeSid": "sid-52",
       "viewport": "tablet",
       "property": "lineCount",
@@ -5246,7 +5246,7 @@
       "advisory": true
     },
     {
-      "id": "defect-852",
+      "id": "defect-853",
       "nodeSid": "sid-56",
       "viewport": "tablet",
       "property": "width",
@@ -5257,7 +5257,7 @@
       "advisory": true
     },
     {
-      "id": "defect-853",
+      "id": "defect-854",
       "nodeSid": "sid-56",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5268,7 +5268,7 @@
       "advisory": true
     },
     {
-      "id": "defect-854",
+      "id": "defect-855",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5279,7 +5279,7 @@
       "advisory": false
     },
     {
-      "id": "defect-855",
+      "id": "defect-856",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5290,7 +5290,7 @@
       "advisory": false
     },
     {
-      "id": "defect-856",
+      "id": "defect-857",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5301,7 +5301,7 @@
       "advisory": false
     },
     {
-      "id": "defect-857",
+      "id": "defect-858",
       "nodeSid": "sid-62",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5312,7 +5312,7 @@
       "advisory": false
     },
     {
-      "id": "defect-858",
+      "id": "defect-859",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5323,7 +5323,7 @@
       "advisory": false
     },
     {
-      "id": "defect-859",
+      "id": "defect-860",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5334,7 +5334,7 @@
       "advisory": false
     },
     {
-      "id": "defect-860",
+      "id": "defect-861",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "width",
@@ -5345,7 +5345,7 @@
       "advisory": false
     },
     {
-      "id": "defect-861",
+      "id": "defect-862",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5356,7 +5356,7 @@
       "advisory": false
     },
     {
-      "id": "defect-862",
+      "id": "defect-863",
       "nodeSid": "sid-63",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5367,7 +5367,7 @@
       "advisory": false
     },
     {
-      "id": "defect-863",
+      "id": "defect-864",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5378,7 +5378,7 @@
       "advisory": false
     },
     {
-      "id": "defect-864",
+      "id": "defect-865",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5389,7 +5389,7 @@
       "advisory": false
     },
     {
-      "id": "defect-865",
+      "id": "defect-866",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5400,7 +5400,7 @@
       "advisory": false
     },
     {
-      "id": "defect-866",
+      "id": "defect-867",
       "nodeSid": "sid-64",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5411,7 +5411,7 @@
       "advisory": false
     },
     {
-      "id": "defect-867",
+      "id": "defect-868",
       "nodeSid": "sid-65",
       "viewport": "tablet",
       "property": "lineCount",
@@ -5422,7 +5422,7 @@
       "advisory": true
     },
     {
-      "id": "defect-868",
+      "id": "defect-869",
       "nodeSid": "sid-69",
       "viewport": "tablet",
       "property": "width",
@@ -5433,7 +5433,7 @@
       "advisory": true
     },
     {
-      "id": "defect-869",
+      "id": "defect-870",
       "nodeSid": "sid-69",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5444,7 +5444,7 @@
       "advisory": true
     },
     {
-      "id": "defect-870",
+      "id": "defect-871",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5455,7 +5455,7 @@
       "advisory": false
     },
     {
-      "id": "defect-871",
+      "id": "defect-872",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5466,7 +5466,7 @@
       "advisory": false
     },
     {
-      "id": "defect-872",
+      "id": "defect-873",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5477,7 +5477,7 @@
       "advisory": false
     },
     {
-      "id": "defect-873",
+      "id": "defect-874",
       "nodeSid": "sid-75",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5488,7 +5488,7 @@
       "advisory": false
     },
     {
-      "id": "defect-874",
+      "id": "defect-875",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5499,7 +5499,7 @@
       "advisory": false
     },
     {
-      "id": "defect-875",
+      "id": "defect-876",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5510,7 +5510,7 @@
       "advisory": false
     },
     {
-      "id": "defect-876",
+      "id": "defect-877",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "width",
@@ -5521,7 +5521,7 @@
       "advisory": false
     },
     {
-      "id": "defect-877",
+      "id": "defect-878",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5532,7 +5532,7 @@
       "advisory": false
     },
     {
-      "id": "defect-878",
+      "id": "defect-879",
       "nodeSid": "sid-76",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5543,7 +5543,7 @@
       "advisory": false
     },
     {
-      "id": "defect-879",
+      "id": "defect-880",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5554,7 +5554,7 @@
       "advisory": false
     },
     {
-      "id": "defect-880",
+      "id": "defect-881",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5565,7 +5565,7 @@
       "advisory": false
     },
     {
-      "id": "defect-881",
+      "id": "defect-882",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5576,7 +5576,7 @@
       "advisory": false
     },
     {
-      "id": "defect-882",
+      "id": "defect-883",
       "nodeSid": "sid-77",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5587,7 +5587,7 @@
       "advisory": false
     },
     {
-      "id": "defect-883",
+      "id": "defect-884",
       "nodeSid": "sid-78",
       "viewport": "tablet",
       "property": "lineCount",
@@ -5598,7 +5598,7 @@
       "advisory": true
     },
     {
-      "id": "defect-884",
+      "id": "defect-885",
       "nodeSid": "sid-82",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5609,7 +5609,7 @@
       "advisory": true
     },
     {
-      "id": "defect-885",
+      "id": "defect-886",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5620,7 +5620,7 @@
       "advisory": false
     },
     {
-      "id": "defect-886",
+      "id": "defect-887",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5631,7 +5631,7 @@
       "advisory": false
     },
     {
-      "id": "defect-887",
+      "id": "defect-888",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5642,7 +5642,7 @@
       "advisory": false
     },
     {
-      "id": "defect-888",
+      "id": "defect-889",
       "nodeSid": "sid-88",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5653,7 +5653,7 @@
       "advisory": false
     },
     {
-      "id": "defect-889",
+      "id": "defect-890",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5664,7 +5664,7 @@
       "advisory": false
     },
     {
-      "id": "defect-890",
+      "id": "defect-891",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5675,7 +5675,7 @@
       "advisory": false
     },
     {
-      "id": "defect-891",
+      "id": "defect-892",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "width",
@@ -5686,7 +5686,7 @@
       "advisory": false
     },
     {
-      "id": "defect-892",
+      "id": "defect-893",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5697,7 +5697,7 @@
       "advisory": false
     },
     {
-      "id": "defect-893",
+      "id": "defect-894",
       "nodeSid": "sid-89",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5708,7 +5708,7 @@
       "advisory": false
     },
     {
-      "id": "defect-894",
+      "id": "defect-895",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "backgroundColor",
@@ -5719,7 +5719,7 @@
       "advisory": false
     },
     {
-      "id": "defect-895",
+      "id": "defect-896",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "fontSize",
@@ -5730,7 +5730,7 @@
       "advisory": false
     },
     {
-      "id": "defect-896",
+      "id": "defect-897",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "paddingTop",
@@ -5741,7 +5741,7 @@
       "advisory": false
     },
     {
-      "id": "defect-897",
+      "id": "defect-898",
       "nodeSid": "sid-90",
       "viewport": "tablet",
       "property": "borderTopLeftRadius",
@@ -5752,7 +5752,7 @@
       "advisory": false
     },
     {
-      "id": "defect-898",
+      "id": "defect-899",
       "nodeSid": "sid-91",
       "viewport": "tablet",
       "property": "lineCount",
@@ -5763,7 +5763,7 @@
       "advisory": true
     },
     {
-      "id": "defect-899",
+      "id": "defect-900",
       "nodeSid": "sid-5",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -5774,7 +5774,7 @@
       "advisory": true
     },
     {
-      "id": "defect-900",
+      "id": "defect-901",
       "nodeSid": "sid-9",
       "viewport": "mobile",
       "property": "color",
@@ -5785,7 +5785,7 @@
       "advisory": true
     },
     {
-      "id": "defect-901",
+      "id": "defect-902",
       "nodeSid": "sid-9",
       "viewport": "mobile",
       "property": "borderColor",
@@ -5796,7 +5796,7 @@
       "advisory": true
     },
     {
-      "id": "defect-902",
+      "id": "defect-903",
       "nodeSid": "sid-10",
       "viewport": "mobile",
       "property": "lineCount",
@@ -5807,7 +5807,7 @@
       "advisory": true
     },
     {
-      "id": "defect-903",
+      "id": "defect-904",
       "nodeSid": "sid-11",
       "viewport": "mobile",
       "property": "lineCount",
@@ -5818,7 +5818,7 @@
       "advisory": true
     },
     {
-      "id": "defect-904",
+      "id": "defect-905",
       "nodeSid": "sid-12",
       "viewport": "mobile",
       "property": "lineCount",
@@ -5829,7 +5829,7 @@
       "advisory": true
     },
     {
-      "id": "defect-905",
+      "id": "defect-906",
       "nodeSid": "sid-12",
       "viewport": "mobile",
       "property": "width",
@@ -5840,7 +5840,7 @@
       "advisory": true
     },
     {
-      "id": "defect-906",
+      "id": "defect-907",
       "nodeSid": "sid-13",
       "viewport": "mobile",
       "property": "lineCount",
@@ -5851,7 +5851,7 @@
       "advisory": true
     },
     {
-      "id": "defect-907",
+      "id": "defect-908",
       "nodeSid": "sid-17",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -5862,7 +5862,7 @@
       "advisory": true
     },
     {
-      "id": "defect-908",
+      "id": "defect-909",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -5873,7 +5873,7 @@
       "advisory": false
     },
     {
-      "id": "defect-909",
+      "id": "defect-910",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "fontSize",
@@ -5884,7 +5884,7 @@
       "advisory": false
     },
     {
-      "id": "defect-910",
+      "id": "defect-911",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "width",
@@ -5895,7 +5895,7 @@
       "advisory": false
     },
     {
-      "id": "defect-911",
+      "id": "defect-912",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -5906,7 +5906,7 @@
       "advisory": false
     },
     {
-      "id": "defect-912",
+      "id": "defect-913",
       "nodeSid": "sid-23",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -5917,7 +5917,7 @@
       "advisory": false
     },
     {
-      "id": "defect-913",
+      "id": "defect-914",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -5928,7 +5928,7 @@
       "advisory": false
     },
     {
-      "id": "defect-914",
+      "id": "defect-915",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "fontSize",
@@ -5939,7 +5939,7 @@
       "advisory": false
     },
     {
-      "id": "defect-915",
+      "id": "defect-916",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "width",
@@ -5950,7 +5950,7 @@
       "advisory": false
     },
     {
-      "id": "defect-916",
+      "id": "defect-917",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -5961,7 +5961,7 @@
       "advisory": false
     },
     {
-      "id": "defect-917",
+      "id": "defect-918",
       "nodeSid": "sid-24",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -5972,7 +5972,7 @@
       "advisory": false
     },
     {
-      "id": "defect-918",
+      "id": "defect-919",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -5983,7 +5983,7 @@
       "advisory": false
     },
     {
-      "id": "defect-919",
+      "id": "defect-920",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "fontSize",
@@ -5994,7 +5994,7 @@
       "advisory": false
     },
     {
-      "id": "defect-920",
+      "id": "defect-921",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "width",
@@ -6005,7 +6005,7 @@
       "advisory": false
     },
     {
-      "id": "defect-921",
+      "id": "defect-922",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6016,7 +6016,7 @@
       "advisory": false
     },
     {
-      "id": "defect-922",
+      "id": "defect-923",
       "nodeSid": "sid-25",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6027,7 +6027,7 @@
       "advisory": false
     },
     {
-      "id": "defect-923",
+      "id": "defect-924",
       "nodeSid": "sid-26",
       "viewport": "mobile",
       "property": "lineCount",
@@ -6038,7 +6038,7 @@
       "advisory": true
     },
     {
-      "id": "defect-924",
+      "id": "defect-925",
       "nodeSid": "sid-30",
       "viewport": "mobile",
       "property": "lineCount",
@@ -6049,7 +6049,7 @@
       "advisory": true
     },
     {
-      "id": "defect-925",
+      "id": "defect-926",
       "nodeSid": "sid-30",
       "viewport": "mobile",
       "property": "width",
@@ -6060,7 +6060,7 @@
       "advisory": true
     },
     {
-      "id": "defect-926",
+      "id": "defect-927",
       "nodeSid": "sid-30",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6071,7 +6071,7 @@
       "advisory": true
     },
     {
-      "id": "defect-927",
+      "id": "defect-928",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6082,7 +6082,7 @@
       "advisory": false
     },
     {
-      "id": "defect-928",
+      "id": "defect-929",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6093,7 +6093,7 @@
       "advisory": false
     },
     {
-      "id": "defect-929",
+      "id": "defect-930",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "width",
@@ -6104,7 +6104,7 @@
       "advisory": false
     },
     {
-      "id": "defect-930",
+      "id": "defect-931",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6115,7 +6115,7 @@
       "advisory": false
     },
     {
-      "id": "defect-931",
+      "id": "defect-932",
       "nodeSid": "sid-36",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6126,7 +6126,7 @@
       "advisory": false
     },
     {
-      "id": "defect-932",
+      "id": "defect-933",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6137,7 +6137,7 @@
       "advisory": false
     },
     {
-      "id": "defect-933",
+      "id": "defect-934",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6148,7 +6148,7 @@
       "advisory": false
     },
     {
-      "id": "defect-934",
+      "id": "defect-935",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6159,7 +6159,7 @@
       "advisory": false
     },
     {
-      "id": "defect-935",
+      "id": "defect-936",
       "nodeSid": "sid-37",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6170,7 +6170,7 @@
       "advisory": false
     },
     {
-      "id": "defect-936",
+      "id": "defect-937",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6181,7 +6181,7 @@
       "advisory": false
     },
     {
-      "id": "defect-937",
+      "id": "defect-938",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6192,7 +6192,7 @@
       "advisory": false
     },
     {
-      "id": "defect-938",
+      "id": "defect-939",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "width",
@@ -6203,7 +6203,7 @@
       "advisory": false
     },
     {
-      "id": "defect-939",
+      "id": "defect-940",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6214,7 +6214,7 @@
       "advisory": false
     },
     {
-      "id": "defect-940",
+      "id": "defect-941",
       "nodeSid": "sid-38",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6225,7 +6225,7 @@
       "advisory": false
     },
     {
-      "id": "defect-941",
+      "id": "defect-942",
       "nodeSid": "sid-39",
       "viewport": "mobile",
       "property": "lineCount",
@@ -6236,7 +6236,7 @@
       "advisory": true
     },
     {
-      "id": "defect-942",
+      "id": "defect-943",
       "nodeSid": "sid-43",
       "viewport": "mobile",
       "property": "width",
@@ -6247,7 +6247,7 @@
       "advisory": true
     },
     {
-      "id": "defect-943",
+      "id": "defect-944",
       "nodeSid": "sid-43",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6258,7 +6258,7 @@
       "advisory": true
     },
     {
-      "id": "defect-944",
+      "id": "defect-945",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6269,7 +6269,7 @@
       "advisory": false
     },
     {
-      "id": "defect-945",
+      "id": "defect-946",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6280,7 +6280,7 @@
       "advisory": false
     },
     {
-      "id": "defect-946",
+      "id": "defect-947",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "width",
@@ -6291,7 +6291,7 @@
       "advisory": false
     },
     {
-      "id": "defect-947",
+      "id": "defect-948",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6302,7 +6302,7 @@
       "advisory": false
     },
     {
-      "id": "defect-948",
+      "id": "defect-949",
       "nodeSid": "sid-49",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6313,7 +6313,7 @@
       "advisory": false
     },
     {
-      "id": "defect-949",
+      "id": "defect-950",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6324,7 +6324,7 @@
       "advisory": false
     },
     {
-      "id": "defect-950",
+      "id": "defect-951",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6335,7 +6335,7 @@
       "advisory": false
     },
     {
-      "id": "defect-951",
+      "id": "defect-952",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6346,7 +6346,7 @@
       "advisory": false
     },
     {
-      "id": "defect-952",
+      "id": "defect-953",
       "nodeSid": "sid-50",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6357,7 +6357,7 @@
       "advisory": false
     },
     {
-      "id": "defect-953",
+      "id": "defect-954",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6368,7 +6368,7 @@
       "advisory": false
     },
     {
-      "id": "defect-954",
+      "id": "defect-955",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6379,7 +6379,7 @@
       "advisory": false
     },
     {
-      "id": "defect-955",
+      "id": "defect-956",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "width",
@@ -6390,7 +6390,7 @@
       "advisory": false
     },
     {
-      "id": "defect-956",
+      "id": "defect-957",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6401,7 +6401,7 @@
       "advisory": false
     },
     {
-      "id": "defect-957",
+      "id": "defect-958",
       "nodeSid": "sid-51",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6412,7 +6412,7 @@
       "advisory": false
     },
     {
-      "id": "defect-958",
+      "id": "defect-959",
       "nodeSid": "sid-52",
       "viewport": "mobile",
       "property": "lineCount",
@@ -6423,7 +6423,7 @@
       "advisory": true
     },
     {
-      "id": "defect-959",
+      "id": "defect-960",
       "nodeSid": "sid-56",
       "viewport": "mobile",
       "property": "width",
@@ -6434,7 +6434,7 @@
       "advisory": true
     },
     {
-      "id": "defect-960",
+      "id": "defect-961",
       "nodeSid": "sid-56",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6445,7 +6445,7 @@
       "advisory": true
     },
     {
-      "id": "defect-961",
+      "id": "defect-962",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6456,7 +6456,7 @@
       "advisory": false
     },
     {
-      "id": "defect-962",
+      "id": "defect-963",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6467,7 +6467,7 @@
       "advisory": false
     },
     {
-      "id": "defect-963",
+      "id": "defect-964",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6478,7 +6478,7 @@
       "advisory": false
     },
     {
-      "id": "defect-964",
+      "id": "defect-965",
       "nodeSid": "sid-62",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6489,7 +6489,7 @@
       "advisory": false
     },
     {
-      "id": "defect-965",
+      "id": "defect-966",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6500,7 +6500,7 @@
       "advisory": false
     },
     {
-      "id": "defect-966",
+      "id": "defect-967",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6511,7 +6511,7 @@
       "advisory": false
     },
     {
-      "id": "defect-967",
+      "id": "defect-968",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "width",
@@ -6522,7 +6522,7 @@
       "advisory": false
     },
     {
-      "id": "defect-968",
+      "id": "defect-969",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6533,7 +6533,7 @@
       "advisory": false
     },
     {
-      "id": "defect-969",
+      "id": "defect-970",
       "nodeSid": "sid-63",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6544,7 +6544,7 @@
       "advisory": false
     },
     {
-      "id": "defect-970",
+      "id": "defect-971",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6555,7 +6555,7 @@
       "advisory": false
     },
     {
-      "id": "defect-971",
+      "id": "defect-972",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6566,7 +6566,7 @@
       "advisory": false
     },
     {
-      "id": "defect-972",
+      "id": "defect-973",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6577,7 +6577,7 @@
       "advisory": false
     },
     {
-      "id": "defect-973",
+      "id": "defect-974",
       "nodeSid": "sid-64",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6588,7 +6588,7 @@
       "advisory": false
     },
     {
-      "id": "defect-974",
+      "id": "defect-975",
       "nodeSid": "sid-65",
       "viewport": "mobile",
       "property": "lineCount",
@@ -6599,7 +6599,7 @@
       "advisory": true
     },
     {
-      "id": "defect-975",
+      "id": "defect-976",
       "nodeSid": "sid-69",
       "viewport": "mobile",
       "property": "width",
@@ -6610,7 +6610,7 @@
       "advisory": true
     },
     {
-      "id": "defect-976",
+      "id": "defect-977",
       "nodeSid": "sid-69",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6621,7 +6621,7 @@
       "advisory": true
     },
     {
-      "id": "defect-977",
+      "id": "defect-978",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6632,7 +6632,7 @@
       "advisory": false
     },
     {
-      "id": "defect-978",
+      "id": "defect-979",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6643,7 +6643,7 @@
       "advisory": false
     },
     {
-      "id": "defect-979",
+      "id": "defect-980",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6654,7 +6654,7 @@
       "advisory": false
     },
     {
-      "id": "defect-980",
+      "id": "defect-981",
       "nodeSid": "sid-75",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6665,7 +6665,7 @@
       "advisory": false
     },
     {
-      "id": "defect-981",
+      "id": "defect-982",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6676,7 +6676,7 @@
       "advisory": false
     },
     {
-      "id": "defect-982",
+      "id": "defect-983",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6687,7 +6687,7 @@
       "advisory": false
     },
     {
-      "id": "defect-983",
+      "id": "defect-984",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "width",
@@ -6698,7 +6698,7 @@
       "advisory": false
     },
     {
-      "id": "defect-984",
+      "id": "defect-985",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6709,7 +6709,7 @@
       "advisory": false
     },
     {
-      "id": "defect-985",
+      "id": "defect-986",
       "nodeSid": "sid-76",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6720,7 +6720,7 @@
       "advisory": false
     },
     {
-      "id": "defect-986",
+      "id": "defect-987",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6731,7 +6731,7 @@
       "advisory": false
     },
     {
-      "id": "defect-987",
+      "id": "defect-988",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6742,7 +6742,7 @@
       "advisory": false
     },
     {
-      "id": "defect-988",
+      "id": "defect-989",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6753,7 +6753,7 @@
       "advisory": false
     },
     {
-      "id": "defect-989",
+      "id": "defect-990",
       "nodeSid": "sid-77",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6764,7 +6764,7 @@
       "advisory": false
     },
     {
-      "id": "defect-990",
+      "id": "defect-991",
       "nodeSid": "sid-78",
       "viewport": "mobile",
       "property": "lineCount",
@@ -6775,7 +6775,7 @@
       "advisory": true
     },
     {
-      "id": "defect-991",
+      "id": "defect-992",
       "nodeSid": "sid-82",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6786,7 +6786,7 @@
       "advisory": true
     },
     {
-      "id": "defect-992",
+      "id": "defect-993",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6797,7 +6797,7 @@
       "advisory": false
     },
     {
-      "id": "defect-993",
+      "id": "defect-994",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6808,7 +6808,7 @@
       "advisory": false
     },
     {
-      "id": "defect-994",
+      "id": "defect-995",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6819,7 +6819,7 @@
       "advisory": false
     },
     {
-      "id": "defect-995",
+      "id": "defect-996",
       "nodeSid": "sid-88",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6830,7 +6830,7 @@
       "advisory": false
     },
     {
-      "id": "defect-996",
+      "id": "defect-997",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6841,7 +6841,7 @@
       "advisory": false
     },
     {
-      "id": "defect-997",
+      "id": "defect-998",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6852,7 +6852,7 @@
       "advisory": false
     },
     {
-      "id": "defect-998",
+      "id": "defect-999",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "width",
@@ -6863,7 +6863,7 @@
       "advisory": false
     },
     {
-      "id": "defect-999",
+      "id": "defect-1000",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6874,7 +6874,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1000",
+      "id": "defect-1001",
       "nodeSid": "sid-89",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6885,7 +6885,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1001",
+      "id": "defect-1002",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "backgroundColor",
@@ -6896,7 +6896,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1002",
+      "id": "defect-1003",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "fontSize",
@@ -6907,7 +6907,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1003",
+      "id": "defect-1004",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "paddingTop",
@@ -6918,7 +6918,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1004",
+      "id": "defect-1005",
       "nodeSid": "sid-90",
       "viewport": "mobile",
       "property": "borderTopLeftRadius",
@@ -6929,7 +6929,7 @@
       "advisory": false
     },
     {
-      "id": "defect-1005",
+      "id": "defect-1006",
       "nodeSid": "sid-91",
       "viewport": "mobile",
       "property": "lineCount",

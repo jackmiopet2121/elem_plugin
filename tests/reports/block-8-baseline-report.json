@@ -1,6 +1,7 @@
 {
   "schemaVersion": "8.0.0",
   "contract": "Block 8.0 Universal Baseline & Anti-Hardcoding Contract",
+  "sidClassificationRule": "Nodes are classified into 4 categories: (1) source-derived (nodes representing source DOM elements mapped in Ground Truth, expected to preserve SID); (2) generated helpers (explicit compiler-generated layout helpers, reported separately without invented SIDs); (3) exempt system (stylesheet and script engine widgets); (4) unverifiable (nodes without SID whose source derivation cannot be proven). Missing SIDs on source-derived or unverifiable nodes fail the invariant gate.",
   "viewportConfiguration": [
     {
       "name": "desktop",
@@ -21,7 +22,7 @@
   "totalFixtures": 8,
   "passedCompilations": 8,
   "failedCompilations": 0,
-  "invariantViolationsCount": 8,
+  "invariantViolationsCount": 12,
   "fixtures": [
     {
       "fixtureId": "corpus/01-pricing-table",
@@ -31,6 +32,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 77,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -64,9 +67,12 @@
           "nativeWidgets": 2,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 2
+          "exemptSystemWidgets": 2,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 2,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 87,
           "malformed": 0,
@@ -96,6 +102,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 34,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -133,9 +141,12 @@
           "nativeWidgets": 0,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 2
+          "exemptSystemWidgets": 2,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 0,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 75,
           "malformed": 0,
@@ -163,6 +174,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 0,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -193,12 +206,12 @@
           "SYSTEM:script-engine"
         ],
         "htmlReasonViolations": [
-          "HTML widget a54315f6 contains standard button markup that must be native",
-          "HTML widget f37478b2 contains standard button markup that must be native",
-          "HTML widget 0ea1545b contains standard button markup that must be native",
-          "HTML widget 034334cd contains standard button markup that must be native",
-          "HTML widget 8d3a3359 contains standard button markup that must be native",
-          "HTML widget 1fdf3047 contains standard button markup that must be native"
+          "HTML widget ce166a7d contains simple button markup that must be native button widget",
+          "HTML widget 373f8d2e contains simple button markup that must be native button widget",
+          "HTML widget 57f76d9b contains simple button markup that must be native button widget",
+          "HTML widget ca4ad240 contains simple button markup that must be native button widget",
+          "HTML widget d6028c18 contains simple button markup that must be native button widget",
+          "HTML widget dabb82fe contains simple button markup that must be native button widget"
         ],
         "nativeEditabilityPercentage": 84,
         "microCssSizeBytes": 4769,
@@ -208,9 +221,12 @@
           "nativeWidgets": 20,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 2
+          "exemptSystemWidgets": 2,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 20,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 114,
           "malformed": 0,
@@ -229,7 +245,7 @@
         "passed": false,
         "violations": [
           "20 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 20, customWidgets: 0, contentHtml: 0)",
-          "6 HTML widget contract violation(s) (e.g., HTML widget a54315f6 contains standard button markup that must be native)"
+          "6 HTML widget contract violation(s) (e.g., HTML widget ce166a7d contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -241,6 +257,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 39,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -270,7 +288,9 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget a51d7099 contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 80,
         "microCssSizeBytes": 7301,
         "scriptSizeBytes": 19219,
@@ -279,9 +299,12 @@
           "nativeWidgets": 2,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 3
+          "exemptSystemWidgets": 3,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 2,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 86,
           "malformed": 0,
@@ -299,7 +322,8 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)"
+          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)",
+          "1 HTML widget contract violation(s) (e.g., HTML widget a51d7099 contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -311,6 +335,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 99,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -337,7 +363,12 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget c2175083 contains simple button markup that must be native button widget",
+          "HTML widget 2f4dfa6d contains simple button markup that must be native button widget",
+          "HTML widget 7afb3802 contains simple button markup that must be native button widget",
+          "HTML widget c72eabf2 contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
@@ -346,9 +377,12 @@
           "nativeWidgets": 3,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 2
+          "exemptSystemWidgets": 2,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 3,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 203,
           "malformed": 0,
@@ -366,7 +400,8 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
+          "4 HTML widget contract violation(s) (e.g., HTML widget c2175083 contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -378,6 +413,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 79,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -402,7 +439,10 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget 71c9a549 contains simple button markup that must be native button widget",
+          "HTML widget 17248614 contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 83,
         "microCssSizeBytes": 5452,
         "scriptSizeBytes": 6662,
@@ -411,9 +451,12 @@
           "nativeWidgets": 0,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 2
+          "exemptSystemWidgets": 2,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 0,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 36,
           "malformed": 0,
@@ -429,8 +472,10 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "2 HTML widget contract violation(s) (e.g., HTML widget 71c9a549 contains simple button markup that must be native button widget)"
+        ]
       }
     },
     {
@@ -441,6 +486,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 99,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -467,7 +514,12 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget c2175083 contains simple button markup that must be native button widget",
+          "HTML widget 2f4dfa6d contains simple button markup that must be native button widget",
+          "HTML widget 7afb3802 contains simple button markup that must be native button widget",
+          "HTML widget c72eabf2 contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
@@ -476,9 +528,12 @@
           "nativeWidgets": 3,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 2
+          "exemptSystemWidgets": 2,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 3,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 203,
           "malformed": 0,
@@ -496,7 +551,8 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
+          "4 HTML widget contract violation(s) (e.g., HTML widget c2175083 contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -508,6 +564,8 @@
       "errorMessage": null,
       "metrics": {
         "globalFidelityScore": 84,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -542,18 +600,21 @@
           "SYSTEM:script-engine"
         ],
         "htmlReasonViolations": [
-          "HTML widget d35e4e80 contains standard heading markup that must be native",
-          "HTML widget d35e4e80 contains standard button markup that must be native",
-          "HTML widget d35e4e80 contains standard structural card/grid layout that must be native",
-          "HTML widget f136f38c contains standard heading markup that must be native",
-          "HTML widget f136f38c contains standard button markup that must be native",
-          "HTML widget f136f38c contains standard structural card/grid layout that must be native",
-          "HTML widget 3ce54161 contains standard heading markup that must be native",
-          "HTML widget 3ce54161 contains standard button markup that must be native",
-          "HTML widget 3ce54161 contains standard structural card/grid layout that must be native",
-          "HTML widget 0667dbd3 contains standard heading markup that must be native",
-          "HTML widget 0667dbd3 contains standard button markup that must be native",
-          "HTML widget 0667dbd3 contains standard structural card/grid layout that must be native"
+          "HTML widget fead3e2c contains simple button markup that must be native button widget",
+          "HTML widget fead3e2c contains standard heading markup that must be native heading widget",
+          "HTML widget 0bc1ad15 contains simple button markup that must be native button widget",
+          "HTML widget 0bc1ad15 contains standard heading markup that must be native heading widget",
+          "HTML widget d675c154 contains simple button markup that must be native button widget",
+          "HTML widget d675c154 contains standard heading markup that must be native heading widget",
+          "HTML widget 858b8d71 contains simple button markup that must be native button widget",
+          "HTML widget 858b8d71 contains standard heading markup that must be native heading widget",
+          "HTML widget 66cff3a6 contains simple button markup that must be native button widget",
+          "HTML widget e304b184 contains simple button markup that must be native button widget",
+          "HTML widget 7e7ff16c contains simple button markup that must be native button widget",
+          "HTML widget dfeded30 contains simple button markup that must be native button widget",
+          "HTML widget a8bcd597 contains simple button markup that must be native button widget",
+          "HTML widget 26cc76ea contains simple button markup that must be native button widget",
+          "HTML widget 3e9e6b6a contains simple button markup that must be native button widget"
         ],
         "nativeEditabilityPercentage": 88,
         "microCssSizeBytes": 18095,
@@ -563,9 +624,12 @@
           "nativeWidgets": 1,
           "customWidgets": 0,
           "contentHtmlWidgets": 0,
-          "exemptSystemWidgets": 2
+          "exemptSystemWidgets": 2,
+          "generatedHelperNodes": 0,
+          "unverifiableNodes": 0
         },
         "missingSidCount": 2,
+        "unverifiableNodesCount": 0,
         "idMetrics": {
           "totalIds": 209,
           "malformed": 0,
@@ -584,7 +648,7 @@
         "passed": false,
         "violations": [
           "2 non-exempt element(s) missing SID (containers: 1, nativeWidgets: 1, customWidgets: 0, contentHtml: 0)",
-          "12 HTML widget contract violation(s) (e.g., HTML widget d35e4e80 contains standard heading markup that must be native)"
+          "15 HTML widget contract violation(s) (e.g., HTML widget fead3e2c contains simple button markup that must be native button widget)"
         ]
       }
     }
