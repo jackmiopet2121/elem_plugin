@@ -18,24 +18,44 @@ const {
 const REPORTS_DIR = path.join(__dirname, 'reports');
 const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
 
-(async () => {
-  console.log('========================================================================');
-  console.log('BLOCK 8.1: CORPUS EXHAUSTIVE GROUND-TRUTH CAPTURE & COVERAGE GATE');
-  console.log('========================================================================\n');
+/**
+ * Runs the corpus ground-truth capture and coverage gate.
+ * Testable through fixture-list or capture-function injection.
+ * 
+ * @param {Object} options
+ * @returns {Promise<{allFixturesPassed: boolean, report: Object, reportFile: string, exitCode: number}>}
+ */
+async function runCorpusCapture(options = {}) {
+  const customFixtures = options.fixtures;
+  const targetReportFile = options.reportFile || REPORT_FILE;
+  const captureFn = options.captureGroundTruth || captureGroundTruth;
+  const silent = Boolean(options.silent);
 
-  // Stale report prevention (Section 11)
-  if (fs.existsSync(REPORT_FILE)) {
+  const log = (...args) => {
+    if (!silent) console.log(...args);
+  };
+  const write = (...args) => {
+    if (!silent) process.stdout.write(...args);
+  };
+
+  log('========================================================================');
+  log('BLOCK 8.1: CORPUS EXHAUSTIVE GROUND-TRUTH CAPTURE & COVERAGE GATE');
+  log('========================================================================\n');
+
+  // Stale report prevention (Section 11): delete target report file at start
+  if (fs.existsSync(targetReportFile)) {
     try {
-      fs.unlinkSync(REPORT_FILE);
+      fs.unlinkSync(targetReportFile);
     } catch (_) {}
   }
 
-  const fixtures = discoverCorpusFixtures();
-  console.log(`▶ Discovered Fixtures: ${fixtures.length}`);
-  console.log(`▶ Viewports Config:    desktop(1280x800), tablet(768x1024), mobile(370x667)\n`);
+  const fixtures = customFixtures || discoverCorpusFixtures();
+  log(`▶ Discovered Fixtures: ${fixtures.length}`);
+  log(`▶ Viewports Config:    desktop(1280x800), tablet(768x1024), mobile(370x667)\n`);
 
-  if (!fs.existsSync(REPORTS_DIR)) {
-    fs.mkdirSync(REPORTS_DIR, { recursive: true });
+  const repDir = path.dirname(targetReportFile);
+  if (!fs.existsSync(repDir)) {
+    fs.mkdirSync(repDir, { recursive: true });
   }
 
   const results = [];
@@ -43,17 +63,26 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
 
   for (let i = 0; i < fixtures.length; i++) {
     const fixture = fixtures[i];
-    const fixtureId = fixture.fixtureId || fixture.id;
-    const filePath = fixture.filePath || fixture.htmlPath;
+    const fixtureId = fixture.fixtureId || fixture.id || `fixture-${i + 1}`;
+    const filePath = fixture.filePath || fixture.htmlPath || null;
+    const inputContent = fixture.content || fixture.rawHtml || (filePath && fs.existsSync(filePath) ? filePath : null);
     const fixtureName = fixture.metadata?.tags?.[1] || fixtureId;
     const prefix = `[${i + 1}/${fixtures.length}] ${fixtureId}`;
-    process.stdout.write(`  ${prefix.padEnd(46)} ... `);
+    write(`  ${prefix.padEnd(46)} ... `);
 
     const startTime = Date.now();
     try {
+      if (!inputContent) {
+        throw new Error(`Fixture ${fixtureId} has no valid file path or content`);
+      }
+
       // Capture fresh ground truth
-      const snapshot = await captureGroundTruth(filePath, { refresh: true });
+      const snapshot = await captureFn(inputContent, { refresh: true });
       const durationMs = Date.now() - startTime;
+
+      if (!snapshot || typeof snapshot !== 'object') {
+        throw new Error('Invalid snapshot: expected object');
+      }
 
       // Schema version check
       if (snapshot.groundTruthSchemaVersion !== '8.1.0') {
@@ -66,7 +95,7 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
       const failureReasons = [];
 
       for (const vpKey of ['desktop', 'tablet', 'mobile']) {
-        const vp = snapshot.viewports[vpKey];
+        const vp = snapshot.viewports ? snapshot.viewports[vpKey] : null;
         if (!vp || !vp.flat) {
           throw new Error(`Missing viewport ${vpKey} in snapshot`);
         }
@@ -102,23 +131,23 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
       }
 
       if (fixtureCoveragePass) {
-        console.log(`PASS (${durationMs}ms, 100% coverage, 3 VPs)`);
+        log(`PASS (${durationMs}ms, 100% coverage, 3 VPs)`);
       } else {
-        console.log(`FAIL (${failureReasons.join('; ')})`);
+        log(`FAIL (${failureReasons.join('; ')})`);
         allFixturesPassed = false;
       }
 
       results.push({
         fixtureId,
         fixtureName,
-        htmlPath: `<ROOT>/${path.relative(path.resolve(__dirname, '..'), filePath).replace(/\\/g, '/')}`,
+        htmlPath: filePath ? `<ROOT>/${path.relative(path.resolve(__dirname, '..'), filePath).replace(/\\/g, '/')}` : 'inline',
         status: fixtureCoveragePass ? 'PASS' : 'FAIL',
         failureReasons: failureReasons.length > 0 ? failureReasons : null,
         viewports: viewportMetrics
       });
 
     } catch (err) {
-      console.log(`ERROR (${err.message})`);
+      log(`ERROR (${err.message})`);
       allFixturesPassed = false;
       results.push({
         fixtureId,
@@ -139,13 +168,13 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
     fixtures: results
   };
 
-  fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2), 'utf8');
+  fs.writeFileSync(targetReportFile, JSON.stringify(report, null, 2), 'utf8');
 
-  console.log('\n========================================================================================================');
-  console.log('BLOCK 8.1 GROUND TRUTH COVERAGE SUMMARY:');
-  console.log('========================================================================================================');
-  console.log('Fixture                         | D-Nodes | AvgProps | Coverage | Canvas | DictEntries | CustomProps | Status');
-  console.log('--------------------------------+---------+----------+----------+--------+-------------+-------------+-------');
+  log('\n========================================================================================================');
+  log('BLOCK 8.1 GROUND TRUTH COVERAGE SUMMARY:');
+  log('========================================================================================================');
+  log('Fixture                         | D-Nodes | AvgProps | Coverage | Canvas | DictEntries | CustomProps | Status');
+  log('--------------------------------+---------+----------+----------+--------+-------------+-------------+-------');
 
   for (const r of results) {
     if (r.status === 'PASS') {
@@ -158,23 +187,41 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
       const dictStr = String(d.styleDictionaryEntryCount).padStart(11);
       const cpStr = `${d.customPropertyDiscoveryStatus}(${d.customPropertyNameCount})`.padStart(11);
       const statusStr = ' PASS ';
-      console.log(`${idStr} | ${nodesStr} | ${avgPropsStr} | ${covStr} |${canvasStr}| ${dictStr} | ${cpStr} |${statusStr}`);
+      log(`${idStr} | ${nodesStr} | ${avgPropsStr} | ${covStr} |${canvasStr}| ${dictStr} | ${cpStr} |${statusStr}`);
     } else {
-      console.log(`${r.fixtureId.padEnd(31)} |   ERROR |    ERROR |    ERROR |  ERROR |       ERROR |       ERROR |  FAIL `);
+      log(`${r.fixtureId.padEnd(31)} |   ERROR |    ERROR |    ERROR |  ERROR |       ERROR |       ERROR |  FAIL `);
     }
   }
 
-  console.log('========================================================================================================\n');
-  console.log(`Deterministic report written to: ${path.relative(process.cwd(), REPORT_FILE)}`);
+  log('========================================================================================================\n');
+  log(`Deterministic report written to: ${path.relative(process.cwd(), targetReportFile)}`);
 
   if (!allFixturesPassed) {
-    console.error('✖ BLOCK 8.1 COVERAGE GATE FAILED: One or more fixtures did not reach 100% computed style coverage.');
-    process.exit(1);
+    if (!silent) {
+      console.error('✖ BLOCK 8.1 COVERAGE GATE FAILED: One or more fixtures did not reach 100% computed style coverage.');
+    }
+  } else {
+    log('✓ BLOCK 8.1 COVERAGE GATE PASSED: All fixtures reached 100% exhaustive computed style coverage!\n');
   }
 
-  console.log('✓ BLOCK 8.1 COVERAGE GATE PASSED: All fixtures reached 100% exhaustive computed style coverage!\n');
-  process.exit(0);
-})().catch(err => {
-  console.error('✖ FATAL ERROR in run-b81-corpus-capture:', err);
-  process.exit(1);
-});
+  return {
+    allFixturesPassed,
+    report,
+    reportFile: targetReportFile,
+    exitCode: allFixturesPassed ? 0 : 1
+  };
+}
+
+module.exports = {
+  runCorpusCapture,
+  REPORT_FILE
+};
+
+if (require.main === module) {
+  runCorpusCapture().then(res => {
+    process.exit(res.exitCode);
+  }).catch(err => {
+    console.error('✖ FATAL ERROR in run-b81-corpus-capture:', err);
+    process.exit(1);
+  });
+}

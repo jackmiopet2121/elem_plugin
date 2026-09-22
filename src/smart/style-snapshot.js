@@ -181,14 +181,79 @@ function inPageExtract(options = {}) {
     }
   }
 
-  function isEligibleElement(el) {
-    if (!el || el.nodeType !== 1) return false;
-    const tag = el.tagName.toLowerCase();
-    const INELIGIBLE_TAGS = new Set([
-      'head', 'meta', 'link', 'script', 'style', 'template', 'noscript', 'title', 'base'
-    ]);
-    return !INELIGIBLE_TAGS.has(tag);
+  // Shared universal eligibility rule (Section 1)
+  const isEligibleElement = options.eligibilityFnStr
+    ? (new Function('return ' + options.eligibilityFnStr)())
+    : function(node) {
+        if (!node) return false;
+        if (node.nodeType !== undefined && node.nodeType !== 1) return false;
+        const rawTag = node.tagName || node.tag || '';
+        const tag = String(rawTag).toLowerCase();
+        if (!tag) return false;
+        const INELIGIBLE = new Set(['head', 'meta', 'link', 'script', 'style', 'template', 'noscript', 'title', 'base']);
+        return !INELIGIBLE.has(tag);
+      };
+
+  // 1. Independent DOM Inventory Pass (Section 1)
+  function enumerateLiveDomInventory() {
+    const eligibleSids = [];
+    const visited = new Set();
+
+    function visit(el) {
+      if (!el || el.nodeType !== 1 || visited.has(el)) return;
+      visited.add(el);
+
+      if (isEligibleElement(el)) {
+        let sid = el.getAttribute('data-sid');
+        if (!sid) {
+          if (el === docEl) {
+            sid = 'sid-0';
+          } else {
+            sid = `sid-${++sidCounter}`;
+          }
+          el.setAttribute('data-sid', sid);
+        }
+        eligibleSids.push(sid);
+      }
+
+      // Open shadow DOM children
+      if (el.shadowRoot && el.shadowRoot.mode === 'open') {
+        for (const child of el.shadowRoot.children) {
+          visit(child);
+        }
+      }
+
+      // Same-origin iframe document
+      const tag = el.tagName.toLowerCase();
+      if (tag === 'iframe') {
+        try {
+          if (el.contentWindow) {
+            const dummy = el.contentWindow.location.href;
+          }
+          const idoc = el.contentDocument;
+          if (idoc && idoc.body) {
+            for (const child of idoc.body.children) {
+              visit(child);
+            }
+          }
+        } catch (_) {}
+      }
+
+      // Light DOM children
+      for (const child of el.children) {
+        visit(child);
+      }
+    }
+
+    if (docEl) {
+      visit(docEl);
+    }
+
+    return eligibleSids;
   }
+
+  // Pre-populate independent live DOM inventory (denominator)
+  results.captureAccounting.eligibleElementSids = enumerateLiveDomInventory();
 
   // Synchronous pure JS SHA-256 for browser-side deterministic interning
   function sha256Sync(ascii) {
@@ -480,6 +545,14 @@ function inPageExtract(options = {}) {
     if (!el || el.nodeType !== 1) return;
     if (!isEligibleElement(el)) return;
 
+    // Test seam for Section 1: allow deliberately skipping a subtree
+    if (options.skipSubtreeSelector && typeof el.matches === 'function' && el.matches(options.skipSubtreeSelector)) {
+      return;
+    }
+    if (options.skipSubtreeSid && el.getAttribute('data-sid') === options.skipSubtreeSid) {
+      return;
+    }
+
     const tag = el.tagName.toLowerCase();
 
     let sid = el.getAttribute('data-sid');
@@ -489,8 +562,7 @@ function inPageExtract(options = {}) {
     }
     recordSid(sid, el);
 
-    // Track accounting
-    results.captureAccounting.eligibleElementSids.push(sid);
+    // Track accounting: attempted
     results.captureAccounting.attemptedElementSids.push(sid);
 
     // Detect unsupported regions (closed shadow roots, cross-origin iframes)
@@ -507,7 +579,13 @@ function inPageExtract(options = {}) {
       let doc = null;
       let isCrossOrigin = false;
       try {
+        if (el.contentWindow) {
+          const dummy = el.contentWindow.location.href;
+        }
         doc = el.contentDocument;
+        if (!doc && el.src && /^(https?:|\/\/)/i.test(el.getAttribute('src') || '')) {
+          throw new Error('SecurityError: Blocked cross-origin iframe document access');
+        }
       } catch (secErr) {
         isCrossOrigin = true;
         results.unsupportedRegions.push({
@@ -775,7 +853,6 @@ function inPageExtract(options = {}) {
   }
   recordSid(htmlSid, docEl);
 
-  results.captureAccounting.eligibleElementSids.push(htmlSid);
   results.captureAccounting.attemptedElementSids.push(htmlSid);
 
   const bodySid = body.getAttribute('data-sid') || 'sid-1';
@@ -802,6 +879,7 @@ function inPageExtract(options = {}) {
   results.canvas = {
     html: {
       sid: htmlSid,
+      tag: 'html',
       backgroundColor: htmlComp.getPropertyValue('background-color') || 'rgba(0, 0, 0, 0)',
       backgroundImage: htmlComp.getPropertyValue('background-image') || 'none',
       color: htmlComp.getPropertyValue('color') || 'rgb(0, 0, 0)',
@@ -820,6 +898,7 @@ function inPageExtract(options = {}) {
     },
     body: {
       sid: bodySid,
+      tag: 'body',
       backgroundColor: bodyComp.getPropertyValue('background-color') || 'rgba(0, 0, 0, 0)',
       backgroundImage: bodyComp.getPropertyValue('background-image') || 'none',
       color: bodyComp.getPropertyValue('color') || 'rgb(0, 0, 0)',
@@ -975,6 +1054,8 @@ function calculateGroundTruthCoverage(snapshot, viewportKey = 'desktop') {
     let node = vp.flat[sid];
     if (!node && vp.canvas?.html?.sid === sid) {
       node = vp.canvas.html;
+    } else if (!node && vp.canvas?.body?.sid === sid) {
+      node = vp.canvas.body;
     }
 
     if (node && node.computedStyleRef && dict[node.computedStyleRef]) {
@@ -1183,28 +1264,34 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
         fontStatus = 'ERROR';
       }
 
-      // 2. Deterministic motion freeze at currentTime = 0 (Section 8)
+      // 2. Deterministic motion freeze at currentTime = 0 and transition settling (Section 8)
       try {
         await page.evaluate(() => {
           if (typeof document.getAnimations === 'function') {
-            const anims = document.getAnimations();
+            const anims = document.getAnimations({ subtree: true });
             for (const a of anims) {
-              try {
-                a.pause();
-                a.currentTime = 0;
-              } catch (_) {}
+              if (a.constructor.name === 'CSSTransition' || a.transitionProperty) {
+                try { a.finish(); } catch (_) {}
+              } else {
+                try {
+                  a.pause();
+                  a.currentTime = 0;
+                } catch (_) {}
+              }
             }
           }
-        });
-        await page.addStyleTag({
-          content: '*, *::before, *::after { animation-play-state: paused !important; }'
         });
       } catch (_) {}
 
       await new Promise(res => setTimeout(res, 100));
 
       // 3. Extract in-page ground truth (styles, rects, canvas, accounting)
-      const vpResults = await page.evaluate(inPageExtract, { isDesktopPass: vpKey === 'desktop' });
+      const vpResults = await page.evaluate(inPageExtract, {
+        isDesktopPass: vpKey === 'desktop',
+        eligibilityFnStr: isEligibleForComputedStyleCapture.toString(),
+        skipSubtreeSelector: options.skipSubtreeSelector || null,
+        skipSubtreeSid: options.skipSubtreeSid || null
+      });
 
       // 4. Measure live image readiness (Section 7)
       const imageReadiness = await page.evaluate(() => {
@@ -1303,67 +1390,96 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
                         trigger: 'hover',
                         status: 'CAPTURED'
                       };
+                    }
+                  }
 
-                      // Probe descendants for parent-hover effects (Section 3 item 8)
-                      function getDescendantSids(pSid) {
-                        const direct = Object.values(vpResults.flat).filter(n => n.parentSid === pSid);
-                        let all = [];
-                        for (const d of direct) {
-                          all.push(d.sid);
-                          all = all.concat(getDescendantSids(d.sid));
-                        }
-                        return all;
+                  // ALWAYS probe descendants for every hovered interactive parent (Section 3)
+                  function getDescendantSids(pSid) {
+                    const direct = Object.values(vpResults.flat).filter(n => n.parentSid === pSid);
+                    let all = [];
+                    for (const d of direct) {
+                      all.push(d.sid);
+                      all = all.concat(getDescendantSids(d.sid));
+                    }
+                    return all;
+                  }
+                  const childSids = getDescendantSids(sid);
+
+                  for (const cSid of childSids) {
+                    const cHoverStyle = await page.evaluate(cs => {
+                      const cel = document.querySelector(`[data-sid="${cs}"]`);
+                      if (!cel) return null;
+                      const comp = window.getComputedStyle(cel);
+                      const cmap = {};
+                      for (let ci = 0; ci < comp.length; ci++) {
+                        const cp = comp.item(ci);
+                        cmap[cp] = comp.getPropertyValue(cp);
                       }
-                      const childSids = getDescendantSids(sid);
+                      return cmap;
+                    }, cSid);
 
-                      for (const cSid of childSids) {
-                        const cHoverStyle = await page.evaluate(cs => {
-                          const cel = document.querySelector(`[data-sid="${cs}"]`);
-                          if (!cel) return null;
-                          const comp = window.getComputedStyle(cel);
-                          const cmap = {};
-                          for (let ci = 0; ci < comp.length; ci++) {
-                            const cp = comp.item(ci);
-                            cmap[cp] = comp.getPropertyValue(cp);
-                          }
-                          return cmap;
-                        }, cSid);
+                    if (cHoverStyle) {
+                      const cBaseRef = vpResults.flat[cSid]?.computedStyleRef;
+                      const cBaseMap = vpResults.styleDictionary[cBaseRef] || {};
+                      let cHasDelta = false;
+                      for (const ck in cHoverStyle) {
+                        if (cHoverStyle[ck] !== cBaseMap[ck]) {
+                          cHasDelta = true;
+                          break;
+                        }
+                      }
 
-                        if (cHoverStyle) {
-                          const cBaseRef = vpResults.flat[cSid]?.computedStyleRef;
-                          const cBaseMap = vpResults.styleDictionary[cBaseRef] || {};
-                          let cHasDelta = false;
-                          for (const ck in cHoverStyle) {
-                            if (cHoverStyle[ck] !== cBaseMap[ck]) {
-                              cHasDelta = true;
-                              break;
-                            }
-                          }
-
-                          if (cHasDelta) {
-                            const cIntern = internStyleMap(cHoverStyle, vpResults.styleDictionary);
-                            vpResults.flat[cSid].states = vpResults.flat[cSid].states || {};
-                            vpResults.flat[cSid].states.hover = {
-                              computedStyleRef: cIntern.computedStyleRef,
-                              styleHash: cIntern.styleHash,
-                              stylePropertyCount: cIntern.stylePropertyCount,
-                              trigger: `parent-hover:${sid}`,
-                              status: 'CAPTURED'
-                            };
-                          }
+                      if (cHasDelta) {
+                        const cIntern = internStyleMap(cHoverStyle, vpResults.styleDictionary);
+                        vpResults.flat[cSid].states = vpResults.flat[cSid].states || {};
+                        const triggerKey = `parent-hover:${sid}`;
+                        vpResults.flat[cSid].states[triggerKey] = {
+                          computedStyleRef: cIntern.computedStyleRef,
+                          styleHash: cIntern.styleHash,
+                          stylePropertyCount: cIntern.stylePropertyCount,
+                          trigger: triggerKey,
+                          ancestorSid: sid,
+                          status: 'CAPTURED'
+                        };
+                        // Maintain primary .hover pointer without overwriting if already set
+                        if (!vpResults.flat[cSid].states.hover) {
+                          vpResults.flat[cSid].states.hover = vpResults.flat[cSid].states[triggerKey];
                         }
                       }
                     }
                   }
+                } catch (probeErr) {
+                  vpResults.captureErrors.push({
+                    operation: 'hover-probe',
+                    sid,
+                    error: probeErr.message
+                  });
                 } finally {
                   // Restore state unconditionally using finally (Section 3 item 6)
-                  await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] }).catch(() => {});
+                  await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] }).catch(cleanupErr => {
+                    vpResults.captureErrors.push({
+                      operation: 'restorePseudoState',
+                      sid,
+                      error: cleanupErr.message
+                    });
+                  });
                 }
               }
-            } catch (_) {}
+            } catch (nodeErr) {
+              vpResults.captureErrors.push({
+                operation: 'node-hover-setup',
+                sid,
+                error: nodeErr.message
+              });
+            }
           }
         }
-      } catch (_) {}
+      } catch (cdpErr) {
+        vpResults.captureErrors.push({
+          operation: 'cdp-session',
+          error: cdpErr.message
+        });
+      }
 
       // Attach calculated coverage metrics to viewport
       try {

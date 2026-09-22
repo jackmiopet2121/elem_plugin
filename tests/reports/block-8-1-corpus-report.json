@@ -35,7 +35,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1070500
+          "snapshotSizeBytes": 1070964
         },
         "tablet": {
           "viewport": "tablet",
@@ -60,7 +60,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1056738
+          "snapshotSizeBytes": 1056804
         },
         "mobile": {
           "viewport": "mobile",
@@ -85,7 +85,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1001737
+          "snapshotSizeBytes": 1001793
         }
       }
     },
@@ -103,7 +103,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 46221,
-          "totalStoredPropertyEntries": 27832,
+          "totalStoredPropertyEntries": 28826,
           "minimumPropertiesOnAnyEligibleElement": 497,
           "maximumPropertiesOnAnyEligibleElement": 497,
           "averagePropertiesPerEligibleElement": 497,
@@ -111,15 +111,15 @@
           "customPropertyResolvedEntryCount": 1860,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 6,
-          "stateSnapshotCount": 0,
-          "styleDictionaryEntryCount": 56,
-          "styleReferenceCount": 100,
+          "stateSnapshotCount": 12,
+          "styleDictionaryEntryCount": 58,
+          "styleReferenceCount": 112,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1020977
+          "snapshotSizeBytes": 1053006
         },
         "tablet": {
           "viewport": "tablet",
@@ -128,7 +128,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 46221,
-          "totalStoredPropertyEntries": 26341,
+          "totalStoredPropertyEntries": 26838,
           "minimumPropertiesOnAnyEligibleElement": 497,
           "maximumPropertiesOnAnyEligibleElement": 497,
           "averagePropertiesPerEligibleElement": 497,
@@ -136,15 +136,15 @@
           "customPropertyResolvedEntryCount": 1860,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 6,
-          "stateSnapshotCount": 1,
-          "styleDictionaryEntryCount": 53,
-          "styleReferenceCount": 101,
+          "stateSnapshotCount": 12,
+          "styleDictionaryEntryCount": 54,
+          "styleReferenceCount": 112,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 979139
+          "snapshotSizeBytes": 996369
         },
         "mobile": {
           "viewport": "mobile",
@@ -153,7 +153,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 46221,
-          "totalStoredPropertyEntries": 24353,
+          "totalStoredPropertyEntries": 25844,
           "minimumPropertiesOnAnyEligibleElement": 497,
           "maximumPropertiesOnAnyEligibleElement": 497,
           "averagePropertiesPerEligibleElement": 497,
@@ -161,15 +161,15 @@
           "customPropertyResolvedEntryCount": 1860,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 6,
-          "stateSnapshotCount": 0,
-          "styleDictionaryEntryCount": 49,
-          "styleReferenceCount": 100,
+          "stateSnapshotCount": 12,
+          "styleDictionaryEntryCount": 52,
+          "styleReferenceCount": 112,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 922617
+          "snapshotSizeBytes": 968270
         }
       }
     },
@@ -187,7 +187,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 63373,
-          "totalStoredPropertyEntries": 29441,
+          "totalStoredPropertyEntries": 40419,
           "minimumPropertiesOnAnyEligibleElement": 499,
           "maximumPropertiesOnAnyEligibleElement": 499,
           "averagePropertiesPerEligibleElement": 499,
@@ -195,15 +195,15 @@
           "customPropertyResolvedEntryCount": 2794,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 2,
-          "styleDictionaryEntryCount": 59,
-          "styleReferenceCount": 130,
+          "stateSnapshotCount": 43,
+          "styleDictionaryEntryCount": 81,
+          "styleReferenceCount": 171,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 1159865
+          "snapshotSizeBytes": 1482898
         },
         "tablet": {
           "viewport": "tablet",
@@ -212,7 +212,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 63373,
-          "totalStoredPropertyEntries": 30439,
+          "totalStoredPropertyEntries": 35429,
           "minimumPropertiesOnAnyEligibleElement": 499,
           "maximumPropertiesOnAnyEligibleElement": 499,
           "averagePropertiesPerEligibleElement": 499,
@@ -220,15 +220,15 @@
           "customPropertyResolvedEntryCount": 2794,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 3,
-          "styleDictionaryEntryCount": 61,
-          "styleReferenceCount": 131,
+          "stateSnapshotCount": 31,
+          "styleDictionaryEntryCount": 71,
+          "styleReferenceCount": 159,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 1188645
+          "snapshotSizeBytes": 1337965
         },
         "mobile": {
           "viewport": "mobile",
@@ -237,7 +237,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 63373,
-          "totalStoredPropertyEntries": 31437,
+          "totalStoredPropertyEntries": 38922,
           "minimumPropertiesOnAnyEligibleElement": 499,
           "maximumPropertiesOnAnyEligibleElement": 499,
           "averagePropertiesPerEligibleElement": 499,
@@ -245,15 +245,15 @@
           "customPropertyResolvedEntryCount": 2794,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 2,
-          "styleDictionaryEntryCount": 63,
-          "styleReferenceCount": 130,
+          "stateSnapshotCount": 24,
+          "styleDictionaryEntryCount": 78,
+          "styleReferenceCount": 152,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 1216701
+          "snapshotSizeBytes": 1434861
         }
       }
     },
@@ -271,7 +271,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 51912,
-          "totalStoredPropertyEntries": 47376,
+          "totalStoredPropertyEntries": 52920,
           "minimumPropertiesOnAnyEligibleElement": 504,
           "maximumPropertiesOnAnyEligibleElement": 504,
           "averagePropertiesPerEligibleElement": 504,
@@ -279,15 +279,15 @@
           "customPropertyResolvedEntryCount": 2781,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 11,
-          "stateSnapshotCount": 3,
-          "styleDictionaryEntryCount": 94,
-          "styleReferenceCount": 118,
+          "stateSnapshotCount": 19,
+          "styleDictionaryEntryCount": 105,
+          "styleReferenceCount": 134,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1591560
+          "snapshotSizeBytes": 1753022
         },
         "tablet": {
           "viewport": "tablet",
@@ -296,7 +296,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 51912,
-          "totalStoredPropertyEntries": 47880,
+          "totalStoredPropertyEntries": 51408,
           "minimumPropertiesOnAnyEligibleElement": 504,
           "maximumPropertiesOnAnyEligibleElement": 504,
           "averagePropertiesPerEligibleElement": 504,
@@ -304,15 +304,15 @@
           "customPropertyResolvedEntryCount": 2781,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 11,
-          "stateSnapshotCount": 3,
-          "styleDictionaryEntryCount": 95,
-          "styleReferenceCount": 118,
+          "stateSnapshotCount": 16,
+          "styleDictionaryEntryCount": 102,
+          "styleReferenceCount": 131,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1605694
+          "snapshotSizeBytes": 1709091
         },
         "mobile": {
           "viewport": "mobile",
@@ -321,7 +321,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 51912,
-          "totalStoredPropertyEntries": 47376,
+          "totalStoredPropertyEntries": 48888,
           "minimumPropertiesOnAnyEligibleElement": 504,
           "maximumPropertiesOnAnyEligibleElement": 504,
           "averagePropertiesPerEligibleElement": 504,
@@ -329,15 +329,15 @@
           "customPropertyResolvedEntryCount": 2781,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 11,
-          "stateSnapshotCount": 5,
-          "styleDictionaryEntryCount": 94,
-          "styleReferenceCount": 120,
+          "stateSnapshotCount": 13,
+          "styleDictionaryEntryCount": 97,
+          "styleReferenceCount": 128,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1591838
+          "snapshotSizeBytes": 1636981
         }
       }
     },
@@ -371,7 +371,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 2209523
+          "snapshotSizeBytes": 2210604
         },
         "tablet": {
           "viewport": "tablet",
@@ -396,7 +396,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1975078
+          "snapshotSizeBytes": 1975210
         },
         "mobile": {
           "viewport": "mobile",
@@ -421,7 +421,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1988831
+          "snapshotSizeBytes": 1988964
         }
       }
     },
@@ -455,7 +455,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 547502
+          "snapshotSizeBytes": 547705
         },
         "tablet": {
           "viewport": "tablet",
@@ -480,7 +480,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 547612
+          "snapshotSizeBytes": 547671
         },
         "mobile": {
           "viewport": "mobile",
@@ -505,7 +505,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 654381
+          "snapshotSizeBytes": 654448
         }
       }
     },
@@ -539,7 +539,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 2209522
+          "snapshotSizeBytes": 2210604
         },
         "tablet": {
           "viewport": "tablet",
@@ -564,7 +564,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1975078
+          "snapshotSizeBytes": 1975210
         },
         "mobile": {
           "viewport": "mobile",
@@ -589,7 +589,7 @@
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1988831
+          "snapshotSizeBytes": 1988964
         }
       }
     },
@@ -607,7 +607,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 145440,
-          "totalStoredPropertyEntries": 108070,
+          "totalStoredPropertyEntries": 104030,
           "minimumPropertiesOnAnyEligibleElement": 505,
           "maximumPropertiesOnAnyEligibleElement": 505,
           "averagePropertiesPerEligibleElement": 505,
@@ -615,15 +615,15 @@
           "customPropertyResolvedEntryCount": 8064,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 27,
-          "styleDictionaryEntryCount": 214,
-          "styleReferenceCount": 317,
+          "stateSnapshotCount": 47,
+          "styleDictionaryEntryCount": 206,
+          "styleReferenceCount": 337,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 3761974
+          "snapshotSizeBytes": 3654618
         },
         "tablet": {
           "viewport": "tablet",
@@ -632,7 +632,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 145440,
-          "totalStoredPropertyEntries": 93930,
+          "totalStoredPropertyEntries": 97465,
           "minimumPropertiesOnAnyEligibleElement": 505,
           "maximumPropertiesOnAnyEligibleElement": 505,
           "averagePropertiesPerEligibleElement": 505,
@@ -640,15 +640,15 @@
           "customPropertyResolvedEntryCount": 8064,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 26,
-          "styleDictionaryEntryCount": 186,
-          "styleReferenceCount": 316,
+          "stateSnapshotCount": 52,
+          "styleDictionaryEntryCount": 193,
+          "styleReferenceCount": 342,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 3361978
+          "snapshotSizeBytes": 3469824
         },
         "mobile": {
           "viewport": "mobile",
@@ -657,7 +657,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 145440,
-          "totalStoredPropertyEntries": 99990,
+          "totalStoredPropertyEntries": 96455,
           "minimumPropertiesOnAnyEligibleElement": 505,
           "maximumPropertiesOnAnyEligibleElement": 505,
           "averagePropertiesPerEligibleElement": 505,
@@ -665,15 +665,15 @@
           "customPropertyResolvedEntryCount": 8064,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 26,
-          "styleDictionaryEntryCount": 198,
-          "styleReferenceCount": 316,
+          "stateSnapshotCount": 48,
+          "styleDictionaryEntryCount": 191,
+          "styleReferenceCount": 338,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 3534198
+          "snapshotSizeBytes": 3440144
         }
       }
     }
