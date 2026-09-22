@@ -25,7 +25,9 @@
     "test:c14": "node tests/check-c14.js",
     "test:b8-baseline": "node tests/run-block-8-baseline.js",
     "test:b8-hardcoding": "node tests/check-b8-no-hardcoding.js",
-    "test:b8-infra": "node tests/test-b8-infrastructure.js"
+    "test:b8-infra": "node tests/test-b8-infrastructure.js",
+    "test:b81-snapshot": "node tests/test-b81-exhaustive-snapshot.js",
+    "test:b81-corpus": "node tests/run-b81-corpus-capture.js"
   },
   "keywords": [
     "elementor",
