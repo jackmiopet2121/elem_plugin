@@ -3,7 +3,7 @@
  * 
  * Runs exhaustive computed-style acquisition across all 8 production corpus fixtures,
  * verifies 100% W3C computed-style coverage, checks dictionary interning and canvas truth,
- * and emits a deterministic coverage scorecard.
+ * validates all style references, and emits a deterministic coverage scorecard.
  */
 
 const fs = require('fs');
@@ -22,6 +22,13 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
   console.log('========================================================================');
   console.log('BLOCK 8.1: CORPUS EXHAUSTIVE GROUND-TRUTH CAPTURE & COVERAGE GATE');
   console.log('========================================================================\n');
+
+  // Stale report prevention (Section 11)
+  if (fs.existsSync(REPORT_FILE)) {
+    try {
+      fs.unlinkSync(REPORT_FILE);
+    } catch (_) {}
+  }
 
   const fixtures = discoverCorpusFixtures();
   console.log(`▶ Discovered Fixtures: ${fixtures.length}`);
@@ -48,9 +55,15 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
       const snapshot = await captureGroundTruth(filePath, { refresh: true });
       const durationMs = Date.now() - startTime;
 
+      // Schema version check
+      if (snapshot.groundTruthSchemaVersion !== '8.1.0') {
+        throw new Error(`Invalid schema version: expected 8.1.0, got ${snapshot.groundTruthSchemaVersion}`);
+      }
+
       // Verify and collect metrics for each viewport
       const viewportMetrics = {};
       let fixtureCoveragePass = true;
+      const failureReasons = [];
 
       for (const vpKey of ['desktop', 'tablet', 'mobile']) {
         const vp = snapshot.viewports[vpKey];
@@ -58,25 +71,40 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
           throw new Error(`Missing viewport ${vpKey} in snapshot`);
         }
 
+        // Verify root canvas truth
+        if (!vp.canvas || !vp.canvas.html || !vp.canvas.body) {
+          throw new Error(`Missing root canvas record in viewport ${vpKey}`);
+        }
+
         const metrics = calculateGroundTruthCoverage(snapshot, vpKey);
         viewportMetrics[vpKey] = metrics;
 
-        if (metrics.computedStyleCoveragePercent !== 100 ||
-            metrics.elementsMissingComputedStyle !== 0 ||
-            metrics.unresolvedStyleReferenceCount !== 0) {
+        if (metrics.computedStyleCoveragePercent !== 100) {
           fixtureCoveragePass = false;
+          failureReasons.push(`${vpKey}: coverage is ${metrics.computedStyleCoveragePercent}% (expected 100%)`);
         }
-
-        // Verify canvas truth
-        if (!vp.canvas || !vp.canvas.html || !vp.canvas.body) {
-          throw new Error(`Missing root canvas record in viewport ${vpKey}`);
+        if (metrics.elementsMissingComputedStyle !== 0) {
+          fixtureCoveragePass = false;
+          failureReasons.push(`${vpKey}: ${metrics.elementsMissingComputedStyle} element(s) missing computed style`);
+        }
+        if (metrics.unresolvedStyleReferenceCount !== 0) {
+          fixtureCoveragePass = false;
+          failureReasons.push(`${vpKey}: ${metrics.unresolvedStyleReferenceCount} unresolved style reference(s)`);
+        }
+        if (metrics.duplicateSidRecordsCount !== 0) {
+          fixtureCoveragePass = false;
+          failureReasons.push(`${vpKey}: ${metrics.duplicateSidRecordsCount} duplicate SID(s) detected`);
+        }
+        if (vp.captureErrors && vp.captureErrors.length > 0) {
+          fixtureCoveragePass = false;
+          failureReasons.push(`${vpKey}: ${vp.captureErrors.length} capture error(s)`);
         }
       }
 
       if (fixtureCoveragePass) {
         console.log(`PASS (${durationMs}ms, 100% coverage, 3 VPs)`);
       } else {
-        console.log(`FAIL (coverage gap detected)`);
+        console.log(`FAIL (${failureReasons.join('; ')})`);
         allFixturesPassed = false;
       }
 
@@ -85,6 +113,7 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
         fixtureName,
         htmlPath: `<ROOT>/${path.relative(path.resolve(__dirname, '..'), filePath).replace(/\\/g, '/')}`,
         status: fixtureCoveragePass ? 'PASS' : 'FAIL',
+        failureReasons: failureReasons.length > 0 ? failureReasons : null,
         viewports: viewportMetrics
       });
 
@@ -100,7 +129,7 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
     }
   }
 
-  // Generate deterministic report without timestamps or durations
+  // Generate deterministic report without volatile timestamps or durations
   const report = {
     reportVersion: '8.1.0',
     gateStatus: allFixturesPassed ? 'PASS' : 'FAIL',
@@ -112,11 +141,11 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
 
   fs.writeFileSync(REPORT_FILE, JSON.stringify(report, null, 2), 'utf8');
 
-  console.log('\n========================================================================');
+  console.log('\n========================================================================================================');
   console.log('BLOCK 8.1 GROUND TRUTH COVERAGE SUMMARY:');
-  console.log('========================================================================');
-  console.log('Fixture                         | D-Nodes | AvgProps | Coverage | Canvas | DictEntries | Status');
-  console.log('--------------------------------+---------+----------+----------+--------+-------------+-------');
+  console.log('========================================================================================================');
+  console.log('Fixture                         | D-Nodes | AvgProps | Coverage | Canvas | DictEntries | CustomProps | Status');
+  console.log('--------------------------------+---------+----------+----------+--------+-------------+-------------+-------');
 
   for (const r of results) {
     if (r.status === 'PASS') {
@@ -127,14 +156,15 @@ const REPORT_FILE = path.join(REPORTS_DIR, 'block-8-1-corpus-report.json');
       const covStr = `${d.computedStyleCoveragePercent}%`.padStart(8);
       const canvasStr = '  YES   ';
       const dictStr = String(d.styleDictionaryEntryCount).padStart(11);
+      const cpStr = `${d.customPropertyDiscoveryStatus}(${d.customPropertyNameCount})`.padStart(11);
       const statusStr = ' PASS ';
-      console.log(`${idStr} | ${nodesStr} | ${avgPropsStr} | ${covStr} |${canvasStr}| ${dictStr} |${statusStr}`);
+      console.log(`${idStr} | ${nodesStr} | ${avgPropsStr} | ${covStr} |${canvasStr}| ${dictStr} | ${cpStr} |${statusStr}`);
     } else {
-      console.log(`${r.fixtureId.padEnd(31)} |   ERROR |    ERROR |    ERROR |  ERROR |       ERROR |  FAIL `);
+      console.log(`${r.fixtureId.padEnd(31)} |   ERROR |    ERROR |    ERROR |  ERROR |       ERROR |       ERROR |  FAIL `);
     }
   }
 
-  console.log('========================================================================\n');
+  console.log('========================================================================================================\n');
   console.log(`Deterministic report written to: ${path.relative(process.cwd(), REPORT_FILE)}`);
 
   if (!allFixturesPassed) {

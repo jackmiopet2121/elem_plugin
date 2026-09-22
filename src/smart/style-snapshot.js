@@ -12,8 +12,9 @@
  * - Style Interning & Collision-Safe Style Dictionary
  * - Deterministic Motion Freezing (Web Animations API & Phase A/B capture)
  * - Text Metrics & Line Wrapping
- * - Pseudo-state Deltas (:hover via CDP)
+ * - Exhaustive Pseudo-state Capture (:hover across viewports via CDP)
  * - Asset & Font Verification
+ * - Independent DOM-based Coverage Accounting
  * - 100% Backward Compatible legacy styles projection
  */
 
@@ -33,7 +34,7 @@ const VIEWPORTS = Object.freeze({
 const CACHE_DIR = path.join(__dirname, '..', '..', '.cache');
 
 function getCachePath(htmlContent) {
-  const hash = crypto.createHash('sha256').update(htmlContent + ':v8_1_k9').digest('hex').slice(0, 16);
+  const hash = crypto.createHash('sha256').update(htmlContent + ':v8_1_k10_final').digest('hex').slice(0, 16);
   return path.join(CACHE_DIR, `gt-${hash}.json`);
 }
 
@@ -64,6 +65,69 @@ function isEligibleForComputedStyleCapture(node) {
 }
 
 /**
+ * Node-side helper to canonicalize, hash, and intern a style map into a dictionary.
+ * Also exported for controlled test seam (e.g., collision testing).
+ * 
+ * @param {Object} styleMap 
+ * @param {Object} dictionary 
+ * @param {string|null} [forcedHash=null] 
+ * @returns {Object}
+ */
+function internStyleMap(styleMap, dictionary, forcedHash = null) {
+  if (!styleMap || typeof styleMap !== 'object') {
+    throw new Error('internStyleMap: styleMap must be an object');
+  }
+  if (!dictionary || typeof dictionary !== 'object') {
+    throw new Error('internStyleMap: dictionary must be an object');
+  }
+
+  const keys = Object.keys(styleMap).sort();
+  let hashInput = '';
+  const canonical = {};
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const v = styleMap[k];
+    canonical[k] = v;
+    hashInput += `${k}:${v}\n`;
+  }
+
+  const baseHash = forcedHash || crypto.createHash('sha256').update(hashInput).digest('hex');
+
+  let ref = baseHash;
+  let collisionIdx = 0;
+  while (dictionary[ref]) {
+    const existing = dictionary[ref];
+    let matches = true;
+    const exKeys = Object.keys(existing);
+    if (exKeys.length !== keys.length) {
+      matches = false;
+    } else {
+      for (let i = 0; i < keys.length; i++) {
+        const k = keys[i];
+        if (existing[k] !== canonical[k]) {
+          matches = false;
+          break;
+        }
+      }
+    }
+    if (matches) break; // Identical style map already exists
+    collisionIdx++;
+    ref = `${baseHash}_c${collisionIdx}`;
+  }
+
+  if (!dictionary[ref]) {
+    dictionary[ref] = canonical;
+  }
+
+  return {
+    styleHash: baseHash,
+    computedStyleRef: ref,
+    stylePropertyCount: keys.length,
+    canonical
+  };
+}
+
+/**
  * Script evaluated inside page to walk DOM, discover custom properties,
  * enumerate all computed styles from Chromium, and build the interned dictionary.
  */
@@ -84,6 +148,13 @@ function inPageExtract(options = {}) {
       inaccessibleStylesheetCount: 0,
       warnings: []
     },
+    captureAccounting: {
+      eligibleElementSids: [],
+      attemptedElementSids: [],
+      capturedElementSids: [],
+      missingComputedStyleSids: [],
+      duplicateSidRecords: []
+    },
     unsupportedRegions: [],
     captureErrors: [],
     assets: [],
@@ -93,6 +164,31 @@ function inPageExtract(options = {}) {
   const docEl = document.documentElement;
   const body = document.body;
   if (!docEl || !body) return results;
+
+  // Track seen SIDs to detect duplicate, overwritten, or malformed SIDs
+  const seenSids = new Map();
+
+  function recordSid(sid, el) {
+    const tag = el.tagName.toLowerCase();
+    if (seenSids.has(sid)) {
+      results.captureAccounting.duplicateSidRecords.push({
+        sid,
+        tag,
+        existingTag: seenSids.get(sid)
+      });
+    } else {
+      seenSids.set(sid, tag);
+    }
+  }
+
+  function isEligibleElement(el) {
+    if (!el || el.nodeType !== 1) return false;
+    const tag = el.tagName.toLowerCase();
+    const INELIGIBLE_TAGS = new Set([
+      'head', 'meta', 'link', 'script', 'style', 'template', 'noscript', 'title', 'base'
+    ]);
+    return !INELIGIBLE_TAGS.has(tag);
+  }
 
   // Synchronous pure JS SHA-256 for browser-side deterministic interning
   function sha256Sync(ascii) {
@@ -185,7 +281,7 @@ function inPageExtract(options = {}) {
         walkCssRules(sheets[i].cssRules);
       } catch (secErr) {
         inaccessibleCount++;
-        results.customPropertyDiscovery.warnings.push(`Inaccessible stylesheet: ${secErr.message}`);
+        results.customPropertyDiscovery.warnings.push(`Inaccessible stylesheet [index ${i}]: ${secErr.message}`);
       }
     }
   } catch (_) {}
@@ -198,12 +294,6 @@ function inPageExtract(options = {}) {
         } catch (_) {}
       }
     } catch (_) {}
-  }
-
-  results.customPropertyDiscovery.inaccessibleStylesheetCount = inaccessibleCount;
-  results.customPropertyDiscovery.discoveredNameCount = customPropNames.size;
-  if (inaccessibleCount > 0) {
-    results.customPropertyDiscovery.status = 'PARTIAL';
   }
 
   // Canonicalize style map, hash deterministically, and intern into styleDictionary
@@ -303,6 +393,9 @@ function inPageExtract(options = {}) {
     for (let i = 0; i < computed.length; i++) {
       const p = computed.item(i);
       map[p] = computed.getPropertyValue(p);
+      if (p && p.startsWith('--')) {
+        customPropNames.add(p);
+      }
     }
 
     // Capture stylesheet-declared custom properties
@@ -318,6 +411,7 @@ function inPageExtract(options = {}) {
       for (let i = 0; i < el.style.length; i++) {
         const p = el.style.item(i);
         if (p && p.startsWith('--')) {
+          customPropNames.add(p);
           const val = computed.getPropertyValue(p);
           if (val !== undefined && val !== null && val !== '') {
             map[p] = val;
@@ -329,19 +423,75 @@ function inPageExtract(options = {}) {
     return map;
   }
 
+  // Generic computed evidence helper for pseudo-element materiality (Section 4)
+  function evaluatePseudoMateriality(pStyle) {
+    if (!pStyle) return null;
+    const pContent = pStyle.getPropertyValue('content') || pStyle.content;
+    const normContent = String(pContent || '').trim();
+    const hasContent = normContent !== '' && normContent !== 'none' && normContent !== 'normal';
+
+    const pDisplay = pStyle.getPropertyValue('display') || '';
+    const isNoneDisplay = pDisplay === 'none';
+
+    const pBg = pStyle.getPropertyValue('background-color') || '';
+    const hasBg = pBg && pBg !== 'rgba(0, 0, 0, 0)' && pBg !== 'transparent';
+    const pImg = pStyle.getPropertyValue('background-image') || '';
+    const hasImg = pImg && pImg !== 'none';
+
+    const borderW = pStyle.getPropertyValue('border-top-width') || pStyle.getPropertyValue('border-width') || '0px';
+    const borderS = pStyle.getPropertyValue('border-top-style') || pStyle.getPropertyValue('border-style') || 'none';
+    const hasBorder = borderW !== '0px' && borderW !== '0' && borderS !== 'none';
+
+    const pShadow = pStyle.getPropertyValue('box-shadow') || '';
+    const hasShadow = pShadow && pShadow !== 'none';
+
+    const pFilter = pStyle.getPropertyValue('filter') || '';
+    const hasFilter = pFilter && pFilter !== 'none';
+
+    const pW = parseFloat(pStyle.getPropertyValue('width')) || 0;
+    const pH = parseFloat(pStyle.getPropertyValue('height')) || 0;
+    const hasDims = pW > 0 && pH > 0;
+
+    const pOpacity = parseFloat(pStyle.getPropertyValue('opacity')) || 1;
+    const hasVisiblePaint = (hasBg || hasImg || hasBorder || hasShadow || hasFilter) && (!isNoneDisplay) && (pOpacity > 0);
+
+    if (hasContent || hasVisiblePaint || (hasContent && hasDims)) {
+      const reasons = [];
+      if (hasContent) reasons.push(`content: ${normContent}`);
+      if (hasBg) reasons.push('background');
+      if (hasImg) reasons.push('background-image');
+      if (hasBorder) reasons.push('border');
+      if (hasShadow) reasons.push('box-shadow');
+      if (hasFilter) reasons.push('filter');
+      if (hasDims) reasons.push(`dimensions(${pW}x${pH})`);
+
+      return {
+        isMaterial: true,
+        reason: reasons.join(' + ') || 'material-visual',
+        content: pContent,
+        display: pDisplay,
+        hasVisiblePaint
+      };
+    }
+    return null;
+  }
+
   function walk(el, parentSid = null) {
     if (!el || el.nodeType !== 1) return;
+    if (!isEligibleElement(el)) return;
+
     const tag = el.tagName.toLowerCase();
-    const INELIGIBLE_TAGS = new Set([
-      'head', 'meta', 'link', 'script', 'style', 'template', 'noscript', 'title', 'base'
-    ]);
-    if (INELIGIBLE_TAGS.has(tag)) return;
 
     let sid = el.getAttribute('data-sid');
     if (!sid) {
       sid = `sid-${++sidCounter}`;
       el.setAttribute('data-sid', sid);
     }
+    recordSid(sid, el);
+
+    // Track accounting
+    results.captureAccounting.eligibleElementSids.push(sid);
+    results.captureAccounting.attemptedElementSids.push(sid);
 
     // Detect unsupported regions (closed shadow roots, cross-origin iframes)
     if ((el.shadowRoot && el.shadowRoot.mode === 'closed') || (typeof window !== 'undefined' && window.__closedShadowHosts && window.__closedShadowHosts.has(el))) {
@@ -352,19 +502,39 @@ function inPageExtract(options = {}) {
       });
     }
 
+    // Handle iframe exploration
     if (tag === 'iframe') {
+      let doc = null;
+      let isCrossOrigin = false;
       try {
-        if (!el.contentDocument) {
+        doc = el.contentDocument;
+      } catch (secErr) {
+        isCrossOrigin = true;
+        results.unsupportedRegions.push({
+          type: 'cross-origin-iframe',
+          sid,
+          error: `SecurityError: ${secErr.message}`
+        });
+      }
+      if (!isCrossOrigin) {
+        if (doc && doc.body) {
+          try {
+            for (const child of doc.body.children) {
+              walk(child, sid);
+            }
+          } catch (walkErr) {
+            results.unsupportedRegions.push({
+              type: 'same-origin-iframe-unsupported',
+              sid,
+              error: walkErr.message
+            });
+          }
+        } else {
           results.unsupportedRegions.push({
-            type: 'cross-origin-iframe',
+            type: 'empty-or-restricted-iframe',
             sid
           });
         }
-      } catch (_) {
-        results.unsupportedRegions.push({
-          type: 'cross-origin-iframe',
-          sid
-        });
       }
     }
 
@@ -403,7 +573,9 @@ function inPageExtract(options = {}) {
     try {
       const fullMap = extractFullComputedStyle(el);
       internMeta = internComputedStyle(fullMap);
+      results.captureAccounting.capturedElementSids.push(sid);
     } catch (err) {
+      results.captureAccounting.missingComputedStyleSids.push(sid);
       results.captureErrors.push({
         sid,
         tag,
@@ -422,31 +594,23 @@ function inPageExtract(options = {}) {
       el.hasAttribute('tabindex') ||
       computed.cursor === 'pointer';
 
-    // Exhaustive Pseudo-element capture (::before, ::after)
+    // Exhaustive Pseudo-element capture (::before, ::after) across materiality criteria
     let pseudo = null;
-    try {
-      for (const pType of ['before', 'after']) {
+    for (const pType of ['before', 'after']) {
+      try {
         const pStyle = window.getComputedStyle(el, `::${pType}`);
-        if (!pStyle) continue;
+        const mat = evaluatePseudoMateriality(pStyle);
 
-        const pContent = pStyle.getPropertyValue('content') || pStyle.content;
-        const normContent = String(pContent || '').trim();
-        const hasContent = normContent !== '' && normContent !== 'none' && normContent !== 'normal';
-
-        if (hasContent) {
+        if (mat) {
           if (!pseudo) pseudo = {};
 
           const pMap = {};
           for (let i = 0; i < pStyle.length; i++) {
             const prop = pStyle.item(i);
             pMap[prop] = pStyle.getPropertyValue(prop);
+            if (prop && prop.startsWith('--')) customPropNames.add(prop);
           }
           const pIntern = internComputedStyle(pMap);
-
-          const pDisplay = pStyle.getPropertyValue('display') || '';
-          const pBg = pStyle.getPropertyValue('background-color') || '';
-          const pImg = pStyle.getPropertyValue('background-image') || '';
-          const hasVisualPaint = (pBg && pBg !== 'rgba(0, 0, 0, 0)' && pBg !== 'transparent') || (pImg && pImg !== 'none');
 
           pseudo[pType] = {
             ownerSid: sid,
@@ -454,21 +618,28 @@ function inPageExtract(options = {}) {
             computedStyleRef: pIntern.computedStyleRef,
             stylePropertyCount: pIntern.stylePropertyCount,
             styleHash: pIntern.styleHash,
-            materialityReason: hasVisualPaint ? `content: ${normContent} + paint` : `content: ${normContent}`,
+            materialityReason: mat.reason,
             geometryStatus: 'COMPUTED_ONLY',
-            content: pContent,
-            display: pDisplay,
+            content: mat.content,
+            display: mat.display,
             position: pStyle.getPropertyValue('position') || '',
             // Legacy projection fields for backward compatibility
             width: pStyle.getPropertyValue('width') || '',
             height: pStyle.getPropertyValue('height') || '',
-            backgroundColor: pBg,
+            backgroundColor: pStyle.getPropertyValue('background-color') || '',
             color: pStyle.getPropertyValue('color') || '',
             fontSize: pStyle.getPropertyValue('font-size') || ''
           };
         }
+      } catch (pErr) {
+        results.captureErrors.push({
+          sid,
+          tag,
+          operation: `pseudo-capture:${pType}`,
+          error: pErr.message
+        });
       }
-    } catch (_) {}
+    }
 
     // Child bounding rects capture
     const childRects = [];
@@ -558,8 +729,28 @@ function inPageExtract(options = {}) {
       });
     }
 
-    // Open shadow root traversal
+    // Open shadow root traversal (Section 6)
     if (el.shadowRoot && el.shadowRoot.mode === 'open') {
+      try {
+        if (el.shadowRoot.styleSheets) {
+          for (const sheet of el.shadowRoot.styleSheets) {
+            try {
+              walkCssRules(sheet.cssRules);
+            } catch (secErr) {
+              inaccessibleCount++;
+              results.customPropertyDiscovery.warnings.push(`Inaccessible shadow stylesheet: ${secErr.message}`);
+            }
+          }
+        }
+        if (el.shadowRoot.adoptedStyleSheets) {
+          for (const sheet of el.shadowRoot.adoptedStyleSheets) {
+            try {
+              walkCssRules(sheet.cssRules);
+            } catch (_) {}
+          }
+        }
+      } catch (_) {}
+
       for (const child of el.shadowRoot.children) {
         walk(child, sid);
       }
@@ -582,6 +773,11 @@ function inPageExtract(options = {}) {
     htmlSid = 'sid-0';
     docEl.setAttribute('data-sid', htmlSid);
   }
+  recordSid(htmlSid, docEl);
+
+  results.captureAccounting.eligibleElementSids.push(htmlSid);
+  results.captureAccounting.attemptedElementSids.push(htmlSid);
+
   const bodySid = body.getAttribute('data-sid') || 'sid-1';
   const bodyNode = results.flat[bodySid];
 
@@ -589,7 +785,9 @@ function inPageExtract(options = {}) {
   try {
     const htmlFullMap = extractFullComputedStyle(docEl);
     htmlInternMeta = internComputedStyle(htmlFullMap);
+    results.captureAccounting.capturedElementSids.push(htmlSid);
   } catch (err) {
+    results.captureAccounting.missingComputedStyleSids.push(htmlSid);
     results.captureErrors.push({
       sid: htmlSid,
       tag: 'html',
@@ -639,6 +837,11 @@ function inPageExtract(options = {}) {
       stylePropertyCount: bodyNode ? bodyNode.stylePropertyCount : 0
     }
   };
+
+  // Finalize custom property discovery counts AFTER all elements and shadow roots have been walked
+  results.customPropertyDiscovery.discoveredNameCount = customPropNames.size;
+  results.customPropertyDiscovery.inaccessibleStylesheetCount = inaccessibleCount;
+  results.customPropertyDiscovery.status = inaccessibleCount > 0 ? 'PARTIAL' : 'COMPLETE';
 
   // Check unique fonts
   const fontFamilies = new Set();
@@ -703,6 +906,8 @@ function reconstructComputedStyle(node, viewportSnapshot) {
 
 /**
  * Computes honest Ground Truth coverage metrics for a viewport or snapshot.
+ * Uses independent DOM-based accounting for the coverage denominator (Section 1).
+ * Exhaustively validates every style reference across nodes, canvas, pseudo, and states (Section 2).
  * 
  * @param {Object} snapshot - Ground-truth snapshot
  * @param {string} [viewportKey='desktop']
@@ -719,8 +924,14 @@ function calculateGroundTruthCoverage(snapshot, viewportKey = 'desktop') {
 
   const dict = vp.styleDictionary || {};
   const flatNodes = Object.values(vp.flat);
+  const accounting = vp.captureAccounting;
 
-  let eligibleElementCount = 0;
+  // Independent DOM-based eligible element SIDs (Section 1)
+  const eligibleSids = accounting && Array.isArray(accounting.eligibleElementSids) && accounting.eligibleElementSids.length > 0
+    ? accounting.eligibleElementSids
+    : flatNodes.filter(n => isEligibleForComputedStyleCapture(n)).map(n => n.sid);
+
+  const eligibleElementCount = eligibleSids.length;
   let capturedElementCount = 0;
   let totalEnumeratedPropertyEntries = 0;
   let minProps = Infinity;
@@ -729,42 +940,118 @@ function calculateGroundTruthCoverage(snapshot, viewportKey = 'desktop') {
   let customPropertyResolvedEntryCount = 0;
   let pseudoElementCount = 0;
   let stateSnapshotCount = 0;
+  const invalidReferenceDetails = [];
 
-  for (const node of flatNodes) {
-    if (isEligibleForComputedStyleCapture(node)) {
-      eligibleElementCount++;
-      const ref = node.computedStyleRef;
-      if (ref && dict[ref]) {
-        capturedElementCount++;
-        const propCount = node.stylePropertyCount || Object.keys(dict[ref]).length;
-        totalEnumeratedPropertyEntries += propCount;
-        if (propCount < minProps) minProps = propCount;
-        if (propCount > maxProps) maxProps = propCount;
+  // Helper to validate any style reference (Section 2)
+  function validateStyleRef(owner, ref, expectedCount, expectedHash) {
+    if (!ref || typeof ref !== 'string') {
+      unresolvedStyleReferenceCount++;
+      invalidReferenceDetails.push({ owner, ref, reason: 'Reference missing or non-string' });
+      return false;
+    }
+    const entry = dict[ref];
+    if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+      unresolvedStyleReferenceCount++;
+      invalidReferenceDetails.push({ owner, ref, reason: 'Dictionary entry missing or not an object' });
+      return false;
+    }
+    const propCount = Object.keys(entry).length;
+    if (expectedCount !== undefined && expectedCount !== null && expectedCount > 0 && propCount !== expectedCount) {
+      unresolvedStyleReferenceCount++;
+      invalidReferenceDetails.push({ owner, ref, reason: `Property count mismatch: entry has ${propCount}, expected ${expectedCount}` });
+      return false;
+    }
+    if (expectedHash && ref !== expectedHash && !ref.startsWith(`${expectedHash}_c`)) {
+      unresolvedStyleReferenceCount++;
+      invalidReferenceDetails.push({ owner, ref, reason: `Hash mismatch: ref ${ref} does not match hash ${expectedHash}` });
+      return false;
+    }
+    return true;
+  }
 
-        const styleMap = dict[ref];
-        for (const propName in styleMap) {
-          if (propName.startsWith('--')) {
-            customPropertyResolvedEntryCount++;
-          }
+  // 1. Validate eligible elements from independent accounting
+  let missingComputedCount = 0;
+  for (const sid of eligibleSids) {
+    let node = vp.flat[sid];
+    if (!node && vp.canvas?.html?.sid === sid) {
+      node = vp.canvas.html;
+    }
+
+    if (node && node.computedStyleRef && dict[node.computedStyleRef]) {
+      capturedElementCount++;
+      const propCount = node.stylePropertyCount || Object.keys(dict[node.computedStyleRef]).length;
+      totalEnumeratedPropertyEntries += propCount;
+      if (propCount < minProps) minProps = propCount;
+      if (propCount > maxProps) maxProps = propCount;
+
+      const styleMap = dict[node.computedStyleRef];
+      for (const propName in styleMap) {
+        if (propName.startsWith('--')) {
+          customPropertyResolvedEntryCount++;
         }
-      } else {
-        unresolvedStyleReferenceCount++;
       }
-    }
-
-    if (node.pseudo && (node.pseudo.before || node.pseudo.after)) {
-      pseudoElementCount++;
-    }
-    if (node.pseudo && node.pseudo.hover) {
-      stateSnapshotCount++;
+    } else {
+      missingComputedCount++;
     }
   }
 
+  // 2. Validate all references across flat nodes
+  for (const node of flatNodes) {
+    validateStyleRef(`flat:${node.sid}`, node.computedStyleRef, node.stylePropertyCount, node.styleHash);
+
+    // Validate pseudo elements
+    if (node.pseudo) {
+      if (node.pseudo.before) {
+        pseudoElementCount++;
+        validateStyleRef(`pseudo:before:${node.sid}`, node.pseudo.before.computedStyleRef, node.pseudo.before.stylePropertyCount, node.pseudo.before.styleHash);
+      }
+      if (node.pseudo.after) {
+        pseudoElementCount++;
+        validateStyleRef(`pseudo:after:${node.sid}`, node.pseudo.after.computedStyleRef, node.pseudo.after.stylePropertyCount, node.pseudo.after.styleHash);
+      }
+    }
+
+    // Validate interaction states
+    if (node.states) {
+      for (const [stName, stData] of Object.entries(node.states)) {
+        if (stData && stData.status === 'CAPTURED' && stData.computedStyleRef) {
+          stateSnapshotCount++;
+          validateStyleRef(`state:${stName}:${node.sid}`, stData.computedStyleRef, stData.stylePropertyCount, stData.styleHash);
+        }
+      }
+    }
+  }
+
+  // 3. Validate root canvas references
+  if (vp.canvas) {
+    if (vp.canvas.html) {
+      validateStyleRef('canvas.html', vp.canvas.html.computedStyleRef, vp.canvas.html.stylePropertyCount, vp.canvas.html.styleHash);
+    } else {
+      unresolvedStyleReferenceCount++;
+      invalidReferenceDetails.push({ owner: 'canvas', ref: null, reason: 'Missing canvas.html' });
+    }
+    if (vp.canvas.body) {
+      validateStyleRef('canvas.body', vp.canvas.body.computedStyleRef, vp.canvas.body.stylePropertyCount, vp.canvas.body.styleHash);
+    } else {
+      unresolvedStyleReferenceCount++;
+      invalidReferenceDetails.push({ owner: 'canvas', ref: null, reason: 'Missing canvas.body' });
+    }
+  } else {
+    unresolvedStyleReferenceCount += 2;
+    invalidReferenceDetails.push({ owner: 'viewport', ref: null, reason: 'Missing canvas object' });
+  }
+
   if (minProps === Infinity) minProps = 0;
-  const elementsMissingComputedStyle = eligibleElementCount - capturedElementCount;
-  const computedStyleCoveragePercent = eligibleElementCount > 0
-    ? Math.round((capturedElementCount / eligibleElementCount) * 100 * 100) / 100
-    : 100;
+  const elementsMissingComputedStyle = missingComputedCount;
+
+  const duplicateSidsCount = (accounting?.duplicateSidRecords || []).length;
+
+  const computedStyleCoveragePercent = (eligibleElementCount > 0 && elementsMissingComputedStyle === 0 && unresolvedStyleReferenceCount === 0 && duplicateSidsCount === 0)
+    ? 100
+    : (eligibleElementCount > 0
+        ? Math.max(0, Math.round(((capturedElementCount - elementsMissingComputedStyle - unresolvedStyleReferenceCount) / eligibleElementCount) * 100 * 100) / 100)
+        : 0);
+
   const avgProps = eligibleElementCount > 0
     ? Math.round(totalEnumeratedPropertyEntries / eligibleElementCount)
     : 0;
@@ -796,8 +1083,10 @@ function calculateGroundTruthCoverage(snapshot, viewportKey = 'desktop') {
     pseudoElementCount,
     stateSnapshotCount,
     styleDictionaryEntryCount: Object.keys(dict).length,
-    styleReferenceCount: flatNodes.length,
+    styleReferenceCount: flatNodes.length + (vp.canvas ? 2 : 0) + pseudoElementCount + stateSnapshotCount,
     unresolvedStyleReferenceCount,
+    invalidReferenceDetails,
+    duplicateSidRecordsCount: duplicateSidsCount,
     unsupportedRegionCount: (vp.unsupportedRegions || []).length,
     captureWarningCount: (vp.captureErrors || []).length + (vp.customPropertyDiscovery?.warnings || []).length,
     snapshotSizeBytes
@@ -870,7 +1159,7 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
       const vp = VIEWPORTS[vpKey];
       await page.setViewport({ width: vp.width, height: vp.height });
 
-      let fontStatus = 'UNAVAILABLE';
+      let fontStatus = 'READY';
 
       if (vpKey === 'desktop') {
         const shadowHook = '<script id="__gt_shadow_hook__">(function(){try{window.__closedShadowHosts=new WeakSet();const o=Element.prototype.attachShadow;Element.prototype.attachShadow=function(i){if(i&&i.mode==="closed"){window.__closedShadowHosts.add(this);}return o.apply(this,arguments);};}catch(_){}})();</script>';
@@ -878,46 +1167,73 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
           ? rawHtml.replace('<head>', '<head>' + shadowHook)
           : (shadowHook + rawHtml);
         await page.setContent(htmlToLoad, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
-        
-        // Font readiness with bounded timeout
-        try {
-          const fontReady = await page.evaluate(() => {
-            if (!document.fonts) return 'UNAVAILABLE';
-            return Promise.race([
-              document.fonts.ready.then(() => 'READY'),
-              new Promise(res => setTimeout(() => res('TIMEOUT'), 5000))
-            ]);
-          });
-          fontStatus = fontReady;
-        } catch (_) {
-          fontStatus = 'UNAVAILABLE';
-        }
-
-        // Two-phase motion policy: pause running animations at current state without modifying CSS
-        try {
-          await page.evaluate(() => {
-            if (document.getAnimations) {
-              try {
-                document.getAnimations().forEach(a => {
-                  try { a.pause(); } catch (_) {}
-                });
-              } catch (_) {}
-            }
-          });
-        } catch (_) {}
-
-        await new Promise(res => setTimeout(res, 200));
-      } else {
-        await new Promise(res => setTimeout(res, 100));
       }
 
+      // 1. Live font readiness wait with bounded timeout (Section 7)
+      try {
+        const fontReady = await page.evaluate(() => {
+          if (!document.fonts) return 'READY';
+          return Promise.race([
+            document.fonts.ready.then(() => 'READY'),
+            new Promise(res => setTimeout(() => res('TIMEOUT'), 3000))
+          ]);
+        });
+        fontStatus = fontReady;
+      } catch (_) {
+        fontStatus = 'ERROR';
+      }
+
+      // 2. Deterministic motion freeze at currentTime = 0 (Section 8)
+      try {
+        await page.evaluate(() => {
+          if (typeof document.getAnimations === 'function') {
+            const anims = document.getAnimations();
+            for (const a of anims) {
+              try {
+                a.pause();
+                a.currentTime = 0;
+              } catch (_) {}
+            }
+          }
+        });
+        await page.addStyleTag({
+          content: '*, *::before, *::after { animation-play-state: paused !important; }'
+        });
+      } catch (_) {}
+
+      await new Promise(res => setTimeout(res, 100));
+
+      // 3. Extract in-page ground truth (styles, rects, canvas, accounting)
       const vpResults = await page.evaluate(inPageExtract, { isDesktopPass: vpKey === 'desktop' });
 
-      // Record readiness metadata
+      // 4. Measure live image readiness (Section 7)
+      const imageReadiness = await page.evaluate(() => {
+        const imgs = Array.from(document.querySelectorAll('img'));
+        let pending = 0;
+        const details = [];
+        for (const img of imgs) {
+          const complete = img.complete;
+          const naturalWidth = img.naturalWidth;
+          const src = img.src || img.getAttribute('src') || '';
+          const isPending = !complete || (complete && naturalWidth === 0 && src && !src.startsWith('data:'));
+          if (isPending) {
+            pending++;
+            details.push({
+              src,
+              complete,
+              naturalWidth,
+              status: complete && naturalWidth === 0 ? 'FAILED' : 'PENDING'
+            });
+          }
+        }
+        return { pending, details };
+      });
+
       vpResults.readiness = {
         fonts: fontStatus,
-        imagesPending: 0,
-        stylesheetWarnings: [],
+        imagesPending: imageReadiness.pending,
+        failedImages: imageReadiness.details.filter(d => d.status === 'FAILED'),
+        stylesheetWarnings: vpResults.customPropertyDiscovery?.warnings || [],
         timeoutMs: 5000
       };
 
@@ -929,52 +1245,125 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
         });
         snapshot.assets = vpResults.assets;
         snapshot.fonts = vpResults.fonts;
+      }
 
-        // Capture pseudo-state deltas for interactive candidates via CDP
-        try {
-          const client = await page.target().createCDPSession();
+      // 5. Exhaustive Interaction-State Capture (:hover across viewports via CDP) (Section 3)
+      try {
+        const client = await page.target().createCDPSession();
+        await client.send('DOM.enable').catch(() => {});
+        await client.send('CSS.enable').catch(() => {});
+        const doc = await client.send('DOM.getDocument').catch(() => null);
+        const rootNodeId = doc?.root?.nodeId;
+
+        if (rootNodeId) {
           const interactiveSids = Object.values(vpResults.flat).filter(n => n.isInteractive).map(n => n.sid);
 
-          for (const sid of interactiveSids.slice(0, 30)) {
-            const elHandle = await page.$(`[data-sid="${sid}"]`);
-            if (!elHandle) continue;
-
+          for (const sid of interactiveSids) {
             try {
-              const remoteObj = elHandle.remoteObject();
-              if (remoteObj && remoteObj.objectId) {
-                await client.send('DOM.enable');
-                await client.send('CSS.enable');
-                const { nodeId } = await client.send('DOM.requestNode', { objectId: remoteObj.objectId });
-                if (nodeId) {
+              const { nodeId } = await client.send('DOM.querySelector', {
+                nodeId: rootNodeId,
+                selector: `[data-sid="${sid}"]`
+              });
+
+              if (nodeId) {
+                try {
                   await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: ['hover'] });
-                  const hoverStyles = await page.evaluate(el => {
-                    const s = window.getComputedStyle(el);
-                    return {
-                      color: s.color,
-                      backgroundColor: s.backgroundColor,
-                      borderColor: s.borderColor,
-                      boxShadow: s.boxShadow
-                    };
-                  }, elHandle);
 
-                  // Compute delta against base legacy styles
-                  const base = vpResults.flat[sid].styles;
-                  const delta = {};
-                  if (hoverStyles.color !== base.color) delta.color = hoverStyles.color;
-                  if (hoverStyles.backgroundColor !== base.backgroundColor) delta.backgroundColor = hoverStyles.backgroundColor;
-                  if (hoverStyles.borderColor !== base.borderTopColor) delta.borderColor = hoverStyles.borderColor;
-                  if (hoverStyles.boxShadow !== base.boxShadow && hoverStyles.boxShadow !== 'none') delta.boxShadow = hoverStyles.boxShadow;
+                  // Extract complete Chromium computed style during hover
+                  const hoverStyleMap = await page.evaluate(s => {
+                    const el = document.querySelector(`[data-sid="${s}"]`);
+                    if (!el) return null;
+                    const comp = window.getComputedStyle(el);
+                    const map = {};
+                    for (let i = 0; i < comp.length; i++) {
+                      const p = comp.item(i);
+                      map[p] = comp.getPropertyValue(p);
+                    }
+                    return map;
+                  }, sid);
 
-                  if (Object.keys(delta).length > 0) {
-                    vpResults.flat[sid].pseudo = { ...(vpResults.flat[sid].pseudo || {}), hover: delta };
+                  if (hoverStyleMap) {
+                    const baseRef = vpResults.flat[sid].computedStyleRef;
+                    const baseStyleMap = vpResults.styleDictionary[baseRef] || {};
+                    let hasDelta = false;
+                    for (const k in hoverStyleMap) {
+                      if (hoverStyleMap[k] !== baseStyleMap[k]) {
+                        hasDelta = true;
+                        break;
+                      }
+                    }
+
+                    if (hasDelta) {
+                      const internMeta = internStyleMap(hoverStyleMap, vpResults.styleDictionary);
+                      vpResults.flat[sid].states = vpResults.flat[sid].states || {};
+                      vpResults.flat[sid].states.hover = {
+                        computedStyleRef: internMeta.computedStyleRef,
+                        styleHash: internMeta.styleHash,
+                        stylePropertyCount: internMeta.stylePropertyCount,
+                        trigger: 'hover',
+                        status: 'CAPTURED'
+                      };
+
+                      // Probe descendants for parent-hover effects (Section 3 item 8)
+                      function getDescendantSids(pSid) {
+                        const direct = Object.values(vpResults.flat).filter(n => n.parentSid === pSid);
+                        let all = [];
+                        for (const d of direct) {
+                          all.push(d.sid);
+                          all = all.concat(getDescendantSids(d.sid));
+                        }
+                        return all;
+                      }
+                      const childSids = getDescendantSids(sid);
+
+                      for (const cSid of childSids) {
+                        const cHoverStyle = await page.evaluate(cs => {
+                          const cel = document.querySelector(`[data-sid="${cs}"]`);
+                          if (!cel) return null;
+                          const comp = window.getComputedStyle(cel);
+                          const cmap = {};
+                          for (let ci = 0; ci < comp.length; ci++) {
+                            const cp = comp.item(ci);
+                            cmap[cp] = comp.getPropertyValue(cp);
+                          }
+                          return cmap;
+                        }, cSid);
+
+                        if (cHoverStyle) {
+                          const cBaseRef = vpResults.flat[cSid]?.computedStyleRef;
+                          const cBaseMap = vpResults.styleDictionary[cBaseRef] || {};
+                          let cHasDelta = false;
+                          for (const ck in cHoverStyle) {
+                            if (cHoverStyle[ck] !== cBaseMap[ck]) {
+                              cHasDelta = true;
+                              break;
+                            }
+                          }
+
+                          if (cHasDelta) {
+                            const cIntern = internStyleMap(cHoverStyle, vpResults.styleDictionary);
+                            vpResults.flat[cSid].states = vpResults.flat[cSid].states || {};
+                            vpResults.flat[cSid].states.hover = {
+                              computedStyleRef: cIntern.computedStyleRef,
+                              styleHash: cIntern.styleHash,
+                              stylePropertyCount: cIntern.stylePropertyCount,
+                              trigger: `parent-hover:${sid}`,
+                              status: 'CAPTURED'
+                            };
+                          }
+                        }
+                      }
+                    }
                   }
-                  await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] });
+                } finally {
+                  // Restore state unconditionally using finally (Section 3 item 6)
+                  await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] }).catch(() => {});
                 }
               }
             } catch (_) {}
           }
-        } catch (_) {}
-      }
+        }
+      } catch (_) {}
 
       // Attach calculated coverage metrics to viewport
       try {
@@ -984,8 +1373,7 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
       snapshot.viewports[vpKey] = vpResults;
     }
 
-    // Root canvas backward-compatibility alias
-    snapshot.canvas = snapshot.viewports.desktop?.canvas || null;
+    // Section 9: Ambiguous root snapshot.canvas alias REMOVED
     snapshot.consoleErrors = consoleErrors;
     snapshot.annotatedHtml = annotatedHtml;
 
@@ -1007,5 +1395,6 @@ module.exports = {
   VIEWPORTS,
   reconstructComputedStyle,
   isEligibleForComputedStyleCapture,
-  calculateGroundTruthCoverage
+  calculateGroundTruthCoverage,
+  internStyleMap
 };
