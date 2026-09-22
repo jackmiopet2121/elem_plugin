@@ -22,7 +22,7 @@
   "totalFixtures": 8,
   "passedCompilations": 8,
   "failedCompilations": 0,
-  "invariantViolationsCount": 20,
+  "invariantViolationsCount": 12,
   "fixtures": [
     {
       "fixtureId": "corpus/01-pricing-table",
@@ -31,17 +31,17 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 77,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 0,
+          "high": 6,
           "medium": 0,
           "low": 0,
-          "advisory": 0
+          "advisory": 72
         },
         "coreWidgetsCount": 53,
         "customPluginWidgetsCount": null,
@@ -90,7 +90,6 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)"
         ]
       }
@@ -102,17 +101,17 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 34,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0,
-          "advisory": 0
+          "high": 90,
+          "medium": 38,
+          "low": 108,
+          "advisory": 75
         },
         "coreWidgetsCount": 38,
         "customPluginWidgetsCount": null,
@@ -163,10 +162,8 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": false,
-        "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\""
-        ]
+        "passed": true,
+        "violations": []
       }
     },
     {
@@ -176,17 +173,17 @@
       "compilationStatus": "SUCCESS (ADVISORY)",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 0,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
-          "critical": 0,
-          "high": 0,
-          "medium": 0,
+          "critical": 15,
+          "high": 36,
+          "medium": 18,
           "low": 0,
-          "advisory": 0
+          "advisory": 42
         },
         "coreWidgetsCount": 49,
         "customPluginWidgetsCount": null,
@@ -247,7 +244,6 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "20 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 20, customWidgets: 0, contentHtml: 0)",
           "6 HTML widget contract violation(s) (e.g., HTML widget 71d17b1d contains simple button markup that must be native button widget)"
         ]
@@ -260,17 +256,17 @@
       "compilationStatus": "SUCCESS (ADVISORY)",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 39,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0,
-          "advisory": 0
+          "high": 95,
+          "medium": 57,
+          "low": 39,
+          "advisory": 42
         },
         "coreWidgetsCount": 35,
         "customPluginWidgetsCount": null,
@@ -326,7 +322,6 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)",
           "1 HTML widget contract violation(s) (e.g., HTML widget d9b91352 contains simple button markup that must be native button widget)"
         ]
@@ -339,9 +334,9 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 99,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -349,7 +344,7 @@
           "high": 0,
           "medium": 0,
           "low": 0,
-          "advisory": 0
+          "advisory": 18
         },
         "coreWidgetsCount": 107,
         "customPluginWidgetsCount": null,
@@ -405,7 +400,6 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
           "4 HTML widget contract violation(s) (e.g., HTML widget 36baba09 contains simple button markup that must be native button widget)"
         ]
@@ -418,9 +412,9 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 79,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -428,7 +422,7 @@
           "high": 0,
           "medium": 0,
           "low": 0,
-          "advisory": 0
+          "advisory": 49
         },
         "coreWidgetsCount": 20,
         "customPluginWidgetsCount": null,
@@ -480,7 +474,6 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "2 HTML widget contract violation(s) (e.g., HTML widget 26360558 contains simple button markup that must be native button widget)"
         ]
       }
@@ -492,9 +485,9 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 99,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -502,7 +495,7 @@
           "high": 0,
           "medium": 0,
           "low": 0,
-          "advisory": 0
+          "advisory": 18
         },
         "coreWidgetsCount": 107,
         "customPluginWidgetsCount": null,
@@ -558,7 +551,6 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
           "4 HTML widget contract violation(s) (e.g., HTML widget 36baba09 contains simple button markup that must be native button widget)"
         ]
@@ -571,17 +563,17 @@
       "compilationStatus": "SUCCESS (ADVISORY)",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": null,
-        "auditStatus": "INVALID",
-        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
+        "globalFidelityScore": 84,
+        "auditStatus": "VALID",
+        "auditError": null,
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 0,
-          "medium": 0,
-          "low": 0,
-          "advisory": 0
+          "high": 63,
+          "medium": 36,
+          "low": 18,
+          "advisory": 133
         },
         "coreWidgetsCount": 97,
         "customPluginWidgetsCount": null,
@@ -659,7 +651,6 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "2 non-exempt element(s) missing SID (containers: 1, nativeWidgets: 1, customWidgets: 0, contentHtml: 0)",
           "19 HTML widget contract violation(s) (e.g., HTML widget 074fcd2a contains simple button markup that must be native button widget)"
         ]

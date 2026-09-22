@@ -134,6 +134,9 @@ async function runInfrastructureSuite() {
       { name: 'invalid advisory count (negative)', audit: { fidelity: 80, counts: { critical: 0 }, advisoryDefectCount: -1 } },
       { name: 'invalid advisory count (float)', audit: { fidelity: 80, counts: { critical: 0 }, advisoryDefectCount: 2.5 } },
       { name: 'contradictory defects and counts', audit: { fidelity: 80, defects: [{ severity: 'high' }], counts: { high: 0 } } },
+      { name: 'counts alone with only total', audit: { fidelity: 80, counts: { total: 5 } } },
+      { name: 'counts alone with total contradicting sum', audit: { fidelity: 80, counts: { total: 5, critical: 3 } } },
+      { name: 'dual representation with contradictory total', audit: { fidelity: 80, defects: [{ severity: 'high' }], counts: { total: 2, high: 1 } } },
       { name: 'invalid consoleErrors (string)', audit: { fidelity: 80, defects: [], consoleErrors: 'bad-error' } },
       { name: 'invalid consoleErrors (object)', audit: { fidelity: 80, defects: [], consoleErrors: { error: true } } },
       { name: 'corrupt JSON', raw: '{"fidelity": 80, "defects": [' },
@@ -200,7 +203,7 @@ async function runInfrastructureSuite() {
         );
       }
 
-      // 5 Positive Cases via runner
+      // 6 Positive Cases via runner
       const positiveCases = [
         {
           name: 'valid defects-array audit',
@@ -210,6 +213,11 @@ async function runInfrastructureSuite() {
         {
           name: 'valid counts-object audit',
           audit: { fidelity: 90, counts: { critical: 0, high: 0, medium: 1, low: 0, advisory: 0 } },
+          expectedFid: 90
+        },
+        {
+          name: 'valid counts with total metadata',
+          audit: { fidelity: 90, counts: { total: 1, critical: 0, high: 0, medium: 1, low: 0, advisory: 0 } },
           expectedFid: 90
         },
         {
@@ -261,7 +269,7 @@ async function runInfrastructureSuite() {
       }
     }
 
-    pass('Runner-level audit matrix verified: 35 negative cases fail closed (status INVALID/MISSING, fidelity null, exit 1) and 5 positive cases succeed');
+    pass('Runner-level audit matrix verified: 38 negative cases fail closed (status INVALID/MISSING, fidelity null, exit 1) and 6 positive cases succeed');
   }
 
   // -------------------------------------------------------------------------
@@ -925,6 +933,104 @@ async function runInfrastructureSuite() {
         fs.rmdirSync(tmpDir);
       }
     }
+  }
+
+  // -------------------------------------------------------------------------
+  // Test 14: Real Producer-Consumer Audit Schema Reconciliation & Mutation Robustness
+  // -------------------------------------------------------------------------
+  totalTests++;
+  {
+    const baselineRunsDir = path.join(__dirname, 'reports', 'baseline_runs');
+    assert.ok(fs.existsSync(baselineRunsDir), 'reports/baseline_runs directory must exist');
+
+    const expectedFidelities = {
+      'corpus_01-pricing-table_baseline.audit.json': 77,
+      'corpus_02-portfolio-gallery_baseline.audit.json': 34,
+      'corpus_03-faq-accordion_baseline.audit.json': 0,
+      'corpus_04-pricing-calculator_baseline.audit.json': 39,
+      'corpus_05-feature-devices_baseline.audit.json': 99,
+      'corpus_06-full-landing_baseline.audit.json': 79,
+      'landing_baseline.audit.json': 99,
+      'landingv2_baseline.audit.json': 84
+    };
+
+    const realAuditFiles = Object.keys(expectedFidelities);
+    let verifiedRealFilesCount = 0;
+
+    for (const filename of realAuditFiles) {
+      const filePath = path.join(baselineRunsDir, filename);
+      if (!fs.existsSync(filePath)) continue;
+
+      const raw = fs.readFileSync(filePath, 'utf8');
+      const auditJson = JSON.parse(raw);
+
+      const valRes = validateAuditSchema(auditJson);
+      assert.strictEqual(valRes.valid, true, `Real audit file ${filename} must be VALID (got error: ${valRes.error})`);
+      assert.strictEqual(valRes.fidelity, expectedFidelities[filename], `Real audit fidelity for ${filename} must equal ${expectedFidelities[filename]}`);
+      assert.ok(valRes.defectCounts, `Real audit ${filename} must have populated defectCounts`);
+      verifiedRealFilesCount++;
+    }
+
+    assert.ok(verifiedRealFilesCount >= 2, `Must verify at least 2 real audit files (verified ${verifiedRealFilesCount})`);
+
+    // Verify exclusive display census on corpus_01: honest numbers 0 / 6 / 0 / 0 / 72
+    const corpus01Path = path.join(baselineRunsDir, 'corpus_01-pricing-table_baseline.audit.json');
+    if (fs.existsSync(corpus01Path)) {
+      const c01Audit = JSON.parse(fs.readFileSync(corpus01Path, 'utf8'));
+      const c01Res = validateAuditSchema(c01Audit);
+      assert.strictEqual(c01Res.defectCounts.critical, 0, 'Pricing table critical display count must be 0');
+      assert.strictEqual(c01Res.defectCounts.high, 6, 'Pricing table high display count must be 6');
+      assert.strictEqual(c01Res.defectCounts.medium, 0, 'Pricing table medium display count must be 0');
+      assert.strictEqual(c01Res.defectCounts.low, 0, 'Pricing table low display count must be 0');
+      assert.strictEqual(c01Res.defectCounts.advisory, 72, 'Pricing table advisory display count must be 72');
+    }
+
+    // Verify negative mutations of real audits fail with exact expected errors
+    const sampleReal = JSON.parse(fs.readFileSync(corpus01Path, 'utf8'));
+
+    // Mutation A: Contradictory counts.total
+    const mutA = JSON.parse(JSON.stringify(sampleReal));
+    mutA.counts.total = 999;
+    const resA = validateAuditSchema(mutA);
+    assert.strictEqual(resA.valid, false, 'Mutated counts.total must fail');
+    assert.ok(resA.error.includes('Audit counts total (999) contradicts defects array length'), `Expected contradiction error, got: ${resA.error}`);
+
+    // Mutation B: Contradictory advisoryDefectCount
+    const mutB = JSON.parse(JSON.stringify(sampleReal));
+    mutB.advisoryDefectCount = 999;
+    const resB = validateAuditSchema(mutB);
+    assert.strictEqual(resB.valid, false, 'Mutated advisoryDefectCount must fail');
+    assert.ok(resB.error.includes('Audit advisoryDefectCount (999) contradicts defects array advisory count'), `Expected advisory contradiction error, got: ${resB.error}`);
+
+    // Mutation C: Unknown key in counts
+    const mutC = JSON.parse(JSON.stringify(sampleReal));
+    mutC.counts.unknown_prop = 10;
+    const resC = validateAuditSchema(mutC);
+    assert.strictEqual(resC.valid, false, 'Unknown counts key must fail');
+    assert.ok(resC.error.includes('Audit counts contains unrecognized severity key: "unknown_prop"'), `Expected unrecognized key error, got: ${resC.error}`);
+
+    // Mutation D: Mutate defect severity to unrecognized string
+    const mutD = JSON.parse(JSON.stringify(sampleReal));
+    mutD.defects[0].severity = 'FATAL_EXTREME';
+    const resD = validateAuditSchema(mutD);
+    assert.strictEqual(resD.valid, false, 'Unrecognized defect severity must fail');
+    assert.ok(resD.error.includes('has unrecognized severity: "FATAL_EXTREME"'), `Expected unrecognized severity error, got: ${resD.error}`);
+
+    // Mutation E: Counts alone with total metadata and breakdown
+    const validCountsAlone = validateAuditSchema({ fidelity: 80, counts: { total: 5, critical: 2, high: 3 } });
+    assert.strictEqual(validCountsAlone.valid, true, 'Valid counts alone with matching total must pass');
+
+    // Mutation F: Counts alone with total contradicting sum
+    const invalidCountsSum = validateAuditSchema({ fidelity: 80, counts: { total: 5, critical: 1, high: 2 } });
+    assert.strictEqual(invalidCountsSum.valid, false, 'Counts alone with total != sum must fail');
+    assert.ok(invalidCountsSum.error.includes('Audit counts total (5) contradicts sum of severity counts (3)'), `Expected sum contradiction error, got: ${invalidCountsSum.error}`);
+
+    // Mutation G: Counts alone with only total (no severity breakdown)
+    const onlyTotal = validateAuditSchema({ fidelity: 80, counts: { total: 5 } });
+    assert.strictEqual(onlyTotal.valid, false, 'Counts alone with only total must fail');
+    assert.ok(onlyTotal.error.includes('Audit counts object must include severity breakdown when used alone'), `Expected breakdown required error, got: ${onlyTotal.error}`);
+
+    pass(`Real audit reconciliation & mutation robustness verified: ${verifiedRealFilesCount} real audits validated, exclusive census confirmed (0/6/0/0/72), 7 mutation patterns fail closed`);
   }
 
   console.log('\n========================================================================');

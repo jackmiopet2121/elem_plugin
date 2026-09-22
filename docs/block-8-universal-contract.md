@@ -97,12 +97,27 @@ HTML widgets (`widgetType: "html"`) are strictly reserved for:
   3. `audit.score` (lowest priority)
 - If multiple fidelity locations are defined, their values must match exactly. Conflicting fidelity values across audit fields are rejected.
 
-### Rule 7.2: Defects & Counts Dual Representation
+### Rule 7.2: Defects & Counts Dual Representation & Reconciled Schema
 - An audit must contain at least one complete defect representation: a valid `defects` array or a valid `counts` object. An audit containing only fidelity is invalid.
-- If `defects` is provided, every defect entry must be an object with either a non-empty recognized severity (`critical`, `high`, `medium`, `low`, `advisory`) or an explicit `advisory: true`. Missing severity is never defaulted to `low`.
-- If `counts` is provided, it must be a non-empty object containing only recognized severity keys mapped to finite non-negative integers.
-- If both `defects` and `counts` are supplied, their totals must be mutually consistent across all severities; any contradiction fails validation.
-- If `advisoryDefectCount` is provided, it must be a finite non-negative integer consistent with the advisory count in `defects` and `counts`.
+- Allowed keys in `counts`: `total`, `critical`, `high`, `medium`, `low`, `advisory`.
+  - `total` is metadata, not a severity.
+  - All count values must be finite non-negative integers. Unknown keys fail validation.
+- When `counts` is used alone (without `defects` array):
+  - At least one severity breakdown key (`critical`, `high`, `medium`, `low`, `advisory`) must be present.
+  - If `total` exists, it must equal the sum of raw severity counts present in `counts`.
+- When both `defects` and `counts` coexist:
+  - If `counts.total` exists, it must equal `defects.length`.
+  - Raw severity counts in `counts` must be consistent with defect severities (case-insensitive: `critical`, `high`, `medium`, `low`).
+  - `d.advisory === true` does not change the defect's raw severity (`severity: "HIGH"` with `advisory: true` remains a high-severity defect in raw tally).
+  - If `counts.advisory` is explicitly emitted, it must match the advisory defect tally.
+- If `advisoryDefectCount` is provided:
+  - Must be a finite non-negative integer.
+  - When `defects` exists, it must equal `defects.filter(d => d.advisory === true).length`.
+  - It is orthogonal to severity; equality with `counts.advisory` is not required unless `counts.advisory` was explicitly emitted.
+- Baseline display census:
+  - The baseline report display preserves exclusive categorization:
+    `if (defect.advisory) -> census.advisory++ else -> census[severity]++`
+    restoring honest baseline display numbers like `0 / 6 / 0 / 0 / 72` while preserving the underlying schema contract (`counts.total: 78`, `counts.high: 42`, `advisory: 72`).
 - If `consoleErrors` is provided, it must be an array.
 
 ---

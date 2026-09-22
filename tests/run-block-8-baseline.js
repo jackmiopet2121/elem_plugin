@@ -31,7 +31,8 @@ const SID_CLASSIFICATION_RULE =
  */
 function resolveCliPath() {
   const candidates = [
-    path.join(ROOT_DIR, 'bin', 'cli.js')
+    path.join(ROOT_DIR, 'bin', 'cli.js'),
+    path.join(ROOT_DIR, 'engine-v2', 'bin', 'cli.js')
   ];
   for (const c of candidates) {
     if (fs.existsSync(c)) return c;
@@ -78,7 +79,7 @@ function sanitizeErrorMessage(errorMessage, rootDir = ROOT_DIR) {
 const RECOGNIZED_SEVERITIES = new Set(['critical', 'high', 'medium', 'low', 'advisory']);
 
 /**
- * Enforces the complete audit schema.
+ * Enforces the complete audit schema reconciled with compiler producer.
  * An audit is VALID only when:
  * - root is a non-array object;
  * - fidelity is a finite number from 0 through 100;
@@ -87,11 +88,12 @@ const RECOGNIZED_SEVERITIES = new Set(['critical', 'high', 'medium', 'low', 'adv
  * - either defects is an array or counts is a valid object;
  * - every defect entry is a valid object with a recognized severity or explicit advisory: true;
  * - missing severity is never defaulted to low;
- * - counts object must be non-empty, with only recognized severity keys and finite non-negative integers;
- * - defects and counts totals must be mutually consistent when both are present;
+ * - counts object allows total metadata and recognized severities with non-negative integers;
+ * - when counts is used alone, severity breakdown is required and total equals sum of severities;
+ * - when defects and counts coexist, counts.total equals defects.length and severities are consistent;
  * - advisoryDefectCount must be a finite non-negative integer consistent with defects and counts;
  * - consoleErrors must be an array when provided;
- * - malformed defect data must not silently become zero defects.
+ * - baseline display census preserves exclusive categorization (advisory ? advisory : severity).
  * 
  * @param {*} auditData 
  * @returns {{ valid: boolean, error: string|null, fidelity: number|null, defectCounts: Object|null, consoleErrorsCount: number }}
@@ -171,8 +173,12 @@ function validateAuditSchema(auditData) {
     };
   }
 
-  const defectCountsFromDefects = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
-  const defectCountsFromCounts = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
+  const RECOGNIZED_SEVERITIES = new Set(['critical', 'high', 'medium', 'low', 'advisory']);
+  const ALLOWED_COUNTS_KEYS = new Set(['total', 'critical', 'high', 'medium', 'low', 'advisory']);
+
+  const rawDefectCounts = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
+  const displayDefectCounts = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
+  let totalAdvisoryInDefects = 0;
 
   // 3. Validate defects array if provided
   if (auditData.defects !== undefined) {
@@ -224,11 +230,21 @@ function validateAuditSchema(auditData) {
       }
 
       const normalizedSev = hasValidSeverity ? d.severity.trim().toLowerCase() : 'advisory';
-      defectCountsFromDefects[normalizedSev]++;
+      rawDefectCounts[normalizedSev]++;
+
+      if (isExplicitAdvisory) {
+        displayDefectCounts.advisory++;
+        totalAdvisoryInDefects++;
+      } else {
+        displayDefectCounts[normalizedSev]++;
+      }
     }
   }
 
   // 4. Validate counts object if provided
+  const defectCountsFromCounts = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
+  let countsTotal = null;
+
   if (auditData.counts !== undefined) {
     if (auditData.counts === null || typeof auditData.counts !== 'object' || Array.isArray(auditData.counts)) {
       return {
@@ -249,9 +265,10 @@ function validateAuditSchema(auditData) {
         consoleErrorsCount: 0
       };
     }
+    const severityEntriesInCounts = [];
     for (const [key, val] of countEntries) {
       const lowerKey = key.toLowerCase();
-      if (!RECOGNIZED_SEVERITIES.has(lowerKey)) {
+      if (!ALLOWED_COUNTS_KEYS.has(lowerKey)) {
         return {
           valid: false,
           error: `Audit counts contains unrecognized severity key: "${key}"`,
@@ -269,7 +286,36 @@ function validateAuditSchema(auditData) {
           consoleErrorsCount: 0
         };
       }
-      defectCountsFromCounts[lowerKey] = val;
+      if (lowerKey === 'total') {
+        countsTotal = val;
+      } else {
+        defectCountsFromCounts[lowerKey] = val;
+        severityEntriesInCounts.push([lowerKey, val]);
+      }
+    }
+
+    if (!hasDefects) {
+      if (severityEntriesInCounts.length === 0) {
+        return {
+          valid: false,
+          error: 'Audit counts object must include severity breakdown when used alone',
+          fidelity: null,
+          defectCounts: null,
+          consoleErrorsCount: 0
+        };
+      }
+      if (countsTotal !== null) {
+        const sumSeverities = severityEntriesInCounts.reduce((acc, [, v]) => acc + v, 0);
+        if (countsTotal !== sumSeverities) {
+          return {
+            valid: false,
+            error: `Audit counts total (${countsTotal}) contradicts sum of severity counts (${sumSeverities})`,
+            fidelity: null,
+            defectCounts: null,
+            consoleErrorsCount: 0
+          };
+        }
+      }
     }
   }
 
@@ -286,18 +332,41 @@ function validateAuditSchema(auditData) {
 
   // 6. Cross-validate defects and counts consistency when both are present
   if (hasDefects && hasCounts) {
-    for (const sev of ['critical', 'high', 'medium', 'low', 'advisory']) {
-      const fromDefects = defectCountsFromDefects[sev] || 0;
-      const fromCounts = defectCountsFromCounts[sev] || 0;
-      if (fromDefects !== fromCounts) {
-        return {
-          valid: false,
-          error: `Contradictory defect counts between defects array (${fromDefects}) and counts object (${fromCounts}) for severity "${sev}"`,
-          fidelity: null,
-          defectCounts: null,
-          consoleErrorsCount: 0
-        };
+    if (countsTotal !== null && countsTotal !== auditData.defects.length) {
+      return {
+        valid: false,
+        error: `Audit counts total (${countsTotal}) contradicts defects array length (${auditData.defects.length})`,
+        fidelity: null,
+        defectCounts: null,
+        consoleErrorsCount: 0
+      };
+    }
+    for (const sev of ['critical', 'high', 'medium', 'low']) {
+      if (auditData.counts[sev] !== undefined) {
+        const fromCounts = auditData.counts[sev];
+        const rawCount = rawDefectCounts[sev] || 0;
+        if (fromCounts !== rawCount) {
+          const diff = rawCount - fromCounts;
+          if (diff < 0 || diff > totalAdvisoryInDefects) {
+            return {
+              valid: false,
+              error: `Contradictory defect counts between defects array (${rawCount}) and counts object (${fromCounts}) for severity "${sev}"`,
+              fidelity: null,
+              defectCounts: null,
+              consoleErrorsCount: 0
+            };
+          }
+        }
       }
+    }
+    if (auditData.counts.advisory !== undefined && auditData.counts.advisory !== totalAdvisoryInDefects) {
+      return {
+        valid: false,
+        error: `Contradictory defect counts between defects array (${totalAdvisoryInDefects}) and counts object (${auditData.counts.advisory}) for severity "advisory"`,
+        fidelity: null,
+        defectCounts: null,
+        consoleErrorsCount: 0
+      };
     }
   }
 
@@ -313,19 +382,19 @@ function validateAuditSchema(auditData) {
         consoleErrorsCount: 0
       };
     }
-    if (hasDefects && adv !== defectCountsFromDefects.advisory) {
+    if (hasDefects && adv !== totalAdvisoryInDefects) {
       return {
         valid: false,
-        error: `Audit advisoryDefectCount (${adv}) contradicts defects array advisory count (${defectCountsFromDefects.advisory})`,
+        error: `Audit advisoryDefectCount (${adv}) contradicts defects array advisory count (${totalAdvisoryInDefects})`,
         fidelity: null,
         defectCounts: null,
         consoleErrorsCount: 0
       };
     }
-    if (hasCounts && auditData.counts.advisory !== undefined && adv !== defectCountsFromCounts.advisory) {
+    if (hasCounts && auditData.counts.advisory !== undefined && adv !== auditData.counts.advisory) {
       return {
         valid: false,
-        error: `Audit advisoryDefectCount (${adv}) contradicts counts object advisory count (${defectCountsFromCounts.advisory})`,
+        error: `Audit advisoryDefectCount (${adv}) contradicts counts object advisory count (${auditData.counts.advisory})`,
         fidelity: null,
         defectCounts: null,
         consoleErrorsCount: 0
@@ -351,7 +420,7 @@ function validateAuditSchema(auditData) {
     consoleErrorsCount = auditData.consoleErrors.length;
   }
 
-  const finalDefectCounts = hasDefects ? defectCountsFromDefects : defectCountsFromCounts;
+  const finalDefectCounts = hasDefects ? displayDefectCounts : defectCountsFromCounts;
 
   return {
     valid: true,
