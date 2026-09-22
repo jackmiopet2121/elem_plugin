@@ -4,7 +4,7 @@
   "type": "page",
   "content": [
     {
-      "id": "ae963578",
+      "id": "5d733b6f",
       "elType": "container",
       "isInner": false,
       "_sid": "sid-2",
@@ -181,12 +181,12 @@
       },
       "elements": [
         {
-          "id": "2a42ad75",
+          "id": "c9299e40",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<style>\n.billing-toggle-wrapper {\n  position: relative;\n}\n\n.toggle-label {\n  transition: color 0.3s ease;\n}\n\n.toggle-label.is-active {\n  color: #0f172a !important;\n}\n\n.toggle-switch {\n  position: relative;\n  cursor: pointer;\n}\n\n.slider {\n  position: absolute;\n  inset: 0;\n  background-color: #e2e8f0;\n  border-radius: 999px;\n  transition: 0.3s;\n}\n\n.slider::before {\n  content: '';\n  position: absolute;\n  height: 24px;\n  width: 24px;\n  left: 4px;\n  bottom: 4px;\n  background-color: white !important;\n  border-radius: 50%;\n  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);\n  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;\n}\n\n.toggle-switch input:checked + .slider {\n  background-color: #6366f1 !important;\n}\n\n.toggle-switch input:checked + .slider::before {\n  transform: translateX(28px) !important;\n}\n\n.pricing-card {\n  position: relative;\n  transition: transform 0.3s ease, box-shadow 0.3s ease;\n}\n\n.pricing-card:hover {\n  transform: translateY(-4px) !important;\n}\n\n.pricing-card.is-popular {\n  z-index: 1;\n  transform: scale(1.02);\n}\n\n.pricing-card.is-popular:hover {\n  transform: scale(1.02) translateY(-4px) !important;\n}\n\n.popular-pill {\n  position: absolute;\n  top: -14px;\n  left: 50%;\n  transform: translateX(-50%);\n  white-space: nowrap;\n}\n\n.cta-btn {\n  transition: all 0.2s ease;\n  cursor: pointer;\n}\n\n.cta-btn.primary .elementor-button:hover, .elementor-widget-button.cta-btn.primary .elementor-button:hover {\n  background-color: #4f46e5 !important;\n  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;\n}\n\n.cta-btn.outline .elementor-button:hover, .elementor-widget-button.cta-btn.outline .elementor-button:hover {\n  border-color: #0f172a !important;\n  background-color: #f1f5f9 !important;\n}\n\n.features-list {\n  list-style: none;\n  flex-grow: 1;\n}\n\n.check-icon {\n  flex-shrink: 0;\n}\n\n.elementor-widget-heading[class*=\"badge\"] .elementor-heading-title,\n.elementor-widget-heading[class*=\"pill\"] .elementor-heading-title,\n[class*=\"badge\"] .elementor-heading-title,\n[class*=\"pill\"] .elementor-heading-title {\n  line-height: 1 !important;\n  display: inline-flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n  margin: 0 !important;\n}\n\n[class*=\"track-wrap\"], [class*=\"track-wrap\"] input[type=\"range\"] { width: 100% !important; max-width: 100% !important; display: block !important; box-sizing: border-box !important; }\n\n.switch-wrap, [class*=\"switch-wrap\"] { cursor: pointer; display: inline-flex; align-items: center; }\n\n.switch-wrap input[type=\"checkbox\"], [class*=\"switch-wrap\"] input[type=\"checkbox\"] { cursor: pointer; }\n\n.price-amount,\n.price-amount .elementor-widget-container,\n.price-amount .elementor-heading-title {\n  width: 64px !important;\n  height: 64px !important;\n  max-height: 64px !important;\n  flex-shrink: 0 !important;\n  align-self: center !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.price-period,\n.price-period .elementor-widget-container,\n.price-period .elementor-text-editor {\n  width: 32px !important;\n  height: 32px !important;\n  max-height: 32px !important;\n  flex-shrink: 0 !important;\n  align-self: flex-end !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.price-amount,\n.price-amount .elementor-widget-container,\n.price-amount .elementor-heading-title {\n  width: 63px !important;\n  height: 63px !important;\n  max-height: 63px !important;\n  flex-shrink: 0 !important;\n  align-self: center !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n.price-period,\n.price-period .elementor-widget-container,\n.price-period .elementor-text-editor {\n  width: 33px !important;\n  height: 33px !important;\n  max-height: 33px !important;\n  flex-shrink: 0 !important;\n  align-self: flex-end !important;\n  border-radius: 0px !important;\n  background: #ffffff !important;\n  display: flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n}\n\n@media (max-width: 768px) {\n  .pricing-card:last-child {\n  max-width: 100%;\n  }\n\n  .pricing-card.is-popular {\n  transform: none;\n  }\n\n  .pricing-card.is-popular:hover {\n  transform: translateY(-4px) !important;\n  }\n}\n\n@media (max-width: 992px) {\n  .pricing-card:last-child {\n  max-width: 50%;\n  justify-self: center;\n  }\n}\n</style>",
-            "css_classes": "embedded-stylesheet-engine e-sid-2a42ad75",
+            "css_classes": "embedded-stylesheet-engine e-sid-c9299e40",
             "_html_reason": "SYSTEM:stylesheet-engine",
             "_margin": {
               "unit": "px",
@@ -204,12 +204,12 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-stylesheet-engine e-sid-2a42ad75"
+            "_css_classes": "embedded-stylesheet-engine e-sid-c9299e40"
           },
           "elements": []
         },
         {
-          "id": "2324c3b7",
+          "id": "edf8c23b",
           "elType": "container",
           "isInner": true,
           "_sid": "sid-3",
@@ -322,7 +322,7 @@
           },
           "elements": [
             {
-              "id": "c272b227",
+              "id": "c19bc06c",
               "elType": "widget",
               "widgetType": "heading",
               "_sid": "sid-4",
@@ -408,7 +408,7 @@
               "isInner": false
             },
             {
-              "id": "bc201b87",
+              "id": "66ae925a",
               "elType": "widget",
               "widgetType": "text-editor",
               "_sid": "sid-5",
@@ -465,7 +465,7 @@
               "isInner": false
             },
             {
-              "id": "636456e7",
+              "id": "8179b1c6",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-6",
@@ -582,7 +582,7 @@
               },
               "elements": [
                 {
-                  "id": "50aac91e",
+                  "id": "ffb61749",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-7",
@@ -637,7 +637,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "7c08952f",
+                  "id": "0a20530f",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-8",
@@ -723,7 +723,7 @@
                   },
                   "elements": [
                     {
-                      "id": "e70f3251",
+                      "id": "86039589",
                       "elType": "widget",
                       "widgetType": "html",
                       "_sid": "sid-9",
@@ -776,7 +776,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "0baa130d",
+                      "id": "84473723",
                       "elType": "widget",
                       "widgetType": "html",
                       "_sid": "sid-10",
@@ -825,7 +825,7 @@
                   ]
                 },
                 {
-                  "id": "afca41e0",
+                  "id": "a0c0a28f",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-11",
@@ -917,7 +917,7 @@
                   },
                   "elements": [
                     {
-                      "id": "727ef75c",
+                      "id": "853a1010",
                       "elType": "widget",
                       "widgetType": "heading",
                       "settings": {
@@ -942,15 +942,15 @@
                           "left": "0",
                           "isLinked": false
                         },
-                        "_css_classes": "e-sid-727ef75c",
-                        "css_classes": "e-sid-727ef75c",
+                        "_css_classes": "e-sid-853a1010",
+                        "css_classes": "e-sid-853a1010",
                         "_element_width": "auto"
                       },
                       "elements": [],
                       "isInner": false
                     },
                     {
-                      "id": "c8f52a3d",
+                      "id": "cee1e91f",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "_sid": "sid-12",
@@ -1084,7 +1084,7 @@
           ]
         },
         {
-          "id": "7b3746e0",
+          "id": "2dc644b0",
           "elType": "container",
           "isInner": true,
           "_sid": "sid-13",
@@ -1234,7 +1234,7 @@
           },
           "elements": [
             {
-              "id": "17248614",
+              "id": "e5f9f4b8",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-14",
@@ -1382,7 +1382,7 @@
               },
               "elements": [
                 {
-                  "id": "c0e81eb7",
+                  "id": "e469e3c6",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-15",
@@ -1432,7 +1432,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "b2a5a95e",
+                  "id": "ab2013b1",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-16",
@@ -1481,7 +1481,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "43629e90",
+                  "id": "73255ffd",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-17",
@@ -1598,7 +1598,7 @@
                   },
                   "elements": [
                     {
-                      "id": "dd9edcc8",
+                      "id": "9cafe9ca",
                       "elType": "widget",
                       "widgetType": "heading",
                       "_sid": "sid-18",
@@ -1650,7 +1650,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "e1e82ab9",
+                      "id": "bb5d4ace",
                       "elType": "widget",
                       "widgetType": "heading",
                       "_sid": "sid-19",
@@ -1730,7 +1730,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "c7ab55a4",
+                      "id": "5642692e",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "_sid": "sid-20",
@@ -1807,7 +1807,7 @@
                   ]
                 },
                 {
-                  "id": "2890587c",
+                  "id": "10c8bfbb",
                   "elType": "widget",
                   "widgetType": "button",
                   "_sid": "sid-21",
@@ -1886,7 +1886,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "a8ad3b05",
+                  "id": "27ddbb96",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-22",
@@ -2003,7 +2003,7 @@
                   },
                   "elements": [
                     {
-                      "id": "25c8f74a",
+                      "id": "d6394f13",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-23",
@@ -2116,7 +2116,7 @@
                       },
                       "elements": [
                         {
-                          "id": "dbb178d1",
+                          "id": "dd9d2843",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-24",
@@ -2183,7 +2183,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "67df426b",
+                          "id": "d077ade1",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-26",
@@ -2235,7 +2235,7 @@
                       ]
                     },
                     {
-                      "id": "d39c26e8",
+                      "id": "77bf7d30",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-27",
@@ -2348,7 +2348,7 @@
                       },
                       "elements": [
                         {
-                          "id": "1513aa1c",
+                          "id": "9964a996",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-28",
@@ -2415,7 +2415,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "07fd6de4",
+                          "id": "11ff0a5b",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-30",
@@ -2467,7 +2467,7 @@
                       ]
                     },
                     {
-                      "id": "54df6541",
+                      "id": "a1811906",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-31",
@@ -2580,7 +2580,7 @@
                       },
                       "elements": [
                         {
-                          "id": "2f5b2f3b",
+                          "id": "80211120",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-32",
@@ -2647,7 +2647,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "a437de31",
+                          "id": "ff0c9f46",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-34",
@@ -2699,7 +2699,7 @@
                       ]
                     },
                     {
-                      "id": "bf921442",
+                      "id": "16a01e23",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-35",
@@ -2812,7 +2812,7 @@
                       },
                       "elements": [
                         {
-                          "id": "9406f8d3",
+                          "id": "2ecfcb39",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-36",
@@ -2879,7 +2879,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "50c77fc4",
+                          "id": "cbd0e53c",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-38",
@@ -2935,7 +2935,7 @@
               ]
             },
             {
-              "id": "90a911e2",
+              "id": "b438453b",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-39",
@@ -3099,7 +3099,7 @@
               },
               "elements": [
                 {
-                  "id": "afbda651",
+                  "id": "6e6933b1",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-40",
@@ -3202,7 +3202,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "bd4b07b9",
+                  "id": "1aafb6cf",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-41",
@@ -3252,7 +3252,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "c1853f9e",
+                  "id": "f5ccc7e1",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-42",
@@ -3301,7 +3301,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "57f76d9b",
+                  "id": "c0e5c217",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-43",
@@ -3418,7 +3418,7 @@
                   },
                   "elements": [
                     {
-                      "id": "ce89a35b",
+                      "id": "180efa07",
                       "elType": "widget",
                       "widgetType": "heading",
                       "_sid": "sid-44",
@@ -3470,7 +3470,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "b9e7d6a0",
+                      "id": "b79658e9",
                       "elType": "widget",
                       "widgetType": "heading",
                       "_sid": "sid-45",
@@ -3550,7 +3550,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "c882f62c",
+                      "id": "fa31af45",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "_sid": "sid-46",
@@ -3627,7 +3627,7 @@
                   ]
                 },
                 {
-                  "id": "9c12672a",
+                  "id": "74043745",
                   "elType": "widget",
                   "widgetType": "button",
                   "_sid": "sid-47",
@@ -3723,7 +3723,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "f6ed1d29",
+                  "id": "86bd8252",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-48",
@@ -3840,7 +3840,7 @@
                   },
                   "elements": [
                     {
-                      "id": "f7797131",
+                      "id": "62b4cd77",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-49",
@@ -3953,7 +3953,7 @@
                       },
                       "elements": [
                         {
-                          "id": "177ce703",
+                          "id": "cc051e8c",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-50",
@@ -4020,7 +4020,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "214ce629",
+                          "id": "eeda459f",
                           "elType": "container",
                           "isInner": true,
                           "_sid": "sid-52",
@@ -4109,7 +4109,7 @@
                           },
                           "elements": [
                             {
-                              "id": "661183c8",
+                              "id": "a6356607",
                               "elType": "widget",
                               "widgetType": "text-editor",
                               "_sid": "sid-53",
@@ -4161,7 +4161,7 @@
                               "isInner": false
                             },
                             {
-                              "id": "e0db60ee",
+                              "id": "982cbd6f",
                               "elType": "widget",
                               "widgetType": "heading",
                               "settings": {
@@ -4186,8 +4186,8 @@
                                   "left": "0",
                                   "isLinked": false
                                 },
-                                "_css_classes": "e-sid-e0db60ee",
-                                "css_classes": "e-sid-e0db60ee",
+                                "_css_classes": "e-sid-982cbd6f",
+                                "css_classes": "e-sid-982cbd6f",
                                 "_element_width": "auto"
                               },
                               "elements": [],
@@ -4198,7 +4198,7 @@
                       ]
                     },
                     {
-                      "id": "809138c2",
+                      "id": "668ddb06",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-54",
@@ -4311,7 +4311,7 @@
                       },
                       "elements": [
                         {
-                          "id": "161c2b16",
+                          "id": "e3b086a8",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-55",
@@ -4378,7 +4378,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "d1cf6dca",
+                          "id": "be731f66",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-57",
@@ -4430,7 +4430,7 @@
                       ]
                     },
                     {
-                      "id": "6c7ed493",
+                      "id": "eb006adf",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-58",
@@ -4543,7 +4543,7 @@
                       },
                       "elements": [
                         {
-                          "id": "0ef315b3",
+                          "id": "0ae7b8d3",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-59",
@@ -4613,7 +4613,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "62f35df3",
+                          "id": "507f2d2c",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-61",
@@ -4661,7 +4661,7 @@
                       ]
                     },
                     {
-                      "id": "548c644f",
+                      "id": "57b0f11e",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-62",
@@ -4774,7 +4774,7 @@
                       },
                       "elements": [
                         {
-                          "id": "afd449fe",
+                          "id": "a655ddae",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-63",
@@ -4841,7 +4841,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "bc0dd2a1",
+                          "id": "7864e42e",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-65",
@@ -4893,7 +4893,7 @@
                       ]
                     },
                     {
-                      "id": "63c2420f",
+                      "id": "74a84a26",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-66",
@@ -5006,7 +5006,7 @@
                       },
                       "elements": [
                         {
-                          "id": "49c690bd",
+                          "id": "b9a75180",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-67",
@@ -5073,7 +5073,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "4bbdcee0",
+                          "id": "4432f845",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-69",
@@ -5129,7 +5129,7 @@
               ]
             },
             {
-              "id": "ab70bd75",
+              "id": "a96046e6",
               "elType": "container",
               "isInner": true,
               "_sid": "sid-70",
@@ -5277,7 +5277,7 @@
               },
               "elements": [
                 {
-                  "id": "c90d35e5",
+                  "id": "cd423053",
                   "elType": "widget",
                   "widgetType": "heading",
                   "_sid": "sid-71",
@@ -5331,7 +5331,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "ca4ad240",
+                  "id": "7a7a66e9",
                   "elType": "widget",
                   "widgetType": "text-editor",
                   "_sid": "sid-72",
@@ -5384,7 +5384,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "02216610",
+                  "id": "b0149f31",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-73",
@@ -5497,7 +5497,7 @@
                   },
                   "elements": [
                     {
-                      "id": "5387b6d6",
+                      "id": "af44db2f",
                       "elType": "widget",
                       "widgetType": "heading",
                       "_sid": "sid-74",
@@ -5549,7 +5549,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "93cf487c",
+                      "id": "411065d7",
                       "elType": "widget",
                       "widgetType": "heading",
                       "_sid": "sid-75",
@@ -5616,7 +5616,7 @@
                       "isInner": false
                     },
                     {
-                      "id": "85ee17a1",
+                      "id": "d604eb10",
                       "elType": "widget",
                       "widgetType": "text-editor",
                       "_sid": "sid-76",
@@ -5693,7 +5693,7 @@
                   ]
                 },
                 {
-                  "id": "84a2e0da",
+                  "id": "6583531b",
                   "elType": "widget",
                   "widgetType": "button",
                   "_sid": "sid-77",
@@ -5776,7 +5776,7 @@
                   "isInner": false
                 },
                 {
-                  "id": "594c08a9",
+                  "id": "142463c3",
                   "elType": "container",
                   "isInner": true,
                   "_sid": "sid-78",
@@ -5889,7 +5889,7 @@
                   },
                   "elements": [
                     {
-                      "id": "abcbd063",
+                      "id": "714200be",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-79",
@@ -5998,7 +5998,7 @@
                       },
                       "elements": [
                         {
-                          "id": "c5ae032a",
+                          "id": "f00d0e4b",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-80",
@@ -6065,7 +6065,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "1887f914",
+                          "id": "d2134a51",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-82",
@@ -6121,7 +6121,7 @@
                       ]
                     },
                     {
-                      "id": "cb097ef7",
+                      "id": "6017b6ac",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-83",
@@ -6230,7 +6230,7 @@
                       },
                       "elements": [
                         {
-                          "id": "a51d7099",
+                          "id": "3132f627",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-84",
@@ -6297,7 +6297,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "65b5ec6c",
+                          "id": "653d48dd",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-86",
@@ -6353,7 +6353,7 @@
                       ]
                     },
                     {
-                      "id": "804713b6",
+                      "id": "ca823ead",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-87",
@@ -6462,7 +6462,7 @@
                       },
                       "elements": [
                         {
-                          "id": "6a132ccc",
+                          "id": "6eff0856",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-88",
@@ -6529,7 +6529,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "fd8ef2b1",
+                          "id": "fdeadd85",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-90",
@@ -6585,7 +6585,7 @@
                       ]
                     },
                     {
-                      "id": "e8407668",
+                      "id": "fc5a7298",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-91",
@@ -6694,7 +6694,7 @@
                       },
                       "elements": [
                         {
-                          "id": "33a3a1ed",
+                          "id": "d46262ab",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-92",
@@ -6761,7 +6761,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "58fe8ffe",
+                          "id": "017cdf4c",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-94",
@@ -6817,7 +6817,7 @@
                       ]
                     },
                     {
-                      "id": "aa8913bb",
+                      "id": "1befec38",
                       "elType": "container",
                       "isInner": true,
                       "_sid": "sid-95",
@@ -6926,7 +6926,7 @@
                       },
                       "elements": [
                         {
-                          "id": "bdbede03",
+                          "id": "51b8592c",
                           "elType": "widget",
                           "widgetType": "icon",
                           "_sid": "sid-96",
@@ -6993,7 +6993,7 @@
                           "isInner": false
                         },
                         {
-                          "id": "12340abf",
+                          "id": "064e0448",
                           "elType": "widget",
                           "widgetType": "text-editor",
                           "_sid": "sid-98",
@@ -7055,12 +7055,12 @@
           ]
         },
         {
-          "id": "ebff64b2",
+          "id": "2c13eae2",
           "elType": "widget",
           "widgetType": "html",
           "settings": {
             "html": "<script>\n(function() {\n  // 1. Universal DOM Lifecycle Polyfill:\n  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,\n  // immediately invoke the callback so dynamic scripts never enter a deadzone.\n  try {\n    var _origDocAdd = Document.prototype.addEventListener;\n    var _lifecycleAdd = function(type, fn, opts) {\n      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {\n        try {\n          setTimeout(function() { fn.call(document, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origDocAdd.call(this, type, fn, opts);\n    };\n    Document.prototype.addEventListener = _lifecycleAdd;\n    try { document.addEventListener = _lifecycleAdd; } catch(e) {}\n\n    var _origWinAdd = Window.prototype.addEventListener;\n    Window.prototype.addEventListener = function(type, fn, opts) {\n      if (type === 'load' && document.readyState === 'complete') {\n        try {\n          setTimeout(function() { fn.call(window, new Event(type)); }, 0);\n        } catch(e) {\n          console.error('[LIFECYCLE]', e);\n        }\n        return;\n      }\n      return _origWinAdd.call(this, type, fn, opts);\n    };\n  } catch(e) {\n    console.warn('[LIFECYCLE POLYFILL ERROR]', e);\n  }\n\n  function initDynamicComponentLogic() {\n    // 2. Universal Data-Attribute Hydration Bridge:\n    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases\n    // (e.g. data-category--design -> el.dataset.category = \"design\", el.setAttribute(\"data-category\", \"design\"))\n    try {\n      document.querySelectorAll('*').forEach(function(el) {\n        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;\n        if (el.dataset && el.dataset.__hasDataHydrated) return;\n        if (el.dataset) el.dataset.__hasDataHydrated = 'true';\n        if (el.classList) {\n          el.classList.forEach(function(cls) {\n            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {\n              var sepIdx = cls.indexOf('--');\n              var attrName = cls.slice(0, sepIdx);\n              var rawVal = cls.slice(sepIdx + 2);\n              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)\n              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {\n                return String.fromCharCode(parseInt(hex, 16));\n              });\n              el.setAttribute(attrName, attrVal);\n              if (el.dataset) {\n                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });\n                el.dataset[prop] = attrVal;\n              }\n            }\n          });\n        }\n      });\n    } catch(e) {\n      console.warn('[DATA HYDRATION ERROR]', e);\n    }\n\n    try {\n      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title\n      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {\n        var inner = widget.querySelector('.elementor-heading-title');\n        if (inner && !widget.__hasTextProxy) {\n          widget.__hasTextProxy = true;\n          Object.defineProperty(widget, 'textContent', {\n            get: function() { return inner.textContent; },\n            set: function(val) { inner.textContent = val; },\n            configurable: true\n          });\n          Object.defineProperty(widget, 'innerText', {\n            get: function() { return inner.innerText; },\n            set: function(val) { inner.innerText = val; },\n            configurable: true\n          });\n        }\n      });\n\n      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)\n      \n      if (!window.__delegatedBridgesBound) {\n        window.__delegatedBridgesBound = true;\n        \n      (function(){\n        var k = \"bridge_.toggle-switch|.billing-toggle-wrapper\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\".toggle-switch\");\n            if (!trig) return;\n            var anc = trig.closest(\".billing-toggle-wrapper\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\".toggle-switch\");\n          if (!trig) return;\n          var anc = trig.closest(\".billing-toggle-wrapper\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_#billing-toggle|.billing-toggle-wrapper\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#billing-toggle\");\n            if (!trig) return;\n            var anc = trig.closest(\".billing-toggle-wrapper\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#billing-toggle\");\n          if (!trig) return;\n          var anc = trig.closest(\".billing-toggle-wrapper\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n\n      (function(){\n        var k = \"bridge_#label-yearly|.billing-toggle-wrapper\";\n        if (window[k]) return; window[k] = true;\n        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;\n        if (preState) {\n          document.addEventListener('click', function(e){\n            var trig = e.target.closest(\"#label-yearly\");\n            if (!trig) return;\n            var anc = trig.closest(\".billing-toggle-wrapper\");\n            if (!anc || anc === document.body) return;\n            var s = {};\n            s[\"is-active\"] = anc.classList.contains(\"is-active\");\n            preState.set(e, s);\n          }, true);\n        }\n        document.addEventListener('click', function(e){\n          var trig = e.target.closest(\"#label-yearly\");\n          if (!trig) return;\n          var anc = trig.closest(\".billing-toggle-wrapper\");\n          if (!anc || anc === document.body) return;\n          var s = preState ? preState.get(e) : null;\n          \n          var wasPresent = s ? s[\"is-active\"] : null;\n          var isNowPresent = anc.classList.contains(\"is-active\");\n          if (wasPresent === null || wasPresent === isNowPresent) {\n            anc.classList.toggle(\"is-active\");\n          }\n          \n          if (trig.hasAttribute('aria-expanded')) {\n            var isExp = trig.getAttribute('aria-expanded') === 'true';\n            trig.setAttribute('aria-expanded', String(!isExp));\n          }\n        });\n      })();\n      }\n  \n    } catch(err) {\n      console.warn('[COMPILER BRIDGE]', err);\n    }\n\n    // Execute Application Business Logic with Idempotency Protection\n    if (!window.__appLogicInitialized) {\n      window.__appLogicInitialized = true;\n      try {\n        document.addEventListener('DOMContentLoaded', () => {\n            const toggle = document.getElementById('billing-toggle');\n            const priceElements = document.querySelectorAll('.price-amount');\n            const labelMonthly = document.getElementById('label-monthly');\n            const labelYearly = document.getElementById('label-yearly');\n\n            // Function to update prices and UI state\n            const updatePricing = () => {\n                const isYearly = toggle.checked;\n\n                // Update Label Styles\n                if (isYearly) {\n                    labelYearly.classList.add('is-active');\n                    labelMonthly.classList.remove('is-active');\n                } else {\n                    labelMonthly.classList.add('is-active');\n                    labelYearly.classList.remove('is-active');\n                }\n\n                // Update Price Numbers with Animation\n                priceElements.forEach(el => {\n                    const newPrice = isYearly ? el.dataset.yearly : el.dataset.monthly;\n                    \n                    // Simple fade effect for number change\n                    el.style.opacity = '0';\n                    setTimeout(() => {\n                        el.textContent = newPrice;\n                        el.style.opacity = '1';\n                    }, 200);\n                });\n            };\n\n            // Event Listener\n            toggle.addEventListener('change', updatePricing);\n\n            // Initialize state\n            updatePricing();\n        });\n      } catch(appErr) {\n        console.warn('[APP LOGIC ERROR]', appErr);\n      }\n    }\n  }\n\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);\n  } else {\n    initDynamicComponentLogic();\n  }\n  setTimeout(initDynamicComponentLogic, 200);\n  setTimeout(initDynamicComponentLogic, 800);\n  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);\n})();\n</script>",
-            "css_classes": "embedded-script-engine e-sid-ebff64b2",
+            "css_classes": "embedded-script-engine e-sid-2c13eae2",
             "_html_reason": "SYSTEM:script-engine",
             "_margin": {
               "unit": "px",
@@ -7078,7 +7078,7 @@
               "left": "0",
               "isLinked": true
             },
-            "_css_classes": "embedded-script-engine e-sid-ebff64b2"
+            "_css_classes": "embedded-script-engine e-sid-2c13eae2"
           },
           "elements": []
         }

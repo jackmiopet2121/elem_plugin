@@ -22,7 +22,7 @@
   "totalFixtures": 8,
   "passedCompilations": 8,
   "failedCompilations": 0,
-  "invariantViolationsCount": 12,
+  "invariantViolationsCount": 7,
   "fixtures": [
     {
       "fixtureId": "corpus/01-pricing-table",
@@ -205,14 +205,7 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [
-          "HTML widget ce166a7d contains simple button markup that must be native button widget",
-          "HTML widget 373f8d2e contains simple button markup that must be native button widget",
-          "HTML widget 57f76d9b contains simple button markup that must be native button widget",
-          "HTML widget ca4ad240 contains simple button markup that must be native button widget",
-          "HTML widget d6028c18 contains simple button markup that must be native button widget",
-          "HTML widget dabb82fe contains simple button markup that must be native button widget"
-        ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 84,
         "microCssSizeBytes": 4769,
         "scriptSizeBytes": 13768,
@@ -244,8 +237,7 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "20 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 20, customWidgets: 0, contentHtml: 0)",
-          "6 HTML widget contract violation(s) (e.g., HTML widget ce166a7d contains simple button markup that must be native button widget)"
+          "20 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 20, customWidgets: 0, contentHtml: 0)"
         ]
       }
     },
@@ -288,9 +280,7 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [
-          "HTML widget a51d7099 contains simple button markup that must be native button widget"
-        ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 80,
         "microCssSizeBytes": 7301,
         "scriptSizeBytes": 19219,
@@ -322,8 +312,7 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)",
-          "1 HTML widget contract violation(s) (e.g., HTML widget a51d7099 contains simple button markup that must be native button widget)"
+          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)"
         ]
       }
     },
@@ -363,12 +352,7 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [
-          "HTML widget c2175083 contains simple button markup that must be native button widget",
-          "HTML widget 2f4dfa6d contains simple button markup that must be native button widget",
-          "HTML widget 7afb3802 contains simple button markup that must be native button widget",
-          "HTML widget c72eabf2 contains simple button markup that must be native button widget"
-        ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
@@ -400,8 +384,7 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
-          "4 HTML widget contract violation(s) (e.g., HTML widget c2175083 contains simple button markup that must be native button widget)"
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
         ]
       }
     },
@@ -439,10 +422,7 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [
-          "HTML widget 71c9a549 contains simple button markup that must be native button widget",
-          "HTML widget 17248614 contains simple button markup that must be native button widget"
-        ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 83,
         "microCssSizeBytes": 5452,
         "scriptSizeBytes": 6662,
@@ -472,10 +452,8 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": false,
-        "violations": [
-          "2 HTML widget contract violation(s) (e.g., HTML widget 71c9a549 contains simple button markup that must be native button widget)"
-        ]
+        "passed": true,
+        "violations": []
       }
     },
     {
@@ -514,12 +492,7 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [
-          "HTML widget c2175083 contains simple button markup that must be native button widget",
-          "HTML widget 2f4dfa6d contains simple button markup that must be native button widget",
-          "HTML widget 7afb3802 contains simple button markup that must be native button widget",
-          "HTML widget c72eabf2 contains simple button markup that must be native button widget"
-        ],
+        "htmlReasonViolations": [],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
@@ -551,8 +524,7 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
-          "4 HTML widget contract violation(s) (e.g., HTML widget c2175083 contains simple button markup that must be native button widget)"
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
         ]
       }
     },
@@ -600,21 +572,14 @@
           "SYSTEM:script-engine"
         ],
         "htmlReasonViolations": [
-          "HTML widget fead3e2c contains simple button markup that must be native button widget",
-          "HTML widget fead3e2c contains standard heading markup that must be native heading widget",
-          "HTML widget 0bc1ad15 contains simple button markup that must be native button widget",
-          "HTML widget 0bc1ad15 contains standard heading markup that must be native heading widget",
-          "HTML widget d675c154 contains simple button markup that must be native button widget",
-          "HTML widget d675c154 contains standard heading markup that must be native heading widget",
-          "HTML widget 858b8d71 contains simple button markup that must be native button widget",
-          "HTML widget 858b8d71 contains standard heading markup that must be native heading widget",
-          "HTML widget 66cff3a6 contains simple button markup that must be native button widget",
-          "HTML widget e304b184 contains simple button markup that must be native button widget",
-          "HTML widget 7e7ff16c contains simple button markup that must be native button widget",
-          "HTML widget dfeded30 contains simple button markup that must be native button widget",
-          "HTML widget a8bcd597 contains simple button markup that must be native button widget",
-          "HTML widget 26cc76ea contains simple button markup that must be native button widget",
-          "HTML widget 3e9e6b6a contains simple button markup that must be native button widget"
+          "HTML widget 074fcd2a contains standard heading markup that must be native heading widget",
+          "HTML widget 074fcd2a contains standard paragraph markup that must be native text-editor widget",
+          "HTML widget 27b50e70 contains standard heading markup that must be native heading widget",
+          "HTML widget 27b50e70 contains standard paragraph markup that must be native text-editor widget",
+          "HTML widget 4cca0d68 contains standard heading markup that must be native heading widget",
+          "HTML widget 4cca0d68 contains standard paragraph markup that must be native text-editor widget",
+          "HTML widget d2d26d7c contains standard heading markup that must be native heading widget",
+          "HTML widget d2d26d7c contains standard paragraph markup that must be native text-editor widget"
         ],
         "nativeEditabilityPercentage": 88,
         "microCssSizeBytes": 18095,
@@ -648,7 +613,7 @@
         "passed": false,
         "violations": [
           "2 non-exempt element(s) missing SID (containers: 1, nativeWidgets: 1, customWidgets: 0, contentHtml: 0)",
-          "15 HTML widget contract violation(s) (e.g., HTML widget fead3e2c contains simple button markup that must be native button widget)"
+          "8 HTML widget contract violation(s) (e.g., HTML widget 074fcd2a contains standard heading markup that must be native heading widget)"
         ]
       }
     }

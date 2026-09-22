@@ -5,7 +5,7 @@
  * 2. Deterministic Elementor Guardrails & Linter for 100% zero-regression schema compliance.
  * 3. Offline Dynamic AST fallback when API key is not present.
  */
-const { resetIdPool } = require('./core/id-generator');
+const { createIdGenerator, computeContentSeed, runWithGenerator } = require('./core/id-generator');
 const { parseHtmlToAst } = require('./parser/html-parser');
 const { parseCssRules } = require('./parser/css-parser');
 const { extractScripts } = require('./parser/js-extractor');
@@ -86,16 +86,18 @@ function generateDelegationCode(traces = []) {
 }
 
 async function compileHtmlToElementor(htmlContent, options = {}) {
-  const {
-    title = 'Elementor Free Template',
-    type = 'page',
-    useAi = true,
-    offline = false,
-    inputPath = null,
-    useGroundTruth = true
-  } = options;
+  const seed = options.seed !== undefined ? options.seed : computeContentSeed(htmlContent);
+  const idGenerator = options.idGenerator || createIdGenerator({ seed, content: htmlContent });
 
-  resetIdPool();
+  return runWithGenerator(idGenerator, async () => {
+    const {
+      title = 'Elementor Free Template',
+      type = 'page',
+      useAi = true,
+      offline = false,
+      inputPath = null,
+      useGroundTruth = true
+    } = options;
 
   const apiKeys = getApiKeys();
   let contentElements = [];
@@ -548,7 +550,8 @@ async function compileHtmlToElementor(htmlContent, options = {}) {
       detectedFontFamily,
       detectedBoxedWidth
     }
-  };
+    };
+  });
 }
 
 module.exports = {
