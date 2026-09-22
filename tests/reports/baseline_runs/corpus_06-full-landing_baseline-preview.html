@@ -1,0 +1,2256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elementor Free Template - Virtual Elementor Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Plus%20Jakarta%20Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=-apple-system:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* 1. Base Elementor Free Grid & Layout Engine */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: transparent;
+      color: #0f172a;
+    }
+    .elementor {
+      position: relative;
+      width: 100%;
+    }
+    .e-con {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      position: relative;
+      width: 100%;
+      --widgets-spacing: 20px;
+    }
+    .e-con-boxed {
+      width: 100% !important;
+    }
+    .e-con-boxed > .e-con-inner {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      width: 100%;
+      max-width: var(--content-width, 1200px);
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      --widgets-spacing: 20px;
+    }
+    .e-con-full {
+      width: 100%;
+    }
+    .elementor-widget {
+      position: relative;
+      margin-bottom: 0;
+    }
+    /* Elementor Core Flexbox Runtime Layout Reset:
+       In live Elementor, widgets inside flex containers default to 100% width
+       unless explicitly flagged as auto-width. This ensures 1:1 parity between
+       local emulation and live WordPress. */
+    .e-con > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial),
+    .e-con-inner > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial) {
+      width: 100%;
+    }
+    .elementor-widget__width-auto {
+      width: auto;
+      max-width: 100%;
+      display: inline-block;
+    }
+    .elementor-widget__width-initial {
+      max-width: 100%;
+    }
+    .elementor-widget__width-inherit {
+      width: 100% !important;
+      max-width: 100%;
+    }
+    .elementor-widget-container {
+      position: relative;
+      transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+    }
+    .elementor-heading-title {
+      margin: 0;
+      padding: 0;
+      line-height: 1.2;
+    }
+    .elementor-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .elementor-button-wrapper.elementor-align-justify,
+    .elementor-button-wrapper.elementor-align-justify .elementor-button {
+      width: 100%;
+      display: flex;
+    }
+    .elementor-button-content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .elementor-widget-icon .elementor-icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .elementor-icon i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      text-align: center;
+    }
+    .elementor-view-stacked .elementor-icon,
+    .elementor-view-framed .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5em;
+      aspect-ratio: 1 / 1;
+    }
+    .elementor-shape-circle,
+    .elementor-shape-circle .elementor-icon,
+    .elementor-icon.elementor-shape-circle {
+      border-radius: 50% !important;
+    }
+    .elementor-shape-square,
+    .elementor-shape-square .elementor-icon,
+    .elementor-icon.elementor-shape-square {
+      border-radius: 0 !important;
+    }
+    .elementor-icon-list-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .elementor-icon-list-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .elementor-divider-separator {
+      display: block;
+      border-top-style: solid;
+      border-top-width: 1px;
+      width: 100%;
+    }
+
+    /* Elementor Free Frontend Core Defaults (WP Parity) */
+    .elementor-widget-image {
+      text-align: center;
+    }
+    .elementor-widget-image a {
+      display: inline-block;
+    }
+    .elementor-widget-image img {
+      vertical-align: middle;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .elementor-text-editor {
+      color: inherit;
+      font-family: inherit;
+    }
+    .elementor-text-editor p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 2. Compiled Elementor Template Styles (Desktop / Post CSS) */
+    .e-sid-2 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 64px;
+  --column-gap: 0px;
+  --gap: 64px 0px;
+  gap: 64px 0px;
+  row-gap: 64px;
+  column-gap: 0px;
+  --content-width: 800px;
+  background-color: transparent;
+  --padding-top: 48px;
+  --padding-right: 24px;
+  --padding-bottom: 48px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 40px;
+  --margin-bottom: 0px;
+  --margin-left: 40px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100% !important;
+  --min-height: 1155px;
+  min-height: 1155px;
+}
+
+.hero {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 0px;
+  --gap: 16px 0px;
+  gap: 16px 0px;
+  row-gap: 16px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 223px;
+  min-height: 223px;
+}
+
+.badge, .badge p, .badge .elementor-text-editor {
+  color: #1e40af;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4em;
+  letter-spacing: 0.6px;
+}
+
+.badge {
+  background-color: #dbeafe;
+  border-radius: 9999px 9999px 9999px 9999px;
+  margin: 0px 0px 0px 0px;
+  padding: 4px 0px 0px 0px;
+}
+
+.badge {
+  width: 136px !important;
+  max-width: 136px;
+}
+
+.e-sid-5 .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2em;
+}
+
+.e-sid-5 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-5 {
+  width: 1152px !important;
+  max-width: 1152px;
+}
+
+.e-sid-6, .e-sid-6 p, .e-sid-6 .elementor-text-editor {
+  color: #64748b;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.e-sid-6 {
+  margin: 0px 276px 0px 276px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-6 {
+  width: 600px !important;
+  max-width: 600px;
+}
+
+.e-sid-7 .elementor-button {
+  color: #ffffff;
+  background-color: #2563eb;
+  border-radius: 8px 8px 8px 8px;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px 12px 24px;
+}
+
+.e-sid-7 .elementor-button-wrapper {
+  text-align: center;
+}
+
+.e-sid-7 {
+  margin: 0px 0px 0px 0px;
+}
+
+.cards-grid {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: stretch;
+  align-items: stretch;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 32px;
+  --column-gap: 32px;
+  --gap: 32px 32px;
+  gap: 32px 32px;
+  row-gap: 32px;
+  column-gap: 32px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 471px;
+  min-height: 471px;
+}
+
+.card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 32px;
+  --padding-right: 32px;
+  --padding-bottom: 32px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.card-media {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 8px 8px 8px 8px;
+  width: 100%;
+}
+
+.e-sid-11 img, .e-sid-11 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.e-sid-11, .e-sid-11 .elementor-widget-image, .e-sid-11 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 180px !important;
+}
+
+.e-sid-11 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.badge, .badge p, .badge .elementor-text-editor {
+  color: #1e40af;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4em;
+  letter-spacing: 0.6px;
+}
+
+.badge {
+  background-color: #dbeafe;
+  border-radius: 9999px 9999px 9999px 9999px;
+  margin: 0px 0px 0px 0px;
+  padding: 4px 0px 0px 0px;
+}
+
+.badge {
+  width: 78px !important;
+  max-width: 78px;
+}
+
+.e-sid-13 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.e-sid-13 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-13 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.e-sid-14, .e-sid-14 p, .e-sid-14 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.e-sid-14 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-14 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.e-sid-15 .elementor-button {
+  color: #ffffff;
+  background-color: #2563eb;
+  border-radius: 8px 8px 8px 8px;
+  font-family: "Inter", Sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 24px 12px 24px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.e-sid-15 .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.e-sid-15 {
+  margin: 0px 0px 0px 0px;
+}
+
+.e-sid-15 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 32px;
+  --padding-right: 32px;
+  --padding-bottom: 32px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.card-media {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 8px 8px 8px 8px;
+  width: 100%;
+}
+
+.e-sid-18 img, .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.e-sid-18, .e-sid-18 .elementor-widget-image, .e-sid-18 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 180px !important;
+}
+
+.e-sid-18 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.badge, .badge p, .badge .elementor-text-editor {
+  color: #1e40af;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4em;
+  letter-spacing: 0.6px;
+}
+
+.badge {
+  background-color: #dbeafe;
+  border-radius: 9999px 9999px 9999px 9999px;
+  margin: 0px 0px 0px 0px;
+  padding: 4px 0px 0px 0px;
+}
+
+.badge {
+  width: 118px !important;
+  max-width: 118px;
+}
+
+.e-sid-20 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.e-sid-20 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-20 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.e-sid-21, .e-sid-21 p, .e-sid-21 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.e-sid-21 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-21 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.e-sid-22 .elementor-button {
+  color: #ffffff;
+  background-color: #2563eb;
+  border-radius: 8px 8px 8px 8px;
+  font-family: "Inter", Sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 24px 12px 24px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.e-sid-22 .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.e-sid-22 {
+  margin: 0px 0px 0px 0px;
+}
+
+.e-sid-22 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 32px;
+  --padding-right: 32px;
+  --padding-bottom: 32px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.card-media {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 8px 8px 8px 8px;
+  width: 100%;
+}
+
+.e-sid-25 img, .e-sid-25 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.e-sid-25, .e-sid-25 .elementor-widget-image, .e-sid-25 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 180px !important;
+}
+
+.e-sid-25 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.badge, .badge p, .badge .elementor-text-editor {
+  color: #1e40af;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4em;
+  letter-spacing: 0.6px;
+}
+
+.badge {
+  background-color: #dbeafe;
+  border-radius: 9999px 9999px 9999px 9999px;
+  margin: 0px 0px 0px 0px;
+  padding: 4px 0px 0px 0px;
+}
+
+.badge {
+  width: 99px !important;
+  max-width: 99px;
+}
+
+.e-sid-27 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.e-sid-27 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-27 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.e-sid-28, .e-sid-28 p, .e-sid-28 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.e-sid-28 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-28 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.e-sid-29 .elementor-button {
+  color: #ffffff;
+  background-color: #2563eb;
+  border-radius: 8px 8px 8px 8px;
+  font-family: "Inter", Sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 24px 12px 24px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.e-sid-29 .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.e-sid-29 {
+  margin: 0px 0px 0px 0px;
+}
+
+.e-sid-29 {
+  width: 297px !important;
+  max-width: 297px;
+}
+
+.faq-section {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 32px;
+  --column-gap: 0px;
+  --gap: 32px 0px;
+  gap: 32px 0px;
+  row-gap: 32px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 176px;
+  --margin-bottom: 0px;
+  --margin-left: 176px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 221px;
+  min-height: 221px;
+}
+
+.e-sid-31 .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.e-sid-31 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.accordion-item {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 12px 12px 12px 12px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 65px;
+  min-height: 65px;
+}
+
+.accordion-header {
+  width: 99.8% !important;
+  max-width: 99.8%;
+  min-height: 63px;
+  flex-shrink: 0 !important;
+}
+
+.accordion-header button,
+.accordion-header .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #0f172a !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.accordion-item {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 16px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 12px 12px 12px 12px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 65px;
+  min-height: 65px;
+}
+
+.accordion-header {
+  width: 99.8% !important;
+  max-width: 99.8%;
+  min-height: 63px;
+  flex-shrink: 0 !important;
+}
+
+.accordion-header button,
+.accordion-header .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #0f172a !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+    /* 3. Compiled Elementor Tablet Styles (max-width: 1024px) */
+    @media (max-width: 1024px) {
+  .e-sid-2 {
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .hero {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+  .badge {
+  width: 136px !important;
+  max-width: 136px;
+}
+  .e-sid-5 {
+  width: 720px !important;
+  max-width: 720px;
+}
+  .e-sid-6 {
+  width: 600px !important;
+  max-width: 600px;
+}
+  .e-sid-7 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .cards-grid {
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 32px 32px;
+  --row-gap: 32px;
+  --column-gap: 32px;
+  gap: 32px 32px;
+  row-gap: 32px;
+  column-gap: 32px;
+}
+  .card {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-11,
+.e-sid-11 .elementor-widget-image,
+.e-sid-11 .elementor-widget-container,
+.e-sid-11 .elementor-widget-container img,
+.e-sid-11 img {
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-11 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 180px !important;
+  min-height: 180px;
+}
+  .badge {
+  width: 78px !important;
+  max-width: 78px;
+}
+  .e-sid-13 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .e-sid-14 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .e-sid-15 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .e-sid-15 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .card {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-18 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 180px !important;
+  min-height: 180px;
+}
+  .badge {
+  width: 118px !important;
+  max-width: 118px;
+}
+  .e-sid-20 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .e-sid-21 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .e-sid-22 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .e-sid-22 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .card {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-25,
+.e-sid-25 .elementor-widget-image,
+.e-sid-25 .elementor-widget-container,
+.e-sid-25 .elementor-widget-container img,
+.e-sid-25 img {
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-25 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 180px !important;
+  min-height: 180px;
+}
+  .badge {
+  width: 99px !important;
+  max-width: 99px;
+}
+  .e-sid-27 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .e-sid-28 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .e-sid-29 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .e-sid-29 {
+  width: 153px !important;
+  max-width: 153px;
+}
+  .faq-section {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .accordion-header {
+  flex-shrink: 0 !important;
+}
+  .accordion-header {
+  flex-shrink: 0 !important;
+}
+}
+
+    /* 4. Compiled Elementor Mobile Styles (max-width: 767px) */
+    @media (max-width: 767px) {
+  .e-sid-2 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --padding-top: 48px;
+  --padding-right: 24px;
+  --padding-bottom: 48px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .hero {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+}
+  .badge {
+  width: 136px !important;
+  max-width: 136px;
+}
+  .e-sid-5 {
+  width: 322px !important;
+  max-width: 322px;
+}
+  .e-sid-6 {
+  width: 322px !important;
+  max-width: 322px;
+}
+  .e-sid-7 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .cards-grid {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 32px 32px;
+  --row-gap: 32px;
+  --column-gap: 32px;
+  gap: 32px 32px;
+  row-gap: 32px;
+  column-gap: 32px;
+  width: 100%;
+}
+  .card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 49.6%;
+  flex-shrink: 0 !important;
+}
+  .card-media {
+  width: 100%;
+}
+  .e-sid-11,
+.e-sid-11 .elementor-widget-image,
+.e-sid-11 .elementor-widget-container,
+.e-sid-11 .elementor-widget-container img,
+.e-sid-11 img {
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-11 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 180px !important;
+  min-height: 180px;
+}
+  .badge {
+  width: 78px !important;
+  max-width: 78px;
+}
+  .e-sid-13 {
+  width: 94px !important;
+  max-width: 94px;
+}
+  .e-sid-14 {
+  width: 94px !important;
+  max-width: 94px;
+}
+  .e-sid-15 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .e-sid-15 {
+  width: 94px !important;
+  max-width: 94px;
+}
+  .card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 57.1%;
+  flex-shrink: 0 !important;
+}
+  .card-media {
+  width: 100%;
+}
+  .e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 118px !important;
+  max-width: 118px !important;
+}
+  .e-sid-18 {
+  width: 118px !important;
+  max-width: 118px;
+  max-height: 180px !important;
+  min-height: 180px;
+}
+  .badge {
+  width: 118px !important;
+  max-width: 118px;
+}
+  .e-sid-20 {
+  width: 118px !important;
+  max-width: 118px;
+}
+  .e-sid-21 {
+  width: 118px !important;
+  max-width: 118px;
+}
+  .e-sid-22 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .e-sid-22 {
+  width: 118px !important;
+  max-width: 118px;
+}
+  .card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 51.2%;
+  flex-shrink: 0 !important;
+}
+  .card-media {
+  width: 100%;
+}
+  .e-sid-25,
+.e-sid-25 .elementor-widget-image,
+.e-sid-25 .elementor-widget-container,
+.e-sid-25 .elementor-widget-container img,
+.e-sid-25 img {
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-25 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 180px !important;
+  min-height: 180px;
+}
+  .badge {
+  width: 99px !important;
+  max-width: 99px;
+}
+  .e-sid-27 {
+  width: 99px !important;
+  max-width: 99px;
+}
+  .e-sid-28 {
+  width: 99px !important;
+  max-width: 99px;
+}
+  .e-sid-29 .elementor-button {
+  border-radius: 8px 8px 8px 8px;
+}
+  .e-sid-29 {
+  width: 99px !important;
+  max-width: 99px;
+}
+  .faq-section {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .accordion-item {
+  width: 100%;
+}
+  .accordion-header {
+  flex-shrink: 0 !important;
+}
+  .accordion-item {
+  width: 100%;
+}
+  .accordion-header {
+  min-height: 76px;
+  flex-shrink: 0 !important;
+}
+}
+
+    /* 5. Isolated Micro-CSS & Atomic Overrides (Post-Cascade Priority) */
+    
+    /* Isolated Micro-CSS */
+    
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-media {
+  overflow: hidden;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  align-self: flex-start;
+}
+
+.card p {
+  flex-grow: 1;
+}
+
+.btn {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn .elementor-button:hover, .elementor-widget-button.btn .elementor-button:hover {
+  background: #1d4ed8 !important;
+}
+
+.accordion-item {
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  text-align: left;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-item.is-active .accordion-body, .accordion-item.is-active .accordion-body .elementor-heading-title, .accordion-item.is-active .accordion-body .elementor-icon, .accordion-item.is-active .accordion-body .elementor-button, .accordion-item.is-active .accordion-body * {
+  display: block;
+}
+
+.accordion-icon {
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+
+.accordion-item.is-active .accordion-icon {
+  transform: rotate(45deg) !important;
+}
+
+[class*="media"], [class*="thumb"], [class*="cover"] {
+  overflow: hidden !important;
+}
+
+[class*="media"] .elementor-widget-image,
+[class*="media"] .elementor-widget-image .elementor-widget-container,
+[class*="thumb"] .elementor-widget-image,
+[class*="thumb"] .elementor-widget-image .elementor-widget-container,
+[class*="cover"] .elementor-widget-image,
+[class*="cover"] .elementor-widget-image .elementor-widget-container {
+  height: 100% !important;
+  display: flex !important;
+  width: 100% !important;
+}
+
+[class*="media"] .elementor-widget-image img,
+[class*="thumb"] .elementor-widget-image img,
+[class*="cover"] .elementor-widget-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.e-sid-11,
+.e-sid-11 .elementor-widget-image,
+.e-sid-11 .elementor-widget-container,
+.e-sid-11 .elementor-widget-container img,
+.e-sid-11 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-25,
+.e-sid-25 .elementor-widget-image,
+.e-sid-25 .elementor-widget-container,
+.e-sid-25 .elementor-widget-container img,
+.e-sid-25 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+}
+
+.accordion-header button,
+.accordion-header .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #0f172a !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+@media (max-width: 1024px) {
+  .e-sid-11,
+  .e-sid-11 .elementor-widget-image,
+  .e-sid-11 .elementor-widget-container,
+  .e-sid-11 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-25,
+  .e-sid-25 .elementor-widget-image,
+  .e-sid-25 .elementor-widget-container,
+  .e-sid-25 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .e-sid-11,
+  .e-sid-11 .elementor-widget-image,
+  .e-sid-11 .elementor-widget-container,
+  .e-sid-11 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-25,
+  .e-sid-25 .elementor-widget-image,
+  .e-sid-25 .elementor-widget-container,
+  .e-sid-25 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+}
+
+
+  </style>
+</head>
+<body class="elementor-default elementor-page">
+  <div class="elementor elementor-virtual-root">
+    <div class="elementor-element elementor-element-451f2cac container e-sid-2 e-flex e-con-boxed e-con e-parent" data-sid="sid-2" data-dom-id="sid-2" data-id="451f2cac" data-element_type="container">
+      <div class="e-con-inner">
+        <div class="elementor-element elementor-element-e97c4c42 embedded-stylesheet-engine e-sid-e97c4c42  elementor-widget elementor-widget-html" data-id="e97c4c42" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><style>
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-media {
+  overflow: hidden;
+}
+
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge {
+  align-self: flex-start;
+}
+
+.card p {
+  flex-grow: 1;
+}
+
+.btn {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn .elementor-button:hover, .elementor-widget-button.btn .elementor-button:hover {
+  background: #1d4ed8 !important;
+}
+
+.accordion-item {
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  text-align: left;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0f172a;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-item.is-active .accordion-body, .accordion-item.is-active .accordion-body .elementor-heading-title, .accordion-item.is-active .accordion-body .elementor-icon, .accordion-item.is-active .accordion-body .elementor-button, .accordion-item.is-active .accordion-body * {
+  display: block;
+}
+
+.accordion-icon {
+  font-size: 20px;
+  transition: transform 0.2s;
+}
+
+.accordion-item.is-active .accordion-icon {
+  transform: rotate(45deg) !important;
+}
+
+[class*="media"], [class*="thumb"], [class*="cover"] {
+  overflow: hidden !important;
+}
+
+[class*="media"] .elementor-widget-image,
+[class*="media"] .elementor-widget-image .elementor-widget-container,
+[class*="thumb"] .elementor-widget-image,
+[class*="thumb"] .elementor-widget-image .elementor-widget-container,
+[class*="cover"] .elementor-widget-image,
+[class*="cover"] .elementor-widget-image .elementor-widget-container {
+  height: 100% !important;
+  display: flex !important;
+  width: 100% !important;
+}
+
+[class*="media"] .elementor-widget-image img,
+[class*="thumb"] .elementor-widget-image img,
+[class*="cover"] .elementor-widget-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.e-sid-11,
+.e-sid-11 .elementor-widget-image,
+.e-sid-11 .elementor-widget-container,
+.e-sid-11 .elementor-widget-container img,
+.e-sid-11 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-25,
+.e-sid-25 .elementor-widget-image,
+.e-sid-25 .elementor-widget-container,
+.e-sid-25 .elementor-widget-container img,
+.e-sid-25 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+}
+
+.accordion-header button,
+.accordion-header .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #0f172a !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+@media (max-width: 1024px) {
+  .e-sid-11,
+  .e-sid-11 .elementor-widget-image,
+  .e-sid-11 .elementor-widget-container,
+  .e-sid-11 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-25,
+  .e-sid-25 .elementor-widget-image,
+  .e-sid-25 .elementor-widget-container,
+  .e-sid-25 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .e-sid-11,
+  .e-sid-11 .elementor-widget-image,
+  .e-sid-11 .elementor-widget-container,
+  .e-sid-11 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-25,
+  .e-sid-25 .elementor-widget-image,
+  .e-sid-25 .elementor-widget-container,
+  .e-sid-25 .elementor-widget-container img {
+  width: 100% !important;
+  height: 180px !important;
+  max-height: 180px !important;
+  min-height: 180px !important;
+  object-fit: cover !important;
+  }
+}
+</style></div>
+  </div>
+<div class="elementor-element elementor-element-a22338d6 hero e-sid-3 e-flex e-con-full e-con e-child" data-sid="sid-3" data-dom-id="sid-3" data-id="a22338d6" data-element_type="container">
+    <div class="elementor-element elementor-element-ba3b55c6 badge e-sid-4  elementor-widget elementor-widget-text-editor" data-sid="sid-4" data-dom-id="sid-4" data-id="ba3b55c6" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Next-Gen Cloud</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-9241b722 e-sid-5  elementor-widget elementor-widget-heading" data-sid="sid-5" data-dom-id="sid-5" data-id="9241b722" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h1 class="elementor-heading-title elementor-size-default">Build, Deploy, Scale Faster</h1></div>
+  </div>
+<div class="elementor-element elementor-element-45665511 e-sid-6  elementor-widget elementor-widget-text-editor" data-sid="sid-6" data-dom-id="sid-6" data-id="45665511" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>A unified infrastructure automation platform engineered for high-performance developer teams worldwide.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-cb9a3192 btn e-sid-7  elementor-widget elementor-widget-button" data-sid="sid-7" data-dom-id="sid-7" data-id="cb9a3192" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper">
+          <a class="elementor-button elementor-size-sm" href="#plans">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Explore Solutions</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+<div id="plans" class="elementor-element elementor-element-bca00a2d cards-grid e-sid-8 e-flex e-con-full e-con e-child" data-sid="sid-8" data-dom-id="sid-8" data-id="bca00a2d" data-element_type="container">
+    <div class="elementor-element elementor-element-bf35b9ef card e-sid-9 e-flex e-con-full e-con e-child" data-sid="sid-9" data-dom-id="sid-9" data-id="bf35b9ef" data-element_type="container">
+    <div class="elementor-element elementor-element-fb248005 card-media e-sid-10 e-flex e-con-full e-con e-child" data-sid="sid-10" data-dom-id="sid-10" data-id="fb248005" data-element_type="container">
+    <div class="elementor-element elementor-element-9590e839 e-sid-11  elementor-widget elementor-widget-image" data-sid="sid-11" data-dom-id="sid-11" data-id="9590e839" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&amp;auto=format&amp;fit=crop&amp;q=60.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-19c4eb43 badge e-sid-12  elementor-widget elementor-widget-text-editor" data-sid="sid-12" data-dom-id="sid-12" data-id="19c4eb43" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Starter</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-f1656ab8 e-sid-13  elementor-widget elementor-widget-heading" data-sid="sid-13" data-dom-id="sid-13" data-id="f1656ab8" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Real-time Metrics</h3></div>
+  </div>
+<div class="elementor-element elementor-element-6adff529 e-sid-14  elementor-widget elementor-widget-text-editor" data-sid="sid-14" data-dom-id="sid-14" data-id="6adff529" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Gain instantaneous visibility into telemetry streams with microsecond latency tracing and monitoring.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-5dbd2a57 btn e-sid-15  elementor-widget elementor-widget-button" data-sid="sid-15" data-dom-id="sid-15" data-id="5dbd2a57" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Get Started</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-26b39977 card e-sid-16 e-flex e-con-full e-con e-child" data-sid="sid-16" data-dom-id="sid-16" data-id="26b39977" data-element_type="container">
+    <div class="elementor-element elementor-element-509b24cf card-media e-sid-17 e-flex e-con-full e-con e-child" data-sid="sid-17" data-dom-id="sid-17" data-id="509b24cf" data-element_type="container">
+    <div class="elementor-element elementor-element-4c234bae e-sid-18  elementor-widget elementor-widget-image" data-sid="sid-18" data-dom-id="sid-18" data-id="4c234bae" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&amp;auto=format&amp;fit=crop&amp;q=60.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-e1e38c83 badge e-sid-19  elementor-widget elementor-widget-text-editor" data-sid="sid-19" data-dom-id="sid-19" data-id="e1e38c83" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Professional</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-eb0975e7 e-sid-20  elementor-widget elementor-widget-heading" data-sid="sid-20" data-dom-id="sid-20" data-id="eb0975e7" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Continuous Delivery</h3></div>
+  </div>
+<div class="elementor-element elementor-element-d8bba0f7 e-sid-21  elementor-widget elementor-widget-text-editor" data-sid="sid-21" data-dom-id="sid-21" data-id="d8bba0f7" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Zero-downtime canary deployments, automated rollbacks, and multi-region synchronization protocols.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-1e5e0d75 btn e-sid-22  elementor-widget elementor-widget-button" data-sid="sid-22" data-dom-id="sid-22" data-id="1e5e0d75" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Start Free Trial</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-09013c23 card e-sid-23 e-flex e-con-full e-con e-child" data-sid="sid-23" data-dom-id="sid-23" data-id="09013c23" data-element_type="container">
+    <div class="elementor-element elementor-element-d31cfee1 card-media e-sid-24 e-flex e-con-full e-con e-child" data-sid="sid-24" data-dom-id="sid-24" data-id="d31cfee1" data-element_type="container">
+    <div class="elementor-element elementor-element-b3ebdb7c e-sid-25  elementor-widget elementor-widget-image" data-sid="sid-25" data-dom-id="sid-25" data-id="b3ebdb7c" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&amp;auto=format&amp;fit=crop&amp;q=60.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-30217413 badge e-sid-26  elementor-widget elementor-widget-text-editor" data-sid="sid-26" data-dom-id="sid-26" data-id="30217413" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Enterprise</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-a17b1e1b e-sid-27  elementor-widget elementor-widget-heading" data-sid="sid-27" data-dom-id="sid-27" data-id="a17b1e1b" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Zero-Trust Security</h3></div>
+  </div>
+<div class="elementor-element elementor-element-62cb2259 e-sid-28  elementor-widget elementor-widget-text-editor" data-sid="sid-28" data-dom-id="sid-28" data-id="62cb2259" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Hardware-grade encryption at rest and in transit, strict RBAC, and automated SOC2 audit compliance.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-99681eb4 btn e-sid-29  elementor-widget elementor-widget-button" data-sid="sid-29" data-dom-id="sid-29" data-id="99681eb4" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Contact Sales</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-5f44ceac faq-section e-sid-30 e-flex e-con-full e-con e-child" data-sid="sid-30" data-dom-id="sid-30" data-id="5f44ceac" data-element_type="container">
+    <div class="elementor-element elementor-element-ccd44d04 e-sid-31  elementor-widget elementor-widget-heading" data-sid="sid-31" data-dom-id="sid-31" data-id="ccd44d04" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h2 class="elementor-heading-title elementor-size-default">Frequently Asked Questions</h2></div>
+  </div>
+<div class="elementor-element elementor-element-f4fb24e3 accordion-item e-sid-32 e-flex e-con-full e-con e-child" data-sid="sid-32" data-dom-id="sid-32" data-id="f4fb24e3" data-element_type="container">
+    <div class="elementor-element elementor-element-d83bd13c accordion-header e-sid-33  elementor-widget elementor-widget-html" data-sid="sid-33" data-dom-id="sid-33" data-id="d83bd13c" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button class="accordion-header composite-trigger"><span>How fast does deployment take?</span><span class="accordion-icon">+</span></button></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-4688b83b accordion-item e-sid-38 e-flex e-con-full e-con e-child" data-sid="sid-38" data-dom-id="sid-38" data-id="4688b83b" data-element_type="container">
+    <div class="elementor-element elementor-element-407ca7f5 accordion-header e-sid-39  elementor-widget elementor-widget-html" data-sid="sid-39" data-dom-id="sid-39" data-id="407ca7f5" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button class="accordion-header composite-trigger"><span>Can I integrate existing AWS / GCP clusters?</span><span class="accordion-icon">+</span></button></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-782a48f3 embedded-script-engine e-sid-782a48f3  elementor-widget elementor-widget-html" data-id="782a48f3" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><script>
+(function() {
+  // 1. Universal DOM Lifecycle Polyfill:
+  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,
+  // immediately invoke the callback so dynamic scripts never enter a deadzone.
+  try {
+    var _origDocAdd = Document.prototype.addEventListener;
+    var _lifecycleAdd = function(type, fn, opts) {
+      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {
+        try {
+          setTimeout(function() { fn.call(document, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origDocAdd.call(this, type, fn, opts);
+    };
+    Document.prototype.addEventListener = _lifecycleAdd;
+    try { document.addEventListener = _lifecycleAdd; } catch(e) {}
+
+    var _origWinAdd = Window.prototype.addEventListener;
+    Window.prototype.addEventListener = function(type, fn, opts) {
+      if (type === 'load' && document.readyState === 'complete') {
+        try {
+          setTimeout(function() { fn.call(window, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origWinAdd.call(this, type, fn, opts);
+    };
+  } catch(e) {
+    console.warn('[LIFECYCLE POLYFILL ERROR]', e);
+  }
+
+  function initDynamicComponentLogic() {
+    // 2. Universal Data-Attribute Hydration Bridge:
+    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases
+    // (e.g. data-category--design -> el.dataset.category = "design", el.setAttribute("data-category", "design"))
+    try {
+      document.querySelectorAll('*').forEach(function(el) {
+        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;
+        if (el.dataset && el.dataset.__hasDataHydrated) return;
+        if (el.dataset) el.dataset.__hasDataHydrated = 'true';
+        if (el.classList) {
+          el.classList.forEach(function(cls) {
+            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {
+              var sepIdx = cls.indexOf('--');
+              var attrName = cls.slice(0, sepIdx);
+              var rawVal = cls.slice(sepIdx + 2);
+              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)
+              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {
+                return String.fromCharCode(parseInt(hex, 16));
+              });
+              el.setAttribute(attrName, attrVal);
+              if (el.dataset) {
+                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });
+                el.dataset[prop] = attrVal;
+              }
+            }
+          });
+        }
+      });
+    } catch(e) {
+      console.warn('[DATA HYDRATION ERROR]', e);
+    }
+
+    try {
+      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title
+      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {
+        var inner = widget.querySelector('.elementor-heading-title');
+        if (inner && !widget.__hasTextProxy) {
+          widget.__hasTextProxy = true;
+          Object.defineProperty(widget, 'textContent', {
+            get: function() { return inner.textContent; },
+            set: function(val) { inner.textContent = val; },
+            configurable: true
+          });
+          Object.defineProperty(widget, 'innerText', {
+            get: function() { return inner.innerText; },
+            set: function(val) { inner.innerText = val; },
+            configurable: true
+          });
+        }
+      });
+
+      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)
+      
+      if (!window.__delegatedBridgesBound) {
+        window.__delegatedBridgesBound = true;
+        
+      (function(){
+        var k = "bridge_.accordion-header|.accordion-item";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest(".accordion-header");
+            if (!trig) return;
+            var anc = trig.closest(".accordion-item");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-active"] = anc.classList.contains("is-active");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest(".accordion-header");
+          if (!trig) return;
+          var anc = trig.closest(".accordion-item");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-active"] : null;
+          var isNowPresent = anc.classList.contains("is-active");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-active");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+      }
+  
+    } catch(err) {
+      console.warn('[COMPILER BRIDGE]', err);
+    }
+
+    // Execute Application Business Logic with Idempotency Protection
+    if (!window.__appLogicInitialized) {
+      window.__appLogicInitialized = true;
+      try {
+        document.addEventListener('DOMContentLoaded', function() {
+      const headers = document.querySelectorAll('.accordion-header');
+      headers.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const item = this.parentElement;
+          const isActive = item.classList.contains('is-active');
+          document.querySelectorAll('.accordion-item').forEach(function(el) {
+            el.classList.remove('is-active');
+          });
+          if (!isActive) {
+            item.classList.add('is-active');
+          }
+        });
+      });
+    });
+      } catch(appErr) {
+        console.warn('[APP LOGIC ERROR]', appErr);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);
+  } else {
+    initDynamicComponentLogic();
+  }
+  setTimeout(initDynamicComponentLogic, 200);
+  setTimeout(initDynamicComponentLogic, 800);
+  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);
+})();
+</script></div>
+  </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

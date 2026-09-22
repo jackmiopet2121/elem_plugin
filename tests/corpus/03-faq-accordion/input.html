@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequently Asked Questions | Modern SaaS Support</title>
+  
+  <style>
+    /* ==========================================================================
+       DESIGN TOKENS & SYSTEM VARIABLES
+       ========================================================================== */
+    :root {
+      /* Palette */
+      --color-surface: #F8FAFC;
+      --color-surface-hover: #F1F5F9;
+      --color-card-bg: #FFFFFF;
+      --color-outline: #E2E8F0;
+      --color-outline-hover: #CBD5E1;
+      --color-slate-900: #0F172A;
+      --color-slate-700: #334155;
+      --color-slate-600: #475569;
+      --color-slate-500: #64748B;
+      --color-primary: #2563EB;
+      --color-primary-soft: rgba(37, 99, 235, 0.08);
+      --color-primary-hover: #1D4ED8;
+
+      /* Typography */
+      --font-stack: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+      /* Radii */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-hover: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02);
+      --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.25);
+
+      /* Transitions */
+      --anim-duration: 0.32s;
+      --anim-timing: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ==========================================================================
+       RESET & BASE RESILIENCY
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-stack);
+      background-color: var(--color-surface);
+      color: var(--color-slate-900);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ==========================================================================
+       SECTION CONTAINER
+       ========================================================================== */
+    .faq-section {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 96px 20px;
+    }
+
+    .faq-container {
+      width: 100%;
+      max-width: 840px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    /* ==========================================================================
+       SECTION HEADER
+       ========================================================================== */
+    .faq-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+    }
+
+    .faq-pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background-color: var(--color-primary-soft);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      border-radius: var(--radius-full);
+      color: var(--color-primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      user-select: none;
+    }
+
+    .faq-pill-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .faq-title {
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      color: var(--color-slate-900);
+    }
+
+    .faq-subtitle {
+      font-size: 16px;
+      color: var(--color-slate-600);
+      max-width: 580px;
+      line-height: 1.6;
+    }
+
+    .faq-subtitle a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 1.5px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .faq-subtitle a:hover {
+      color: var(--color-primary-hover);
+      border-bottom-color: var(--color-primary-hover);
+    }
+
+    /* ==========================================================================
+       ACCORDION CARDS STACK
+       ========================================================================== */
+    .accordion-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .faq-card {
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-outline);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .faq-card:hover {
+      border-color: var(--color-outline-hover);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .faq-card.is-open {
+      border-color: rgba(37, 99, 235, 0.3);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* ==========================================================================
+       ACCORDION HEADER ROW (TRIGGER BUTTON)
+       ========================================================================== */
+    .faq-trigger {
+      width: 100%;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .faq-trigger:hover {
+      background-color: var(--color-surface);
+    }
+
+    .faq-trigger:focus-visible {
+      outline: none;
+      box-shadow: var(--shadow-focus);
+    }
+
+    .faq-question {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--color-slate-900);
+      letter-spacing: -0.01em;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    /* Chevron Indicator Circle */
+    .faq-indicator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: var(--radius-full);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-outline);
+      color: var(--color-slate-500);
+      transition: transform var(--anim-duration) var(--anim-timing), 
+                  background-color 0.2s ease, 
+                  border-color 0.2s ease, 
+                  color 0.2s ease;
+    }
+
+    .faq-indicator svg {
+      width: 16px;
+      height: 16px;
+      stroke-width: 2.2;
+      transition: transform var(--anim-duration) var(--anim-timing);
+    }
+
+    .faq-trigger:hover .faq-indicator {
+      background-color: var(--color-card-bg);
+      border-color: var(--color-outline-hover);
+      color: var(--color-slate-900);
+    }
+
+    .faq-card.is-open .faq-indicator {
+      background-color: var(--color-primary-soft);
+      border-color: rgba(37, 99, 235, 0.2);
+      color: var(--color-primary);
+      transform: rotate(180deg);
+    }
+
+    /* ==========================================================================
+       EXPANDABLE ANSWER BODY (FLUID CSS GRID ANIMATION)
+       ========================================================================== */
+    .faq-collapse {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--anim-duration) var(--anim-timing);
+    }
+
+    .faq-card.is-open .faq-collapse {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-collapse-inner {
+      overflow: hidden;
+    }
+
+    .faq-content {
+      padding: 0 24px 24px 24px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--color-slate-600);
+    }
+
+    .faq-content p + p {
+      margin-top: 12px;
+    }
+
+    .faq-content strong {
+      color: var(--color-slate-900);
+      font-weight: 600;
+    }
+
+    .faq-content a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .faq-content a:hover {
+      text-decoration: underline;
+    }
+
+    /* Formatted Checklist within answer */
+    .faq-bullet-list {
+      list-style: none;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .faq-bullet-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--color-slate-700);
+    }
+
+    .faq-bullet-icon {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      color: var(--color-primary);
+    }
+
+    /* ==========================================================================
+       SUPPORT CALLOUT FOOTER
+       ========================================================================== */
+    .faq-footer {
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-outline);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .faq-footer-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .faq-footer-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--color-slate-900);
+    }
+
+    .faq-footer-desc {
+      font-size: 14px;
+      color: var(--color-slate-500);
+    }
+
+    .faq-footer-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background-color: var(--color-slate-900);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    .faq-footer-btn:hover {
+      background-color: var(--color-slate-700);
+      transform: translateY(-1px);
+    }
+
+    .faq-footer-btn svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ADAPTATIONS
+       ========================================================================== */
+    @media (max-width: 768px) {
+      .faq-section {
+        padding: 56px 16px;
+      }
+
+      .faq-container {
+        gap: 36px;
+      }
+
+      .faq-title {
+        font-size: 30px;
+      }
+
+      .faq-subtitle {
+        font-size: 15px;
+      }
+
+      .faq-trigger {
+        padding: 18px 18px;
+        min-height: 56px;
+      }
+
+      .faq-question {
+        font-size: 16px;
+      }
+
+      .faq-indicator {
+        width: 32px;
+        height: 32px;
+      }
+
+      .faq-content {
+        padding: 0 18px 20px 18px;
+        font-size: 14px;
+      }
+
+      .faq-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 24px 20px;
+        gap: 16px;
+      }
+
+      .faq-footer-btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="faq-section" aria-label="Frequently Asked Questions Section">
+    <div class="faq-container">
+
+      <!-- SECTION HEADER -->
+      <header class="faq-header">
+        <div class="faq-pill-badge">
+          <!-- Sparkle SVG -->
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2L14.39 8.26L21 9.27L16.27 14.14L17.59 21L12 17.77L6.41 21L7.73 14.14L3 9.27L9.61 8.26L12 2Z"/>
+          </svg>
+          <span>Frequently Asked Questions</span>
+        </div>
+        <h2 class="faq-title">Everything you need to know</h2>
+        <p class="faq-subtitle">
+          Have questions regarding plans, billing, or enterprise integration? We’re here to help. If you can’t find your answer, <a href="#contact-support">reach out to our engineering team</a>.
+        </p>
+      </header>
+
+      <!-- ACCORDION ITEMS -->
+      <div class="accordion-list" role="region" aria-label="Accordion Questions List">
+
+        <!-- ITEM 1 (INITIAL OPEN BY DEFAULT) -->
+        <article class="faq-card is-open" id="faq-card-1">
+          <h3>
+            <button 
+              type="button" 
+              class="faq-trigger" 
+              id="faq-btn-1" 
+              aria-expanded="true" 
+              aria-controls="faq-panel-1">
+              <span class="faq-question">How does the 14-day free trial operate?</span>
+              <span class="faq-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+          </h3>
+          <div 
+            class="faq-collapse" 
+            id="faq-panel-1" 
+            role="region" 
+            aria-labelledby="faq-btn-1">
+            <div class="faq-collapse-inner">
+              <div class="faq-content">
+                <p>
+                  You get <strong>immediate, full-tier access</strong> to our entire platform, including all real-time observability telemetry, parallel automation pipelines, and team collaboration tooling.
+                </p>
+                <p>
+                  <strong>No credit card is required upfront.</strong> At the end of your 14-day trial period, you can easily choose a subscription tier that matches your squad's capacity, or your workspace automatically reverts to a non-billing community archive.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ITEM 2 -->
+        <article class="faq-card" id="faq-card-2">
+          <h3>
+            <button 
+              type="button" 
+              class="faq-trigger" 
+              id="faq-btn-2" 
+              aria-expanded="false" 
+              aria-controls="faq-panel-2">
+              <span class="faq-question">Can I switch plans or cancel my subscription at any point?</span>
+              <span class="faq-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+          </h3>
+          <div 
+            class="faq-collapse" 
+            id="faq-panel-2" 
+            role="region" 
+            aria-labelledby="faq-btn-2">
+            <div class="faq-collapse-inner">
+              <div class="faq-content">
+                <p>
+                  Yes, absolutely. You can upgrade, downgrade, or cancel directly from your organization settings dashboard at any second.
+                </p>
+                <ul class="faq-bullet-list">
+                  <li class="faq-bullet-item">
+                    <svg class="faq-bullet-icon" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                    <span><strong>Upgrades:</strong> Take effect immediately with fair prorated billing for the remainder of your cycle.</span>
+                  </li>
+                  <li class="faq-bullet-item">
+                    <svg class="faq-bullet-icon" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                    <span><strong>Cancellations:</strong> You retain complete active features until the billing period concludes. No lock-in penalties.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ITEM 3 -->
+        <article class="faq-card" id="faq-card-3">
+          <h3>
+            <button 
+              type="button" 
+              class="faq-trigger" 
+              id="faq-btn-3" 
+              aria-expanded="false" 
+              aria-controls="faq-panel-3">
+              <span class="faq-question">What payment methods and currencies do you accept?</span>
+              <span class="faq-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+          </h3>
+          <div 
+            class="faq-collapse" 
+            id="faq-panel-3" 
+            role="region" 
+            aria-labelledby="faq-btn-3">
+            <div class="faq-collapse-inner">
+              <div class="faq-content">
+                <p>
+                  We partner with top-tier tier-1 processors to guarantee seamless international procurement:
+                </p>
+                <ul class="faq-bullet-list">
+                  <li class="faq-bullet-item">
+                    <svg class="faq-bullet-icon" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                    <span><strong>Cards:</strong> Visa, MasterCard, American Express, and Discover.</span>
+                  </li>
+                  <li class="faq-bullet-item">
+                    <svg class="faq-bullet-icon" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                    <span><strong>Digital Wallets:</strong> Apple Pay, Google Pay, and Link 1-click checkout.</span>
+                  </li>
+                  <li class="faq-bullet-item">
+                    <svg class="faq-bullet-icon" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+                    </svg>
+                    <span><strong>Enterprise Wire:</strong> ACH, SEPA, and BACS transfers supported on annual agreements.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ITEM 4 -->
+        <article class="faq-card" id="faq-card-4">
+          <h3>
+            <button 
+              type="button" 
+              class="faq-trigger" 
+              id="faq-btn-4" 
+              aria-expanded="false" 
+              aria-controls="faq-panel-4">
+              <span class="faq-question">How is our company data protected and maintained?</span>
+              <span class="faq-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+          </h3>
+          <div 
+            class="faq-collapse" 
+            id="faq-panel-4" 
+            role="region" 
+            aria-labelledby="faq-btn-4">
+            <div class="faq-collapse-inner">
+              <div class="faq-content">
+                <p>
+                  Security is the foundational layer of our infrastructure. We maintain rigorous compliance certifications including <strong>SOC 2 Type II</strong>, <strong>ISO/IEC 27001</strong>, and complete <strong>GDPR &amp; HIPAA</strong> readiness.
+                </p>
+                <p>
+                  All cluster databases are encrypted using AES-256 at rest and TLS 1.3 in transit. We run automated continuous pen-testing and offer segregated VPC peering for Enterprise instances. Review our <a href="#trust-center">Trust &amp; Compliance Center</a> for live status reports.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ITEM 5 -->
+        <article class="faq-card" id="faq-card-5">
+          <h3>
+            <button 
+              type="button" 
+              class="faq-trigger" 
+              id="faq-btn-5" 
+              aria-expanded="false" 
+              aria-controls="faq-panel-5">
+              <span class="faq-question">What happens if my workspace exceeds monthly usage caps?</span>
+              <span class="faq-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+          </h3>
+          <div 
+            class="faq-collapse" 
+            id="faq-panel-5" 
+            role="region" 
+            aria-labelledby="faq-btn-5">
+            <div class="faq-collapse-inner">
+              <div class="faq-content">
+                <p>
+                  <strong>We do not cut off your production pipelines abruptly.</strong> If your API requests or bandwidth hit 80% and 95% of tier thresholds, workspace admins receive real-time webhook and email alerts.
+                </p>
+                <p>
+                  We provide a generous 5-day grace period with zero punitive throttling so you can easily choose between optimization or upgrading your quota seamlessly without service disruption.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- ITEM 6 -->
+        <article class="faq-card" id="faq-card-6">
+          <h3>
+            <button 
+              type="button" 
+              class="faq-trigger" 
+              id="faq-btn-6" 
+              aria-expanded="false" 
+              aria-controls="faq-panel-6">
+              <span class="faq-question">Do you offer migration assistance and dedicated support?</span>
+              <span class="faq-indicator" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </button>
+          </h3>
+          <div 
+            class="faq-collapse" 
+            id="faq-panel-6" 
+            role="region" 
+            aria-labelledby="faq-btn-6">
+            <div class="faq-collapse-inner">
+              <div class="faq-content">
+                <p>
+                  Yes! All Pro and Enterprise subscriptions include access to our complimentary architectural migration scripts and guidance.
+                </p>
+                <p>
+                  Enterprise customers receive a <strong>dedicated Solutions Architect</strong>, a private shared Slack/Teams connect channel, and an aggressive <strong>15-minute Critical Response SLA</strong> backed by financial uptime guarantees.
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- SUPPORT HELPER CALLOUT -->
+      <div class="faq-footer">
+        <div class="faq-footer-info">
+          <h4 class="faq-footer-title">Still have unanswered questions?</h4>
+          <p class="faq-footer-desc">Our technical solutions squad is available 24/7 via live chat.</p>
+        </div>
+        <a href="#chat-with-us" class="faq-footer-btn">
+          <span>Chat with Support</span>
+          <svg viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       VANILLA ES6+ INTERACTIVE LOGIC (AUTO-COLLAPSE ACCORDION)
+       ========================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // Cache DOM references
+      const faqCards = document.querySelectorAll('.faq-card');
+
+      /**
+       * Opens a given FAQ card and updates ARIA attributes
+       * @param {HTMLElement} card 
+       */
+      function openCard(card) {
+        const trigger = card.querySelector('.faq-trigger');
+        if (!card || !trigger) return;
+
+        card.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      /**
+       * Closes a given FAQ card and updates ARIA attributes
+       * @param {HTMLElement} card 
+       */
+      function closeCard(card) {
+        const trigger = card.querySelector('.faq-trigger');
+        if (!card || !trigger) return;
+
+        card.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      /**
+       * Orchestrates single-active accordion logic
+       * @param {HTMLElement} targetCard 
+       */
+      function toggleAccordion(targetCard) {
+        const isCurrentlyOpen = targetCard.classList.contains('is-open');
+
+        // Auto-collapse: close all active cards
+        faqCards.forEach(card => {
+          if (card !== targetCard && card.classList.contains('is-open')) {
+            closeCard(card);
+          }
+        });
+
+        // Toggle state of target item
+        if (isCurrentlyOpen) {
+          closeCard(targetCard);
+        } else {
+          openCard(targetCard);
+        }
+      }
+
+      // Initialize event listeners
+      faqCards.forEach(card => {
+        const trigger = card.querySelector('.faq-trigger');
+        if (!trigger) return;
+
+        // Mouse click handler
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          toggleAccordion(card);
+        });
+
+        // Keyboard accessibility: space & enter handled natively by <button>,
+        // but adding defense against accidental browser scroll on space
+        trigger.addEventListener('keydown', (event) => {
+          if (event.key === ' ' || event.key === 'Spacebar') {
+            event.preventDefault();
+            toggleAccordion(card);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

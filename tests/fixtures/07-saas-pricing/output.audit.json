@@ -1,0 +1,608 @@
+{
+  "title": "Elementor Free Template",
+  "timestamp": "2026-09-17T21:15:54.948Z",
+  "gatekeeperPassed": true,
+  "cleanPass": true,
+  "fidelity": 99,
+  "counts": {
+    "total": 87,
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 12
+  },
+  "rungCensus": {
+    "R0": 0,
+    "R1": 90,
+    "R2": 0,
+    "R3": 0
+  },
+  "editability": {
+    "totalWidgets": 0,
+    "nativeWidgets": 0,
+    "htmlWidgets": 0,
+    "systemWidgets": 0,
+    "effectiveTotal": 0,
+    "nativeWidgetPercentage": 100,
+    "passed": true,
+    "target": 90,
+    "htmlJustifications": []
+  },
+  "advisoryDefectCount": 75,
+  "behavior": {
+    "tested": 0,
+    "passed": 0,
+    "failed": 0,
+    "mismatches": []
+  },
+  "assets": {
+    "total": 0,
+    "loaded": 0
+  },
+  "fonts": {
+    "declared": [
+      {
+        "family": "-apple-system",
+        "isReady": true
+      }
+    ],
+    "verified": [
+      {
+        "family": "-apple-system",
+        "isReady": true
+      }
+    ]
+  },
+  "unresolvedDefects": [
+    {
+      "id": "defect-164",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-165",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"6px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": false
+    },
+    {
+      "id": "defect-166",
+      "nodeSid": "sid-6",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-6 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-167",
+      "nodeSid": "sid-11",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-11 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-168",
+      "nodeSid": "sid-12",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-12 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-169",
+      "nodeSid": "sid-13",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-13 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-170",
+      "nodeSid": "sid-14",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-14 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-171",
+      "nodeSid": "sid-15",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-15 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-172",
+      "nodeSid": "sid-16",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-16 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-173",
+      "nodeSid": "sid-16",
+      "viewport": "desktop",
+      "property": "borderRadius",
+      "message": "Defect on sid-16 [RULE-BOX-02]: expected \"8px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": false
+    },
+    {
+      "id": "defect-174",
+      "nodeSid": "sid-20",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-20 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-175",
+      "nodeSid": "sid-21",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-21 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-176",
+      "nodeSid": "sid-22",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-22 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-177",
+      "nodeSid": "sid-23",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-23 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-178",
+      "nodeSid": "sid-24",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-24 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-179",
+      "nodeSid": "sid-25",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-25 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-180",
+      "nodeSid": "sid-25",
+      "viewport": "desktop",
+      "property": "borderRadius",
+      "message": "Defect on sid-25 [RULE-BOX-02]: expected \"8px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": false
+    },
+    {
+      "id": "defect-181",
+      "nodeSid": "sid-30",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-30 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-182",
+      "nodeSid": "sid-31",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-31 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-183",
+      "nodeSid": "sid-32",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-32 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-184",
+      "nodeSid": "sid-33",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-33 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-185",
+      "nodeSid": "sid-34",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-34 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-186",
+      "nodeSid": "sid-34",
+      "viewport": "desktop",
+      "property": "borderRadius",
+      "message": "Defect on sid-34 [RULE-BOX-02]: expected \"8px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": false
+    },
+    {
+      "id": "defect-187",
+      "nodeSid": "sid-45",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-45 at desktop: expected 2 lines, got 3 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-188",
+      "nodeSid": "sid-50",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-50 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-189",
+      "nodeSid": "sid-53",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-53 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-190",
+      "nodeSid": "sid-56",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-56 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-191",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-192",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"6px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": false
+    },
+    {
+      "id": "defect-193",
+      "nodeSid": "sid-6",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-6 at tablet: expected 2 lines, got 3 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-194",
+      "nodeSid": "sid-11",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-11 at tablet: expected 2 lines, got 3 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-195",
+      "nodeSid": "sid-12",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-12 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-196",
+      "nodeSid": "sid-13",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-13 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-197",
+      "nodeSid": "sid-14",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-14 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-198",
+      "nodeSid": "sid-15",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-15 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-199",
+      "nodeSid": "sid-16",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-16 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-200",
+      "nodeSid": "sid-16",
+      "viewport": "tablet",
+      "property": "borderRadius",
+      "message": "Defect on sid-16 [RULE-BOX-02]: expected \"8px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": false
+    },
+    {
+      "id": "defect-201",
+      "nodeSid": "sid-20",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-20 at tablet: expected 2 lines, got 3 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-202",
+      "nodeSid": "sid-21",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-21 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-203",
+      "nodeSid": "sid-22",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-22 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-204",
+      "nodeSid": "sid-23",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-23 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-205",
+      "nodeSid": "sid-24",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-24 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-206",
+      "nodeSid": "sid-25",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-25 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-207",
+      "nodeSid": "sid-25",
+      "viewport": "tablet",
+      "property": "borderRadius",
+      "message": "Defect on sid-25 [RULE-BOX-02]: expected \"8px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": false
+    },
+    {
+      "id": "defect-208",
+      "nodeSid": "sid-29",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-29 at tablet: expected 2 lines, got 3 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-209",
+      "nodeSid": "sid-30",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-30 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-210",
+      "nodeSid": "sid-31",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-31 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-211",
+      "nodeSid": "sid-32",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-32 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-212",
+      "nodeSid": "sid-33",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-33 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-213",
+      "nodeSid": "sid-34",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-34 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fixture 08 - Visual Atomicity Integration</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8fafc;
+      padding: 40px 20px;
+    }
+    .wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    /* D1: Gradient headline atomicity */
+    .gradient-headline {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.2;
+      background-image: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 24px;
+    }
+    /* D2: Pseudo-content bullets */
+    .feature-list {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+    .feature-item {
+      font-size: 16px;
+      color: #334155;
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 28px;
+    }
+    .feature-item::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: #10b981;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    /* D3: Decorative empty visual panel */
+    .decorative-panel {
+      height: 160px;
+      background-color: #1e293b;
+      border-radius: 16px;
+      border: 2px solid #334155;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- D1: Gradient Headline -->
+    <h1 class="gradient-headline">Supercharge Your Workflow With AI</h1>
+    
+    <!-- D2: Pseudo-content Bullets -->
+    <ul class="feature-list">
+      <li class="feature-item">High-fidelity Elementor Free output</li>
+      <li class="feature-item">Zero regression and 100% native editability</li>
+      <li class="feature-item">Autonomous closed-loop visual self-healing</li>
+    </ul>
+
+    <!-- D3: Decorative Empty Visual Panel -->
+    <div class="decorative-panel"></div>
+  </div>
+</body>
+</html>

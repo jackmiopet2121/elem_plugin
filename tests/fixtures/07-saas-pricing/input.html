@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SaaS Cloud Pricing</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+    .header-section {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .badge {
+      display: inline-block;
+      background-color: #e0e7ff;
+      color: #4338ca;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .main-title {
+      font-size: 42px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      font-size: 18px;
+      color: #64748b;
+      margin-bottom: 0;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+    .pricing-card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+    }
+    .pricing-card.featured {
+      border: 2px solid #4f46e5;
+    }
+    .plan-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    .plan-price {
+      font-size: 40px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 12px;
+    }
+    .plan-desc {
+      font-size: 15px;
+      color: #64748b;
+      margin-bottom: 24px;
+    }
+    .feature-item {
+      font-size: 15px;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+    .cta-btn {
+      display: inline-block;
+      text-align: center;
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      margin-top: 24px;
+    }
+    .cta-btn.primary {
+      background-color: #4f46e5;
+    }
+    .section-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #0f172a;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 80px;
+    }
+    .feature-card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 32px 28px;
+    }
+    .feature-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+    .feature-card-text {
+      font-size: 14px;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    .faq-container {
+      margin-bottom: 40px;
+    }
+    .faq-item {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+    }
+    .faq-question {
+      font-size: 17px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+    .faq-answer {
+      font-size: 14px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- Header -->
+    <div class="header-section">
+      <span class="badge">Pricing Plans</span>
+      <h1 class="main-title">Simple, Transparent Pricing</h1>
+      <p class="subtitle">Choose the perfect plan for your team. Scale up or down at any time with zero commitment.</p>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="pricing-grid">
+      <!-- Starter -->
+      <div class="pricing-card">
+        <h3 class="plan-name">Starter Plan</h3>
+        <div class="plan-price">$19/month</div>
+        <p class="plan-desc">For individuals and small side projects.</p>
+        <p class="feature-item">Up to 5 active projects</p>
+        <p class="feature-item">10 GB cloud storage</p>
+        <p class="feature-item">Basic analytics dashboard</p>
+        <p class="feature-item">Standard email support</p>
+        <a href="#starter" class="cta-btn">Get Started</a>
+      </div>
+
+      <!-- Pro (Featured) -->
+      <div class="pricing-card featured">
+        <h3 class="plan-name">Professional Plan</h3>
+        <div class="plan-price">$49/month</div>
+        <p class="plan-desc">For growing teams and scaling startups.</p>
+        <p class="feature-item">Unlimited active projects</p>
+        <p class="feature-item">100 GB cloud storage</p>
+        <p class="feature-item">Advanced custom metrics</p>
+        <p class="feature-item">24/7 priority email & chat</p>
+        <a href="#pro" class="cta-btn primary">Start Free Trial</a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card">
+        <h3 class="plan-name">Enterprise Plan</h3>
+        <div class="plan-price">$99/month</div>
+        <p class="plan-desc">For organizations with advanced security needs.</p>
+        <p class="feature-item">Unlimited everything</p>
+        <p class="feature-item">1 TB dedicated storage</p>
+        <p class="feature-item">Custom SSO & compliance</p>
+        <p class="feature-item">Dedicated account manager</p>
+        <a href="#enterprise" class="cta-btn">Contact Sales</a>
+      </div>
+    </div>
+
+    <!-- Feature Grid -->
+    <h2 class="section-title">Built for Modern Engineering Teams</h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h4 class="feature-card-title">Instant Setup</h4>
+        <p class="feature-card-text">Deploy in seconds with zero configuration required. Seamlessly connects with your existing stack.</p>
+      </div>
+      <div class="feature-card">
+        <h4 class="feature-card-title">Bank-Grade Security</h4>
+        <p class="feature-card-text">End-to-end encryption with SOC2 Type II compliance to keep your mission-critical data secure.</p>
+      </div>
+      <div class="feature-card">
+        <h4 class="feature-card-title">Global Low Latency</h4>
+        <p class="feature-card-text">Distributed edge nodes ensure sub-50ms latency for all your international team members.</p>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <div class="faq-container">
+      <div class="faq-item">
+        <h4 class="faq-question">Can I switch plans at any time?</h4>
+        <p class="faq-answer">Yes, you can upgrade, downgrade, or cancel your subscription whenever you wish directly from your account settings.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-question">Is there a free trial available?</h4>
+        <p class="faq-answer">All paid plans come with a 14-day free trial. No credit card is required to begin testing.</p>
+      </div>
+      <div class="faq-item">
+        <h4 class="faq-question">What payment methods are supported?</h4>
+        <p class="faq-answer">We accept all major credit cards including Visa, Mastercard, American Express, as well as PayPal and wire transfers.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "id": "calib-06-image-vertical-align",
+  "name": "Image Widget Vertical Align Middle & Zero Baseline Descender",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "img-widget": {
+      "rect": { "h": 200 },
+      "tolerances": { "geometry": 1 }
+    }
+  }
+}

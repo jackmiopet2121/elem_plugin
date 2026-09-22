@@ -1,0 +1,12 @@
+{
+  "id": "calib-04-nested-boxed-container",
+  "name": "Nested Boxed Container Inner Centering & Max-Width",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "inner-boxed": {
+      "rect": { "w": 600 },
+      "centered": true,
+      "tolerances": { "geometry": 2 }
+    }
+  }
+}

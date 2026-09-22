@@ -1,0 +1,17 @@
+{
+  "id": "calib-01-heading-wrap",
+  "name": "Heading Text Wrap & LineCount Parity",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "title-1": {
+      "lineCount": 1,
+      "rect": { "w": 380, "h": 28 },
+      "tolerances": { "lineCount": 0, "geometry": 4 }
+    },
+    "title-2": {
+      "lineCount": 3,
+      "rect": { "w": 380, "h": 105 },
+      "tolerances": { "lineCount": 0, "geometry": 4 }
+    }
+  }
+}

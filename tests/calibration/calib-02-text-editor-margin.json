@@ -1,0 +1,17 @@
+{
+  "id": "calib-02-text-editor-margin",
+  "name": "Text Editor Paragraph Last-Child Margin Collapse",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "p-last": {
+      "styles": {
+        "marginBottom": "0px"
+      },
+      "tolerances": { "geometry": 0 }
+    },
+    "editor-con": {
+      "rect": { "h": 72 },
+      "tolerances": { "geometry": 4 }
+    }
+  }
+}

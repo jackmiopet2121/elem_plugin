@@ -1,0 +1,1163 @@
+{
+  "title": "Elementor Free Template",
+  "timestamp": "2026-09-21T20:45:23.496Z",
+  "engineMode": "Single-Pass Ground Truth (Chromium, local)",
+  "gatekeeperPassed": false,
+  "cleanPass": false,
+  "fidelity": 79,
+  "counts": {
+    "total": 49,
+    "critical": 0,
+    "high": 14,
+    "medium": 8,
+    "low": 24
+  },
+  "rungCensus": {
+    "R0": 0,
+    "R1": 109,
+    "R2": 0,
+    "R3": 0
+  },
+  "editability": {
+    "totalWidgets": 24,
+    "nativeWidgets": 20,
+    "htmlWidgets": 4,
+    "systemWidgets": 2,
+    "nonElementorPrimitives": 2,
+    "effectiveTotal": 20,
+    "nativeWidgetPercentage": 100,
+    "passed": true,
+    "target": 90,
+    "htmlJustifications": [
+      {
+        "reason": "SYSTEM:stylesheet-engine"
+      },
+      {
+        "sid": "sid-33",
+        "reason": "NON_ELEMENTOR_PRIMITIVE:composite-control"
+      },
+      {
+        "sid": "sid-39",
+        "reason": "NON_ELEMENTOR_PRIMITIVE:composite-control"
+      },
+      {
+        "reason": "SYSTEM:script-engine"
+      }
+    ]
+  },
+  "advisoryDefectCount": 49,
+  "behavior": {
+    "tested": 1,
+    "passed": 1,
+    "failed": 0,
+    "mismatches": []
+  },
+  "assets": {
+    "total": 3,
+    "loaded": 3
+  },
+  "fonts": {
+    "declared": [
+      {
+        "family": "-apple-system",
+        "isReady": true
+      },
+      {
+        "family": "Arial",
+        "isReady": true
+      }
+    ],
+    "verified": [
+      {
+        "family": "-apple-system",
+        "isReady": true
+      },
+      {
+        "family": "Arial",
+        "isReady": true
+      }
+    ]
+  },
+  "defects": [
+    {
+      "id": "defect-179",
+      "nodeSid": "sid-3",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-3 at desktop: expected 1152px, got 800px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-180",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-181",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-4 at desktop: expected 136px, got 99px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-182",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-183",
+      "nodeSid": "sid-7",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-7 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-184",
+      "nodeSid": "sid-8",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-8 at desktop: expected 1152px, got 800px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-185",
+      "nodeSid": "sid-9",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-9 at desktop: expected 363px, got 252px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-186",
+      "nodeSid": "sid-10",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-10 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-187",
+      "nodeSid": "sid-11",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-11 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-188",
+      "nodeSid": "sid-12",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-12 at desktop: expected 78px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-189",
+      "nodeSid": "sid-12",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-12 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-190",
+      "nodeSid": "sid-15",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-15 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-191",
+      "nodeSid": "sid-16",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-16 at desktop: expected 363px, got 252px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-192",
+      "nodeSid": "sid-17",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-17 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-193",
+      "nodeSid": "sid-18",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-18 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-194",
+      "nodeSid": "sid-19",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-19 at desktop: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-195",
+      "nodeSid": "sid-19",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-19 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-196",
+      "nodeSid": "sid-22",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-22 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-197",
+      "nodeSid": "sid-23",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-23 at desktop: expected 363px, got 252px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-198",
+      "nodeSid": "sid-24",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-24 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-199",
+      "nodeSid": "sid-25",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-25 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-200",
+      "nodeSid": "sid-26",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-26 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-201",
+      "nodeSid": "sid-29",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-29 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-202",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-203",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "width",
+      "message": "Width discrepancy on sid-4 at tablet: expected 136px, got 99px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-204",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-205",
+      "nodeSid": "sid-7",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-7 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-206",
+      "nodeSid": "sid-12",
+      "viewport": "tablet",
+      "property": "width",
+      "message": "Width discrepancy on sid-12 at tablet: expected 78px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-207",
+      "nodeSid": "sid-12",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-12 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-208",
+      "nodeSid": "sid-15",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-15 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-209",
+      "nodeSid": "sid-19",
+      "viewport": "tablet",
+      "property": "width",
+      "message": "Width discrepancy on sid-19 at tablet: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-210",
+      "nodeSid": "sid-19",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-19 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-211",
+      "nodeSid": "sid-22",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-22 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-212",
+      "nodeSid": "sid-26",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-26 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-213",
+      "nodeSid": "sid-29",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-29 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-214",
+      "nodeSid": "sid-4",
+      "viewport": "mobile",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at mobile: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-215",
+      "nodeSid": "sid-4",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-4 at mobile: expected 136px, got 99px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-216",
+      "nodeSid": "sid-4",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-217",
+      "nodeSid": "sid-7",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-7 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-218",
+      "nodeSid": "sid-12",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-12 at mobile: expected 78px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-219",
+      "nodeSid": "sid-12",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-12 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-220",
+      "nodeSid": "sid-15",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-15 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-221",
+      "nodeSid": "sid-17",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-17 at mobile: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-222",
+      "nodeSid": "sid-18",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-18 at mobile: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-223",
+      "nodeSid": "sid-19",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-19 at mobile: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-224",
+      "nodeSid": "sid-19",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-19 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-225",
+      "nodeSid": "sid-22",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-22 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-226",
+      "nodeSid": "sid-26",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-26 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-227",
+      "nodeSid": "sid-29",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-29 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    }
+  ],
+  "unresolvedDefects": [
+    {
+      "id": "defect-179",
+      "nodeSid": "sid-3",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-3 at desktop: expected 1152px, got 800px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-180",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at desktop: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-181",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-4 at desktop: expected 136px, got 99px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-182",
+      "nodeSid": "sid-4",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-183",
+      "nodeSid": "sid-7",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-7 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-184",
+      "nodeSid": "sid-8",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-8 at desktop: expected 1152px, got 800px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-185",
+      "nodeSid": "sid-9",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-9 at desktop: expected 363px, got 252px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-186",
+      "nodeSid": "sid-10",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-10 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-187",
+      "nodeSid": "sid-11",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-11 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-188",
+      "nodeSid": "sid-12",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-12 at desktop: expected 78px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-189",
+      "nodeSid": "sid-12",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-12 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-190",
+      "nodeSid": "sid-15",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-15 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-191",
+      "nodeSid": "sid-16",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-16 at desktop: expected 363px, got 252px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-192",
+      "nodeSid": "sid-17",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-17 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-193",
+      "nodeSid": "sid-18",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-18 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-194",
+      "nodeSid": "sid-19",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-19 at desktop: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-195",
+      "nodeSid": "sid-19",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-19 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-196",
+      "nodeSid": "sid-22",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-22 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-197",
+      "nodeSid": "sid-23",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-23 at desktop: expected 363px, got 252px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-198",
+      "nodeSid": "sid-24",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-24 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-199",
+      "nodeSid": "sid-25",
+      "viewport": "desktop",
+      "property": "width",
+      "message": "Width discrepancy on sid-25 at desktop: expected 297px, got 186px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-200",
+      "nodeSid": "sid-26",
+      "viewport": "desktop",
+      "property": "paddingTop",
+      "message": "Defect on sid-26 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-201",
+      "nodeSid": "sid-29",
+      "viewport": "desktop",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-29 (borderTopLeftRadius) at desktop: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-202",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at tablet: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-203",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "width",
+      "message": "Width discrepancy on sid-4 at tablet: expected 136px, got 99px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-204",
+      "nodeSid": "sid-4",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-205",
+      "nodeSid": "sid-7",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-7 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-206",
+      "nodeSid": "sid-12",
+      "viewport": "tablet",
+      "property": "width",
+      "message": "Width discrepancy on sid-12 at tablet: expected 78px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-207",
+      "nodeSid": "sid-12",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-12 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-208",
+      "nodeSid": "sid-15",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-15 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-209",
+      "nodeSid": "sid-19",
+      "viewport": "tablet",
+      "property": "width",
+      "message": "Width discrepancy on sid-19 at tablet: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-210",
+      "nodeSid": "sid-19",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-19 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-211",
+      "nodeSid": "sid-22",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-22 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-212",
+      "nodeSid": "sid-26",
+      "viewport": "tablet",
+      "property": "paddingTop",
+      "message": "Defect on sid-26 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-213",
+      "nodeSid": "sid-29",
+      "viewport": "tablet",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-29 (borderTopLeftRadius) at tablet: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-214",
+      "nodeSid": "sid-4",
+      "viewport": "mobile",
+      "property": "lineCount",
+      "message": "Text line wrap mismatch on sid-4 at mobile: expected 1 lines, got 2 lines.",
+      "severity": "LOW",
+      "rule": "RULE-TXT-01",
+      "rung": "R0",
+      "advisory": true
+    },
+    {
+      "id": "defect-215",
+      "nodeSid": "sid-4",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-4 at mobile: expected 136px, got 99px.",
+      "severity": "HIGH",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-216",
+      "nodeSid": "sid-4",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-4 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-217",
+      "nodeSid": "sid-7",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-7 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-218",
+      "nodeSid": "sid-12",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-12 at mobile: expected 78px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-219",
+      "nodeSid": "sid-12",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-12 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-220",
+      "nodeSid": "sid-15",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-15 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-221",
+      "nodeSid": "sid-17",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-17 at mobile: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-222",
+      "nodeSid": "sid-18",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-18 at mobile: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-223",
+      "nodeSid": "sid-19",
+      "viewport": "mobile",
+      "property": "width",
+      "message": "Width discrepancy on sid-19 at mobile: expected 118px, got 99px.",
+      "severity": "MEDIUM",
+      "rule": "RULE-GEO-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-224",
+      "nodeSid": "sid-19",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-19 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-225",
+      "nodeSid": "sid-22",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-22 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-226",
+      "nodeSid": "sid-26",
+      "viewport": "mobile",
+      "property": "paddingTop",
+      "message": "Defect on sid-26 [RULE-BOX-01]: expected \"4px\", got \"0px\".",
+      "severity": "LOW",
+      "rule": "RULE-BOX-01",
+      "rung": "R1",
+      "advisory": true
+    },
+    {
+      "id": "defect-227",
+      "nodeSid": "sid-29",
+      "viewport": "mobile",
+      "property": "borderTopLeftRadius",
+      "message": "Border radius mismatch on sid-29 (borderTopLeftRadius) at mobile: expected 8px, got 0px.",
+      "severity": "LOW",
+      "rule": "RULE-BOX-02",
+      "rung": "R1",
+      "advisory": true
+    }
+  ]
+}

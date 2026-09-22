@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Video Platform Pricing</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans for a modern SaaS look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --color-bg: #f8fafc;
+            --color-surface: #ffffff;
+            --color-primary: #6366f1; /* Indigo */
+            --color-primary-hover: #4f46e5;
+            --color-accent: #ec4899; /* Pink for badges */
+            --color-text-main: #0f172a;
+            --color-text-muted: #64748b;
+            --color-border: #e2e8f0;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 8px;
+            --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            --shadow-popular: 0 20px 25px -5px rgba(99, 102, 241, 0.15), 0 10px 10px -5px rgba(99, 102, 241, 0.08);
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .text-center { text-align: center; }
+        
+        /* --- HEADER SECTION --- */
+        .pricing-header {
+            margin-bottom: 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .pricing-header h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--color-text-main);
+        }
+
+        .pricing-header p {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+            max-width: 600px;
+        }
+
+        /* --- TOGGLE SWITCH --- */
+        .billing-toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 24px;
+            position: relative;
+        }
+
+        .toggle-label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .toggle-label.is-active {
+            color: var(--color-text-main);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 32px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            inset: 0;
+            background-color: var(--color-border);
+            border-radius: 999px;
+            transition: 0.3s;
+        }
+
+        .slider::before {
+            content: "";
+            position: absolute;
+            height: 24px;
+            width: 24px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .toggle-switch input:checked + .slider {
+            background-color: var(--color-primary);
+        }
+
+        .toggle-switch input:checked + .slider::before {
+            transform: translateX(28px);
+        }
+
+        .save-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            line-height: 1;
+            background: linear-gradient(135deg, #fce7f3 0%, #fae8ff 100%);
+            color: #be185d;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 12px;
+            border-radius: 999px;
+            margin-left: 8px;
+            border: 1px solid #fbcfe8;
+        }
+
+        /* --- PRICING GRID --- */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            align-items: stretch;
+            margin-top: 64px;
+        }
+
+        /* --- CARD STYLES --- */
+        .pricing-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: var(--shadow-card);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* Popular Card Modifier */
+        .pricing-card.is-popular {
+            border: 2px solid var(--color-primary);
+            box-shadow: var(--shadow-popular);
+            z-index: 1;
+            transform: scale(1.02);
+        }
+
+        .pricing-card.is-popular:hover {
+            transform: scale(1.02) translateY(-4px);
+        }
+
+        .popular-pill {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            line-height: 1;
+        }
+
+        /* Card Header */
+        .card-tier {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--color-text-main);
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            margin-bottom: 24px;
+            min-height: 48px; /* Alignment fix */
+        }
+
+        .price-container {
+            margin-bottom: 32px;
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+
+        .currency {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text-main);
+        }
+
+        .price-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--color-text-main);
+            line-height: 1;
+            letter-spacing: -0.03em;
+        }
+
+        .price-period {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            margin-bottom: 32px;
+        }
+
+        .cta-btn.primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+
+        .cta-btn.primary:hover {
+            background-color: var(--color-primary-hover);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .cta-btn.outline {
+            background-color: transparent;
+            border: 2px solid var(--color-border);
+            color: var(--color-text-main);
+        }
+
+        .cta-btn.outline:hover {
+            border-color: var(--color-text-main);
+            background-color: #f1f5f9;
+        }
+
+        /* Feature List */
+        .features-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            flex-grow: 1;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: var(--color-text-main);
+        }
+
+        .check-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: var(--color-primary);
+            margin-top: 2px;
+        }
+
+        .is-popular .check-icon {
+            color: var(--color-primary);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .pricing-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* Make the last card span full width if odd number, or just stack naturally */
+            .pricing-card:last-child {
+                grid-column: span 2;
+                max-width: 50%;
+                justify-self: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 16px;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                margin-top: 48px;
+            }
+
+            .pricing-card:last-child {
+                grid-column: auto;
+                max-width: 100%;
+            }
+
+            .pricing-card.is-popular {
+                transform: none;
+            }
+            
+            .pricing-card.is-popular:hover {
+                transform: translateY(-4px);
+            }
+
+            .pricing-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="container">
+        <!-- Header Section -->
+        <header class="pricing-header text-center">
+            <h2>Simple, Transparent Pricing</h2>
+            <p>Choose the perfect AI video generation plan for your content creation needs. No hidden fees.</p>
+            
+            <!-- Toggle Switch -->
+            <div class="billing-toggle-wrapper">
+                <span class="toggle-label is-active" id="label-monthly">Monthly</span>
+                
+                <label class="toggle-switch">
+                    <input type="checkbox" id="billing-toggle">
+                    <span class="slider"></span>
+                </label>
+                
+                <span class="toggle-label" id="label-yearly">
+                    Yearly 
+                    <span class="save-badge">-20% Save</span>
+                </span>
+            </div>
+        </header>
+
+        <!-- Pricing Cards Grid -->
+        <div class="pricing-grid">
+            
+            <!-- Starter Plan -->
+            <article class="pricing-card">
+                <h3 class="card-tier">Starter</h3>
+                <p class="card-desc">Perfect for hobbyists and social media beginners.</p>
+                
+                <div class="price-container">
+                    <span class="currency">$</span>
+                    <span class="price-amount" data-monthly="29" data-yearly="23">29</span>
+                    <span class="price-period">/mo</span>
+                </div>
+
+                <button class="cta-btn outline">Get Started</button>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>5 AI Videos per month</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>720p Export Quality</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Standard Avatars (10+)</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Community Support</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Pro Plan (Popular) -->
+            <article class="pricing-card is-popular">
+                <div class="popular-pill">Most Popular</div>
+                <h3 class="card-tier">Pro Creator</h3>
+                <p class="card-desc">For influencers and marketers needing high volume.</p>
+                
+                <div class="price-container">
+                    <span class="currency">$</span>
+                    <span class="price-amount" data-monthly="79" data-yearly="63">79</span>
+                    <span class="price-period">/mo</span>
+                </div>
+
+                <button class="cta-btn primary">Start Free Trial</button>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span><strong>Unlimited</strong> AI Videos</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>4K Ultra HD Exports</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Premium Avatars (50+) & Voice Cloning</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>No Watermarks</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Priority Email Support</span>
+                    </li>
+                </ul>
+            </article>
+
+            <!-- Enterprise Plan -->
+            <article class="pricing-card">
+                <h3 class="card-tier">Enterprise</h3>
+                <p class="card-desc">Custom solutions for agencies and large teams.</p>
+                
+                <div class="price-container">
+                    <span class="currency">$</span>
+                    <span class="price-amount" data-monthly="199" data-yearly="159">199</span>
+                    <span class="price-period">/mo</span>
+                </div>
+
+                <button class="cta-btn outline">Contact Sales</button>
+
+                <ul class="features-list">
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Everything in Pro</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Custom AI Model Training</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>API Access & Webhooks</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Team Collaboration Tools</span>
+                    </li>
+                    <li class="feature-item">
+                        <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                        <span>Dedicated Account Manager</span>
+                    </li>
+                </ul>
+            </article>
+
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('billing-toggle');
+            const priceElements = document.querySelectorAll('.price-amount');
+            const labelMonthly = document.getElementById('label-monthly');
+            const labelYearly = document.getElementById('label-yearly');
+
+            // Function to update prices and UI state
+            const updatePricing = () => {
+                const isYearly = toggle.checked;
+
+                // Update Label Styles
+                if (isYearly) {
+                    labelYearly.classList.add('is-active');
+                    labelMonthly.classList.remove('is-active');
+                } else {
+                    labelMonthly.classList.add('is-active');
+                    labelYearly.classList.remove('is-active');
+                }
+
+                // Update Price Numbers with Animation
+                priceElements.forEach(el => {
+                    const newPrice = isYearly ? el.dataset.yearly : el.dataset.monthly;
+                    
+                    // Simple fade effect for number change
+                    el.style.opacity = '0';
+                    setTimeout(() => {
+                        el.textContent = newPrice;
+                        el.style.opacity = '1';
+                    }, 200);
+                });
+            };
+
+            // Event Listener
+            toggle.addEventListener('change', updatePricing);
+
+            // Initialize state
+            updatePricing();
+        });
+    </script>
+</body>
+</html>

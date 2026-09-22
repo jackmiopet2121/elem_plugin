@@ -1,0 +1,4263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elementor Free Template - Virtual Elementor Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Plus%20Jakarta%20Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* 1. Base Elementor Free Grid & Layout Engine */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: transparent;
+      color: #0f172a;
+    }
+    .elementor {
+      position: relative;
+      width: 100%;
+    }
+    .e-con {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      position: relative;
+      width: 100%;
+      --widgets-spacing: 20px;
+    }
+    .e-con-boxed {
+      width: 100% !important;
+    }
+    .e-con-boxed > .e-con-inner {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      width: 100%;
+      max-width: var(--content-width, 1200px);
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      --widgets-spacing: 20px;
+    }
+    .e-con-full {
+      width: 100%;
+    }
+    .elementor-widget {
+      position: relative;
+      margin-bottom: 0;
+    }
+    /* Elementor Core Flexbox Runtime Layout Reset:
+       In live Elementor, widgets inside flex containers default to 100% width
+       unless explicitly flagged as auto-width. This ensures 1:1 parity between
+       local emulation and live WordPress. */
+    .e-con > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial),
+    .e-con-inner > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial) {
+      width: 100%;
+    }
+    .elementor-widget__width-auto {
+      width: auto;
+      max-width: 100%;
+      display: inline-block;
+    }
+    .elementor-widget__width-initial {
+      max-width: 100%;
+    }
+    .elementor-widget__width-inherit {
+      width: 100% !important;
+      max-width: 100%;
+    }
+    .elementor-widget-container {
+      position: relative;
+      transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+    }
+    .elementor-heading-title {
+      margin: 0;
+      padding: 0;
+      line-height: 1.2;
+    }
+    .elementor-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .elementor-button-wrapper.elementor-align-justify,
+    .elementor-button-wrapper.elementor-align-justify .elementor-button {
+      width: 100%;
+      display: flex;
+    }
+    .elementor-button-content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .elementor-widget-icon .elementor-icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .elementor-icon i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      text-align: center;
+    }
+    .elementor-view-stacked .elementor-icon,
+    .elementor-view-framed .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5em;
+      aspect-ratio: 1 / 1;
+    }
+    .elementor-shape-circle,
+    .elementor-shape-circle .elementor-icon,
+    .elementor-icon.elementor-shape-circle {
+      border-radius: 50% !important;
+    }
+    .elementor-shape-square,
+    .elementor-shape-square .elementor-icon,
+    .elementor-icon.elementor-shape-square {
+      border-radius: 0 !important;
+    }
+    .elementor-icon-list-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .elementor-icon-list-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .elementor-divider-separator {
+      display: block;
+      border-top-style: solid;
+      border-top-width: 1px;
+      width: 100%;
+    }
+
+    /* Elementor Free Frontend Core Defaults (WP Parity) */
+    .elementor-widget-image {
+      text-align: center;
+    }
+    .elementor-widget-image a {
+      display: inline-block;
+    }
+    .elementor-widget-image img {
+      vertical-align: middle;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .elementor-text-editor {
+      color: inherit;
+      font-family: inherit;
+    }
+    .elementor-text-editor p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 2. Compiled Elementor Template Styles (Desktop / Post CSS) */
+    .e-sid-2 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 64px;
+  --column-gap: 0px;
+  --gap: 64px 0px;
+  gap: 64px 0px;
+  row-gap: 64px;
+  column-gap: 0px;
+  --content-width: 1200px;
+  background-color: transparent;
+  --padding-top: 80px;
+  --padding-right: 20px;
+  --padding-bottom: 80px;
+  --padding-left: 20px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 40px;
+  --margin-bottom: 0px;
+  --margin-left: 40px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100% !important;
+  --min-height: 1027px;
+  min-height: 1027px;
+}
+
+.pricing-header {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: center;
+  align-items: center;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  --gap: 16px 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 222px;
+  min-height: 222px;
+}
+
+.e-sid-4 .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.6em;
+  letter-spacing: -0.96px;
+}
+
+.e-sid-4 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-4 {
+  width: 617px !important;
+  max-width: 617px;
+}
+
+.e-sid-5, .e-sid-5 p, .e-sid-5 .elementor-text-editor {
+  color: #64748b;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-5 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-5 {
+  width: 600px !important;
+  max-width: 600px;
+}
+
+.billing-toggle-wrapper {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: center;
+  justify-content: center;
+  --align-items: center;
+  align-items: center;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  --gap: 16px 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 24px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 25.7%;
+}
+
+.toggle-label, .toggle-label p, .toggle-label .elementor-text-editor {
+  color: #0f172a;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.toggle-label {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.toggle-label {
+  width: 60px !important;
+  max-width: 60px;
+}
+
+.toggle-switch {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 20.1%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-9 {
+  width: 100% !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+
+.slider {
+  width: 60px !important;
+  max-width: 60px;
+  min-height: 32px;
+  flex-shrink: 0 !important;
+}
+
+.toggle-label {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 8px;
+  --gap: 0px 8px;
+  gap: 0px 8px;
+  row-gap: 0px;
+  column-gap: 8px;
+  background-color: transparent;
+  color: #64748b;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 49.2%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-ec0093e6 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-ec0093e6 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.save-badge, .save-badge p, .save-badge .elementor-text-editor {
+  color: #be185d;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1em;
+}
+
+.save-badge {
+  border-radius: 999px 999px 999px 999px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.save-badge {
+  width: 92px !important;
+  max-width: 92px;
+}
+
+.pricing-grid {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: stretch;
+  align-items: stretch;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 32px;
+  --column-gap: 32px;
+  --gap: 32px 32px;
+  gap: 32px 32px;
+  row-gap: 32px;
+  column-gap: 32px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 581px;
+  min-height: 581px;
+}
+
+.pricing-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 40px;
+  --padding-right: 32px;
+  --padding-bottom: 40px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  --min-height: 581px;
+  min-height: 581px;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.card-tier .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.card-tier {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-desc, .card-desc p, .card-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.card-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-container {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: baseline;
+  align-items: baseline;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  --gap: 4px 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 60px;
+  min-height: 60px;
+}
+
+.currency .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.currency {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.currency {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.price-amount .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1em;
+  letter-spacing: -1.68px;
+}
+
+.price-amount {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-amount {
+  width: 64px !important;
+  max-width: 64px;
+  max-height: 64px !important;
+  min-height: 64px;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.price-period, .price-period p, .price-period .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6em;
+}
+
+.price-period {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-period {
+  width: 32px !important;
+  max-width: 32px;
+  max-height: 32px !important;
+  min-height: 32px;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+}
+
+.cta-btn .elementor-button {
+  color: #0f172a;
+  background-color: transparent;
+  border-radius: 16px 16px 16px 16px;
+  font-family: "Inter", Sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 24px 16px 24px;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-color: #e2e8f0;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.cta-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.cta-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.features-list {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  --gap: 16px 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 208px;
+  min-height: 208px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-26, .e-sid-26 p, .e-sid-26 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-26 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-30, .e-sid-30 p, .e-sid-30 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-30 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-34, .e-sid-34 p, .e-sid-34 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-34 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-38, .e-sid-38 p, .e-sid-38 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-38 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.pricing-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 40px;
+  --padding-right: 32px;
+  --padding-bottom: 40px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-color: #6366f1;
+  width: 32.2%;
+  --min-height: 581px;
+  min-height: 581px;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 20px 25px -5px rgba(99, 102, 241, 0.15);
+}
+
+.popular-pill, .popular-pill p, .popular-pill .elementor-text-editor {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1em;
+  letter-spacing: 0.64px;
+}
+
+.popular-pill {
+  background-color: #6366f1;
+  border-radius: 999px 999px 999px 999px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.popular-pill {
+  width: 141px !important;
+  max-width: 141px;
+}
+
+.card-tier .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.card-tier {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-desc, .card-desc p, .card-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.card-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-container {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: baseline;
+  align-items: baseline;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  --gap: 4px 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 60px;
+  min-height: 60px;
+}
+
+.currency .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.currency {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.currency {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.price-amount .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1em;
+  letter-spacing: -1.68px;
+}
+
+.price-amount {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-amount {
+  width: 63px !important;
+  max-width: 63px;
+  max-height: 63px !important;
+  min-height: 63px;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.price-period, .price-period p, .price-period .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6em;
+}
+
+.price-period {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-period {
+  width: 33px !important;
+  max-width: 33px;
+  max-height: 33px !important;
+  min-height: 33px;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+}
+
+.cta-btn .elementor-button {
+  color: #ffffff;
+  background-color: #6366f1;
+  border-radius: 16px 16px 16px 16px;
+  font-family: "Inter", Sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 24px 16px 24px;
+  border-style: solid;
+  border-width: 0px 0px 0px 0px;
+  border-color: #E2E8F0;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.cta-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.cta-btn {
+  margin: 0px 0px 0px 0px;
+  background-color: #6366f1;
+}
+
+.features-list {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  --gap: 16px 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 210px;
+  min-height: 210px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-52 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 47.5%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-53, .e-sid-53 p, .e-sid-53 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.e-sid-53 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-53 {
+  align-self: flex-start !important;
+}
+
+.e-sid-f02ecfcd .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-f02ecfcd {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-57, .e-sid-57 p, .e-sid-57 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-57 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: left;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: flex-start !important;
+}
+
+.e-sid-61, .e-sid-61 p, .e-sid-61 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-61 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-65, .e-sid-65 p, .e-sid-65 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-65 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-69, .e-sid-69 p, .e-sid-69 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-69 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.pricing-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 40px;
+  --padding-right: 32px;
+  --padding-bottom: 40px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  --min-height: 581px;
+  min-height: 581px;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.card-tier .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.card-tier {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-desc, .card-desc p, .card-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.card-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-container {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: baseline;
+  align-items: baseline;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  --gap: 4px 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 60px;
+  min-height: 60px;
+}
+
+.currency .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.currency {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.currency {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.price-amount .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1em;
+  letter-spacing: -1.68px;
+}
+
+.price-amount {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-amount {
+  width: 86px !important;
+  max-width: 86px;
+}
+
+.price-period, .price-period p, .price-period .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6em;
+}
+
+.price-period {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.price-period {
+  width: 32px !important;
+  max-width: 32px;
+  max-height: 32px !important;
+  min-height: 32px;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+}
+
+.cta-btn .elementor-button {
+  color: #0f172a;
+  background-color: transparent;
+  border-radius: 16px 16px 16px 16px;
+  font-family: "Inter", Sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 24px 16px 24px;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-color: #e2e8f0;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.cta-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.cta-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.features-list {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  --gap: 16px 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 208px;
+  min-height: 208px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-82, .e-sid-82 p, .e-sid-82 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-82 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-86, .e-sid-86 p, .e-sid-86 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-86 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-90, .e-sid-90 p, .e-sid-90 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-90 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-94, .e-sid-94 p, .e-sid-94 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-94 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.feature-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.check-icon .elementor-icon {
+  color: #6366f1;
+  fill: #6366f1;
+  font-size: 15px;
+}
+
+.check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.check-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.check-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-98, .e-sid-98 p, .e-sid-98 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.e-sid-98 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+    /* 3. Compiled Elementor Tablet Styles (max-width: 1024px) */
+    @media (max-width: 1024px) {
+  .e-sid-2 {
+  --gap: 48px 0px;
+  --row-gap: 48px;
+  --column-gap: 0px;
+  gap: 48px 0px;
+  row-gap: 48px;
+  column-gap: 0px;
+  --padding-top: 60px;
+  --padding-right: 16px;
+  --padding-bottom: 60px;
+  --padding-left: 16px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .pricing-header {
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+}
+  .e-sid-4 .elementor-heading-title {
+  font-size: 32px;
+  line-height: 1.6em;
+  letter-spacing: -0.64px;
+}
+  .e-sid-4 {
+  width: 411px !important;
+  max-width: 411px;
+}
+  .e-sid-5 {
+  width: 600px !important;
+  max-width: 600px;
+}
+  .billing-toggle-wrapper {
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 40.6%;
+}
+  .toggle-label {
+  width: auto !important;
+  max-width: 100%;
+}
+  .toggle-switch {
+  flex-shrink: 0 !important;
+}
+  .e-sid-9 {
+  flex-shrink: 0 !important;
+}
+  .slider {
+  flex-shrink: 0 !important;
+}
+  .toggle-label {
+  width: 49.2%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-ec0093e6 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .save-badge {
+  width: 92px !important;
+  max-width: 92px;
+}
+  .pricing-grid {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 24px 24px;
+  --row-gap: 24px;
+  --column-gap: 24px;
+  gap: 24px 24px;
+  row-gap: 24px;
+  column-gap: 24px;
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .pricing-card {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  flex-shrink: 0 !important;
+}
+  .card-tier {
+  width: 670px !important;
+  max-width: 670px;
+}
+  .card-desc {
+  width: 670px !important;
+  max-width: 670px;
+}
+  .price-container {
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 100%;
+}
+  .currency {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+}
+  .price-amount {
+  width: 64px !important;
+  max-width: 64px;
+  flex-shrink: 0 !important;
+}
+  .price-period {
+  width: 32px !important;
+  max-width: 32px;
+  flex-shrink: 0 !important;
+}
+  .cta-btn {
+  width: 670px !important;
+  max-width: 670px;
+}
+  .features-list {
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-26 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-30 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-34 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-38 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .pricing-card {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  flex-shrink: 0 !important;
+}
+  .popular-pill {
+  width: 141px !important;
+  max-width: 141px;
+}
+  .card-tier {
+  width: 668px !important;
+  max-width: 668px;
+}
+  .card-desc {
+  width: 668px !important;
+  max-width: 668px;
+}
+  .price-container {
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 100%;
+}
+  .currency {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+}
+  .price-amount {
+  width: 63px !important;
+  max-width: 63px;
+  flex-shrink: 0 !important;
+}
+  .price-period {
+  width: 33px !important;
+  max-width: 33px;
+  flex-shrink: 0 !important;
+}
+  .cta-btn {
+  width: 668px !important;
+  max-width: 668px;
+}
+  .features-list {
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-52 {
+  width: 21.1%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-53 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-f02ecfcd {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-57 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .check-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+  .e-sid-61 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-65 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-69 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .pricing-card {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 55.2%;
+  flex-shrink: 0 !important;
+}
+  .card-tier {
+  width: 340px !important;
+  max-width: 340px;
+}
+  .card-desc {
+  width: 340px !important;
+  max-width: 340px;
+}
+  .price-container {
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+}
+  .currency {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+}
+  .price-amount {
+  width: 86px !important;
+  max-width: 86px;
+}
+  .price-period {
+  width: 32px !important;
+  max-width: 32px;
+  flex-shrink: 0 !important;
+}
+  .cta-btn {
+  width: 340px !important;
+  max-width: 340px;
+}
+  .features-list {
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-82 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-86 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-90 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-94 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-98 {
+  width: auto !important;
+  max-width: 100%;
+}
+}
+
+    /* 4. Compiled Elementor Mobile Styles (max-width: 767px) */
+    @media (max-width: 767px) {
+  .e-sid-2 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 48px 0px;
+  --row-gap: 48px;
+  --column-gap: 0px;
+  gap: 48px 0px;
+  row-gap: 48px;
+  column-gap: 0px;
+  --padding-top: 60px;
+  --padding-right: 16px;
+  --padding-bottom: 60px;
+  --padding-left: 16px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .pricing-header {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .e-sid-4 .elementor-heading-title {
+  font-size: 32px;
+  line-height: 1.6em;
+  letter-spacing: -0.64px;
+}
+  .e-sid-4 {
+  width: 338px !important;
+  max-width: 338px;
+}
+  .e-sid-5 {
+  width: 338px !important;
+  max-width: 338px;
+}
+  .billing-toggle-wrapper {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .toggle-label {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .toggle-switch {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  width: 20.1%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-9 {
+  flex-shrink: 0 !important;
+}
+  .slider {
+  width: 60px !important;
+  max-width: 60px;
+  flex-shrink: 0 !important;
+}
+  .toggle-label {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 49.2%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-ec0093e6 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .save-badge {
+  width: 92px !important;
+  max-width: 92px;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .pricing-grid {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 24px 24px;
+  --row-gap: 24px;
+  --column-gap: 24px;
+  gap: 24px 24px;
+  row-gap: 24px;
+  column-gap: 24px;
+  width: 100%;
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .pricing-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  flex-shrink: 0 !important;
+}
+  .price-container {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 100%;
+}
+  .currency {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
+}
+  .price-amount {
+  width: 64px !important;
+  max-width: 64px;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .price-period {
+  width: 32px !important;
+  max-width: 32px;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
+}
+  .features-list {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-26 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-30 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-34 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-38 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .pricing-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  flex-shrink: 0 !important;
+}
+  .popular-pill {
+  width: 141px !important;
+  max-width: 141px;
+}
+  .price-container {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 100%;
+}
+  .currency {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
+}
+  .price-amount {
+  width: 63px !important;
+  max-width: 63px;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .price-period {
+  width: 33px !important;
+  max-width: 33px;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
+}
+  .features-list {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-52 {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 52.2%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-53 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-f02ecfcd {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-57 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-61 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-65 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-69 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .pricing-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  flex-shrink: 0 !important;
+}
+  .card-tier {
+  width: 272px !important;
+  max-width: 272px;
+}
+  .card-desc {
+  width: 272px !important;
+  max-width: 272px;
+}
+  .price-container {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 100%;
+}
+  .currency {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
+}
+  .price-amount {
+  width: 86px !important;
+  max-width: 86px;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .price-period {
+  width: 32px !important;
+  max-width: 32px;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
+}
+  .cta-btn {
+  width: 272px !important;
+  max-width: 272px;
+}
+  .features-list {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-82 {
+  width: 119px !important;
+  max-width: 119px;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-86 {
+  width: 180px !important;
+  max-width: 180px;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-90 {
+  width: 174px !important;
+  max-width: 174px;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-94 {
+  width: 181px !important;
+  max-width: 181px;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .feature-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 12px 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  width: 100%;
+}
+  .check-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-98 {
+  width: 206px !important;
+  max-width: 206px;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+}
+
+    /* 5. Isolated Micro-CSS & Atomic Overrides (Post-Cascade Priority) */
+    
+    /* Isolated Micro-CSS */
+    
+.billing-toggle-wrapper {
+  position: relative;
+}
+
+.toggle-label {
+  transition: color 0.3s ease;
+}
+
+.toggle-label.is-active {
+  color: #0f172a !important;
+}
+
+.toggle-switch {
+  position: relative;
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white !important;
+  border-radius: 50%;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.toggle-switch input:checked + .slider {
+  background-color: #6366f1 !important;
+}
+
+.toggle-switch input:checked + .slider::before {
+  transform: translateX(28px) !important;
+}
+
+.pricing-card {
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px) !important;
+}
+
+.pricing-card.is-popular {
+  z-index: 1;
+  transform: scale(1.02);
+}
+
+.pricing-card.is-popular:hover {
+  transform: scale(1.02) translateY(-4px) !important;
+}
+
+.popular-pill {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.cta-btn {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.cta-btn.primary .elementor-button:hover, .elementor-widget-button.cta-btn.primary .elementor-button:hover {
+  background-color: #4f46e5 !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+}
+
+.cta-btn.outline .elementor-button:hover, .elementor-widget-button.cta-btn.outline .elementor-button:hover {
+  border-color: #0f172a !important;
+  background-color: #f1f5f9 !important;
+}
+
+.features-list {
+  list-style: none;
+  flex-grow: 1;
+}
+
+.check-icon {
+  flex-shrink: 0;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+[class*="track-wrap"], [class*="track-wrap"] input[type="range"] { width: 100% !important; max-width: 100% !important; display: block !important; box-sizing: border-box !important; }
+
+.switch-wrap, [class*="switch-wrap"] { cursor: pointer; display: inline-flex; align-items: center; }
+
+.switch-wrap input[type="checkbox"], [class*="switch-wrap"] input[type="checkbox"] { cursor: pointer; }
+
+.price-amount,
+.price-amount .elementor-widget-container,
+.price-amount .elementor-heading-title {
+  width: 64px !important;
+  height: 64px !important;
+  max-height: 64px !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.price-period,
+.price-period .elementor-widget-container,
+.price-period .elementor-text-editor {
+  width: 32px !important;
+  height: 32px !important;
+  max-height: 32px !important;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.price-amount,
+.price-amount .elementor-widget-container,
+.price-amount .elementor-heading-title {
+  width: 63px !important;
+  height: 63px !important;
+  max-height: 63px !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.price-period,
+.price-period .elementor-widget-container,
+.price-period .elementor-text-editor {
+  width: 33px !important;
+  height: 33px !important;
+  max-height: 33px !important;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 768px) {
+  .pricing-card:last-child {
+  max-width: 100%;
+  }
+
+  .pricing-card.is-popular {
+  transform: none;
+  }
+
+  .pricing-card.is-popular:hover {
+  transform: translateY(-4px) !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .pricing-card:last-child {
+  max-width: 50%;
+  justify-self: center;
+  }
+}
+
+
+  </style>
+</head>
+<body class="elementor-default elementor-page">
+  <div class="elementor elementor-virtual-root">
+    <div class="elementor-element elementor-element-6b6e549f container e-sid-2 e-flex e-con-boxed e-con e-parent" data-sid="sid-2" data-dom-id="sid-2" data-id="6b6e549f" data-element_type="container">
+      <div class="e-con-inner">
+        <div class="elementor-element elementor-element-553ceb7f embedded-stylesheet-engine e-sid-553ceb7f  elementor-widget elementor-widget-html" data-id="553ceb7f" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><style>
+.billing-toggle-wrapper {
+  position: relative;
+}
+
+.toggle-label {
+  transition: color 0.3s ease;
+}
+
+.toggle-label.is-active {
+  color: #0f172a !important;
+}
+
+.toggle-switch {
+  position: relative;
+  cursor: pointer;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: #e2e8f0;
+  border-radius: 999px;
+  transition: 0.3s;
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white !important;
+  border-radius: 50%;
+  transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+}
+
+.toggle-switch input:checked + .slider {
+  background-color: #6366f1 !important;
+}
+
+.toggle-switch input:checked + .slider::before {
+  transform: translateX(28px) !important;
+}
+
+.pricing-card {
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px) !important;
+}
+
+.pricing-card.is-popular {
+  z-index: 1;
+  transform: scale(1.02);
+}
+
+.pricing-card.is-popular:hover {
+  transform: scale(1.02) translateY(-4px) !important;
+}
+
+.popular-pill {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.cta-btn {
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.cta-btn.primary .elementor-button:hover, .elementor-widget-button.cta-btn.primary .elementor-button:hover {
+  background-color: #4f46e5 !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+}
+
+.cta-btn.outline .elementor-button:hover, .elementor-widget-button.cta-btn.outline .elementor-button:hover {
+  border-color: #0f172a !important;
+  background-color: #f1f5f9 !important;
+}
+
+.features-list {
+  list-style: none;
+  flex-grow: 1;
+}
+
+.check-icon {
+  flex-shrink: 0;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+[class*="track-wrap"], [class*="track-wrap"] input[type="range"] { width: 100% !important; max-width: 100% !important; display: block !important; box-sizing: border-box !important; }
+
+.switch-wrap, [class*="switch-wrap"] { cursor: pointer; display: inline-flex; align-items: center; }
+
+.switch-wrap input[type="checkbox"], [class*="switch-wrap"] input[type="checkbox"] { cursor: pointer; }
+
+.price-amount,
+.price-amount .elementor-widget-container,
+.price-amount .elementor-heading-title {
+  width: 64px !important;
+  height: 64px !important;
+  max-height: 64px !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.price-period,
+.price-period .elementor-widget-container,
+.price-period .elementor-text-editor {
+  width: 32px !important;
+  height: 32px !important;
+  max-height: 32px !important;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.price-amount,
+.price-amount .elementor-widget-container,
+.price-amount .elementor-heading-title {
+  width: 63px !important;
+  height: 63px !important;
+  max-height: 63px !important;
+  flex-shrink: 0 !important;
+  align-self: center !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.price-period,
+.price-period .elementor-widget-container,
+.price-period .elementor-text-editor {
+  width: 33px !important;
+  height: 33px !important;
+  max-height: 33px !important;
+  flex-shrink: 0 !important;
+  align-self: flex-end !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+@media (max-width: 768px) {
+  .pricing-card:last-child {
+  max-width: 100%;
+  }
+
+  .pricing-card.is-popular {
+  transform: none;
+  }
+
+  .pricing-card.is-popular:hover {
+  transform: translateY(-4px) !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .pricing-card:last-child {
+  max-width: 50%;
+  justify-self: center;
+  }
+}
+</style></div>
+  </div>
+<div class="elementor-element elementor-element-28c81ab9 pricing-header text-center e-sid-3 e-flex e-con-full e-con e-child" data-sid="sid-3" data-dom-id="sid-3" data-id="28c81ab9" data-element_type="container">
+    <div class="elementor-element elementor-element-ed56d602 e-sid-4  elementor-widget elementor-widget-heading" data-sid="sid-4" data-dom-id="sid-4" data-id="ed56d602" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h2 class="elementor-heading-title elementor-size-default">Simple, Transparent Pricing</h2></div>
+  </div>
+<div class="elementor-element elementor-element-76be5be6 e-sid-5  elementor-widget elementor-widget-text-editor" data-sid="sid-5" data-dom-id="sid-5" data-id="76be5be6" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Choose the perfect AI video generation plan for your content creation needs. No hidden fees.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-d4d3e5c6 billing-toggle-wrapper e-sid-6 e-flex e-con-full e-con e-child" data-sid="sid-6" data-dom-id="sid-6" data-id="d4d3e5c6" data-element_type="container">
+    <div id="label-monthly" class="elementor-element elementor-element-3ed5367e toggle-label is-active e-sid-7 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-7" data-dom-id="sid-7" data-id="3ed5367e" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Monthly</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-193243f8 toggle-switch e-sid-8 e-flex e-con-full e-con e-child" data-sid="sid-8" data-dom-id="sid-8" data-id="193243f8" data-element_type="container">
+    <div id="billing-toggle" class="elementor-element elementor-element-63565db4 e-sid-9  elementor-widget elementor-widget-html" data-sid="sid-9" data-dom-id="sid-9" data-id="63565db4" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><input></input></div>
+  </div>
+<div class="elementor-element elementor-element-05e1713b slider e-sid-10  elementor-widget elementor-widget-html" data-sid="sid-10" data-dom-id="sid-10" data-id="05e1713b" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><span class="slider"></span></div>
+  </div>
+  </div>
+<div id="label-yearly" class="elementor-element elementor-element-81fc3422 toggle-label e-sid-11 e-flex e-con-full e-con e-child" data-sid="sid-11" data-dom-id="sid-11" data-id="81fc3422" data-element_type="container">
+    <div class="elementor-element elementor-element-ec0093e6 e-sid-ec0093e6 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="ec0093e6" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">Yearly</span></div>
+  </div>
+<div class="elementor-element elementor-element-626b097a save-badge e-sid-12 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-12" data-dom-id="sid-12" data-id="626b097a" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>-20% Save</p></div></div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-8cd46502 pricing-grid e-sid-13 e-flex e-con-full e-con e-child" data-sid="sid-13" data-dom-id="sid-13" data-id="8cd46502" data-element_type="container">
+    <div class="elementor-element elementor-element-a956a698 pricing-card e-sid-14 e-flex e-con-full e-con e-child" data-sid="sid-14" data-dom-id="sid-14" data-id="a956a698" data-element_type="container">
+    <div class="elementor-element elementor-element-2930dea6 card-tier e-sid-15  elementor-widget elementor-widget-heading" data-sid="sid-15" data-dom-id="sid-15" data-id="2930dea6" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Starter</h3></div>
+  </div>
+<div class="elementor-element elementor-element-f9911eba card-desc e-sid-16  elementor-widget elementor-widget-text-editor" data-sid="sid-16" data-dom-id="sid-16" data-id="f9911eba" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Perfect for hobbyists and social media beginners.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-ee5fcb19 price-container e-sid-17 e-flex e-con-full e-con e-child" data-sid="sid-17" data-dom-id="sid-17" data-id="ee5fcb19" data-element_type="container">
+    <div class="elementor-element elementor-element-8e7ecf96 currency e-sid-18 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-sid="sid-18" data-dom-id="sid-18" data-id="8e7ecf96" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">$</span></div>
+  </div>
+<div class="elementor-element elementor-element-4bd40143 price-amount e-sid-19 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-sid="sid-19" data-dom-id="sid-19" data-id="4bd40143" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">29</h3></div>
+  </div>
+<div class="elementor-element elementor-element-cab13ac1 price-period e-sid-20 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-20" data-dom-id="sid-20" data-id="cab13ac1" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>/mo</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-a72c03f8 cta-btn outline e-sid-21  elementor-widget elementor-widget-button" data-sid="sid-21" data-dom-id="sid-21" data-id="a72c03f8" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Get Started</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-c2af878c features-list e-sid-22 e-flex e-con-full e-con e-child" data-sid="sid-22" data-dom-id="sid-22" data-id="c2af878c" data-element_type="container">
+    <div class="elementor-element elementor-element-182d32f9 feature-item e-sid-23 e-flex e-con-full e-con e-child" data-sid="sid-23" data-dom-id="sid-23" data-id="182d32f9" data-element_type="container">
+    <div class="elementor-element elementor-element-8e11b6fc check-icon e-sid-24 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-24" data-dom-id="sid-24" data-id="8e11b6fc" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-0d8bd9df e-sid-26 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-26" data-dom-id="sid-26" data-id="0d8bd9df" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>5 AI Videos per month</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-e1f2f8d5 feature-item e-sid-27 e-flex e-con-full e-con e-child" data-sid="sid-27" data-dom-id="sid-27" data-id="e1f2f8d5" data-element_type="container">
+    <div class="elementor-element elementor-element-6782b1ba check-icon e-sid-28 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-28" data-dom-id="sid-28" data-id="6782b1ba" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-267bf29e e-sid-30 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-30" data-dom-id="sid-30" data-id="267bf29e" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>720p Export Quality</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-4e0227c7 feature-item e-sid-31 e-flex e-con-full e-con e-child" data-sid="sid-31" data-dom-id="sid-31" data-id="4e0227c7" data-element_type="container">
+    <div class="elementor-element elementor-element-9d4a52c7 check-icon e-sid-32 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-32" data-dom-id="sid-32" data-id="9d4a52c7" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-0e6167c9 e-sid-34 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-34" data-dom-id="sid-34" data-id="0e6167c9" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Standard Avatars (10+)</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-b55d089d feature-item e-sid-35 e-flex e-con-full e-con e-child" data-sid="sid-35" data-dom-id="sid-35" data-id="b55d089d" data-element_type="container">
+    <div class="elementor-element elementor-element-a5c6d0d4 check-icon e-sid-36 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-36" data-dom-id="sid-36" data-id="a5c6d0d4" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-37384e27 e-sid-38 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-38" data-dom-id="sid-38" data-id="37384e27" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Community Support</p></div></div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-afbda499 pricing-card is-popular e-sid-39 e-flex e-con-full e-con e-child" data-sid="sid-39" data-dom-id="sid-39" data-id="afbda499" data-element_type="container">
+    <div class="elementor-element elementor-element-e85e3da4 popular-pill e-sid-40  elementor-widget elementor-widget-text-editor" data-sid="sid-40" data-dom-id="sid-40" data-id="e85e3da4" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Most Popular</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-694f0a1f card-tier e-sid-41  elementor-widget elementor-widget-heading" data-sid="sid-41" data-dom-id="sid-41" data-id="694f0a1f" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Pro Creator</h3></div>
+  </div>
+<div class="elementor-element elementor-element-39f0b71c card-desc e-sid-42  elementor-widget elementor-widget-text-editor" data-sid="sid-42" data-dom-id="sid-42" data-id="39f0b71c" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>For influencers and marketers needing high volume.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-10b48a4b price-container e-sid-43 e-flex e-con-full e-con e-child" data-sid="sid-43" data-dom-id="sid-43" data-id="10b48a4b" data-element_type="container">
+    <div class="elementor-element elementor-element-11211feb currency e-sid-44 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-sid="sid-44" data-dom-id="sid-44" data-id="11211feb" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">$</span></div>
+  </div>
+<div class="elementor-element elementor-element-01fdf939 price-amount e-sid-45 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-sid="sid-45" data-dom-id="sid-45" data-id="01fdf939" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">79</h3></div>
+  </div>
+<div class="elementor-element elementor-element-3e9c7454 price-period e-sid-46 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-46" data-dom-id="sid-46" data-id="3e9c7454" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>/mo</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-294daec7 cta-btn primary e-sid-47  elementor-widget elementor-widget-button" data-sid="sid-47" data-dom-id="sid-47" data-id="294daec7" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Start Free Trial</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-98a15faf features-list e-sid-48 e-flex e-con-full e-con e-child" data-sid="sid-48" data-dom-id="sid-48" data-id="98a15faf" data-element_type="container">
+    <div class="elementor-element elementor-element-90c6d547 feature-item e-sid-49 e-flex e-con-full e-con e-child" data-sid="sid-49" data-dom-id="sid-49" data-id="90c6d547" data-element_type="container">
+    <div class="elementor-element elementor-element-69be3bb4 check-icon e-sid-50 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-50" data-dom-id="sid-50" data-id="69be3bb4" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-79ae5fb4 e-sid-52 e-flex e-con-full e-con e-child" data-sid="sid-52" data-dom-id="sid-52" data-id="79ae5fb4" data-element_type="container">
+    <div class="elementor-element elementor-element-57a4dc4b e-sid-53 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-53" data-dom-id="sid-53" data-id="57a4dc4b" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Unlimited</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-f02ecfcd e-sid-f02ecfcd elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="f02ecfcd" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">AI Videos</span></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-643456f3 feature-item e-sid-54 e-flex e-con-full e-con e-child" data-sid="sid-54" data-dom-id="sid-54" data-id="643456f3" data-element_type="container">
+    <div class="elementor-element elementor-element-792dd93c check-icon e-sid-55 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-55" data-dom-id="sid-55" data-id="792dd93c" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-00832b3e e-sid-57 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-57" data-dom-id="sid-57" data-id="00832b3e" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>4K Ultra HD Exports</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-0fb43a4d feature-item e-sid-58 e-flex e-con-full e-con e-child" data-sid="sid-58" data-dom-id="sid-58" data-id="0fb43a4d" data-element_type="container">
+    <div class="elementor-element elementor-element-51926104 check-icon e-sid-59 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-59" data-dom-id="sid-59" data-id="51926104" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-b3773b33 e-sid-61 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-61" data-dom-id="sid-61" data-id="b3773b33" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Premium Avatars (50+) &amp; Voice Cloning</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-c6c0d8a1 feature-item e-sid-62 e-flex e-con-full e-con e-child" data-sid="sid-62" data-dom-id="sid-62" data-id="c6c0d8a1" data-element_type="container">
+    <div class="elementor-element elementor-element-d996a0e6 check-icon e-sid-63 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-63" data-dom-id="sid-63" data-id="d996a0e6" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-18fafe63 e-sid-65 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-65" data-dom-id="sid-65" data-id="18fafe63" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>No Watermarks</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-fc00d217 feature-item e-sid-66 e-flex e-con-full e-con e-child" data-sid="sid-66" data-dom-id="sid-66" data-id="fc00d217" data-element_type="container">
+    <div class="elementor-element elementor-element-b02281e0 check-icon e-sid-67 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-67" data-dom-id="sid-67" data-id="b02281e0" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-7ead24ac e-sid-69 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-69" data-dom-id="sid-69" data-id="7ead24ac" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Priority Email Support</p></div></div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-78e67fd6 pricing-card e-sid-70 e-flex e-con-full e-con e-child" data-sid="sid-70" data-dom-id="sid-70" data-id="78e67fd6" data-element_type="container">
+    <div class="elementor-element elementor-element-9343c0a0 card-tier e-sid-71  elementor-widget elementor-widget-heading" data-sid="sid-71" data-dom-id="sid-71" data-id="9343c0a0" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Enterprise</h3></div>
+  </div>
+<div class="elementor-element elementor-element-d9656066 card-desc e-sid-72  elementor-widget elementor-widget-text-editor" data-sid="sid-72" data-dom-id="sid-72" data-id="d9656066" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Custom solutions for agencies and large teams.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-54005cb7 price-container e-sid-73 e-flex e-con-full e-con e-child" data-sid="sid-73" data-dom-id="sid-73" data-id="54005cb7" data-element_type="container">
+    <div class="elementor-element elementor-element-773fb135 currency e-sid-74 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-sid="sid-74" data-dom-id="sid-74" data-id="773fb135" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">$</span></div>
+  </div>
+<div class="elementor-element elementor-element-060e5c36 price-amount e-sid-75 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-sid="sid-75" data-dom-id="sid-75" data-id="060e5c36" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">199</h3></div>
+  </div>
+<div class="elementor-element elementor-element-53cf6247 price-period e-sid-76 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-76" data-dom-id="sid-76" data-id="53cf6247" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>/mo</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-0a914eec cta-btn outline e-sid-77  elementor-widget elementor-widget-button" data-sid="sid-77" data-dom-id="sid-77" data-id="0a914eec" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Contact Sales</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-29fe8ef1 features-list e-sid-78 e-flex e-con-full e-con e-child" data-sid="sid-78" data-dom-id="sid-78" data-id="29fe8ef1" data-element_type="container">
+    <div class="elementor-element elementor-element-5da878e2 feature-item e-sid-79 e-flex e-con-full e-con e-child" data-sid="sid-79" data-dom-id="sid-79" data-id="5da878e2" data-element_type="container">
+    <div class="elementor-element elementor-element-4975564e check-icon e-sid-80 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-80" data-dom-id="sid-80" data-id="4975564e" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-02165901 e-sid-82 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-82" data-dom-id="sid-82" data-id="02165901" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Everything in Pro</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-d10c148e feature-item e-sid-83 e-flex e-con-full e-con e-child" data-sid="sid-83" data-dom-id="sid-83" data-id="d10c148e" data-element_type="container">
+    <div class="elementor-element elementor-element-aa664ad9 check-icon e-sid-84 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-84" data-dom-id="sid-84" data-id="aa664ad9" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-f7abda0d e-sid-86 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-86" data-dom-id="sid-86" data-id="f7abda0d" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Custom AI Model Training</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-c6eb9211 feature-item e-sid-87 e-flex e-con-full e-con e-child" data-sid="sid-87" data-dom-id="sid-87" data-id="c6eb9211" data-element_type="container">
+    <div class="elementor-element elementor-element-77c71550 check-icon e-sid-88 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-88" data-dom-id="sid-88" data-id="77c71550" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-f0cc16f4 e-sid-90 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-90" data-dom-id="sid-90" data-id="f0cc16f4" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>API Access &amp; Webhooks</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-e1fc04bb feature-item e-sid-91 e-flex e-con-full e-con e-child" data-sid="sid-91" data-dom-id="sid-91" data-id="e1fc04bb" data-element_type="container">
+    <div class="elementor-element elementor-element-28969471 check-icon e-sid-92 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-92" data-dom-id="sid-92" data-id="28969471" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-996ca152 e-sid-94 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-94" data-dom-id="sid-94" data-id="996ca152" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Team Collaboration Tools</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-278570f4 feature-item e-sid-95 e-flex e-con-full e-con e-child" data-sid="sid-95" data-dom-id="sid-95" data-id="278570f4" data-element_type="container">
+    <div class="elementor-element elementor-element-e81723e8 check-icon e-sid-96 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-96" data-dom-id="sid-96" data-id="e81723e8" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-47ac452f e-sid-98 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-98" data-dom-id="sid-98" data-id="47ac452f" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Dedicated Account Manager</p></div></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-576bdd8c embedded-script-engine e-sid-576bdd8c  elementor-widget elementor-widget-html" data-id="576bdd8c" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><script>
+(function() {
+  // 1. Universal DOM Lifecycle Polyfill:
+  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,
+  // immediately invoke the callback so dynamic scripts never enter a deadzone.
+  try {
+    var _origDocAdd = Document.prototype.addEventListener;
+    var _lifecycleAdd = function(type, fn, opts) {
+      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {
+        try {
+          setTimeout(function() { fn.call(document, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origDocAdd.call(this, type, fn, opts);
+    };
+    Document.prototype.addEventListener = _lifecycleAdd;
+    try { document.addEventListener = _lifecycleAdd; } catch(e) {}
+
+    var _origWinAdd = Window.prototype.addEventListener;
+    Window.prototype.addEventListener = function(type, fn, opts) {
+      if (type === 'load' && document.readyState === 'complete') {
+        try {
+          setTimeout(function() { fn.call(window, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origWinAdd.call(this, type, fn, opts);
+    };
+  } catch(e) {
+    console.warn('[LIFECYCLE POLYFILL ERROR]', e);
+  }
+
+  function initDynamicComponentLogic() {
+    // 2. Universal Data-Attribute Hydration Bridge:
+    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases
+    // (e.g. data-category--design -> el.dataset.category = "design", el.setAttribute("data-category", "design"))
+    try {
+      document.querySelectorAll('*').forEach(function(el) {
+        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;
+        if (el.dataset && el.dataset.__hasDataHydrated) return;
+        if (el.dataset) el.dataset.__hasDataHydrated = 'true';
+        if (el.classList) {
+          el.classList.forEach(function(cls) {
+            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {
+              var sepIdx = cls.indexOf('--');
+              var attrName = cls.slice(0, sepIdx);
+              var rawVal = cls.slice(sepIdx + 2);
+              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)
+              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {
+                return String.fromCharCode(parseInt(hex, 16));
+              });
+              el.setAttribute(attrName, attrVal);
+              if (el.dataset) {
+                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });
+                el.dataset[prop] = attrVal;
+              }
+            }
+          });
+        }
+      });
+    } catch(e) {
+      console.warn('[DATA HYDRATION ERROR]', e);
+    }
+
+    try {
+      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title
+      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {
+        var inner = widget.querySelector('.elementor-heading-title');
+        if (inner && !widget.__hasTextProxy) {
+          widget.__hasTextProxy = true;
+          Object.defineProperty(widget, 'textContent', {
+            get: function() { return inner.textContent; },
+            set: function(val) { inner.textContent = val; },
+            configurable: true
+          });
+          Object.defineProperty(widget, 'innerText', {
+            get: function() { return inner.innerText; },
+            set: function(val) { inner.innerText = val; },
+            configurable: true
+          });
+        }
+      });
+
+      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)
+      
+      if (!window.__delegatedBridgesBound) {
+        window.__delegatedBridgesBound = true;
+        
+      (function(){
+        var k = "bridge_.toggle-switch|.billing-toggle-wrapper";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest(".toggle-switch");
+            if (!trig) return;
+            var anc = trig.closest(".billing-toggle-wrapper");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-active"] = anc.classList.contains("is-active");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest(".toggle-switch");
+          if (!trig) return;
+          var anc = trig.closest(".billing-toggle-wrapper");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-active"] : null;
+          var isNowPresent = anc.classList.contains("is-active");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-active");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+
+      (function(){
+        var k = "bridge_#billing-toggle|.billing-toggle-wrapper";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest("#billing-toggle");
+            if (!trig) return;
+            var anc = trig.closest(".billing-toggle-wrapper");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-active"] = anc.classList.contains("is-active");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest("#billing-toggle");
+          if (!trig) return;
+          var anc = trig.closest(".billing-toggle-wrapper");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-active"] : null;
+          var isNowPresent = anc.classList.contains("is-active");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-active");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+
+      (function(){
+        var k = "bridge_#label-yearly|.billing-toggle-wrapper";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest("#label-yearly");
+            if (!trig) return;
+            var anc = trig.closest(".billing-toggle-wrapper");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-active"] = anc.classList.contains("is-active");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest("#label-yearly");
+          if (!trig) return;
+          var anc = trig.closest(".billing-toggle-wrapper");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-active"] : null;
+          var isNowPresent = anc.classList.contains("is-active");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-active");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+      }
+  
+    } catch(err) {
+      console.warn('[COMPILER BRIDGE]', err);
+    }
+
+    // Execute Application Business Logic with Idempotency Protection
+    if (!window.__appLogicInitialized) {
+      window.__appLogicInitialized = true;
+      try {
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('billing-toggle');
+            const priceElements = document.querySelectorAll('.price-amount');
+            const labelMonthly = document.getElementById('label-monthly');
+            const labelYearly = document.getElementById('label-yearly');
+
+            // Function to update prices and UI state
+            const updatePricing = () => {
+                const isYearly = toggle.checked;
+
+                // Update Label Styles
+                if (isYearly) {
+                    labelYearly.classList.add('is-active');
+                    labelMonthly.classList.remove('is-active');
+                } else {
+                    labelMonthly.classList.add('is-active');
+                    labelYearly.classList.remove('is-active');
+                }
+
+                // Update Price Numbers with Animation
+                priceElements.forEach(el => {
+                    const newPrice = isYearly ? el.dataset.yearly : el.dataset.monthly;
+                    
+                    // Simple fade effect for number change
+                    el.style.opacity = '0';
+                    setTimeout(() => {
+                        el.textContent = newPrice;
+                        el.style.opacity = '1';
+                    }, 200);
+                });
+            };
+
+            // Event Listener
+            toggle.addEventListener('change', updatePricing);
+
+            // Initialize state
+            updatePricing();
+        });
+      } catch(appErr) {
+        console.warn('[APP LOGIC ERROR]', appErr);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);
+  } else {
+    initDynamicComponentLogic();
+  }
+  setTimeout(initDynamicComponentLogic, 200);
+  setTimeout(initDynamicComponentLogic, 800);
+  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);
+})();
+</script></div>
+  </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

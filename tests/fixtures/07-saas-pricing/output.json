@@ -1,0 +1,3298 @@
+{
+  "version": "0.4",
+  "title": "Elementor Free Template",
+  "type": "page",
+  "content": [
+    {
+      "id": "f970c1c1",
+      "elType": "container",
+      "isInner": false,
+      "_sid": "sid-2",
+      "_dom_id": "sid-2",
+      "settings": {
+        "_sid": "sid-2",
+        "_dom_id": "sid-2",
+        "css_classes": "main-container",
+        "direction": "column",
+        "flex_direction": "column",
+        "wrap": "nowrap",
+        "flex_wrap": "nowrap",
+        "gap": {
+          "unit": "px",
+          "size": 48,
+          "column": 48,
+          "row": 48
+        },
+        "flex_gap": {
+          "unit": "px",
+          "size": 48,
+          "column": 48,
+          "row": 48
+        },
+        "space_between_widgets": 48,
+        "content_width": "boxed",
+        "background_background": "classic",
+        "background_color": "transparent",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        },
+        "margin": {
+          "unit": "px",
+          "top": "0",
+          "right": "40",
+          "bottom": "0",
+          "left": "40",
+          "isLinked": false
+        },
+        "align_items": "normal",
+        "flex_align_items": "normal",
+        "justify_content": "normal",
+        "flex_justify_content": "normal",
+        "min_height": {
+          "unit": "px",
+          "size": 1716
+        },
+        "_css_classes": "main-container",
+        "boxed_width": {
+          "unit": "px",
+          "size": 1280
+        },
+        "padding_mobile": {
+          "unit": "px",
+          "top": "60",
+          "right": "24",
+          "bottom": "60",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "121647ad",
+          "elType": "widget",
+          "widgetType": "html",
+          "settings": {
+            "html": "<style>\n.badge {\n  display: inline-block;\n}\n\n.pricing-card {\n  display: flex;\n}\n\n.cta-btn {\n  display: inline-block;\n}\n\n.elementor-widget-heading[class*=\"badge\"] .elementor-heading-title,\n.elementor-widget-heading[class*=\"pill\"] .elementor-heading-title,\n[class*=\"badge\"] .elementor-heading-title,\n[class*=\"pill\"] .elementor-heading-title {\n  line-height: 1 !important;\n  display: inline-flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n  margin: 0 !important;\n}\n</style>",
+            "css_classes": "embedded-stylesheet-engine",
+            "_html_reason": "SYSTEM:stylesheet-engine",
+            "_margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": true
+            },
+            "_css_classes": "embedded-stylesheet-engine"
+          },
+          "elements": []
+        },
+        {
+          "id": "42568b34",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-3",
+          "_dom_id": "sid-3",
+          "settings": {
+            "_sid": "sid-3",
+            "_dom_id": "sid-3",
+            "css_classes": "header-section",
+            "direction": "column",
+            "flex_direction": "column",
+            "wrap": "nowrap",
+            "flex_wrap": "nowrap",
+            "gap": {
+              "unit": "px",
+              "size": 17,
+              "column": 17,
+              "row": 17
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 17,
+              "column": 17,
+              "row": 17
+            },
+            "space_between_widgets": 17,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "48",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "normal",
+            "flex_align_items": "normal",
+            "justify_content": "normal",
+            "flex_justify_content": "normal",
+            "min_height": {
+              "unit": "px",
+              "size": 146
+            },
+            "_css_classes": "header-section",
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "9f8a4d0d",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "_sid": "sid-4",
+              "_dom_id": "sid-4",
+              "settings": {
+                "_sid": "sid-4",
+                "_dom_id": "sid-4",
+                "css_classes": "badge",
+                "editor": "<p>Pricing Plans</p>",
+                "align": "center",
+                "text_color": "#4338ca",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 14
+                },
+                "typography_font_weight": "600",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.4
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "6",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_css_classes": "badge",
+                "background_color": "#e0e7ff",
+                "background_background": "classic",
+                "width": {
+                  "unit": "px",
+                  "size": 113
+                },
+                "border_radius": {
+                  "unit": "px",
+                  "top": "20",
+                  "right": "20",
+                  "bottom": "20",
+                  "left": "20",
+                  "isLinked": true
+                },
+                "width_tablet": {
+                  "unit": "px",
+                  "size": 113
+                },
+                "_padding_tablet": {
+                  "unit": "px",
+                  "top": "6",
+                  "right": "6",
+                  "bottom": "6",
+                  "left": "6",
+                  "isLinked": true
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "20",
+                  "right": "20",
+                  "bottom": "20",
+                  "left": "20",
+                  "isLinked": true
+                },
+                "width_mobile": {
+                  "unit": "px",
+                  "size": 113
+                },
+                "_padding_mobile": {
+                  "unit": "px",
+                  "top": "6",
+                  "right": "6",
+                  "bottom": "6",
+                  "left": "6",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "20",
+                  "right": "20",
+                  "bottom": "20",
+                  "left": "20",
+                  "isLinked": true
+                }
+              },
+              "elements": [],
+              "isInner": false
+            },
+            {
+              "id": "50ced378",
+              "elType": "widget",
+              "widgetType": "heading",
+              "_sid": "sid-5",
+              "_dom_id": "sid-5",
+              "settings": {
+                "_sid": "sid-5",
+                "_dom_id": "sid-5",
+                "css_classes": "main-title",
+                "title": "Simple, Transparent Pricing",
+                "header_size": "h1",
+                "align": "center",
+                "title_color": "#0f172a",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 42
+                },
+                "typography_font_weight": "800",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.2
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_css_classes": "main-title"
+              },
+              "elements": [],
+              "isInner": false
+            },
+            {
+              "id": "348a7361",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "_sid": "sid-6",
+              "_dom_id": "sid-6",
+              "settings": {
+                "_sid": "sid-6",
+                "_dom_id": "sid-6",
+                "css_classes": "subtitle",
+                "editor": "<p>Choose the perfect plan for your team. Scale up or down at any time with zero commitment.</p>",
+                "align": "center",
+                "text_color": "#64748b",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 18
+                },
+                "typography_font_weight": "400",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.4
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "_css_classes": "subtitle",
+                "typography_font_size_tablet": {
+                  "unit": "px",
+                  "size": 18
+                },
+                "typography_font_size_mobile": {
+                  "unit": "px",
+                  "size": 18
+                }
+              },
+              "elements": [],
+              "isInner": false
+            }
+          ]
+        },
+        {
+          "id": "bc4a8239",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-7",
+          "_dom_id": "sid-7",
+          "settings": {
+            "_sid": "sid-7",
+            "_dom_id": "sid-7",
+            "css_classes": "pricing-grid",
+            "_layoutHandled": true,
+            "direction": "row",
+            "flex_direction": "row",
+            "wrap": "wrap",
+            "flex_wrap": "wrap",
+            "gap": {
+              "unit": "px",
+              "size": 32,
+              "column": 32,
+              "row": 32
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 32,
+              "column": 32,
+              "row": 32
+            },
+            "space_between_widgets": 32,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "80",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "normal",
+            "flex_align_items": "normal",
+            "justify_content": "normal",
+            "flex_justify_content": "normal",
+            "min_height": {
+              "unit": "px",
+              "size": 497
+            },
+            "_css_classes": "pricing-grid",
+            "wrap_tablet": "nowrap",
+            "flex_wrap_tablet": "nowrap",
+            "wrap_mobile": "nowrap",
+            "flex_wrap_mobile": "nowrap",
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "80ac5cfc",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-8",
+              "_dom_id": "sid-8",
+              "settings": {
+                "_sid": "sid-8",
+                "_dom_id": "sid-8",
+                "css_classes": "pricing-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 12,
+                  "column": 12,
+                  "row": 12
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 12,
+                  "column": 12,
+                  "row": 12
+                },
+                "space_between_widgets": 12,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "40",
+                  "right": "32",
+                  "bottom": "40",
+                  "left": "32",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 497
+                },
+                "_css_classes": "pricing-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 39.2
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "d9fcd9ea",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-9",
+                  "_dom_id": "sid-9",
+                  "settings": {
+                    "_sid": "sid-9",
+                    "_dom_id": "sid-9",
+                    "css_classes": "plan-name",
+                    "title": "Starter Plan",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 22
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "plan-name"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "7ca457f6",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-10",
+                  "_dom_id": "sid-10",
+                  "settings": {
+                    "_sid": "sid-10",
+                    "_dom_id": "sid-10",
+                    "css_classes": "plan-price",
+                    "title": "$19/month",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 40
+                    },
+                    "typography_font_weight": "800",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "plan-price"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "85f5cf69",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-11",
+                  "_dom_id": "sid-11",
+                  "settings": {
+                    "_sid": "sid-11",
+                    "_dom_id": "sid-11",
+                    "css_classes": "plan-desc",
+                    "editor": "<p>For individuals and small side projects.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "plan-desc"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "ceddf31f",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-12",
+                  "_dom_id": "sid-12",
+                  "settings": {
+                    "_sid": "sid-12",
+                    "_dom_id": "sid-12",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Up to 5 active projects</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "82c225b9",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-13",
+                  "_dom_id": "sid-13",
+                  "settings": {
+                    "_sid": "sid-13",
+                    "_dom_id": "sid-13",
+                    "css_classes": "feature-item",
+                    "editor": "<p>10 GB cloud storage</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "aa16b92f",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-14",
+                  "_dom_id": "sid-14",
+                  "settings": {
+                    "_sid": "sid-14",
+                    "_dom_id": "sid-14",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Basic analytics dashboard</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "12ab6a56",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-15",
+                  "_dom_id": "sid-15",
+                  "settings": {
+                    "_sid": "sid-15",
+                    "_dom_id": "sid-15",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Standard email support</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "650a8ea5",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "_sid": "sid-16",
+                  "_dom_id": "sid-16",
+                  "settings": {
+                    "_sid": "sid-16",
+                    "_dom_id": "sid-16",
+                    "css_classes": "cta-btn",
+                    "text": "Get Started",
+                    "link": {
+                      "url": "#starter",
+                      "is_external": false,
+                      "nofollow": false
+                    },
+                    "size": "sm",
+                    "background_color": "#0f172a",
+                    "button_text_color": "#ffffff",
+                    "button_padding": {
+                      "unit": "px",
+                      "top": "14",
+                      "right": "24",
+                      "bottom": "14",
+                      "left": "24",
+                      "isLinked": false
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "align": "justify",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 15
+                    },
+                    "typography_font_weight": "600",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "cta-btn",
+                    "align_mobile": "justify",
+                    "_element_width_mobile": "initial",
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "4c794a92",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-17",
+              "_dom_id": "sid-17",
+              "settings": {
+                "_sid": "sid-17",
+                "_dom_id": "sid-17",
+                "css_classes": "pricing-card featured",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 12,
+                  "column": 12,
+                  "row": 12
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 12,
+                  "column": 12,
+                  "row": 12
+                },
+                "space_between_widgets": 12,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "2",
+                  "right": "2",
+                  "bottom": "2",
+                  "left": "2",
+                  "isLinked": true
+                },
+                "border_color": "#4f46e5",
+                "padding": {
+                  "unit": "px",
+                  "top": "40",
+                  "right": "32",
+                  "bottom": "40",
+                  "left": "32",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 497
+                },
+                "_css_classes": "pricing-card featured",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 40.3
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "ece83071",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-18",
+                  "_dom_id": "sid-18",
+                  "settings": {
+                    "_sid": "sid-18",
+                    "_dom_id": "sid-18",
+                    "css_classes": "plan-name",
+                    "title": "Professional Plan",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 22
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "plan-name"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "a5477686",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-19",
+                  "_dom_id": "sid-19",
+                  "settings": {
+                    "_sid": "sid-19",
+                    "_dom_id": "sid-19",
+                    "css_classes": "plan-price",
+                    "title": "$49/month",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 40
+                    },
+                    "typography_font_weight": "800",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "plan-price"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "9970e8f6",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-20",
+                  "_dom_id": "sid-20",
+                  "settings": {
+                    "_sid": "sid-20",
+                    "_dom_id": "sid-20",
+                    "css_classes": "plan-desc",
+                    "editor": "<p>For growing teams and scaling startups.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "plan-desc"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "538364fd",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-21",
+                  "_dom_id": "sid-21",
+                  "settings": {
+                    "_sid": "sid-21",
+                    "_dom_id": "sid-21",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Unlimited active projects</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "bc689987",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-22",
+                  "_dom_id": "sid-22",
+                  "settings": {
+                    "_sid": "sid-22",
+                    "_dom_id": "sid-22",
+                    "css_classes": "feature-item",
+                    "editor": "<p>100 GB cloud storage</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "94337df2",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-23",
+                  "_dom_id": "sid-23",
+                  "settings": {
+                    "_sid": "sid-23",
+                    "_dom_id": "sid-23",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Advanced custom metrics</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "474a61e3",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-24",
+                  "_dom_id": "sid-24",
+                  "settings": {
+                    "_sid": "sid-24",
+                    "_dom_id": "sid-24",
+                    "css_classes": "feature-item",
+                    "editor": "<p>24/7 priority email &amp; chat</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "e1fbbed0",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "_sid": "sid-25",
+                  "_dom_id": "sid-25",
+                  "settings": {
+                    "_sid": "sid-25",
+                    "_dom_id": "sid-25",
+                    "css_classes": "cta-btn primary",
+                    "text": "Start Free Trial",
+                    "link": {
+                      "url": "#pro",
+                      "is_external": false,
+                      "nofollow": false
+                    },
+                    "size": "sm",
+                    "background_color": "#4f46e5",
+                    "button_text_color": "#ffffff",
+                    "button_padding": {
+                      "unit": "px",
+                      "top": "14",
+                      "right": "24",
+                      "bottom": "14",
+                      "left": "24",
+                      "isLinked": false
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "align": "justify",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 15
+                    },
+                    "typography_font_weight": "600",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "cta-btn primary",
+                    "align_mobile": "justify",
+                    "_element_width_mobile": "initial",
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "f365c4ac",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-26",
+              "_dom_id": "sid-26",
+              "settings": {
+                "_sid": "sid-26",
+                "_dom_id": "sid-26",
+                "css_classes": "pricing-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 12,
+                  "column": 12,
+                  "row": 12
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 12,
+                  "column": 12,
+                  "row": 12
+                },
+                "space_between_widgets": 12,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "40",
+                  "right": "32",
+                  "bottom": "40",
+                  "left": "32",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 497
+                },
+                "_css_classes": "pricing-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 39.9
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "276b7271",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-27",
+                  "_dom_id": "sid-27",
+                  "settings": {
+                    "_sid": "sid-27",
+                    "_dom_id": "sid-27",
+                    "css_classes": "plan-name",
+                    "title": "Enterprise Plan",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 22
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "plan-name"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "97dd14b2",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-28",
+                  "_dom_id": "sid-28",
+                  "settings": {
+                    "_sid": "sid-28",
+                    "_dom_id": "sid-28",
+                    "css_classes": "plan-price",
+                    "title": "$99/month",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 40
+                    },
+                    "typography_font_weight": "800",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "plan-price"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "160eb946",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-29",
+                  "_dom_id": "sid-29",
+                  "settings": {
+                    "_sid": "sid-29",
+                    "_dom_id": "sid-29",
+                    "css_classes": "plan-desc",
+                    "editor": "<p>For organizations with advanced security needs.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "plan-desc"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "cff8486e",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-30",
+                  "_dom_id": "sid-30",
+                  "settings": {
+                    "_sid": "sid-30",
+                    "_dom_id": "sid-30",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Unlimited everything</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "9c0f7283",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-31",
+                  "_dom_id": "sid-31",
+                  "settings": {
+                    "_sid": "sid-31",
+                    "_dom_id": "sid-31",
+                    "css_classes": "feature-item",
+                    "editor": "<p>1 TB dedicated storage</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "332472fd",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-32",
+                  "_dom_id": "sid-32",
+                  "settings": {
+                    "_sid": "sid-32",
+                    "_dom_id": "sid-32",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Custom SSO &amp; compliance</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "4c49a18a",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-33",
+                  "_dom_id": "sid-33",
+                  "settings": {
+                    "_sid": "sid-33",
+                    "_dom_id": "sid-33",
+                    "css_classes": "feature-item",
+                    "editor": "<p>Dedicated account manager</p>",
+                    "align": "left",
+                    "text_color": "#334155",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-item"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "5b80a5b6",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "_sid": "sid-34",
+                  "_dom_id": "sid-34",
+                  "settings": {
+                    "_sid": "sid-34",
+                    "_dom_id": "sid-34",
+                    "css_classes": "cta-btn",
+                    "text": "Contact Sales",
+                    "link": {
+                      "url": "#enterprise",
+                      "is_external": false,
+                      "nofollow": false
+                    },
+                    "size": "sm",
+                    "background_color": "#0f172a",
+                    "button_text_color": "#ffffff",
+                    "button_padding": {
+                      "unit": "px",
+                      "top": "14",
+                      "right": "24",
+                      "bottom": "14",
+                      "left": "24",
+                      "isLinked": false
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "align": "justify",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 15
+                    },
+                    "typography_font_weight": "600",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "cta-btn",
+                    "align_mobile": "justify",
+                    "_element_width_mobile": "initial",
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "2d72168b",
+          "elType": "widget",
+          "widgetType": "heading",
+          "_sid": "sid-35",
+          "_dom_id": "sid-35",
+          "settings": {
+            "_sid": "sid-35",
+            "_dom_id": "sid-35",
+            "css_classes": "section-title",
+            "title": "Built for Modern Engineering Teams",
+            "header_size": "h2",
+            "align": "center",
+            "title_color": "#0f172a",
+            "typography_typography": "custom",
+            "typography_font_family": "-apple-system",
+            "typography_font_size": {
+              "unit": "px",
+              "size": 32
+            },
+            "typography_font_weight": "700",
+            "typography_line_height": {
+              "unit": "em",
+              "size": 1.6
+            },
+            "_margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_css_classes": "section-title"
+          },
+          "elements": [],
+          "isInner": false
+        },
+        {
+          "id": "7f11fb4b",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-36",
+          "_dom_id": "sid-36",
+          "settings": {
+            "_sid": "sid-36",
+            "_dom_id": "sid-36",
+            "css_classes": "features-grid",
+            "_layoutHandled": true,
+            "direction": "row",
+            "flex_direction": "row",
+            "wrap": "wrap",
+            "flex_wrap": "wrap",
+            "gap": {
+              "unit": "px",
+              "size": 32,
+              "column": 32,
+              "row": 32
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 32,
+              "column": 32,
+              "row": 32
+            },
+            "space_between_widgets": 32,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "80",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "normal",
+            "flex_align_items": "normal",
+            "justify_content": "normal",
+            "flex_justify_content": "normal",
+            "min_height": {
+              "unit": "px",
+              "size": 168
+            },
+            "_css_classes": "features-grid",
+            "wrap_tablet": "nowrap",
+            "flex_wrap_tablet": "nowrap",
+            "wrap_mobile": "nowrap",
+            "flex_wrap_mobile": "nowrap",
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "84f01b02",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-37",
+              "_dom_id": "sid-37",
+              "settings": {
+                "_sid": "sid-37",
+                "_dom_id": "sid-37",
+                "css_classes": "feature-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 10,
+                  "column": 10,
+                  "row": 10
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 10,
+                  "column": 10,
+                  "row": 10
+                },
+                "space_between_widgets": 10,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "32",
+                  "right": "28",
+                  "bottom": "32",
+                  "left": "28",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 168
+                },
+                "_css_classes": "feature-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 43.8
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "4a61cc9f",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-38",
+                  "_dom_id": "sid-38",
+                  "settings": {
+                    "_sid": "sid-38",
+                    "_dom_id": "sid-38",
+                    "css_classes": "feature-card-title",
+                    "title": "Instant Setup",
+                    "header_size": "h4",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 18
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "feature-card-title"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "dc5ecf8b",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-39",
+                  "_dom_id": "sid-39",
+                  "settings": {
+                    "_sid": "sid-39",
+                    "_dom_id": "sid-39",
+                    "css_classes": "feature-card-text",
+                    "editor": "<p>Deploy in seconds with zero configuration required. Seamlessly connects with your existing stack.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-card-text"
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "a2ee31e7",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-40",
+              "_dom_id": "sid-40",
+              "settings": {
+                "_sid": "sid-40",
+                "_dom_id": "sid-40",
+                "css_classes": "feature-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 10,
+                  "column": 10,
+                  "row": 10
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 10,
+                  "column": 10,
+                  "row": 10
+                },
+                "space_between_widgets": 10,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "32",
+                  "right": "28",
+                  "bottom": "32",
+                  "left": "28",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 168
+                },
+                "_css_classes": "feature-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 40.1
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "ecbbf499",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-41",
+                  "_dom_id": "sid-41",
+                  "settings": {
+                    "_sid": "sid-41",
+                    "_dom_id": "sid-41",
+                    "css_classes": "feature-card-title",
+                    "title": "Bank-Grade Security",
+                    "header_size": "h4",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 18
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "feature-card-title"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "a4006208",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-42",
+                  "_dom_id": "sid-42",
+                  "settings": {
+                    "_sid": "sid-42",
+                    "_dom_id": "sid-42",
+                    "css_classes": "feature-card-text",
+                    "editor": "<p>End-to-end encryption with SOC2 Type II compliance to keep your mission-critical data secure.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-card-text"
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "ef5d2a55",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-43",
+              "_dom_id": "sid-43",
+              "settings": {
+                "_sid": "sid-43",
+                "_dom_id": "sid-43",
+                "css_classes": "feature-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 10,
+                  "column": 10,
+                  "row": 10
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 10,
+                  "column": 10,
+                  "row": 10
+                },
+                "space_between_widgets": 10,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "32",
+                  "right": "28",
+                  "bottom": "32",
+                  "left": "28",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 168
+                },
+                "_css_classes": "feature-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 42.2
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "da3bb5b3",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-44",
+                  "_dom_id": "sid-44",
+                  "settings": {
+                    "_sid": "sid-44",
+                    "_dom_id": "sid-44",
+                    "css_classes": "feature-card-title",
+                    "title": "Global Low Latency",
+                    "header_size": "h4",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 18
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "feature-card-title"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "6e99b12a",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-45",
+                  "_dom_id": "sid-45",
+                  "settings": {
+                    "_sid": "sid-45",
+                    "_dom_id": "sid-45",
+                    "css_classes": "feature-card-text",
+                    "editor": "<p>Distributed edge nodes ensure sub-50ms latency for all your international team members.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "feature-card-text"
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "a912a0f6",
+          "elType": "widget",
+          "widgetType": "heading",
+          "_sid": "sid-46",
+          "_dom_id": "sid-46",
+          "settings": {
+            "_sid": "sid-46",
+            "_dom_id": "sid-46",
+            "css_classes": "section-title",
+            "title": "Frequently Asked Questions",
+            "header_size": "h2",
+            "align": "center",
+            "title_color": "#0f172a",
+            "typography_typography": "custom",
+            "typography_font_family": "-apple-system",
+            "typography_font_size": {
+              "unit": "px",
+              "size": 32
+            },
+            "typography_font_weight": "700",
+            "typography_line_height": {
+              "unit": "em",
+              "size": 1.6
+            },
+            "_margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_css_classes": "section-title"
+          },
+          "elements": [],
+          "isInner": false
+        },
+        {
+          "id": "44d312e4",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-47",
+          "_dom_id": "sid-47",
+          "settings": {
+            "_sid": "sid-47",
+            "_dom_id": "sid-47",
+            "css_classes": "faq-container",
+            "direction": "column",
+            "flex_direction": "column",
+            "wrap": "nowrap",
+            "flex_wrap": "nowrap",
+            "gap": {
+              "unit": "px",
+              "size": 16,
+              "column": 16,
+              "row": 16
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 16,
+              "column": 16,
+              "row": 16
+            },
+            "space_between_widgets": 16,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "40",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "normal",
+            "flex_align_items": "normal",
+            "justify_content": "normal",
+            "flex_justify_content": "normal",
+            "min_height": {
+              "unit": "px",
+              "size": 355
+            },
+            "_css_classes": "faq-container",
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "923a1c8f",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-48",
+              "_dom_id": "sid-48",
+              "settings": {
+                "_sid": "sid-48",
+                "_dom_id": "sid-48",
+                "css_classes": "faq-item",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 8,
+                  "column": 8,
+                  "row": 8
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 8,
+                  "column": 8,
+                  "row": 8
+                },
+                "space_between_widgets": 8,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "24",
+                  "right": "28",
+                  "bottom": "24",
+                  "left": "28",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "16",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 108
+                },
+                "_css_classes": "faq-item",
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "2d37bf88",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-49",
+                  "_dom_id": "sid-49",
+                  "settings": {
+                    "_sid": "sid-49",
+                    "_dom_id": "sid-49",
+                    "css_classes": "faq-question",
+                    "title": "Can I switch plans at any time?",
+                    "header_size": "h4",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 17
+                    },
+                    "typography_font_weight": "600",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "faq-question"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "5cea7953",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-50",
+                  "_dom_id": "sid-50",
+                  "settings": {
+                    "_sid": "sid-50",
+                    "_dom_id": "sid-50",
+                    "css_classes": "faq-answer",
+                    "editor": "<p>Yes, you can upgrade, downgrade, or cancel your subscription whenever you wish directly from your account settings.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "faq-answer"
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "18420fd8",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-51",
+              "_dom_id": "sid-51",
+              "settings": {
+                "_sid": "sid-51",
+                "_dom_id": "sid-51",
+                "css_classes": "faq-item",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 8,
+                  "column": 8,
+                  "row": 8
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 8,
+                  "column": 8,
+                  "row": 8
+                },
+                "space_between_widgets": 8,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "24",
+                  "right": "28",
+                  "bottom": "24",
+                  "left": "28",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "16",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 108
+                },
+                "_css_classes": "faq-item",
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "59e53383",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-52",
+                  "_dom_id": "sid-52",
+                  "settings": {
+                    "_sid": "sid-52",
+                    "_dom_id": "sid-52",
+                    "css_classes": "faq-question",
+                    "title": "Is there a free trial available?",
+                    "header_size": "h4",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 17
+                    },
+                    "typography_font_weight": "600",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "faq-question"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "d6194ded",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-53",
+                  "_dom_id": "sid-53",
+                  "settings": {
+                    "_sid": "sid-53",
+                    "_dom_id": "sid-53",
+                    "css_classes": "faq-answer",
+                    "editor": "<p>All paid plans come with a 14-day free trial. No credit card is required to begin testing.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "faq-answer"
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "2da73eba",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-54",
+              "_dom_id": "sid-54",
+              "settings": {
+                "_sid": "sid-54",
+                "_dom_id": "sid-54",
+                "css_classes": "faq-item",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 8,
+                  "column": 8,
+                  "row": 8
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 8,
+                  "column": 8,
+                  "row": 8
+                },
+                "space_between_widgets": 8,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#ffffff",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#e2e8f0",
+                "padding": {
+                  "unit": "px",
+                  "top": "24",
+                  "right": "28",
+                  "bottom": "24",
+                  "left": "28",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "16",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 108
+                },
+                "_css_classes": "faq-item",
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "10",
+                  "bottom": "10",
+                  "left": "10",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "e8ff4c23",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-55",
+                  "_dom_id": "sid-55",
+                  "settings": {
+                    "_sid": "sid-55",
+                    "_dom_id": "sid-55",
+                    "css_classes": "faq-question",
+                    "title": "What payment methods are supported?",
+                    "header_size": "h4",
+                    "align": "left",
+                    "title_color": "#0f172a",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 17
+                    },
+                    "typography_font_weight": "600",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "faq-question"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "b00a75e7",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-56",
+                  "_dom_id": "sid-56",
+                  "settings": {
+                    "_sid": "sid-56",
+                    "_dom_id": "sid-56",
+                    "css_classes": "faq-answer",
+                    "editor": "<p>We accept all major credit cards including Visa, Mastercard, American Express, as well as PayPal and wire transfers.</p>",
+                    "align": "left",
+                    "text_color": "#64748b",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "faq-answer"
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

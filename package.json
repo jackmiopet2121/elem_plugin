@@ -1,0 +1,41 @@
+{
+  "name": "engine-v2",
+  "version": "2.0.0",
+  "description": "Clean-slate, zero-hardcoding HTML to Elementor Free deterministic compiler engine",
+  "main": "src/index.js",
+  "bin": {
+    "engine-v2": "./bin/cli.js"
+  },
+  "scripts": {
+    "compile": "node bin/cli.js",
+    "test": "node tests/run-corpus.js",
+    "test:corpus": "node tests/run-corpus.js",
+    "test:c1": "node tests/check-c1.js",
+    "test:c3": "node tests/check-c3.js",
+    "test:c4": "node tests/check-c4.js",
+    "test:c5": "node tests/check-c5.js",
+    "test:c6": "node tests/check-c6.js",
+    "test:c7": "node tests/check-c7.js",
+    "test:c8": "node tests/check-c8.js",
+    "test:c9": "node tests/check-c9.js",
+    "test:c10": "node tests/check-c10.js",
+    "test:c11": "node tests/check-c11.js",
+    "test:c12": "node tests/check-c12.js",
+    "test:c13": "node tests/check-c13.js",
+    "test:c14": "node tests/check-c14.js",
+    "test:b8-baseline": "node tests/run-block-8-baseline.js",
+    "test:b8-hardcoding": "node tests/check-b8-no-hardcoding.js",
+    "test:b8-infra": "node tests/test-b8-infrastructure.js"
+  },
+  "keywords": [
+    "elementor",
+    "html-to-elementor",
+    "wordpress",
+    "compiler"
+  ],
+  "author": "Antigravity Core Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer-core": "^25.10.0"
+  }
+}

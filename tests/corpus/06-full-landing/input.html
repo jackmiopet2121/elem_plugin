@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enterprise Cloud Platform</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --surface: #ffffff;
+      --bg: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg); color: var(--text); }
+    .container { max-width: 1200px; margin: 0 auto; padding: 48px 24px; }
+    
+    .hero { text-align: center; margin-bottom: 64px; }
+    .hero h1 { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 16px; color: var(--text); }
+    .hero p { font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 24px; }
+    
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-bottom: 64px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+    .card-media {
+      width: 100%;
+      height: 180px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .badge {
+      display: inline-block;
+      align-self: flex-start;
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card h3 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .card p { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 24px; flex-grow: 1; }
+    
+    .btn {
+      display: inline-block;
+      text-align: center;
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--primary-hover); }
+    
+    /* FAQ Section */
+    .faq-section { max-width: 800px; margin: 0 auto; }
+    .faq-section h2 { text-align: center; font-size: 32px; margin-bottom: 32px; }
+    .accordion-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .accordion-header {
+      width: 100%;
+      text-align: left;
+      padding: 20px 24px;
+      background: transparent;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .accordion-body {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .accordion-item.is-active .accordion-body {
+      display: block;
+    }
+    .accordion-icon { font-size: 20px; transition: transform 0.2s; }
+    .accordion-item.is-active .accordion-icon {
+      transform: rotate(45deg);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <span class="badge">Next-Gen Cloud</span>
+      <h1>Build, Deploy, Scale Faster</h1>
+      <p>A unified infrastructure automation platform engineered for high-performance developer teams worldwide.</p>
+      <a href="#plans" class="btn">Explore Solutions</a>
+    </section>
+
+    <section id="plans" class="cards-grid">
+      <div class="card">
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60" alt="Dashboard Analytics">
+        </div>
+        <span class="badge">Starter</span>
+        <h3>Real-time Metrics</h3>
+        <p>Gain instantaneous visibility into telemetry streams with microsecond latency tracing and monitoring.</p>
+        <button class="btn">Get Started</button>
+      </div>
+
+      <div class="card">
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop&q=60" alt="Code Architecture">
+        </div>
+        <span class="badge">Professional</span>
+        <h3>Continuous Delivery</h3>
+        <p>Zero-downtime canary deployments, automated rollbacks, and multi-region synchronization protocols.</p>
+        <button class="btn">Start Free Trial</button>
+      </div>
+
+      <div class="card">
+        <div class="card-media">
+          <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=60" alt="Cyber Security">
+        </div>
+        <span class="badge">Enterprise</span>
+        <h3>Zero-Trust Security</h3>
+        <p>Hardware-grade encryption at rest and in transit, strict RBAC, and automated SOC2 audit compliance.</p>
+        <button class="btn">Contact Sales</button>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="accordion-item">
+        <button class="accordion-header">
+          <span>How fast does deployment take?</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Standard deployments complete in under 90 seconds from Git commit push to global edge propagation.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">
+          <span>Can I integrate existing AWS / GCP clusters?</span>
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-body">
+          <p>Yes, our control plane bridges natively with standard Kubernetes and VPC peering configurations.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const headers = document.querySelectorAll('.accordion-header');
+      headers.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const item = this.parentElement;
+          const isActive = item.classList.contains('is-active');
+          document.querySelectorAll('.accordion-item').forEach(function(el) {
+            el.classList.remove('is-active');
+          });
+          if (!isActive) {
+            item.classList.add('is-active');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

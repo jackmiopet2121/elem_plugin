@@ -1,0 +1,15 @@
+{
+  "id": "calib-07-icon-stacked-circle",
+  "name": "Icon Stacked Circle 1:1 Aspect Ratio & Border Radius",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "icon-circle": {
+      "rect": { "w": 48, "h": 48 },
+      "aspectRatio": 1,
+      "styles": {
+        "borderRadius": "50%"
+      },
+      "tolerances": { "geometry": 1 }
+    }
+  }
+}

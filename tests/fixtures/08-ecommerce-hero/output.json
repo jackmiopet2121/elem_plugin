@@ -1,0 +1,2558 @@
+{
+  "version": "0.4",
+  "title": "Elementor Free Template",
+  "type": "page",
+  "content": [
+    {
+      "id": "45eff9b2",
+      "elType": "container",
+      "isInner": false,
+      "_sid": "sid-2",
+      "_dom_id": "sid-2",
+      "settings": {
+        "_sid": "sid-2",
+        "_dom_id": "sid-2",
+        "css_classes": "wrapper",
+        "direction": "column",
+        "flex_direction": "column",
+        "wrap": "nowrap",
+        "flex_wrap": "nowrap",
+        "gap": {
+          "unit": "px",
+          "size": 60,
+          "column": 60,
+          "row": 60
+        },
+        "flex_gap": {
+          "unit": "px",
+          "size": 60,
+          "column": 60,
+          "row": 60
+        },
+        "space_between_widgets": 60,
+        "content_width": "boxed",
+        "background_background": "classic",
+        "background_color": "transparent",
+        "padding": {
+          "unit": "px",
+          "top": "40",
+          "right": "24",
+          "bottom": "80",
+          "left": "24",
+          "isLinked": false
+        },
+        "margin": {
+          "unit": "px",
+          "top": "0",
+          "right": "40",
+          "bottom": "0",
+          "left": "40",
+          "isLinked": false
+        },
+        "align_items": "normal",
+        "flex_align_items": "normal",
+        "justify_content": "normal",
+        "flex_justify_content": "normal",
+        "min_height": {
+          "unit": "px",
+          "size": 1606
+        },
+        "_css_classes": "wrapper",
+        "boxed_width": {
+          "unit": "px",
+          "size": 1280
+        },
+        "padding_mobile": {
+          "unit": "px",
+          "top": "40",
+          "right": "24",
+          "bottom": "80",
+          "left": "24",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "2752eb8f",
+          "elType": "widget",
+          "widgetType": "html",
+          "settings": {
+            "html": "<style>\n.navbar {\n  display: flex;\n}\n\n.nav-btn {\n  display: inline-block;\n}\n\n.hero-container {\n  display: flex;\n}\n\n.hero-content {\n  flex: 1;\n}\n\n.badge {\n  display: inline-block;\n}\n\n.btn-primary {\n  display: inline-block;\n}\n\n.hero-visual {\n  flex: 1;\n  overflow: hidden;\n}\n\n.hero-visual img {\n  max-height: 380px;\n  object-fit: cover;\n  display: block;\n}\n\n.product-card {\n  display: flex;\n}\n\n.product-card img {\n  aspect-ratio: 3 / 2;\n  object-fit: cover;\n  display: block;\n}\n\n.product-btn {\n  display: block;\n}\n\n.btn-light {\n  display: inline-block;\n}\n\n[class*=\"media\"], [class*=\"thumb\"], [class*=\"cover\"] {\n  overflow: hidden !important;\n}\n[class*=\"media\"] .elementor-widget-image,\n[class*=\"media\"] .elementor-widget-image .elementor-widget-container,\n[class*=\"thumb\"] .elementor-widget-image,\n[class*=\"thumb\"] .elementor-widget-image .elementor-widget-container,\n[class*=\"cover\"] .elementor-widget-image,\n[class*=\"cover\"] .elementor-widget-image .elementor-widget-container {\n  height: 100% !important;\n  display: flex !important;\n  width: 100% !important;\n}\n[class*=\"media\"] .elementor-widget-image img,\n[class*=\"thumb\"] .elementor-widget-image img,\n[class*=\"cover\"] .elementor-widget-image img {\n  width: 100% !important;\n  height: 100% !important;\n  object-fit: cover !important;\n}\n\n.elementor-widget-heading[class*=\"badge\"] .elementor-heading-title,\n.elementor-widget-heading[class*=\"pill\"] .elementor-heading-title,\n[class*=\"badge\"] .elementor-heading-title,\n[class*=\"pill\"] .elementor-heading-title {\n  line-height: 1 !important;\n  display: inline-flex !important;\n  align-items: center !important;\n  justify-content: center !important;\n  margin: 0 !important;\n}\n\n.elementor-element-cfdedc7d,\n.elementor-element-cfdedc7d .elementor-widget-container,\n.elementor-element-cfdedc7d .elementor-widget-container img {\n  height: 100% !important;\n  max-height: 380px !important;\n  object-fit: cover !important;\n}\n</style>",
+            "css_classes": "embedded-stylesheet-engine",
+            "_html_reason": "SYSTEM:stylesheet-engine",
+            "_margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "_padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": true
+            },
+            "_css_classes": "embedded-stylesheet-engine"
+          },
+          "elements": []
+        },
+        {
+          "id": "e34fc308",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-3",
+          "_dom_id": "sid-3",
+          "settings": {
+            "_sid": "sid-3",
+            "_dom_id": "sid-3",
+            "css_classes": "navbar",
+            "direction": "row",
+            "flex_direction": "row",
+            "wrap": "nowrap",
+            "flex_wrap": "nowrap",
+            "gap": {
+              "unit": "px",
+              "size": 60,
+              "column": 60,
+              "row": 60
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 60,
+              "column": 60,
+              "row": 60
+            },
+            "space_between_widgets": 60,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "48",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "center",
+            "flex_align_items": "center",
+            "justify_content": "space-between",
+            "flex_justify_content": "space-between",
+            "_css_classes": "navbar",
+            "gap_mobile": {
+              "unit": "px",
+              "size": 0
+            },
+            "flex_gap_mobile": {
+              "unit": "px",
+              "size": 0
+            },
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "cb960069",
+              "elType": "widget",
+              "widgetType": "heading",
+              "_sid": "sid-4",
+              "_dom_id": "sid-4",
+              "settings": {
+                "_sid": "sid-4",
+                "_dom_id": "sid-4",
+                "css_classes": "brand-logo",
+                "title": "LUMINA AUDIO",
+                "header_size": "h3",
+                "align": "left",
+                "title_color": "#38bdf8",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 26
+                },
+                "typography_font_weight": "800",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.6
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_css_classes": "brand-logo",
+                "_element_width": "auto",
+                "width": {
+                  "unit": "px",
+                  "size": 215
+                },
+                "width_tablet": {
+                  "unit": "px",
+                  "size": 215
+                },
+                "width_mobile": {
+                  "unit": "px",
+                  "size": 187
+                }
+              },
+              "elements": [],
+              "isInner": false
+            },
+            {
+              "id": "f9dfa725",
+              "elType": "widget",
+              "widgetType": "button",
+              "_sid": "sid-5",
+              "_dom_id": "sid-5",
+              "settings": {
+                "_sid": "sid-5",
+                "_dom_id": "sid-5",
+                "css_classes": "nav-btn",
+                "text": "Shop Collection",
+                "link": {
+                  "url": "#shop",
+                  "is_external": false,
+                  "nofollow": false
+                },
+                "size": "sm",
+                "background_color": "#1e293b",
+                "button_text_color": "#38bdf8",
+                "button_padding": {
+                  "unit": "px",
+                  "top": "10",
+                  "right": "20",
+                  "bottom": "10",
+                  "left": "20",
+                  "isLinked": false
+                },
+                "border_radius": {
+                  "unit": "px",
+                  "top": "8",
+                  "right": "8",
+                  "bottom": "8",
+                  "left": "8",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#334155",
+                "align": "justify",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 15
+                },
+                "typography_font_weight": "600",
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_css_classes": "nav-btn",
+                "align_mobile": "justify",
+                "_element_width_mobile": "initial",
+                "width": {
+                  "unit": "px",
+                  "size": 149
+                },
+                "width_tablet": {
+                  "unit": "px",
+                  "size": 149
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "8",
+                  "right": "8",
+                  "bottom": "8",
+                  "left": "8",
+                  "isLinked": true
+                },
+                "width_mobile": {
+                  "unit": "px",
+                  "size": 135
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "8",
+                  "right": "8",
+                  "bottom": "8",
+                  "left": "8",
+                  "isLinked": true
+                }
+              },
+              "elements": [],
+              "isInner": false
+            }
+          ]
+        },
+        {
+          "id": "c9e35d8d",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-6",
+          "_dom_id": "sid-6",
+          "settings": {
+            "_sid": "sid-6",
+            "_dom_id": "sid-6",
+            "css_classes": "hero-container",
+            "direction": "row",
+            "flex_direction": "row",
+            "wrap": "nowrap",
+            "flex_wrap": "nowrap",
+            "gap": {
+              "unit": "px",
+              "size": 48,
+              "column": 48,
+              "row": 48
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 48,
+              "column": 48,
+              "row": 48
+            },
+            "space_between_widgets": 48,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "80",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "center",
+            "flex_align_items": "center",
+            "justify_content": "space-between",
+            "flex_justify_content": "space-between",
+            "min_height": {
+              "unit": "px",
+              "size": 380
+            },
+            "_css_classes": "hero-container",
+            "direction_tablet": "column",
+            "flex_direction_tablet": "column",
+            "gap_tablet": {
+              "unit": "px",
+              "size": 32
+            },
+            "flex_gap_tablet": {
+              "unit": "px",
+              "size": 32
+            },
+            "direction_mobile": "column",
+            "flex_direction_mobile": "column",
+            "gap_mobile": {
+              "unit": "px",
+              "size": 32
+            },
+            "flex_gap_mobile": {
+              "unit": "px",
+              "size": 32
+            },
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "ee853461",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-7",
+              "_dom_id": "sid-7",
+              "settings": {
+                "_sid": "sid-7",
+                "_dom_id": "sid-7",
+                "css_classes": "hero-content",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "space_between_widgets": 16,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "transparent",
+                "padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 293
+                },
+                "_css_classes": "hero-content",
+                "width": {
+                  "unit": "%",
+                  "size": 47.9
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                }
+              },
+              "elements": [
+                {
+                  "id": "204635e1",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-8",
+                  "_dom_id": "sid-8",
+                  "settings": {
+                    "_sid": "sid-8",
+                    "_dom_id": "sid-8",
+                    "css_classes": "badge",
+                    "editor": "<p>Acoustic Engineering</p>",
+                    "align": "left",
+                    "text_color": "#e0f2fe",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "badge",
+                    "background_color": "#0369a1",
+                    "background_background": "classic",
+                    "width": {
+                      "unit": "px",
+                      "size": 202
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "20",
+                      "right": "20",
+                      "bottom": "20",
+                      "left": "20",
+                      "isLinked": true
+                    },
+                    "width_tablet": {
+                      "unit": "px",
+                      "size": 202
+                    },
+                    "_padding_tablet": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "20",
+                      "right": "20",
+                      "bottom": "20",
+                      "left": "20",
+                      "isLinked": true
+                    },
+                    "width_mobile": {
+                      "unit": "px",
+                      "size": 202
+                    },
+                    "_padding_mobile": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "20",
+                      "right": "20",
+                      "bottom": "20",
+                      "left": "20",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "01bdff6a",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-9",
+                  "_dom_id": "sid-9",
+                  "settings": {
+                    "_sid": "sid-9",
+                    "_dom_id": "sid-9",
+                    "css_classes": "hero-title",
+                    "title": "Studio Sound. Zero Compromise.",
+                    "header_size": "h1",
+                    "align": "left",
+                    "title_color": "#f8fafc",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 42
+                    },
+                    "typography_font_weight": "800",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.2
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "hero-title"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "23335066",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-10",
+                  "_dom_id": "sid-10",
+                  "settings": {
+                    "_sid": "sid-10",
+                    "_dom_id": "sid-10",
+                    "css_classes": "hero-desc",
+                    "editor": "<p>Experience lossless high-resolution audio tuned by world-class acoustic engineers for ultra-low distortion.</p>",
+                    "align": "left",
+                    "text_color": "#94a3b8",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 16
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "hero-desc",
+                    "typography_font_size_tablet": {
+                      "unit": "px",
+                      "size": 16
+                    },
+                    "typography_font_size_mobile": {
+                      "unit": "px",
+                      "size": 16
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "4b1319cb",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "_sid": "sid-11",
+                  "_dom_id": "sid-11",
+                  "settings": {
+                    "_sid": "sid-11",
+                    "_dom_id": "sid-11",
+                    "css_classes": "btn-primary",
+                    "text": "Order Lumina Pro",
+                    "link": {
+                      "url": "#order",
+                      "is_external": false,
+                      "nofollow": false
+                    },
+                    "size": "sm",
+                    "background_color": "#0284c7",
+                    "button_text_color": "#ffffff",
+                    "button_padding": {
+                      "unit": "px",
+                      "top": "14",
+                      "right": "28",
+                      "bottom": "14",
+                      "left": "28",
+                      "isLinked": false
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "align": "left",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 15
+                    },
+                    "typography_font_weight": "600",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "btn-primary",
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "66d27da9",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-12",
+              "_dom_id": "sid-12",
+              "settings": {
+                "_sid": "sid-12",
+                "_dom_id": "sid-12",
+                "css_classes": "hero-visual",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 0,
+                  "column": 0,
+                  "row": 0
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 0,
+                  "column": 0,
+                  "row": 0
+                },
+                "space_between_widgets": 0,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#1e293b",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 380
+                },
+                "_css_classes": "hero-visual",
+                "width": {
+                  "unit": "%",
+                  "size": 47.9
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "16",
+                  "right": "16",
+                  "bottom": "16",
+                  "left": "16",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "cfdedc7d",
+                  "elType": "widget",
+                  "widgetType": "image",
+                  "_sid": "sid-13",
+                  "_dom_id": "sid-13",
+                  "settings": {
+                    "_sid": "sid-13",
+                    "_dom_id": "sid-13",
+                    "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ccircle cx='400' cy='300' r='180' fill='%230284c7' opacity='0.3'/%3E%3Cpath d='M300 240 C300 160 500 160 500 240 L500 360 C500 400 460 420 440 400 L440 320 L480 320 L480 240 C480 180 320 180 320 240 L320 320 L360 320 L360 400 C340 420 300 400 300 360 Z' fill='%2338bdf8'/%3E%3C/svg%3E",
+                    "image": {
+                      "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%231e293b'/%3E%3Ccircle cx='400' cy='300' r='180' fill='%230284c7' opacity='0.3'/%3E%3Cpath d='M300 240 C300 160 500 160 500 240 L500 360 C500 400 460 420 440 400 L440 320 L480 320 L480 240 C480 180 320 180 320 240 L320 320 L360 320 L360 400 C340 420 300 400 300 360 Z' fill='%2338bdf8'/%3E%3C/svg%3E",
+                      "id": ""
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 100
+                    },
+                    "align": "center",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "",
+                    "css_classes": "",
+                    "_hero_cover_fill": true,
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "16",
+                      "right": "16",
+                      "bottom": "16",
+                      "left": "16",
+                      "isLinked": true
+                    },
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "16",
+                      "right": "16",
+                      "bottom": "16",
+                      "left": "16",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "16",
+                      "right": "16",
+                      "bottom": "16",
+                      "left": "16",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ece13380",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-14",
+          "_dom_id": "sid-14",
+          "settings": {
+            "_sid": "sid-14",
+            "_dom_id": "sid-14",
+            "css_classes": "section-header",
+            "direction": "column",
+            "flex_direction": "column",
+            "wrap": "nowrap",
+            "flex_wrap": "nowrap",
+            "gap": {
+              "unit": "px",
+              "size": 12,
+              "column": 12,
+              "row": 12
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 12,
+              "column": 12,
+              "row": 12
+            },
+            "space_between_widgets": 12,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "40",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "normal",
+            "flex_align_items": "normal",
+            "justify_content": "normal",
+            "flex_justify_content": "normal",
+            "min_height": {
+              "unit": "px",
+              "size": 89
+            },
+            "_css_classes": "section-header",
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "6735ffcf",
+              "elType": "widget",
+              "widgetType": "heading",
+              "_sid": "sid-15",
+              "_dom_id": "sid-15",
+              "settings": {
+                "_sid": "sid-15",
+                "_dom_id": "sid-15",
+                "css_classes": "section-title",
+                "title": "Featured Products",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#f8fafc",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 32
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.6
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_css_classes": "section-title"
+              },
+              "elements": [],
+              "isInner": false
+            },
+            {
+              "id": "9d3cac5c",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "_sid": "sid-16",
+              "_dom_id": "sid-16",
+              "settings": {
+                "_sid": "sid-16",
+                "_dom_id": "sid-16",
+                "css_classes": "section-subtitle",
+                "editor": "<p>Precision listening devices crafted for studio creators and music enthusiasts.</p>",
+                "align": "center",
+                "text_color": "#94a3b8",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 16
+                },
+                "typography_font_weight": "400",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.4
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "_css_classes": "section-subtitle",
+                "typography_font_size_tablet": {
+                  "unit": "px",
+                  "size": 16
+                },
+                "typography_font_size_mobile": {
+                  "unit": "px",
+                  "size": 16
+                }
+              },
+              "elements": [],
+              "isInner": false
+            }
+          ]
+        },
+        {
+          "id": "e0c8cc64",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-17",
+          "_dom_id": "sid-17",
+          "settings": {
+            "_sid": "sid-17",
+            "_dom_id": "sid-17",
+            "css_classes": "product-grid",
+            "_layoutHandled": true,
+            "direction": "row",
+            "flex_direction": "row",
+            "wrap": "wrap",
+            "flex_wrap": "wrap",
+            "gap": {
+              "unit": "px",
+              "size": 32,
+              "column": 32,
+              "row": 32
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 32,
+              "column": 32,
+              "row": 32
+            },
+            "space_between_widgets": 32,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "transparent",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "80",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "normal",
+            "flex_align_items": "normal",
+            "justify_content": "normal",
+            "flex_justify_content": "normal",
+            "min_height": {
+              "unit": "px",
+              "size": 462
+            },
+            "_css_classes": "product-grid",
+            "direction_tablet": "column",
+            "flex_direction_tablet": "column",
+            "wrap_tablet": "nowrap",
+            "flex_wrap_tablet": "nowrap",
+            "direction_mobile": "column",
+            "flex_direction_mobile": "column",
+            "wrap_mobile": "nowrap",
+            "flex_wrap_mobile": "nowrap",
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            }
+          },
+          "elements": [
+            {
+              "id": "9218b1c1",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-18",
+              "_dom_id": "sid-18",
+              "settings": {
+                "_sid": "sid-18",
+                "_dom_id": "sid-18",
+                "css_classes": "product-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "space_between_widgets": 16,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#1e293b",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#334155",
+                "padding": {
+                  "unit": "px",
+                  "top": "24",
+                  "right": "24",
+                  "bottom": "24",
+                  "left": "24",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 462
+                },
+                "_css_classes": "product-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "93256d61",
+                  "elType": "widget",
+                  "widgetType": "image",
+                  "_sid": "sid-19",
+                  "_dom_id": "sid-19",
+                  "settings": {
+                    "_sid": "sid-19",
+                    "_dom_id": "sid-19",
+                    "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3Ccircle cx='300' cy='200' r='90' fill='%2338bdf8' opacity='0.5'/%3E%3C/svg%3E",
+                    "image": {
+                      "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3Ccircle cx='300' cy='200' r='90' fill='%2338bdf8' opacity='0.5'/%3E%3C/svg%3E",
+                      "id": ""
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 100
+                    },
+                    "align": "center",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "",
+                    "css_classes": "",
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "ae86073e",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-20",
+                  "_dom_id": "sid-20",
+                  "settings": {
+                    "_sid": "sid-20",
+                    "_dom_id": "sid-20",
+                    "css_classes": "product-title",
+                    "title": "Lumina One Wireless",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#f8fafc",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 20
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-title"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "da87be77",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-21",
+                  "_dom_id": "sid-21",
+                  "settings": {
+                    "_sid": "sid-21",
+                    "_dom_id": "sid-21",
+                    "css_classes": "product-desc",
+                    "editor": "<p>Flagship wireless headphones featuring custom planar drivers and hybrid ANC.</p>",
+                    "align": "left",
+                    "text_color": "#94a3b8",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "product-desc"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "dbbe308e",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-22",
+                  "_dom_id": "sid-22",
+                  "settings": {
+                    "_sid": "sid-22",
+                    "_dom_id": "sid-22",
+                    "css_classes": "product-price",
+                    "title": "Available from $299 USD",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#38bdf8",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 18
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-price"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "b8a8881e",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "_sid": "sid-23",
+                  "_dom_id": "sid-23",
+                  "settings": {
+                    "_sid": "sid-23",
+                    "_dom_id": "sid-23",
+                    "css_classes": "product-btn",
+                    "text": "Buy Now",
+                    "link": {
+                      "url": "#buy-one",
+                      "is_external": false,
+                      "nofollow": false
+                    },
+                    "size": "sm",
+                    "background_color": "#334155",
+                    "button_text_color": "#f8fafc",
+                    "button_padding": {
+                      "unit": "px",
+                      "top": "12",
+                      "right": "16",
+                      "bottom": "12",
+                      "left": "16",
+                      "isLinked": false
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "align": "justify",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "600",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-btn",
+                    "align_mobile": "justify",
+                    "_element_width_mobile": "initial",
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "141e8d83",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-24",
+              "_dom_id": "sid-24",
+              "settings": {
+                "_sid": "sid-24",
+                "_dom_id": "sid-24",
+                "css_classes": "product-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "space_between_widgets": 16,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#1e293b",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#334155",
+                "padding": {
+                  "unit": "px",
+                  "top": "24",
+                  "right": "24",
+                  "bottom": "24",
+                  "left": "24",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 462
+                },
+                "_css_classes": "product-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "e5d8424b",
+                  "elType": "widget",
+                  "widgetType": "image",
+                  "_sid": "sid-25",
+                  "_dom_id": "sid-25",
+                  "settings": {
+                    "_sid": "sid-25",
+                    "_dom_id": "sid-25",
+                    "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3Ccircle cx='300' cy='200' r='90' fill='%230284c7' opacity='0.5'/%3E%3C/svg%3E",
+                    "image": {
+                      "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3Ccircle cx='300' cy='200' r='90' fill='%230284c7' opacity='0.5'/%3E%3C/svg%3E",
+                      "id": ""
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 100
+                    },
+                    "align": "center",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "",
+                    "css_classes": "",
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "5899469a",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-26",
+                  "_dom_id": "sid-26",
+                  "settings": {
+                    "_sid": "sid-26",
+                    "_dom_id": "sid-26",
+                    "css_classes": "product-title",
+                    "title": "Lumina Air Earbuds",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#f8fafc",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 20
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-title"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "7d9ef679",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-27",
+                  "_dom_id": "sid-27",
+                  "settings": {
+                    "_sid": "sid-27",
+                    "_dom_id": "sid-27",
+                    "css_classes": "product-desc",
+                    "editor": "<p>Compact true wireless earbuds with beryllium drivers and 36-hour battery life.</p>",
+                    "align": "left",
+                    "text_color": "#94a3b8",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "product-desc"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "57ebfa0b",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-28",
+                  "_dom_id": "sid-28",
+                  "settings": {
+                    "_sid": "sid-28",
+                    "_dom_id": "sid-28",
+                    "css_classes": "product-price",
+                    "title": "Available from $179 USD",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#38bdf8",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 18
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-price"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "f67e6088",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "_sid": "sid-29",
+                  "_dom_id": "sid-29",
+                  "settings": {
+                    "_sid": "sid-29",
+                    "_dom_id": "sid-29",
+                    "css_classes": "product-btn",
+                    "text": "Buy Now",
+                    "link": {
+                      "url": "#buy-air",
+                      "is_external": false,
+                      "nofollow": false
+                    },
+                    "size": "sm",
+                    "background_color": "#334155",
+                    "button_text_color": "#f8fafc",
+                    "button_padding": {
+                      "unit": "px",
+                      "top": "12",
+                      "right": "16",
+                      "bottom": "12",
+                      "left": "16",
+                      "isLinked": false
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "align": "justify",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "600",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-btn",
+                    "align_mobile": "justify",
+                    "_element_width_mobile": "initial",
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            },
+            {
+              "id": "8e78f7c0",
+              "elType": "container",
+              "isInner": true,
+              "_sid": "sid-30",
+              "_dom_id": "sid-30",
+              "settings": {
+                "_sid": "sid-30",
+                "_dom_id": "sid-30",
+                "css_classes": "product-card",
+                "direction": "column",
+                "flex_direction": "column",
+                "wrap": "nowrap",
+                "flex_wrap": "nowrap",
+                "gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "flex_gap": {
+                  "unit": "px",
+                  "size": 16,
+                  "column": 16,
+                  "row": 16
+                },
+                "space_between_widgets": 16,
+                "content_width": "full",
+                "background_background": "classic",
+                "background_color": "#1e293b",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "1",
+                  "right": "1",
+                  "bottom": "1",
+                  "left": "1",
+                  "isLinked": true
+                },
+                "border_color": "#334155",
+                "padding": {
+                  "unit": "px",
+                  "top": "24",
+                  "right": "24",
+                  "bottom": "24",
+                  "left": "24",
+                  "isLinked": false
+                },
+                "margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "align_items": "normal",
+                "flex_align_items": "normal",
+                "justify_content": "normal",
+                "flex_justify_content": "normal",
+                "min_height": {
+                  "unit": "px",
+                  "size": 462
+                },
+                "_css_classes": "product-card",
+                "width": {
+                  "unit": "%",
+                  "size": 31.5
+                },
+                "_flex_size": "none",
+                "flex_shrink": 0,
+                "width_tablet": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "width_mobile": {
+                  "unit": "%",
+                  "size": 100
+                },
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "12",
+                  "right": "12",
+                  "bottom": "12",
+                  "left": "12",
+                  "isLinked": true
+                }
+              },
+              "elements": [
+                {
+                  "id": "e36e6bb8",
+                  "elType": "widget",
+                  "widgetType": "image",
+                  "_sid": "sid-31",
+                  "_dom_id": "sid-31",
+                  "settings": {
+                    "_sid": "sid-31",
+                    "_dom_id": "sid-31",
+                    "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3Ccircle cx='300' cy='200' r='90' fill='%2338bdf8' opacity='0.7'/%3E%3C/svg%3E",
+                    "image": {
+                      "url": "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%230f172a'/%3E%3Ccircle cx='300' cy='200' r='90' fill='%2338bdf8' opacity='0.7'/%3E%3C/svg%3E",
+                      "id": ""
+                    },
+                    "width": {
+                      "unit": "%",
+                      "size": 100
+                    },
+                    "align": "center",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "",
+                    "css_classes": "",
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "8",
+                      "right": "8",
+                      "bottom": "8",
+                      "left": "8",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "4d657434",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-32",
+                  "_dom_id": "sid-32",
+                  "settings": {
+                    "_sid": "sid-32",
+                    "_dom_id": "sid-32",
+                    "css_classes": "product-title",
+                    "title": "Lumina Studio Reference",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#f8fafc",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 20
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-title"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "6b8aa7a1",
+                  "elType": "widget",
+                  "widgetType": "text-editor",
+                  "_sid": "sid-33",
+                  "_dom_id": "sid-33",
+                  "settings": {
+                    "_sid": "sid-33",
+                    "_dom_id": "sid-33",
+                    "css_classes": "product-desc",
+                    "editor": "<p>Open-back reference monitors tuned specifically for mastering and production.</p>",
+                    "align": "left",
+                    "text_color": "#94a3b8",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "400",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.4
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": true
+                    },
+                    "_css_classes": "product-desc"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "66b3d81d",
+                  "elType": "widget",
+                  "widgetType": "heading",
+                  "_sid": "sid-34",
+                  "_dom_id": "sid-34",
+                  "settings": {
+                    "_sid": "sid-34",
+                    "_dom_id": "sid-34",
+                    "css_classes": "product-price",
+                    "title": "Available from $499 USD",
+                    "header_size": "h3",
+                    "align": "left",
+                    "title_color": "#38bdf8",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 18
+                    },
+                    "typography_font_weight": "700",
+                    "typography_line_height": {
+                      "unit": "em",
+                      "size": 1.6
+                    },
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_padding": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-price"
+                  },
+                  "elements": [],
+                  "isInner": false
+                },
+                {
+                  "id": "bb2b6fae",
+                  "elType": "widget",
+                  "widgetType": "button",
+                  "_sid": "sid-35",
+                  "_dom_id": "sid-35",
+                  "settings": {
+                    "_sid": "sid-35",
+                    "_dom_id": "sid-35",
+                    "css_classes": "product-btn",
+                    "text": "Buy Now",
+                    "link": {
+                      "url": "#buy-ref",
+                      "is_external": false,
+                      "nofollow": false
+                    },
+                    "size": "sm",
+                    "background_color": "#334155",
+                    "button_text_color": "#f8fafc",
+                    "button_padding": {
+                      "unit": "px",
+                      "top": "12",
+                      "right": "16",
+                      "bottom": "12",
+                      "left": "16",
+                      "isLinked": false
+                    },
+                    "border_radius": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "align": "justify",
+                    "typography_typography": "custom",
+                    "typography_font_family": "-apple-system",
+                    "typography_font_size": {
+                      "unit": "px",
+                      "size": 14
+                    },
+                    "typography_font_weight": "600",
+                    "_margin": {
+                      "unit": "px",
+                      "top": "0",
+                      "right": "0",
+                      "bottom": "0",
+                      "left": "0",
+                      "isLinked": false
+                    },
+                    "_css_classes": "product-btn",
+                    "align_mobile": "justify",
+                    "_element_width_mobile": "initial",
+                    "border_radius_tablet": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    },
+                    "border_radius_mobile": {
+                      "unit": "px",
+                      "top": "6",
+                      "right": "6",
+                      "bottom": "6",
+                      "left": "6",
+                      "isLinked": true
+                    }
+                  },
+                  "elements": [],
+                  "isInner": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "39251ec0",
+          "elType": "container",
+          "isInner": true,
+          "_sid": "sid-36",
+          "_dom_id": "sid-36",
+          "settings": {
+            "_sid": "sid-36",
+            "_dom_id": "sid-36",
+            "css_classes": "cta-banner",
+            "direction": "column",
+            "flex_direction": "column",
+            "wrap": "nowrap",
+            "flex_wrap": "nowrap",
+            "gap": {
+              "unit": "px",
+              "size": 24,
+              "column": 24,
+              "row": 24
+            },
+            "flex_gap": {
+              "unit": "px",
+              "size": 24,
+              "column": 24,
+              "row": 24
+            },
+            "space_between_widgets": 24,
+            "content_width": "full",
+            "background_background": "classic",
+            "background_color": "#0369a1",
+            "border_radius": {
+              "unit": "px",
+              "top": "16",
+              "right": "16",
+              "bottom": "16",
+              "left": "16",
+              "isLinked": true
+            },
+            "padding": {
+              "unit": "px",
+              "top": "48",
+              "right": "36",
+              "bottom": "48",
+              "left": "36",
+              "isLinked": false
+            },
+            "margin": {
+              "unit": "px",
+              "top": "0",
+              "right": "0",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            },
+            "align_items": "normal",
+            "flex_align_items": "normal",
+            "justify_content": "normal",
+            "flex_justify_content": "normal",
+            "min_height": {
+              "unit": "px",
+              "size": 261
+            },
+            "_css_classes": "cta-banner",
+            "width_mobile": {
+              "unit": "%",
+              "size": 100
+            },
+            "border_radius_tablet": {
+              "unit": "px",
+              "top": "16",
+              "right": "16",
+              "bottom": "16",
+              "left": "16",
+              "isLinked": true
+            },
+            "border_radius_mobile": {
+              "unit": "px",
+              "top": "16",
+              "right": "16",
+              "bottom": "16",
+              "left": "16",
+              "isLinked": true
+            }
+          },
+          "elements": [
+            {
+              "id": "f4fb9804",
+              "elType": "widget",
+              "widgetType": "heading",
+              "_sid": "sid-37",
+              "_dom_id": "sid-37",
+              "settings": {
+                "_sid": "sid-37",
+                "_dom_id": "sid-37",
+                "css_classes": "cta-banner-title",
+                "title": "Join 50,000+ Audiophiles Worldwide",
+                "header_size": "h2",
+                "align": "center",
+                "title_color": "#ffffff",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 32
+                },
+                "typography_font_weight": "800",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.6
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_css_classes": "cta-banner-title"
+              },
+              "elements": [],
+              "isInner": false
+            },
+            {
+              "id": "1afcdd2c",
+              "elType": "widget",
+              "widgetType": "text-editor",
+              "_sid": "sid-38",
+              "_dom_id": "sid-38",
+              "settings": {
+                "_sid": "sid-38",
+                "_dom_id": "sid-38",
+                "css_classes": "cta-banner-desc",
+                "editor": "<p>Upgrade your listening experience today with free express shipping and a 30-day money back guarantee.</p>",
+                "align": "center",
+                "text_color": "#e0f2fe",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 16
+                },
+                "typography_font_weight": "400",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.4
+                },
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_padding": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": true
+                },
+                "_css_classes": "cta-banner-desc",
+                "typography_font_size_tablet": {
+                  "unit": "px",
+                  "size": 16
+                },
+                "typography_font_size_mobile": {
+                  "unit": "px",
+                  "size": 16
+                }
+              },
+              "elements": [],
+              "isInner": false
+            },
+            {
+              "id": "75766873",
+              "elType": "widget",
+              "widgetType": "button",
+              "_sid": "sid-39",
+              "_dom_id": "sid-39",
+              "settings": {
+                "_sid": "sid-39",
+                "_dom_id": "sid-39",
+                "css_classes": "btn-light",
+                "text": "Explore Full Catalog",
+                "link": {
+                  "url": "#explore",
+                  "is_external": false,
+                  "nofollow": false
+                },
+                "size": "sm",
+                "background_color": "#ffffff",
+                "button_text_color": "#0369a1",
+                "button_padding": {
+                  "unit": "px",
+                  "top": "14",
+                  "right": "32",
+                  "bottom": "14",
+                  "left": "32",
+                  "isLinked": false
+                },
+                "border_radius": {
+                  "unit": "px",
+                  "top": "8",
+                  "right": "8",
+                  "bottom": "8",
+                  "left": "8",
+                  "isLinked": true
+                },
+                "align": "center",
+                "typography_typography": "custom",
+                "typography_font_family": "-apple-system",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 15
+                },
+                "typography_font_weight": "700",
+                "_margin": {
+                  "unit": "px",
+                  "top": "0",
+                  "right": "0",
+                  "bottom": "0",
+                  "left": "0",
+                  "isLinked": false
+                },
+                "_css_classes": "btn-light",
+                "border_radius_tablet": {
+                  "unit": "px",
+                  "top": "8",
+                  "right": "8",
+                  "bottom": "8",
+                  "left": "8",
+                  "isLinked": true
+                },
+                "border_radius_mobile": {
+                  "unit": "px",
+                  "top": "8",
+                  "right": "8",
+                  "bottom": "8",
+                  "left": "8",
+                  "isLinked": true
+                }
+              },
+              "elements": [],
+              "isInner": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

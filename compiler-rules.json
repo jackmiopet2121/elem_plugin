@@ -1,0 +1,562 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "name": "HTML to Native Elementor Free Compiler Rules Engine",
+  "version": "1.0.0",
+  "description": "Central Black Box knowledge-base and runtime configuration for deterministic HTML-to-Elementor conversion.",
+  "metaRuleUniversalAgnosticContract": {
+    "enabled": true,
+    "ruleDescription": "The compiler must never hardcode component-specific class names, fixed layout dimensions, or font families from test fixtures. All rules, normalizers, and prompt heuristics must operate on universal CSS specifications, HTML semantics, and dynamic AST structural patterns across all landing page types and components."
+  },
+  "microEmbedDecompositionContract": {
+    "enabled": true,
+    "ruleDescription": "Layout cards, feature columns, headers, control panels, summaries, and CTA buttons must ALWAYS be decomposed into native Elementor Containers and Widgets (100% native). Using widgetType 'html' to encapsulate parent structural cards or buttons is strictly forbidden. The 'html' widget is strictly quarantined to unreachable browser primitives (e.g. <input type='range'> slider tracks, custom toggle switches), scoped <style> stylesheets, and application <script> engines."
+  },
+  "customScriptPreservationContract": {
+    "enabled": true,
+    "ruleDescription": "Custom client-side JavaScript business logic (such as pricing curves, interactive calculators, math algorithms, tab switchers, and reactive event listeners) in <script> tags must be 100% preserved in full. Normalizers must NEVER overwrite, truncate, or replace application scripts with generic boilerplate. When accordion collapse handling is needed, click listeners must be appended without mutating or overwriting the original application code."
+  },
+  "domIdPreservationContract": {
+    "enabled": true,
+    "ruleDescription": "Interactive HTML components rely on DOM IDs (e.g. getElementById) for dynamic state mutations. Every element with an 'id' attribute must preserve its ID via 'settings._element_id' on containers/widgets or within inner text markup (<span id='...'>) so client-side JavaScript binds directly to native Elementor elements."
+  },
+  "elementorSchemaContract": {
+    "enabled": true,
+    "ruleDescription": "All nodes in the Elementor JSON AST must strictly comply with Elementor Core schema. Every container must have elType: 'container' and elements: []. Every widget must have elType: 'widget', a valid widgetType, and elements: []. Missing or undefined elType causes Elementor's JavaScript renderer to fail to instantiate models and skip rendering the widgets entirely."
+  },
+  "domFirstReactiveJsContract": {
+    "enabled": true,
+    "ruleDescription": "All content, feature checklists, titles, badges, and text must be rendered statically in the HTML DOM. JavaScript must strictly handle events and state, mutating .textContent or .classList on existing elements, and is strictly prohibited from injecting dynamic markup via innerHTML. Naked HTML widgets are quarantined exclusively to <input type='range'> and <input type='checkbox'>."
+  },
+  "inputAttributePreservationContract": {
+    "enabled": true,
+    "ruleDescription": "When HTML form controls (<input>, <select>, <textarea>) are transformed into micro-embed HTML widgets, all standard and custom DOM attributes (including min, max, step, value, type, name, placeholder, checked, disabled, required, aria-*, data-*) present on the original HTML node must be dynamically serialized and preserved with zero attribute loss. Hardcoding or stripping input attributes causes client-side mathematical calculations and state synchronization to evaluate to NaN or fail."
+  },
+  "aiCompilationResilienceContract": {
+    "enabled": true,
+    "ruleDescription": "The AI compilation client must be resilient against transient network errors, HTTP 429 rate limits, and 503 service outages using automatic retry with exponential backoff. The compiler must never silently downgrade to offline mode unless explicitly requested by the user, providing transparent telemetry and deterministic error handling."
+  },
+  "antiDuplicateIdContract": {
+    "enabled": true,
+    "ruleDescription": "When a micro-embed HTML widget encapsulates an inner DOM element declaring an 'id' (such as <input id='...'>, <select id='...'>, <canvas id='...'>), the outer widget wrapper must NEVER declare the identical ID via '_element_id'. Duplicate IDs in the DOM cause document.getElementById to resolve to the parent <div> wrapper instead of the form control, corrupting .value, .checked, and event listeners into NaN."
+  },
+  "atomicToggleSwitchContract": {
+    "enabled": true,
+    "ruleDescription": "Custom checkbox switches and toggles that rely on CSS adjacent sibling combinators (e.g. input:checked + .switch-slider) must ALWAYS be preserved together as an atomic micro-embed HTML widget. Decomposing the input and its visual handle into separate Elementor containers breaks the DOM sibling relationship (+), corrupts CSS transitions, and disables interactive switch animations."
+  },
+  "images": {
+    "validExtensions": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".webp",
+      ".svg",
+      ".gif",
+      ".avif"
+    ],
+    "defaultFallbackExtension": ".jpg",
+    "ruleDescription": "WordPress/Elementor media pipeline fails or rejects external image URLs missing a file extension (wp_check_filetype). Any URL lacking an extension must be sanitized by appending .jpg before template compilation.",
+    "cardMediaFullBleed": {
+      "enabled": false,
+      "target": {
+        "widgetType": "image"
+      },
+      "conditions": {
+        "parentClasses": ["media", "card-img", "thumb", "cover"]
+      },
+      "mutations": {
+        "settings.width": { "unit": "%", "size": 100 },
+        "settings.space": { "unit": "%", "size": 100 },
+        "settings._element_width": "inherit",
+        "settings._flex_size": "none",
+        "settings._flex_align_self": "stretch"
+      },
+      "alignItems": "stretch",
+      "justifyContent": "flex-start",
+      "imageWidget": {
+        "width": { "unit": "%", "size": 100 },
+        "space": { "unit": "%", "size": 100 },
+        "_element_width": "inherit",
+        "_flex_align_self": "stretch"
+      },
+      "ruleDescription": "When rendering an image inside a card (e.g. blog cards, media cards), the image widget must declare width: 100%, space: 100%, _element_width: 'inherit', and _flex_align_self: 'stretch'. The parent media wrapper container must declare align_items: 'stretch' (never 'center') and zero padding so the image bleeds edge-to-edge without exposing wrapper background or flexbox centering voids."
+    }
+  },
+  "badges": {
+    "pillBadgeFitContent": {
+      "enabled": false,
+      "target": {
+        "elType": "container",
+        "classes": ["badge", "pill", "tag"]
+      },
+      "mutations": {
+        "settings.content_width": "full",
+        "settings.width": { "unit": "custom", "size": "fit-content" },
+        "settings.width_tablet": { "unit": "custom", "size": "fit-content" },
+        "settings.width_mobile": { "unit": "custom", "size": "fit-content" },
+        "settings._flex_size": "none",
+        "settings._flex_size_tablet": "none",
+        "settings._flex_size_mobile": "none",
+        "settings.flex_shrink": 0,
+        "settings.flex_shrink_tablet": 0,
+        "settings.flex_shrink_mobile": 0
+      },
+      "width": {
+        "unit": "custom",
+        "size": "fit-content"
+      },
+      "ruleDescription": "Any pill badge or inline badge container (.badge) inside a flex container must explicitly declare width: { unit: 'custom', size: 'fit-content' } across desktop, tablet, and mobile to prevent the badge from stretching across the full width of the parent container, while respecting parent alignment."
+    }
+  },
+  "layout": {
+    "defaultBoxedWidth": 1280,
+    "triDeviceTiers": [
+      "desktop",
+      "tablet",
+      "mobile"
+    ],
+    "zeroBoxModel": {
+      "margin": {
+        "unit": "px",
+        "top": "0",
+        "right": "0",
+        "bottom": "0",
+        "left": "0",
+        "isLinked": true
+      },
+      "padding": {
+        "unit": "px",
+        "top": "0",
+        "right": "0",
+        "bottom": "0",
+        "left": "0",
+        "isLinked": true
+      }
+    },
+    "neutralizeKitPadding": {
+      "enabled": true,
+      "ruleDescription": "Elementor default kit injects 10px default padding on all nested containers. All child containers must explicitly declare zero padding and zero margin across desktop, tablet, and mobile."
+    },
+    "boxedWidthParity": {
+      "enabled": true,
+      "ruleDescription": "For containers where content_width === 'boxed', Elementor Core strictly reads 'boxed_width' on desktop, completely ignoring 'width'. Without boxed_width, desktop falls back to the 1140px Site Kit default. The compiler must always mirror width into boxed_width."
+    },
+    "explicitContainerGap": {
+      "enabled": true,
+      "ruleDescription": "Elementor Default Kit automatically injects a 20px gap (--widgets-spacing: 20px) on any flex container that does not explicitly specify a gap. All containers must declare gap, flex_gap, and space_between_widgets simultaneously across all breakpoints to prevent kit fallback."
+    },
+    "zeroPaddingOnCollapseWrappers": {
+      "enabled": false,
+      "target": {
+        "elType": "container",
+        "classes": ["collapse", "accordion-content", "accordion-body", "drawer-content", "collapsible", "expandable", "toggle-content"]
+      },
+      "mutations": {
+        "settings.padding": { "unit": "px", "top": "0", "right": "0", "bottom": "0", "left": "0", "isLinked": true },
+        "settings._padding": { "unit": "px", "top": "0", "right": "0", "bottom": "0", "left": "0", "isLinked": true },
+        "settings.padding_tablet": { "unit": "px", "top": "0", "right": "0", "bottom": "0", "left": "0", "isLinked": true },
+        "settings.padding_mobile": { "unit": "px", "top": "0", "right": "0", "bottom": "0", "left": "0", "isLinked": true }
+      },
+      "ruleDescription": "Collapsible containers (.faq-collapse, .collapse) must declare zero padding in Elementor settings. Setting padding directly on a collapsible container causes max-height: 0 to retain padding height, creating empty whitespace on closed cards."
+    }
+  },
+  "typography": {
+    "singleParagraphStrategy": {
+      "widgetType": "heading",
+      "header_size": "p",
+      "ruleDescription": "WordPress themes inject 14-16px margin-bottom on standard <p> tags inside text-editor widgets, breaking flexbox gap precision. Using heading widget with header_size 'p' outputs clean zero-margin semantic <p> tags."
+    },
+    "tightStackStrategy": {
+      "widgetType": "heading",
+      "header_size": "span",
+      "ruleDescription": "WordPress themes (e.g. Hello Elementor, Astra) inject aggressive default margins (0.8em - 1.5em) on h1-h6 and p tags. For micro-stacks (e.g. trust badges with title and description), compile both elements as heading widgets with header_size 'span' and explicit typography_line_height (1.2 to 1.35) and margin: 0. This bypasses theme heading styles entirely and guarantees pixel-perfect container gaps."
+    },
+    "opticalNudgeStrategy": {
+      "marginTop": -2,
+      "marginBottom": 2,
+      "fontFamily": "Poppins",
+      "ruleDescription": "Due to high ascender metrics in fonts like Poppins, text paired with vector icons in flex row pill buttons sits visually lower than the icon. Applying margin-top: -2px and margin-bottom: 2px lifts the glyph baseline to align the optical cap-height center directly with the icon center."
+    },
+    "typographyCustomEnforcement": {
+      "enabled": true,
+      "defaultFontFamily": "Inter",
+      "ruleDescription": "Elementor strictly ignores typography_font_weight, typography_font_family, and typography_line_height unless typography_typography is set to 'custom'. Any widget specifying font styling must enforce typography_typography: 'custom' to prevent theme fallback."
+    }
+  },
+  "icons": {
+    "fontAwesomeLibrary": "fa-solid",
+    "boxCalibrations": {
+      "24": {
+        "width": 24,
+        "height": 24,
+        "lockMobile": true,
+        "alignSelfMobile": "flex-start",
+        "verticalOffset": {
+          "unit": "px",
+          "top": "1",
+          "right": "0",
+          "bottom": "-1",
+          "left": "0",
+          "isLinked": false
+        },
+        "ruleDescription": "In a 24x24 circular check-icon badge, a +1px top / -1px bottom margin offset centers the 11-12px checkmark icon inside the circle."
+      },
+      "48": {
+        "width": 48,
+        "height": 48,
+        "lockMobile": true,
+        "widthMobile": 48,
+        "heightMobile": 48,
+        "flexSizeMobile": "none",
+        "verticalOffset": {
+          "unit": "px",
+          "top": "0",
+          "right": "0",
+          "bottom": "0",
+          "left": "0",
+          "isLinked": true
+        },
+        "ruleDescription": "In a 48x48 box, true geometric centering is achieved via parent flex centering (align_items: center, justify_content: center) and setting icon widget margin to 0, space to 0, and icon size to 20px. Manual positive/negative margins push glyphs off-center."
+      }
+    },
+    "circularBadgeStrategy": {
+      "widgetType": "icon",
+      "view": "stacked",
+      "shape": "circle",
+      "ruleDescription": "When rendering small circular icon badges (e.g. 20x20 checkmarks) inside a flex row next to text, wrapping the icon in a container risks flexbox horizontal compression (squashing to oval) when the sibling has width 100%. Using native widgetType 'icon' with view 'stacked', shape 'circle', size 9px, and icon_padding 5px enforces a true 1:1 geometric circle natively via Elementor's border-radius: 50% without wrapper bloating."
+    }
+  },
+  "pseudoClasses": {
+    "hover": {
+      "containerMapping": {
+        "border_color": "border_hover_color",
+        "border_type": "border_hover_border",
+        "box_shadow": "box_shadow_hover_box_shadow",
+        "box_shadow_type": "box_shadow_hover_box_shadow_type",
+        "transition_duration": "border_hover_transition"
+      },
+      "buttonMapping": {
+        "background_color": "button_background_hover_color",
+        "color": "hover_color",
+        "border_color": "button_hover_border_color"
+      },
+      "ruleDescription": "CSS pseudo-classes (:hover) must be captured during AST scanning, cascaded according to stylesheet rule order, and mapped directly to Elementor native Style -> Hover tab controls."
+    }
+  },
+  "responsive": {
+    "breakpoints": {
+      "tabletMax": 1024,
+      "mobileMax": 767
+    },
+    "timelineCollapsing": {
+      "spacerHideMobile": "hidden-mobile",
+      "directionMobile": "column",
+      "ruleDescription": "Alternating timeline rows must collapse on mobile by setting hide_mobile on the spacer container, leaving a vertical sequence of Node and Card."
+    },
+    "universalMobileRowRetention": {
+      "directionMobile": "row",
+      "wrapMobile": "nowrap",
+      "ruleDescription": "Elementor automatically injects flex-direction: column on all containers on mobile (<= 767px) and inflates inner containers to 100% width. Any container designed to keep items side-by-side on mobile (navigation headers, trust items with icon + text, card top bars with title + save pill, segmented switcher tabs) must explicitly declare flex_direction_mobile: 'row', flex_wrap_mobile: 'nowrap', and inner child badges/icons must declare width_mobile: 'fit-content' or fixed px, plus _flex_size_mobile: 'none' and flex_shrink_mobile: 0."
+    },
+    "universalMobilePadding": {
+      "enabled": true,
+      "paddingMobile": { "top": 56, "right": 16, "bottom": 56, "left": 16 },
+      "ruleDescription": "To prevent double-padding from theme stylesheets and excessive white gutters on mobile viewports, the root section must always declare explicit padding_mobile: 16px left/right and width_mobile: 100%."
+    },
+    "mobileFullWidthButtonJustify": {
+      "enabled": true,
+      "ruleDescription": "On mobile devices, buttons that stretch full-width (100%) must declare align_mobile: 'justify' and parent containers must set align_items_mobile: 'stretch'. Setting only _element_width_mobile: 100 on the widget wrapper leaves the internal <a> button aligned left."
+    }
+  },
+  "checklistSpacingCalibration": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["feature-item", "checklist-item", "feature-row", "check-item"]
+    },
+    "mutations": {
+      "settings.direction": "row",
+      "settings.flex_direction": "row",
+      "settings.align_items": "center",
+      "settings.gap": { "unit": "px", "size": 10, "column": 10, "row": 10 },
+      "settings.flex_gap": { "unit": "px", "size": 10, "column": 10, "row": 10 },
+      "settings.space_between_widgets": 10
+    },
+    "containerGap": 10,
+    "lineHeight": 1.25,
+    "iconPadding": 5,
+    "ruleDescription": "To prevent vertical gap inflation in feature checklists, set container gap to 10px, enforce typography_line_height: 1.25 on feature item headings, and set stacked circle icon padding to 5px."
+  },
+  "currencyGlyphKerning": {
+    "currencyRightMargin": -3,
+    "ruleDescription": "When currency symbol ($) and amount (e.g. 29) are split across heading widgets, font side-bearing space creates an unnatural gap. Applying margin-right: -3px on the currency heading widget creates tight natural kerning."
+  },
+  "interactiveTabs": {
+    "freeTierSwitcher": {
+      "activeClass": "tier-active",
+      "engine": "vanilla-js-css-hybrid",
+      "ruleDescription": "Elementor Free does not support Nested Tabs (Pro-only). To achieve 100% visual editability in Elementor while preserving interactive click events, all tiers are compiled into native Elementor containers with CSS classes (tier-1-cards, tier-2-cards, tier-3-cards), with Tier 1 set to active by default. An ultra-lightweight inline JS/CSS engine toggles active classes without page reloads."
+    }
+  },
+  "negativeMargins": {
+    "floatingCardBadge": {
+      "enabled": false,
+      "target": {
+        "elType": "container",
+        "classes": ["popular-badge", "featured-badge", "floating-badge", "best-value", "tier-highlight-badge"]
+      },
+      "mutations": {
+        "settings.margin": { "unit": "px", "top": "-16", "right": "0", "bottom": "0", "left": "0", "isLinked": false },
+        "settings._margin": { "unit": "px", "top": "-16", "right": "0", "bottom": "0", "left": "0", "isLinked": false },
+        "settings.align_self": "center",
+        "settings.width": { "unit": "custom", "size": "fit-content" },
+        "settings.width_tablet": { "unit": "custom", "size": "fit-content" },
+        "settings.width_mobile": { "unit": "custom", "size": "fit-content" }
+      },
+      "marginTop": -16,
+      "alignSelf": "center",
+      "width": "fit-content",
+      "ruleDescription": "For elevated/featured cards with a floating top badge overlapping the border, the badge container must declare margin-top: -16px, align_self: center, and fit-content width, while the card container declares top padding of 0px."
+    }
+  },
+  "fontAwesomeCompatibility": {
+    "fa5Equivalents": {
+      "fa-xmark": "fas fa-times",
+      "fa-shield-halved": "fas fa-shield-alt",
+      "fa-shield": "fas fa-shield-alt",
+      "fa-headset": "fas fa-headset",
+      "fa-mobile-screen": "fas fa-mobile-alt"
+    },
+    "ruleDescription": "WordPress/Elementor Free loads FontAwesome 5 by default. Modern FA6 glyph names (fa-xmark, fa-shield-halved) render as invisible empty boxes. The compiler must translate FA6 glyphs to FA5 equivalents (fas fa-times, fas fa-shield-alt) to guarantee visible icons."
+  },
+  "inlinePriceRow": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["price-row", "price-headline", "pricing-amount", "price-wrap", "price-val-wrap"]
+    },
+    "mutations": {
+      "settings.direction": "row",
+      "settings.flex_direction": "row",
+      "settings.direction_tablet": "row",
+      "settings.flex_direction_tablet": "row",
+      "settings.direction_mobile": "row",
+      "settings.flex_direction_mobile": "row",
+      "settings.align_items": "baseline",
+      "settings.flex_align_items": "baseline",
+      "settings.wrap": "nowrap",
+      "settings.flex_wrap": "nowrap",
+      "settings.wrap_mobile": "nowrap",
+      "settings.flex_wrap_mobile": "nowrap"
+    },
+    "childMutations": {
+      "target": { "widgetType": "heading" },
+      "mutations": {
+        "settings._element_width": "auto",
+        "settings._flex_size": "none",
+        "settings.flex_shrink": 0
+      }
+    },
+    "flexWrap": "nowrap",
+    "alignItems": "baseline",
+    "childElementWidth": "auto",
+    "ruleDescription": "When a price is split into currency, amount, and cadence across multiple heading widgets, the container must declare flex_wrap: 'nowrap' and align_items: 'baseline', and every child widget must set _element_width: 'auto' and _flex_size: 'none'. Without this, Elementor forces 100% width on each heading widget, causing the currency symbol to wrap onto a separate line above the amount."
+  },
+  "containerClassParity": {
+    "dualClassDeclaration": true,
+    "ruleDescription": "In Elementor, containers (elType: 'container') store classes in 'css_classes', while widgets use '_css_classes'. Declare both css_classes and _css_classes on all elements to ensure classes are written to the DOM regardless of element type or Elementor version."
+  },
+  "widgetUnderscoreBoxModelContract": {
+    "enabled": true,
+    "targetElTypes": ["widget"],
+    "properties": ["_margin", "_padding", "_css_classes", "_element_width", "_flex_size", "_flex_align_self"],
+    "ruleDescription": "Elementor Core architectural contract: Any element where elType === 'widget' strictly ignores 'margin' and 'padding' without a leading underscore. Passing 'margin' or 'padding' without an underscore results in silent failure where Elementor falls back to Site Kit theme defaults (e.g. margin-bottom: 20px). The compiler pipeline must recursively normalize every widget to enforce leading underscores (_margin, _padding, _css_classes) before template serialization."
+  },
+  "accordionItemArchitecture": {
+    "enabled": true,
+    "ruleDescription": "When compiling accordion items where a heading tag (h1-h6) wraps a button/trigger with question text and a chevron icon: the compiler MUST NOT collapse the heading into a leaf heading widget. Instead, compile the trigger as a Flex Row Container (direction: row, justify_content: space-between, align_items: center, wrap: nowrap) containing a native Heading widget for the question on the left and a native Icon widget (view: stacked, circle, size: 13) for the chevron on the right. Collapsible answer bodies must use max-height: 0; overflow: hidden; transitions to remain fully compatible with Elementor flex containers."
+  },
+  "desktopAndMobileBadgeFitContent": {
+    "enabled": true,
+    "ruleDescription": "Elementor inner containers default to width: 100% on desktop as well as mobile. Any pill badge or tag container (.badge, .pill) must explicitly declare width: { unit: 'custom', size: 'fit-content' } across desktop, tablet, AND mobile breakpoints + align_self: center to prevent the badge from stretching across the full screen width."
+  },
+  "crossVersionFlexParity": {
+    "enabled": true,
+    "ruleDescription": "Different Elementor versions serialize container flexbox properties differently (direction vs flex_direction, justify_content vs flex_justify_content, align_items vs flex_align_items, wrap vs flex_wrap). The compiler normalizes both sets simultaneously on all containers to ensure 100% compatibility across all Elementor installations."
+  },
+  "elementorFlexGridOverrideResolution": {
+    "enabled": true,
+    "ruleDescription": "Elementor .e-con stylesheet enforces display: flex !important, overriding CSS grid properties (grid-template-rows: 0fr) and breaking accordion/drawer collapse transitions. The compiler automatically maps grid-based collapse systems to max-height: 0; overflow: hidden; with opacity transitions."
+  },
+  "segmentedSwitcherFlexRowCalibration": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["switcher", "toggle-card", "toggle-group", "segmented", "radiogroup", "billing-toggle"]
+    },
+    "mutations": {
+      "settings.direction": "row",
+      "settings.flex_direction": "row",
+      "settings.flex_direction_tablet": "row",
+      "settings.flex_direction_mobile": "row",
+      "settings.wrap": "nowrap",
+      "settings.flex_wrap": "nowrap",
+      "settings.wrap_mobile": "nowrap",
+      "settings.flex_wrap_mobile": "nowrap",
+      "settings.align_items": "center",
+      "settings.flex_align_items": "center",
+      "settings.justify_content": "center",
+      "settings.flex_justify_content": "center",
+      "settings.content_width": "full",
+      "settings.width": { "unit": "custom", "size": "fit-content" },
+      "settings.width_tablet": { "unit": "custom", "size": "fit-content" },
+      "settings.align_self": "center",
+      "settings.flex_align_self": "center",
+      "settings._flex_align_self": "center"
+    },
+    "childMutations": {
+      "target": { "widgetType": "button" },
+      "mutations": {
+        "settings._element_width": "auto",
+        "settings._flex_size": "none",
+        "settings.flex_shrink": 0,
+        "settings.align": "center"
+      }
+    },
+    "ruleDescription": "Any segmented switcher, toggle card, or tab-bar container (.switcher, .toggle-card, [role='radiogroup']) containing toggle/option buttons must enforce direction: 'row', wrap: 'nowrap', align_items: 'center', justify_content: 'center', width: { unit: 'custom', size: 'fit-content' } across desktop, tablet, and mobile + align_self: 'center'. All child button widgets must enforce _element_width: 'auto', _flex_size: 'none', flex_shrink: 0, and background_color: 'transparent' (or transparent border-radius) so buttons line up as an inline pill row without full-width stacking or theme button green background bleeding."
+  },
+  "sliderMilestonesRow": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["milestones", "ticks", "scale", "steps", "marks", "slider-milestones", "range-scale", "slider-ticks"]
+    },
+    "conditions": {
+      "notClasses": ["vertical", "column", "is-vertical", "vertical-steps", "timeline", "stepper-vertical"]
+    },
+    "mutations": {
+      "settings.direction": "row",
+      "settings.flex_direction": "row",
+      "settings.direction_tablet": "row",
+      "settings.flex_direction_tablet": "row",
+      "settings.direction_mobile": "row",
+      "settings.flex_direction_mobile": "row",
+      "settings.justify_content": "space-between",
+      "settings.flex_justify_content": "space-between",
+      "settings.align_items": "flex-start",
+      "settings.flex_align_items": "flex-start",
+      "settings.content_width": "full",
+      "settings.width": { "unit": "%", "size": 100 },
+      "settings.wrap": "nowrap",
+      "settings.flex_wrap": "nowrap"
+    },
+    "childMutations": {
+      "target": { "elType": "container", "classes": ["milestone-node", "milestone", "step", "tick"] },
+      "mutations": {
+        "settings.direction": "column",
+        "settings.flex_direction": "column",
+        "settings.align_items": "center",
+        "settings.flex_align_items": "center",
+        "settings._element_width": "auto",
+        "settings._flex_size": "none"
+      }
+    },
+    "ruleDescription": "Slider scale markers, milestone ticks, and step indicators placed along a slider track must be Flex Row containers (direction: 'row', justify_content: 'space-between', width: 100%) so that milestones are distributed horizontally underneath the track instead of stacking vertically."
+  },
+  "floatingTooltipFitContent": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["tooltip", "slider-tooltip", "badge-tooltip", "floating-tip", "bubble-tip"]
+    },
+    "mutations": {
+      "settings.content_width": "full",
+      "settings.width": { "unit": "custom", "size": "fit-content" },
+      "settings.width_tablet": { "unit": "custom", "size": "fit-content" },
+      "settings.width_mobile": { "unit": "custom", "size": "fit-content" },
+      "settings._flex_size": "none",
+      "settings.flex_shrink": 0
+    },
+    "ruleDescription": "Any floating indicator, bubble, or tooltip container (.tooltip, .slider-tooltip) must declare fit-content width and _flex_size: 'none'. Never allow tooltips to default to width: 100%."
+  },
+  "priceLockupColumn": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["summary-price-lockup", "price-lockup", "price-stack", "pricing-overview-lockup", "price-summary-box"]
+    },
+    "mutations": {
+      "settings.direction": "column",
+      "settings.flex_direction": "column",
+      "settings.direction_tablet": "column",
+      "settings.flex_direction_tablet": "column",
+      "settings.direction_mobile": "column",
+      "settings.flex_direction_mobile": "column",
+      "settings.align_items": "flex-start",
+      "settings.flex_align_items": "flex-start",
+      "settings.gap": { "unit": "px", "size": 6, "column": 6, "row": 6 },
+      "settings.flex_gap": { "unit": "px", "size": 6, "column": 6, "row": 6 },
+      "settings.space_between_widgets": 6
+    },
+    "ruleDescription": "When a pricing lockup stacks the primary price row above baseline calculations, billing cadences, or discount notes, the parent lockup container must be a Flex Column (direction: column, align_items: flex-start) with a 6px gap to prevent secondary breakdown text from colliding into a horizontal row with the main price."
+  },
+  "metricCounterDisplayRow": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["metric-counter-display", "counter-display", "metric-pill", "stat-counter", "metric-value-box"]
+    },
+    "mutations": {
+      "settings.direction": "row",
+      "settings.flex_direction": "row",
+      "settings.direction_tablet": "row",
+      "settings.flex_direction_tablet": "row",
+      "settings.direction_mobile": "row",
+      "settings.flex_direction_mobile": "row",
+      "settings.align_items": "baseline",
+      "settings.flex_align_items": "baseline",
+      "settings.wrap": "nowrap",
+      "settings.flex_wrap": "nowrap",
+      "settings.wrap_mobile": "nowrap",
+      "settings.flex_wrap_mobile": "nowrap",
+      "settings.gap": { "unit": "px", "size": 8, "column": 8, "row": 8 },
+      "settings.flex_gap": { "unit": "px", "size": 8, "column": 8, "row": 8 },
+      "settings.space_between_widgets": 8
+    },
+    "childMutations": {
+      "target": { "widgetType": "heading" },
+      "mutations": {
+        "settings._element_width": "auto",
+        "settings._flex_size": "none",
+        "settings.flex_shrink": 0
+      }
+    },
+    "ruleDescription": "Metric counter displays (such as request throughput counters or live stat pills) must be Flex Row containers with wrap: nowrap and align_items: baseline, with child widgets declaring _element_width: auto, preventing the unit label from wrapping onto a second line."
+  },
+  "sliderTrackFullWidth": {
+    "enabled": false,
+    "target": {
+      "elType": "container",
+      "classes": ["slider-track-wrap", "range-track-wrap", "slider-wrap", "slider-track-container"]
+    },
+    "mutations": {
+      "settings.content_width": "full",
+      "settings.width": { "unit": "%", "size": 100 },
+      "settings.direction": "column",
+      "settings.flex_direction": "column",
+      "settings.align_items": "stretch",
+      "settings.flex_align_items": "stretch"
+    },
+    "childMutations": {
+      "target": { "widgetType": "html" },
+      "mutations": {
+        "settings.width": { "unit": "%", "size": 100 },
+        "settings._element_width": "inherit"
+      }
+    },
+    "ruleDescription": "Slider track wrappers must enforce full width (100%) and align_items: stretch so that range inputs stretch across the full available card width and relative tooltips track accurately across the complete travel distance."
+  },
+  "iconsAndDividersNativeContract": {
+    "enabled": true,
+    "ruleDescription": "SVG icons (<svg>) must ALWAYS be compiled into native Elementor Icon widgets (widgetType: 'icon' with FontAwesome 5). Standalone dividers, horizontal rules (<hr>), or border separators must ALWAYS be compiled into native Elementor Divider widgets (widgetType: 'divider'). Dumping SVGs or divider lines into raw HTML widgets is strictly forbidden."
+  }
+}

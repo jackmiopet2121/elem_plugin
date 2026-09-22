@@ -1,0 +1,5272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elementor Free Template - Virtual Elementor Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Plus%20Jakarta%20Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=-apple-system:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* 1. Base Elementor Free Grid & Layout Engine */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: transparent;
+      color: #0f172a;
+    }
+    .elementor {
+      position: relative;
+      width: 100%;
+    }
+    .e-con {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      position: relative;
+      width: 100%;
+      --widgets-spacing: 20px;
+    }
+    .e-con-boxed {
+      width: 100% !important;
+    }
+    .e-con-boxed > .e-con-inner {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      width: 100%;
+      max-width: var(--content-width, 1200px);
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      --widgets-spacing: 20px;
+    }
+    .e-con-full {
+      width: 100%;
+    }
+    .elementor-widget {
+      position: relative;
+      margin-bottom: 0;
+    }
+    /* Elementor Core Flexbox Runtime Layout Reset:
+       In live Elementor, widgets inside flex containers default to 100% width
+       unless explicitly flagged as auto-width. This ensures 1:1 parity between
+       local emulation and live WordPress. */
+    .e-con > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial),
+    .e-con-inner > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial) {
+      width: 100%;
+    }
+    .elementor-widget__width-auto {
+      width: auto;
+      max-width: 100%;
+      display: inline-block;
+    }
+    .elementor-widget__width-initial {
+      max-width: 100%;
+    }
+    .elementor-widget__width-inherit {
+      width: 100% !important;
+      max-width: 100%;
+    }
+    .elementor-widget-container {
+      position: relative;
+      transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+    }
+    .elementor-heading-title {
+      margin: 0;
+      padding: 0;
+      line-height: 1.2;
+    }
+    .elementor-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .elementor-button-wrapper.elementor-align-justify,
+    .elementor-button-wrapper.elementor-align-justify .elementor-button {
+      width: 100%;
+      display: flex;
+    }
+    .elementor-button-content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .elementor-widget-icon .elementor-icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .elementor-icon i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      text-align: center;
+    }
+    .elementor-view-stacked .elementor-icon,
+    .elementor-view-framed .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5em;
+      aspect-ratio: 1 / 1;
+    }
+    .elementor-shape-circle,
+    .elementor-shape-circle .elementor-icon,
+    .elementor-icon.elementor-shape-circle {
+      border-radius: 50% !important;
+    }
+    .elementor-shape-square,
+    .elementor-shape-square .elementor-icon,
+    .elementor-icon.elementor-shape-square {
+      border-radius: 0 !important;
+    }
+    .elementor-icon-list-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .elementor-icon-list-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .elementor-divider-separator {
+      display: block;
+      border-top-style: solid;
+      border-top-width: 1px;
+      width: 100%;
+    }
+
+    /* Elementor Free Frontend Core Defaults (WP Parity) */
+    .elementor-widget-image {
+      text-align: center;
+    }
+    .elementor-widget-image a {
+      display: inline-block;
+    }
+    .elementor-widget-image img {
+      vertical-align: middle;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .elementor-text-editor {
+      color: inherit;
+      font-family: inherit;
+    }
+    .elementor-text-editor p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 2. Compiled Elementor Template Styles (Desktop / Post CSS) */
+    .faq-section {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: center;
+  justify-content: center;
+  --align-items: center;
+  align-items: center;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  --content-width: 840px;
+  background-color: transparent;
+  --padding-top: 96px;
+  --padding-right: 20px;
+  --padding-bottom: 96px;
+  --padding-left: 20px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100% !important;
+  --min-height: 800px;
+  min-height: 800px;
+}
+
+.faq-container {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 48px;
+  --column-gap: 48px;
+  --gap: 48px 48px;
+  gap: 48px 48px;
+  row-gap: 48px;
+  column-gap: 48px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 1072px;
+  min-height: 1072px;
+}
+
+.faq-header {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: center;
+  align-items: center;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  --gap: 16px 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 161px;
+  min-height: 161px;
+}
+
+.faq-pill-badge {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: center;
+  align-items: center;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  --gap: 8px 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  background-color: rgba(37, 99, 235, 0.08);
+  font-size: 12px;
+  font-weight: 700;
+  color: #2563eb;
+  --padding-top: 6px;
+  --padding-right: 14px;
+  --padding-bottom: 6px;
+  --padding-left: 14px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 9999px 9999px 9999px 9999px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: rgba(37, 99, 235, 0.15);
+  width: 31.4%;
+}
+
+.e-sid-6 .elementor-icon {
+  color: #2563eb;
+  fill: #2563eb;
+  font-size: 12px;
+}
+
+.e-sid-6 .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.e-sid-6 {
+  margin: 0px 0px 0px 0px;
+}
+
+.e-sid-6 {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-8, .e-sid-8 p, .e-sid-8 .elementor-text-editor {
+  color: #2563eb;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5em;
+  letter-spacing: 0.6px;
+}
+
+.e-sid-8 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-8 {
+  width: 212px !important;
+  max-width: 212px;
+}
+
+.faq-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.2em;
+  letter-spacing: -1px;
+}
+
+.faq-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-title {
+  width: 546px !important;
+  max-width: 546px;
+}
+
+.faq-subtitle {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 69%;
+}
+
+.e-sid-4ce182de .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-4ce182de {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-11 .elementor-button {
+  color: #2563eb;
+  background-color: transparent;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 0px 0px 0px 0px;
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #E2E8F0;
+}
+
+.e-sid-11 .elementor-button-wrapper {
+  text-align: center;
+}
+
+.e-sid-11 {
+  margin: 0px 0px 0px 0px;
+}
+
+.e-sid-d951cca4 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-d951cca4 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.accordion-list {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  --gap: 16px 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 708px;
+  min-height: 708px;
+}
+
+.faq-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: rgba(37, 99, 235, 0.3);
+  width: 100%;
+  --min-height: 238px;
+  min-height: 238px;
+  box-shadow: 0px 10px 25px -5px rgba(15, 23, 42, 0.05);
+}
+
+.e-sid-14 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 19px;
+  font-weight: 700;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 76px;
+  min-height: 76px;
+}
+
+.faq-trigger {
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 76px;
+  flex-shrink: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-collapse {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 160px;
+  min-height: 160px;
+}
+
+.faq-collapse-inner {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 160px;
+  min-height: 160px;
+}
+
+.faq-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 0px;
+  --gap: 12px 0px;
+  gap: 12px 0px;
+  row-gap: 12px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 160px;
+  min-height: 160px;
+}
+
+.e-sid-23 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-9790e51d .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-9790e51d {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-24, .e-sid-24 p, .e-sid-24 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-24 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-24 {
+  align-self: flex-start !important;
+}
+
+.e-sid-22251a59 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-22251a59 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-25 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 74px;
+  min-height: 74px;
+}
+
+.e-sid-26, .e-sid-26 p, .e-sid-26 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-26 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-26 {
+  align-self: flex-start !important;
+}
+
+.e-sid-d0859c3d .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-d0859c3d {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 78px;
+  min-height: 78px;
+  box-shadow: 0px 1px 2px 0px rgba(15, 23, 42, 0.04);
+}
+
+.e-sid-28 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 19px;
+  font-weight: 700;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 76px;
+  min-height: 76px;
+}
+
+.faq-trigger {
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 76px;
+  flex-shrink: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-collapse {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-collapse-inner {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+  max-height: 0px;
+}
+
+.faq-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 13px;
+  --column-gap: 0px;
+  --gap: 13px 0px;
+  gap: 13px 0px;
+  row-gap: 13px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-37, .e-sid-37 p, .e-sid-37 .elementor-text-editor {
+  color: #475569;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7em;
+}
+
+.e-sid-37 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-bullet-list {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --gap: 10px 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --gap: 10px 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-bullet-icon .elementor-icon {
+  color: #2563eb;
+  fill: #2563eb;
+  font-size: 14px;
+}
+
+.faq-bullet-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.faq-bullet-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.faq-bullet-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-42 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 76.5%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-43, .e-sid-43 p, .e-sid-43 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-43 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-43 {
+  align-self: flex-start !important;
+}
+
+.e-sid-09a5579a .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-09a5579a {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --gap: 10px 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-bullet-icon .elementor-icon {
+  color: #2563eb;
+  fill: #2563eb;
+  font-size: 14px;
+}
+
+.faq-bullet-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.faq-bullet-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.faq-bullet-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-47 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 88%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-48, .e-sid-48 p, .e-sid-48 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-48 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-48 {
+  align-self: flex-start !important;
+}
+
+.e-sid-3a76f507 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-3a76f507 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 78px;
+  min-height: 78px;
+  box-shadow: 0px 1px 2px 0px rgba(15, 23, 42, 0.04);
+}
+
+.e-sid-50 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 19px;
+  font-weight: 700;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 76px;
+  min-height: 76px;
+}
+
+.faq-trigger {
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 76px;
+  flex-shrink: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-collapse {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-collapse-inner {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+  max-height: 0px;
+}
+
+.faq-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 14px;
+  --column-gap: 0px;
+  --gap: 14px 0px;
+  gap: 14px 0px;
+  row-gap: 14px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-59, .e-sid-59 p, .e-sid-59 .elementor-text-editor {
+  color: #475569;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7em;
+}
+
+.e-sid-59 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-bullet-list {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --gap: 10px 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --gap: 10px 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-bullet-icon .elementor-icon {
+  color: #2563eb;
+  fill: #2563eb;
+  font-size: 14px;
+}
+
+.faq-bullet-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.faq-bullet-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.faq-bullet-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-64 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 48.7%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-65, .e-sid-65 p, .e-sid-65 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-65 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-65 {
+  align-self: flex-start !important;
+}
+
+.e-sid-8da8d9b0 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-8da8d9b0 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --gap: 10px 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-bullet-icon .elementor-icon {
+  color: #2563eb;
+  fill: #2563eb;
+  font-size: 14px;
+}
+
+.faq-bullet-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.faq-bullet-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.faq-bullet-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-69 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 54.7%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-70, .e-sid-70 p, .e-sid-70 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-70 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-70 {
+  align-self: flex-start !important;
+}
+
+.e-sid-6a0bf347 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-6a0bf347 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: flex-start;
+  align-items: flex-start;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  --gap: 10px 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-bullet-icon .elementor-icon {
+  color: #2563eb;
+  fill: #2563eb;
+  font-size: 14px;
+}
+
+.faq-bullet-icon .elementor-icon-wrapper {
+  text-align: center;
+}
+
+.faq-bullet-icon {
+  margin: 2px 0px 0px 0px;
+}
+
+.faq-bullet-icon {
+  flex-shrink: 0 !important;
+  align-self: center !important;
+}
+
+.e-sid-74 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 14px;
+  color: #334155;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 69.4%;
+  flex-shrink: 0 !important;
+}
+
+.e-sid-75, .e-sid-75 p, .e-sid-75 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-75 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-75 {
+  align-self: flex-start !important;
+}
+
+.e-sid-86afe203 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-86afe203 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 78px;
+  min-height: 78px;
+  box-shadow: 0px 1px 2px 0px rgba(15, 23, 42, 0.04);
+}
+
+.e-sid-77 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 19px;
+  font-weight: 700;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 76px;
+  min-height: 76px;
+}
+
+.faq-trigger {
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 76px;
+  flex-shrink: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-collapse {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-collapse-inner {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+  max-height: 0px;
+}
+
+.faq-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 11px;
+  --column-gap: 0px;
+  --gap: 11px 0px;
+  gap: 11px 0px;
+  row-gap: 11px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-86 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 1px;
+  --column-gap: 1px;
+  --gap: 1px 1px;
+  gap: 1px 1px;
+  row-gap: 1px;
+  column-gap: 1px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-43e6b4df .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-43e6b4df {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-87, .e-sid-87 p, .e-sid-87 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-87 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-87 {
+  align-self: flex-start !important;
+}
+
+.e-sid-ee9499f5 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-ee9499f5 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-88, .e-sid-88 p, .e-sid-88 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-88 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-88 {
+  align-self: flex-start !important;
+}
+
+.e-sid-dc61fd7a .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-dc61fd7a {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-89, .e-sid-89 p, .e-sid-89 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-89 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-89 {
+  align-self: flex-start !important;
+}
+
+.e-sid-04623729 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-04623729 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-90 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 6px;
+  --column-gap: 0px;
+  --gap: 6px 0px;
+  gap: 6px 0px;
+  row-gap: 6px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-9b56f505 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-9b56f505 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-91 .elementor-button {
+  color: #2563eb;
+  background-color: transparent;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-91 .elementor-button-wrapper {
+  text-align: right;
+}
+
+.e-sid-91 {
+  margin: 0px 0px 0px 0px;
+}
+
+.e-sid-5bfbb551 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-5bfbb551 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 78px;
+  min-height: 78px;
+  box-shadow: 0px 1px 2px 0px rgba(15, 23, 42, 0.04);
+}
+
+.e-sid-93 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 19px;
+  font-weight: 700;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 76px;
+  min-height: 76px;
+}
+
+.faq-trigger {
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 76px;
+  flex-shrink: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-collapse {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-collapse-inner {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+  max-height: 0px;
+}
+
+.faq-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 11px;
+  --column-gap: 0px;
+  --gap: 11px 0px;
+  gap: 11px 0px;
+  row-gap: 11px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-102 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-103, .e-sid-103 p, .e-sid-103 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-103 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-103 {
+  align-self: flex-start !important;
+}
+
+.e-sid-c9880bc1 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-c9880bc1 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-104, .e-sid-104 p, .e-sid-104 .elementor-text-editor {
+  color: #475569;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7em;
+}
+
+.e-sid-104 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 78px;
+  min-height: 78px;
+  box-shadow: 0px 1px 2px 0px rgba(15, 23, 42, 0.04);
+}
+
+.e-sid-106 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  font-size: 19px;
+  font-weight: 700;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 76px;
+  min-height: 76px;
+}
+
+.faq-trigger {
+  width: 100% !important;
+  max-width: 100%;
+  min-height: 76px;
+  flex-shrink: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-collapse {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.faq-collapse-inner {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+  max-height: 0px;
+}
+
+.faq-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 11px;
+  --column-gap: 0px;
+  --gap: 11px 0px;
+  gap: 11px 0px;
+  row-gap: 11px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-115, .e-sid-115 p, .e-sid-115 .elementor-text-editor {
+  color: #475569;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.7em;
+}
+
+.e-sid-115 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-116 {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  color: #475569;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.e-sid-de6b9db3 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-de6b9db3 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-117, .e-sid-117 p, .e-sid-117 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-117 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-117 {
+  align-self: flex-start !important;
+}
+
+.e-sid-a72451a3 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-a72451a3 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-118, .e-sid-118 p, .e-sid-118 .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7em;
+}
+
+.e-sid-118 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.e-sid-118 {
+  align-self: flex-start !important;
+}
+
+.e-sid-879e7f5c .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+}
+
+.e-sid-879e7f5c {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-footer {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: space-between;
+  justify-content: space-between;
+  --align-items: center;
+  align-items: center;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 20px;
+  --column-gap: 20px;
+  --gap: 20px 20px;
+  gap: 20px 20px;
+  row-gap: 20px;
+  column-gap: 20px;
+  background-color: #ffffff;
+  --padding-top: 28px;
+  --padding-right: 32px;
+  --padding-bottom: 28px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 107px;
+  min-height: 107px;
+  box-shadow: 0px 1px 2px 0px rgba(15, 23, 42, 0.04);
+}
+
+.faq-footer-info {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  --gap: 4px 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 50.6%;
+  flex-shrink: 0 !important;
+}
+
+.faq-footer-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5em;
+}
+
+.faq-footer-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-footer-desc, .faq-footer-desc p, .faq-footer-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.faq-footer-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.faq-footer-btn {
+  width: 186px !important;
+  max-width: 186px;
+  min-height: 41px;
+  flex-shrink: 0 !important;
+}
+
+.faq-footer-btn button,
+.faq-footer-btn .composite-trigger {
+  appearance: none !important;
+  background: #0f172a !important;
+  border: none !important;
+  color: #ffffff !important;
+  padding: 10px 20px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 12px !important;
+}
+
+    /* 3. Compiled Elementor Tablet Styles (max-width: 1024px) */
+    @media (max-width: 1024px) {
+  .faq-section {
+  --padding-top: 56px;
+  --padding-right: 16px;
+  --padding-bottom: 56px;
+  --padding-left: 16px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+}
+  .faq-container {
+  --gap: 36px 36px;
+  --row-gap: 36px;
+  --column-gap: 36px;
+  gap: 36px 36px;
+  row-gap: 36px;
+  column-gap: 36px;
+  width: 100%;
+}
+  .faq-header {
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+}
+  .faq-pill-badge {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 35.9%;
+  font-size: 12px;
+}
+  .e-sid-6 {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-8 {
+  width: 212px !important;
+  max-width: 212px;
+}
+  .faq-title .elementor-heading-title {
+  font-size: 30px;
+  line-height: 1.2em;
+  letter-spacing: -0.75px;
+}
+  .faq-title {
+  width: 409px !important;
+  max-width: 409px;
+}
+  .faq-subtitle {
+  width: 78.8%;
+}
+  .e-sid-4ce182de {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-11 .elementor-button {
+  font-size: 15px;
+}
+  .e-sid-11 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-d951cca4 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .accordion-list {
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+}
+  .e-sid-14 {
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 68px;
+  flex-shrink: 0 !important;
+}
+  .faq-content {
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-23 {
+  font-size: 14px;
+}
+  .e-sid-9790e51d {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-24, .e-sid-24 p, .e-sid-24 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-24 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-22251a59 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-25 {
+  font-size: 14px;
+}
+  .e-sid-26, .e-sid-26 p, .e-sid-26 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-26 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-28 {
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 68px;
+  flex-shrink: 0 !important;
+}
+  .faq-content {
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-37, .e-sid-37 p, .e-sid-37 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .faq-bullet-list {
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+  .faq-bullet-item {
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-42 {
+  width: 86.5%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-43 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-09a5579a {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-bullet-item {
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .faq-bullet-icon .elementor-icon-wrapper {
+  text-align: left;
+}
+  .e-sid-47 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  width: 96%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-48 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-3a76f507 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-50 {
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 68px;
+  flex-shrink: 0 !important;
+}
+  .faq-content {
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-59, .e-sid-59 p, .e-sid-59 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .faq-bullet-list {
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+  .faq-bullet-item {
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-64 {
+  width: 55.2%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-65 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-8da8d9b0 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-bullet-item {
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-69 {
+  width: 61.9%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-70 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-6a0bf347 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-bullet-item {
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  flex-shrink: 0 !important;
+}
+  .e-sid-74 {
+  width: 78.5%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-75 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-86afe203 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-77 {
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 68px;
+  flex-shrink: 0 !important;
+}
+  .faq-content {
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-86 {
+  font-size: 14px;
+}
+  .e-sid-43e6b4df {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-87, .e-sid-87 p, .e-sid-87 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-87 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-ee9499f5 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-88, .e-sid-88 p, .e-sid-88 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-88 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-dc61fd7a {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-89, .e-sid-89 p, .e-sid-89 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-89 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+}
+  .e-sid-04623729 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-90 {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  font-size: 14px;
+}
+  .e-sid-91 .elementor-button {
+  font-size: 14px;
+}
+  .e-sid-91 .elementor-button-wrapper {
+  text-align: justify;
+}
+  .e-sid-93 {
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 68px;
+  flex-shrink: 0 !important;
+}
+  .faq-content {
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-102 {
+  font-size: 14px;
+}
+  .e-sid-103, .e-sid-103 p, .e-sid-103 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-103 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-104, .e-sid-104 p, .e-sid-104 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-106 {
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 68px;
+  flex-shrink: 0 !important;
+}
+  .faq-content {
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-115, .e-sid-115 p, .e-sid-115 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-116 {
+  font-size: 14px;
+}
+  .e-sid-de6b9db3 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-117, .e-sid-117 p, .e-sid-117 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-117 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-a72451a3 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-118, .e-sid-118 p, .e-sid-118 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-118 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-879e7f5c {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-footer {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  --padding-top: 24px;
+  --padding-right: 20px;
+  --padding-bottom: 24px;
+  --padding-left: 20px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+}
+  .faq-footer-info {
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 56.5%;
+  flex-shrink: 0 !important;
+}
+  .faq-footer-btn {
+  width: 94.3% !important;
+  max-width: 94.3%;
+  flex-shrink: 0 !important;
+}
+}
+
+    /* 4. Compiled Elementor Mobile Styles (max-width: 767px) */
+    @media (max-width: 767px) {
+  .faq-section {
+  --padding-top: 56px;
+  --padding-right: 16px;
+  --padding-bottom: 56px;
+  --padding-left: 16px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+}
+  .faq-container {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 36px 36px;
+  --row-gap: 36px;
+  --column-gap: 36px;
+  gap: 36px 36px;
+  row-gap: 36px;
+  column-gap: 36px;
+  width: 100%;
+}
+  .faq-header {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .faq-pill-badge {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 78.1%;
+  font-size: 12px;
+}
+  .e-sid-6 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-8 {
+  width: 212px !important;
+  max-width: 212px;
+}
+  .faq-title .elementor-heading-title {
+  font-size: 30px;
+  line-height: 1.2em;
+  letter-spacing: -0.75px;
+}
+  .faq-title {
+  width: 338px !important;
+  max-width: 338px;
+}
+  .faq-subtitle {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .e-sid-4ce182de {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-11 .elementor-button-wrapper {
+  text-align: right;
+}
+  .e-sid-11 .elementor-button {
+  font-size: 15px;
+}
+  .e-sid-11 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-d951cca4 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .accordion-list {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+}
+  .faq-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .e-sid-14 {
+  width: 100%;
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 81px;
+  flex-shrink: 0 !important;
+}
+  .faq-collapse {
+  width: 100%;
+}
+  .faq-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-23 {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  width: 100%;
+  font-size: 14px;
+}
+  .e-sid-9790e51d {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-24, .e-sid-24 p, .e-sid-24 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-24 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: center !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-22251a59 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-25 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  font-size: 14px;
+}
+  .e-sid-26, .e-sid-26 p, .e-sid-26 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-26 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .faq-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .e-sid-28 {
+  width: 100%;
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 81px;
+  flex-shrink: 0 !important;
+}
+  .faq-collapse {
+  width: 100%;
+}
+  .faq-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-37, .e-sid-37 p, .e-sid-37 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .faq-bullet-list {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+  .faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .faq-bullet-icon .elementor-icon-wrapper {
+  text-align: left;
+}
+  .e-sid-42 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 90.7%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-43 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-09a5579a {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .faq-bullet-icon .elementor-icon-wrapper {
+  text-align: left;
+}
+  .e-sid-47 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-48 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-3a76f507 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .e-sid-50 {
+  width: 100%;
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 81px;
+  flex-shrink: 0 !important;
+}
+  .faq-collapse {
+  width: 100%;
+}
+  .faq-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-59, .e-sid-59 p, .e-sid-59 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .faq-bullet-list {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+  .faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .faq-bullet-icon .elementor-icon-wrapper {
+  text-align: left;
+}
+  .e-sid-64 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 90.7%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-65 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-8da8d9b0 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .faq-bullet-icon .elementor-icon-wrapper {
+  text-align: left;
+}
+  .e-sid-69 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 90.7%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-70 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-6a0bf347 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-bullet-item {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 10px 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  gap: 10px 10px;
+  row-gap: 10px;
+  column-gap: 10px;
+  width: 100%;
+  font-size: 14px;
+}
+  .faq-bullet-icon {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .faq-bullet-icon .elementor-icon-wrapper {
+  text-align: left;
+}
+  .e-sid-74 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 90.7%;
+  font-size: 14px;
+  flex-shrink: 0 !important;
+}
+  .e-sid-75 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-86afe203 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .e-sid-77 {
+  width: 100%;
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 81px;
+  flex-shrink: 0 !important;
+}
+  .faq-collapse {
+  width: 100%;
+}
+  .faq-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-86 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  font-size: 14px;
+}
+  .e-sid-43e6b4df {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-87, .e-sid-87 p, .e-sid-87 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-87 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-ee9499f5 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-88, .e-sid-88 p, .e-sid-88 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-88 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-dc61fd7a {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-89, .e-sid-89 p, .e-sid-89 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-89 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-04623729 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-90 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+  font-size: 14px;
+}
+  .e-sid-91 .elementor-button-wrapper {
+  width: 100% !important;
+}
+  .e-sid-91 .elementor-button {
+  font-size: 14px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+  .faq-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .e-sid-93 {
+  width: 100%;
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 81px;
+  flex-shrink: 0 !important;
+}
+  .faq-collapse {
+  width: 100%;
+}
+  .faq-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-102 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  font-size: 14px;
+}
+  .e-sid-103, .e-sid-103 p, .e-sid-103 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-103 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-104, .e-sid-104 p, .e-sid-104 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .faq-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .e-sid-106 {
+  width: 100%;
+  font-size: 19px;
+}
+  .faq-trigger {
+  min-height: 103px;
+  flex-shrink: 0 !important;
+}
+  .faq-collapse {
+  width: 100%;
+}
+  .faq-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --padding-top: 0px;
+  --padding-right: 18px;
+  --padding-bottom: 20px;
+  --padding-left: 18px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  font-size: 14px;
+}
+  .e-sid-115, .e-sid-115 p, .e-sid-115 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-116 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  font-size: 14px;
+}
+  .e-sid-de6b9db3 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-117, .e-sid-117 p, .e-sid-117 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-117 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-start !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-a72451a3 {
+  width: auto !important;
+  max-width: 100%;
+}
+  .e-sid-118, .e-sid-118 p, .e-sid-118 .elementor-text-editor {
+  font-size: 14px;
+  line-height: 1.7em;
+}
+  .e-sid-118 {
+  width: auto !important;
+  max-width: 100%;
+  align-self: flex-end !important;
+  flex-shrink: 0 !important;
+}
+  .e-sid-879e7f5c {
+  width: auto !important;
+  max-width: 100%;
+}
+  .faq-footer {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 16px 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  gap: 16px 16px;
+  row-gap: 16px;
+  column-gap: 16px;
+  width: 100%;
+  --padding-top: 24px;
+  --padding-right: 20px;
+  --padding-bottom: 24px;
+  --padding-left: 20px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+}
+  .faq-footer-info {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 4px 4px;
+  --row-gap: 4px;
+  --column-gap: 4px;
+  gap: 4px 4px;
+  row-gap: 4px;
+  column-gap: 4px;
+  width: 100%;
+  flex-shrink: 0 !important;
+}
+  .faq-footer-btn {
+  width: 296px !important;
+  max-width: 296px;
+  flex-shrink: 0 !important;
+}
+}
+
+    /* 5. Isolated Micro-CSS & Atomic Overrides (Post-Cascade Priority) */
+    
+    /* Isolated Micro-CSS */
+    
+.faq-pill-badge {
+  user-select: none;
+}
+
+.faq-pill-badge svg {
+  fill: currentColor;
+}
+
+.faq-subtitle a {
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.faq-subtitle a:hover, .faq-subtitle a:hover .elementor-heading-title, .faq-subtitle a:hover .elementor-icon, .faq-subtitle a:hover .elementor-button {
+  color: #1D4ED8 !important;
+  border-bottom-color: #1D4ED8;
+}
+
+.faq-card {
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.faq-card:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;
+}
+
+.faq-card.is-open {
+  border-color: rgba(37, 99, 235, 0.3) !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;
+}
+
+.faq-trigger {
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.faq-trigger:hover {
+  background-color: #F8FAFC !important;
+}
+
+.faq-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
+}
+
+.faq-question {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0F172A;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.faq-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #64748B;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), 
+                  background-color 0.2s ease, 
+                  border-color 0.2s ease, 
+                  color 0.2s ease;
+}
+
+.faq-indicator svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-trigger:hover .faq-indicator {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+.faq-card.is-open .faq-indicator {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+  color: #2563EB !important;
+  transform: rotate(180deg) !important;
+}
+
+.faq-collapse {
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-collapse-inner {
+  overflow: hidden;
+}
+
+.faq-content a:hover, .faq-content a:hover .elementor-heading-title, .faq-content a:hover .elementor-icon, .faq-content a:hover .elementor-button {
+  text-decoration: underline;
+}
+
+.faq-bullet-list {
+  list-style: none;
+}
+
+.faq-bullet-icon {
+  flex-shrink: 0;
+}
+
+.faq-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #0F172A;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.faq-footer-btn:hover {
+  background-color: #334155 !important;
+  transform: translateY(-1px) !important;
+}
+
+.faq-footer-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-footer-btn button,
+.faq-footer-btn .composite-trigger {
+  appearance: none !important;
+  background: #0f172a !important;
+  border: none !important;
+  color: #ffffff !important;
+  padding: 10px 20px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 12px !important;
+}
+
+@media (max-width: 768px) {
+  .faq-trigger {
+  padding: 18px 18px;
+  min-height: 56px;
+  }
+
+  .faq-question {
+  font-size: 16px;
+  }
+
+  .faq-indicator {
+  width: 32px;
+  height: 32px;
+  }
+
+  .faq-footer-btn {
+  width: 100%;
+  justify-content: center;
+  }
+}
+
+
+  </style>
+</head>
+<body class="elementor-default elementor-page">
+  <div class="elementor elementor-virtual-root">
+    <div class="elementor-element elementor-element-08d64089 faq-section e-sid-2 e-flex e-con-boxed e-con e-parent" data-sid="sid-2" data-dom-id="sid-2" data-id="08d64089" data-element_type="container">
+      <div class="e-con-inner">
+        <div class="elementor-element elementor-element-cf7a6479 embedded-stylesheet-engine e-sid-cf7a6479  elementor-widget elementor-widget-html" data-id="cf7a6479" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><style>
+.faq-pill-badge {
+  user-select: none;
+}
+
+.faq-pill-badge svg {
+  fill: currentColor;
+}
+
+.faq-subtitle a {
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.faq-subtitle a:hover, .faq-subtitle a:hover .elementor-heading-title, .faq-subtitle a:hover .elementor-icon, .faq-subtitle a:hover .elementor-button {
+  color: #1D4ED8 !important;
+  border-bottom-color: #1D4ED8;
+}
+
+.faq-card {
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.faq-card:hover {
+  border-color: #CBD5E1 !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;
+}
+
+.faq-card.is-open {
+  border-color: rgba(37, 99, 235, 0.3) !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.02) !important;
+}
+
+.faq-trigger {
+  width: 100%;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.faq-trigger:hover {
+  background-color: #F8FAFC !important;
+}
+
+.faq-trigger:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
+}
+
+.faq-question {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0F172A;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.faq-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #64748B;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), 
+                  background-color 0.2s ease, 
+                  border-color 0.2s ease, 
+                  color 0.2s ease;
+}
+
+.faq-indicator svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2.2;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-trigger:hover .faq-indicator {
+  background-color: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
+  color: #0F172A !important;
+}
+
+.faq-card.is-open .faq-indicator {
+  background-color: rgba(37, 99, 235, 0.08) !important;
+  border-color: rgba(37, 99, 235, 0.2) !important;
+  color: #2563EB !important;
+  transform: rotate(180deg) !important;
+}
+
+.faq-collapse {
+  transition: grid-template-rows 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-collapse-inner {
+  overflow: hidden;
+}
+
+.faq-content a:hover, .faq-content a:hover .elementor-heading-title, .faq-content a:hover .elementor-icon, .faq-content a:hover .elementor-button {
+  text-decoration: underline;
+}
+
+.faq-bullet-list {
+  list-style: none;
+}
+
+.faq-bullet-icon {
+  flex-shrink: 0;
+}
+
+.faq-footer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #0F172A;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.faq-footer-btn:hover {
+  background-color: #334155 !important;
+  transform: translateY(-1px) !important;
+}
+
+.faq-footer-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.faq-trigger button,
+.faq-trigger .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #000000 !important;
+  padding: 20px 24px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.faq-footer-btn button,
+.faq-footer-btn .composite-trigger {
+  appearance: none !important;
+  background: #0f172a !important;
+  border: none !important;
+  color: #ffffff !important;
+  padding: 10px 20px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 12px !important;
+}
+
+@media (max-width: 768px) {
+  .faq-trigger {
+  padding: 18px 18px;
+  min-height: 56px;
+  }
+
+  .faq-question {
+  font-size: 16px;
+  }
+
+  .faq-indicator {
+  width: 32px;
+  height: 32px;
+  }
+
+  .faq-footer-btn {
+  width: 100%;
+  justify-content: center;
+  }
+}
+</style></div>
+  </div>
+<div class="elementor-element elementor-element-e1157998 faq-container e-sid-3 e-flex e-con-full e-con e-child" data-sid="sid-3" data-dom-id="sid-3" data-id="e1157998" data-element_type="container">
+    <div class="elementor-element elementor-element-abc96375 faq-header e-sid-4 e-flex e-con-full e-con e-child" data-sid="sid-4" data-dom-id="sid-4" data-id="abc96375" data-element_type="container">
+    <div class="elementor-element elementor-element-8b65531d faq-pill-badge e-sid-5 e-flex e-con-full e-con e-child" data-sid="sid-5" data-dom-id="sid-5" data-id="8b65531d" data-element_type="container">
+    <div class="elementor-element elementor-element-437bfbee e-sid-6 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-6" data-dom-id="sid-6" data-id="437bfbee" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-41d6f287 e-sid-8 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-8" data-dom-id="sid-8" data-id="41d6f287" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Frequently Asked Questions</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-710a0db0 faq-title e-sid-9  elementor-widget elementor-widget-heading" data-sid="sid-9" data-dom-id="sid-9" data-id="710a0db0" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h2 class="elementor-heading-title elementor-size-default">Everything you need to know</h2></div>
+  </div>
+<div class="elementor-element elementor-element-769c65d0 faq-subtitle e-sid-10 e-flex e-con-full e-con e-child" data-sid="sid-10" data-dom-id="sid-10" data-id="769c65d0" data-element_type="container">
+    <div class="elementor-element elementor-element-4ce182de e-sid-4ce182de elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="4ce182de" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">Have questions regarding plans, billing, or enterprise integration? We’re here to help. If you can’t find your answer,</span></div>
+  </div>
+<div class="elementor-element elementor-element-87875cac e-sid-11 elementor-widget__width-auto elementor-widget elementor-widget-button" data-sid="sid-11" data-dom-id="sid-11" data-id="87875cac" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper">
+          <a class="elementor-button elementor-size-sm" href="#contact-support">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">reach out to our engineering team</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-d951cca4 e-sid-d951cca4 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="d951cca4" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">.</span></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-8bd49bf1 accordion-list e-sid-12 e-flex e-con-full e-con e-child" data-sid="sid-12" data-dom-id="sid-12" data-id="8bd49bf1" data-element_type="container">
+    <div id="faq-card-1" class="elementor-element elementor-element-d335c5be faq-card is-open e-sid-13 e-flex e-con-full e-con e-child" data-sid="sid-13" data-dom-id="sid-13" data-id="d335c5be" data-element_type="container">
+    <div class="elementor-element elementor-element-96ac7e28 e-sid-14 e-flex e-con-full e-con e-child" data-sid="sid-14" data-dom-id="sid-14" data-id="96ac7e28" data-element_type="container">
+    <div id="faq-btn-1" class="elementor-element elementor-element-3515f1e1 faq-trigger e-sid-15  elementor-widget elementor-widget-html" data-sid="sid-15" data-dom-id="sid-15" data-id="3515f1e1" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button type="button" class="faq-trigger composite-trigger" id="faq-btn-1" aria-expanded="true" aria-controls="faq-panel-1"><span class="faq-question">How does the 14-day free trial operate?</span><span class="faq-indicator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg></span></button></div>
+  </div>
+  </div>
+<div id="faq-panel-1" class="elementor-element elementor-element-acc0daac faq-collapse e-sid-20 e-flex e-con-full e-con e-child" data-sid="sid-20" data-dom-id="sid-20" data-id="acc0daac" data-element_type="container">
+    <div class="elementor-element elementor-element-4515b92e faq-collapse-inner e-sid-21 e-flex e-con-full e-con e-child" data-sid="sid-21" data-dom-id="sid-21" data-id="4515b92e" data-element_type="container">
+    <div class="elementor-element elementor-element-bb730a6f faq-content e-sid-22 e-flex e-con-full e-con e-child" data-sid="sid-22" data-dom-id="sid-22" data-id="bb730a6f" data-element_type="container">
+    <div class="elementor-element elementor-element-ef74565b e-sid-23 e-flex e-con-full e-con e-child" data-sid="sid-23" data-dom-id="sid-23" data-id="ef74565b" data-element_type="container">
+    <div class="elementor-element elementor-element-9790e51d e-sid-9790e51d elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="9790e51d" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">You get</span></div>
+  </div>
+<div class="elementor-element elementor-element-d0e1024b e-sid-24 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-24" data-dom-id="sid-24" data-id="d0e1024b" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>immediate, full-tier access</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-22251a59 e-sid-22251a59 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="22251a59" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">to our entire platform, including all real-time observability telemetry, parallel automation pipelines, and team collaboration tooling.</span></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-8b684fb1 e-sid-25 e-flex e-con-full e-con e-child" data-sid="sid-25" data-dom-id="sid-25" data-id="8b684fb1" data-element_type="container">
+    <div class="elementor-element elementor-element-32ea51f4 e-sid-26 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-26" data-dom-id="sid-26" data-id="32ea51f4" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>No credit card is required upfront.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-d0859c3d e-sid-d0859c3d  elementor-widget elementor-widget-heading" data-id="d0859c3d" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">At the end of your 14-day trial period, you can easily choose a subscription tier that matches your squad's capacity, or your workspace automatically reverts to a non-billing community archive.</span></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div id="faq-card-2" class="elementor-element elementor-element-7e9f5a80 faq-card e-sid-27 e-flex e-con-full e-con e-child" data-sid="sid-27" data-dom-id="sid-27" data-id="7e9f5a80" data-element_type="container">
+    <div class="elementor-element elementor-element-1f7dab19 e-sid-28 e-flex e-con-full e-con e-child" data-sid="sid-28" data-dom-id="sid-28" data-id="1f7dab19" data-element_type="container">
+    <div id="faq-btn-2" class="elementor-element elementor-element-bc81e590 faq-trigger e-sid-29  elementor-widget elementor-widget-html" data-sid="sid-29" data-dom-id="sid-29" data-id="bc81e590" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button type="button" class="faq-trigger composite-trigger" id="faq-btn-2" aria-expanded="false" aria-controls="faq-panel-2"><span class="faq-question">Can I switch plans or cancel my subscription at any point?</span><span class="faq-indicator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg></span></button></div>
+  </div>
+  </div>
+<div id="faq-panel-2" class="elementor-element elementor-element-d1c70328 faq-collapse e-sid-34 e-flex e-con-full e-con e-child" data-sid="sid-34" data-dom-id="sid-34" data-id="d1c70328" data-element_type="container">
+    <div class="elementor-element elementor-element-8c14bc51 faq-collapse-inner e-sid-35 e-flex e-con-full e-con e-child" data-sid="sid-35" data-dom-id="sid-35" data-id="8c14bc51" data-element_type="container">
+    <div class="elementor-element elementor-element-fa9b7f3f faq-content e-sid-36 e-flex e-con-full e-con e-child" data-sid="sid-36" data-dom-id="sid-36" data-id="fa9b7f3f" data-element_type="container">
+    <div class="elementor-element elementor-element-907c4c45 e-sid-37  elementor-widget elementor-widget-text-editor" data-sid="sid-37" data-dom-id="sid-37" data-id="907c4c45" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Yes, absolutely. You can upgrade, downgrade, or cancel directly from your organization settings dashboard at any second.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-c6e666cf faq-bullet-list e-sid-38 e-flex e-con-full e-con e-child" data-sid="sid-38" data-dom-id="sid-38" data-id="c6e666cf" data-element_type="container">
+    <div class="elementor-element elementor-element-e70fc59a faq-bullet-item e-sid-39 e-flex e-con-full e-con e-child" data-sid="sid-39" data-dom-id="sid-39" data-id="e70fc59a" data-element_type="container">
+    <div class="elementor-element elementor-element-c641d175 faq-bullet-icon e-sid-40 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-40" data-dom-id="sid-40" data-id="c641d175" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-e804c792 e-sid-42 e-flex e-con-full e-con e-child" data-sid="sid-42" data-dom-id="sid-42" data-id="e804c792" data-element_type="container">
+    <div class="elementor-element elementor-element-11f3961a e-sid-43 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-43" data-dom-id="sid-43" data-id="11f3961a" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Upgrades:</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-09a5579a e-sid-09a5579a elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="09a5579a" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">Take effect immediately with fair prorated billing for the remainder of your cycle.</span></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-6401da58 faq-bullet-item e-sid-44 e-flex e-con-full e-con e-child" data-sid="sid-44" data-dom-id="sid-44" data-id="6401da58" data-element_type="container">
+    <div class="elementor-element elementor-element-cad6c298 faq-bullet-icon e-sid-45 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-45" data-dom-id="sid-45" data-id="cad6c298" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-a145bf97 e-sid-47 e-flex e-con-full e-con e-child" data-sid="sid-47" data-dom-id="sid-47" data-id="a145bf97" data-element_type="container">
+    <div class="elementor-element elementor-element-4ea4aa92 e-sid-48 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-48" data-dom-id="sid-48" data-id="4ea4aa92" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Cancellations:</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-3a76f507 e-sid-3a76f507 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="3a76f507" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">You retain complete active features until the billing period concludes. No lock-in penalties.</span></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div id="faq-card-3" class="elementor-element elementor-element-1fe66faf faq-card e-sid-49 e-flex e-con-full e-con e-child" data-sid="sid-49" data-dom-id="sid-49" data-id="1fe66faf" data-element_type="container">
+    <div class="elementor-element elementor-element-82d8b3d9 e-sid-50 e-flex e-con-full e-con e-child" data-sid="sid-50" data-dom-id="sid-50" data-id="82d8b3d9" data-element_type="container">
+    <div id="faq-btn-3" class="elementor-element elementor-element-82615fc8 faq-trigger e-sid-51  elementor-widget elementor-widget-html" data-sid="sid-51" data-dom-id="sid-51" data-id="82615fc8" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button type="button" class="faq-trigger composite-trigger" id="faq-btn-3" aria-expanded="false" aria-controls="faq-panel-3"><span class="faq-question">What payment methods and currencies do you accept?</span><span class="faq-indicator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg></span></button></div>
+  </div>
+  </div>
+<div id="faq-panel-3" class="elementor-element elementor-element-e6503385 faq-collapse e-sid-56 e-flex e-con-full e-con e-child" data-sid="sid-56" data-dom-id="sid-56" data-id="e6503385" data-element_type="container">
+    <div class="elementor-element elementor-element-ecfaf040 faq-collapse-inner e-sid-57 e-flex e-con-full e-con e-child" data-sid="sid-57" data-dom-id="sid-57" data-id="ecfaf040" data-element_type="container">
+    <div class="elementor-element elementor-element-eeab14c8 faq-content e-sid-58 e-flex e-con-full e-con e-child" data-sid="sid-58" data-dom-id="sid-58" data-id="eeab14c8" data-element_type="container">
+    <div class="elementor-element elementor-element-d7bb36b8 e-sid-59  elementor-widget elementor-widget-text-editor" data-sid="sid-59" data-dom-id="sid-59" data-id="d7bb36b8" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>We partner with top-tier tier-1 processors to guarantee seamless international procurement:</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-3859b5c2 faq-bullet-list e-sid-60 e-flex e-con-full e-con e-child" data-sid="sid-60" data-dom-id="sid-60" data-id="3859b5c2" data-element_type="container">
+    <div class="elementor-element elementor-element-ec6e9005 faq-bullet-item e-sid-61 e-flex e-con-full e-con e-child" data-sid="sid-61" data-dom-id="sid-61" data-id="ec6e9005" data-element_type="container">
+    <div class="elementor-element elementor-element-c000a110 faq-bullet-icon e-sid-62 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-62" data-dom-id="sid-62" data-id="c000a110" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-b7258d22 e-sid-64 e-flex e-con-full e-con e-child" data-sid="sid-64" data-dom-id="sid-64" data-id="b7258d22" data-element_type="container">
+    <div class="elementor-element elementor-element-1b165106 e-sid-65 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-65" data-dom-id="sid-65" data-id="1b165106" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Cards:</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-8da8d9b0 e-sid-8da8d9b0 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="8da8d9b0" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">Visa, MasterCard, American Express, and Discover.</span></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-d2b726b5 faq-bullet-item e-sid-66 e-flex e-con-full e-con e-child" data-sid="sid-66" data-dom-id="sid-66" data-id="d2b726b5" data-element_type="container">
+    <div class="elementor-element elementor-element-82c5ee22 faq-bullet-icon e-sid-67 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-67" data-dom-id="sid-67" data-id="82c5ee22" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-590beb5f e-sid-69 e-flex e-con-full e-con e-child" data-sid="sid-69" data-dom-id="sid-69" data-id="590beb5f" data-element_type="container">
+    <div class="elementor-element elementor-element-78f916e2 e-sid-70 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-70" data-dom-id="sid-70" data-id="78f916e2" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Digital Wallets:</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-6a0bf347 e-sid-6a0bf347 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="6a0bf347" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">Apple Pay, Google Pay, and Link 1-click checkout.</span></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-4f867c23 faq-bullet-item e-sid-71 e-flex e-con-full e-con e-child" data-sid="sid-71" data-dom-id="sid-71" data-id="4f867c23" data-element_type="container">
+    <div class="elementor-element elementor-element-ff2a5131 faq-bullet-icon e-sid-72 elementor-widget__width-auto elementor-widget elementor-widget-icon" data-sid="sid-72" data-dom-id="sid-72" data-id="ff2a5131" data-element_type="widget" data-widget_type="icon.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-icon-wrapper">
+          <div class="elementor-icon elementor-view-default">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-d287e0e5 e-sid-74 e-flex e-con-full e-con e-child" data-sid="sid-74" data-dom-id="sid-74" data-id="d287e0e5" data-element_type="container">
+    <div class="elementor-element elementor-element-f5a4bb6e e-sid-75 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-75" data-dom-id="sid-75" data-id="f5a4bb6e" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Enterprise Wire:</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-86afe203 e-sid-86afe203 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="86afe203" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">ACH, SEPA, and BACS transfers supported on annual agreements.</span></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div id="faq-card-4" class="elementor-element elementor-element-0bd2f61b faq-card e-sid-76 e-flex e-con-full e-con e-child" data-sid="sid-76" data-dom-id="sid-76" data-id="0bd2f61b" data-element_type="container">
+    <div class="elementor-element elementor-element-359cba56 e-sid-77 e-flex e-con-full e-con e-child" data-sid="sid-77" data-dom-id="sid-77" data-id="359cba56" data-element_type="container">
+    <div id="faq-btn-4" class="elementor-element elementor-element-99dff7a5 faq-trigger e-sid-78  elementor-widget elementor-widget-html" data-sid="sid-78" data-dom-id="sid-78" data-id="99dff7a5" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button type="button" class="faq-trigger composite-trigger" id="faq-btn-4" aria-expanded="false" aria-controls="faq-panel-4"><span class="faq-question">How is our company data protected and maintained?</span><span class="faq-indicator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg></span></button></div>
+  </div>
+  </div>
+<div id="faq-panel-4" class="elementor-element elementor-element-d6ef3430 faq-collapse e-sid-83 e-flex e-con-full e-con e-child" data-sid="sid-83" data-dom-id="sid-83" data-id="d6ef3430" data-element_type="container">
+    <div class="elementor-element elementor-element-3ce076e5 faq-collapse-inner e-sid-84 e-flex e-con-full e-con e-child" data-sid="sid-84" data-dom-id="sid-84" data-id="3ce076e5" data-element_type="container">
+    <div class="elementor-element elementor-element-6ddece01 faq-content e-sid-85 e-flex e-con-full e-con e-child" data-sid="sid-85" data-dom-id="sid-85" data-id="6ddece01" data-element_type="container">
+    <div class="elementor-element elementor-element-0f451ba9 e-sid-86 e-flex e-con-full e-con e-child" data-sid="sid-86" data-dom-id="sid-86" data-id="0f451ba9" data-element_type="container">
+    <div class="elementor-element elementor-element-43e6b4df e-sid-43e6b4df elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="43e6b4df" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">Security is the foundational layer of our infrastructure. We maintain rigorous compliance certifications including</span></div>
+  </div>
+<div class="elementor-element elementor-element-f054e1cb e-sid-87 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-87" data-dom-id="sid-87" data-id="f054e1cb" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>SOC 2 Type II</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-ee9499f5 e-sid-ee9499f5 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="ee9499f5" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">,</span></div>
+  </div>
+<div class="elementor-element elementor-element-1e95454b e-sid-88 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-88" data-dom-id="sid-88" data-id="1e95454b" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>ISO/IEC 27001</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-dc61fd7a e-sid-dc61fd7a elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="dc61fd7a" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">, and complete</span></div>
+  </div>
+<div class="elementor-element elementor-element-c9764378 e-sid-89 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-89" data-dom-id="sid-89" data-id="c9764378" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>GDPR &amp; HIPAA</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-04623729 e-sid-04623729 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="04623729" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">readiness.</span></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-cc7a126b e-sid-90 e-flex e-con-full e-con e-child" data-sid="sid-90" data-dom-id="sid-90" data-id="cc7a126b" data-element_type="container">
+    <div class="elementor-element elementor-element-9b56f505 e-sid-9b56f505  elementor-widget elementor-widget-heading" data-id="9b56f505" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">All cluster databases are encrypted using AES-256 at rest and TLS 1.3 in transit. We run automated continuous pen-testing and offer segregated VPC peering for Enterprise instances. Review our</span></div>
+  </div>
+<div class="elementor-element elementor-element-8bcd9097 e-sid-91  elementor-widget elementor-widget-button" data-sid="sid-91" data-dom-id="sid-91" data-id="8bcd9097" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper">
+          <a class="elementor-button elementor-size-sm" href="#trust-center">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Trust & Compliance Center</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-5bfbb551 e-sid-5bfbb551  elementor-widget elementor-widget-heading" data-id="5bfbb551" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">for live status reports.</span></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div id="faq-card-5" class="elementor-element elementor-element-8c21c82f faq-card e-sid-92 e-flex e-con-full e-con e-child" data-sid="sid-92" data-dom-id="sid-92" data-id="8c21c82f" data-element_type="container">
+    <div class="elementor-element elementor-element-03ee7d8e e-sid-93 e-flex e-con-full e-con e-child" data-sid="sid-93" data-dom-id="sid-93" data-id="03ee7d8e" data-element_type="container">
+    <div id="faq-btn-5" class="elementor-element elementor-element-6bdfbb3f faq-trigger e-sid-94  elementor-widget elementor-widget-html" data-sid="sid-94" data-dom-id="sid-94" data-id="6bdfbb3f" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button type="button" class="faq-trigger composite-trigger" id="faq-btn-5" aria-expanded="false" aria-controls="faq-panel-5"><span class="faq-question">What happens if my workspace exceeds monthly usage caps?</span><span class="faq-indicator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg></span></button></div>
+  </div>
+  </div>
+<div id="faq-panel-5" class="elementor-element elementor-element-50ec9cdc faq-collapse e-sid-99 e-flex e-con-full e-con e-child" data-sid="sid-99" data-dom-id="sid-99" data-id="50ec9cdc" data-element_type="container">
+    <div class="elementor-element elementor-element-9b5069cc faq-collapse-inner e-sid-100 e-flex e-con-full e-con e-child" data-sid="sid-100" data-dom-id="sid-100" data-id="9b5069cc" data-element_type="container">
+    <div class="elementor-element elementor-element-ad726822 faq-content e-sid-101 e-flex e-con-full e-con e-child" data-sid="sid-101" data-dom-id="sid-101" data-id="ad726822" data-element_type="container">
+    <div class="elementor-element elementor-element-d9ef8feb e-sid-102 e-flex e-con-full e-con e-child" data-sid="sid-102" data-dom-id="sid-102" data-id="d9ef8feb" data-element_type="container">
+    <div class="elementor-element elementor-element-e90e9e18 e-sid-103 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-103" data-dom-id="sid-103" data-id="e90e9e18" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>We do not cut off your production pipelines abruptly.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-c9880bc1 e-sid-c9880bc1  elementor-widget elementor-widget-heading" data-id="c9880bc1" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">If your API requests or bandwidth hit 80% and 95% of tier thresholds, workspace admins receive real-time webhook and email alerts.</span></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-f3cd3076 e-sid-104  elementor-widget elementor-widget-text-editor" data-sid="sid-104" data-dom-id="sid-104" data-id="f3cd3076" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>We provide a generous 5-day grace period with zero punitive throttling so you can easily choose between optimization or upgrading your quota seamlessly without service disruption.</p></div></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div id="faq-card-6" class="elementor-element elementor-element-1ffd3b25 faq-card e-sid-105 e-flex e-con-full e-con e-child" data-sid="sid-105" data-dom-id="sid-105" data-id="1ffd3b25" data-element_type="container">
+    <div class="elementor-element elementor-element-cf629bde e-sid-106 e-flex e-con-full e-con e-child" data-sid="sid-106" data-dom-id="sid-106" data-id="cf629bde" data-element_type="container">
+    <div id="faq-btn-6" class="elementor-element elementor-element-02e8e41b faq-trigger e-sid-107  elementor-widget elementor-widget-html" data-sid="sid-107" data-dom-id="sid-107" data-id="02e8e41b" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><button type="button" class="faq-trigger composite-trigger" id="faq-btn-6" aria-expanded="false" aria-controls="faq-panel-6"><span class="faq-question">Do you offer migration assistance and dedicated support?</span><span class="faq-indicator" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+                </svg></span></button></div>
+  </div>
+  </div>
+<div id="faq-panel-6" class="elementor-element elementor-element-514cf1e2 faq-collapse e-sid-112 e-flex e-con-full e-con e-child" data-sid="sid-112" data-dom-id="sid-112" data-id="514cf1e2" data-element_type="container">
+    <div class="elementor-element elementor-element-27c8c6bb faq-collapse-inner e-sid-113 e-flex e-con-full e-con e-child" data-sid="sid-113" data-dom-id="sid-113" data-id="27c8c6bb" data-element_type="container">
+    <div class="elementor-element elementor-element-cbedf033 faq-content e-sid-114 e-flex e-con-full e-con e-child" data-sid="sid-114" data-dom-id="sid-114" data-id="cbedf033" data-element_type="container">
+    <div class="elementor-element elementor-element-2f700a9b e-sid-115  elementor-widget elementor-widget-text-editor" data-sid="sid-115" data-dom-id="sid-115" data-id="2f700a9b" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Yes! All Pro and Enterprise subscriptions include access to our complimentary architectural migration scripts and guidance.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-f6e5dec9 e-sid-116 e-flex e-con-full e-con e-child" data-sid="sid-116" data-dom-id="sid-116" data-id="f6e5dec9" data-element_type="container">
+    <div class="elementor-element elementor-element-de6b9db3 e-sid-de6b9db3 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="de6b9db3" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">Enterprise customers receive a</span></div>
+  </div>
+<div class="elementor-element elementor-element-bd0fd740 e-sid-117 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-117" data-dom-id="sid-117" data-id="bd0fd740" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>dedicated Solutions Architect</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-a72451a3 e-sid-a72451a3 elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="a72451a3" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">, a private shared Slack/Teams connect channel, and an aggressive</span></div>
+  </div>
+<div class="elementor-element elementor-element-e07b78b0 e-sid-118 elementor-widget__width-auto elementor-widget elementor-widget-text-editor" data-sid="sid-118" data-dom-id="sid-118" data-id="e07b78b0" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>15-minute Critical Response SLA</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-879e7f5c e-sid-879e7f5c elementor-widget__width-auto elementor-widget elementor-widget-heading" data-id="879e7f5c" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><span class="elementor-heading-title elementor-size-default">backed by financial uptime guarantees.</span></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-fc670c69 faq-footer e-sid-119 e-flex e-con-full e-con e-child" data-sid="sid-119" data-dom-id="sid-119" data-id="fc670c69" data-element_type="container">
+    <div class="elementor-element elementor-element-c7e9d9f0 faq-footer-info e-sid-120 e-flex e-con-full e-con e-child" data-sid="sid-120" data-dom-id="sid-120" data-id="c7e9d9f0" data-element_type="container">
+    <div class="elementor-element elementor-element-0683019f faq-footer-title e-sid-121  elementor-widget elementor-widget-heading" data-sid="sid-121" data-dom-id="sid-121" data-id="0683019f" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h4 class="elementor-heading-title elementor-size-default">Still have unanswered questions?</h4></div>
+  </div>
+<div class="elementor-element elementor-element-5d082258 faq-footer-desc e-sid-122  elementor-widget elementor-widget-text-editor" data-sid="sid-122" data-dom-id="sid-122" data-id="5d082258" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Our technical solutions squad is available 24/7 via live chat.</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-7b75abc6 faq-footer-btn e-sid-123  elementor-widget elementor-widget-html" data-sid="sid-123" data-dom-id="sid-123" data-id="7b75abc6" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><a href="#chat-with-us" class="faq-footer-btn composite-trigger"><span>Chat with Support</span><svg viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg></a></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-8656c162 embedded-script-engine e-sid-8656c162  elementor-widget elementor-widget-html" data-id="8656c162" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><script>
+(function() {
+  // 1. Universal DOM Lifecycle Polyfill:
+  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,
+  // immediately invoke the callback so dynamic scripts never enter a deadzone.
+  try {
+    var _origDocAdd = Document.prototype.addEventListener;
+    var _lifecycleAdd = function(type, fn, opts) {
+      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {
+        try {
+          setTimeout(function() { fn.call(document, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origDocAdd.call(this, type, fn, opts);
+    };
+    Document.prototype.addEventListener = _lifecycleAdd;
+    try { document.addEventListener = _lifecycleAdd; } catch(e) {}
+
+    var _origWinAdd = Window.prototype.addEventListener;
+    Window.prototype.addEventListener = function(type, fn, opts) {
+      if (type === 'load' && document.readyState === 'complete') {
+        try {
+          setTimeout(function() { fn.call(window, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origWinAdd.call(this, type, fn, opts);
+    };
+  } catch(e) {
+    console.warn('[LIFECYCLE POLYFILL ERROR]', e);
+  }
+
+  function initDynamicComponentLogic() {
+    // 2. Universal Data-Attribute Hydration Bridge:
+    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases
+    // (e.g. data-category--design -> el.dataset.category = "design", el.setAttribute("data-category", "design"))
+    try {
+      document.querySelectorAll('*').forEach(function(el) {
+        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;
+        if (el.dataset && el.dataset.__hasDataHydrated) return;
+        if (el.dataset) el.dataset.__hasDataHydrated = 'true';
+        if (el.classList) {
+          el.classList.forEach(function(cls) {
+            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {
+              var sepIdx = cls.indexOf('--');
+              var attrName = cls.slice(0, sepIdx);
+              var rawVal = cls.slice(sepIdx + 2);
+              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)
+              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {
+                return String.fromCharCode(parseInt(hex, 16));
+              });
+              el.setAttribute(attrName, attrVal);
+              if (el.dataset) {
+                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });
+                el.dataset[prop] = attrVal;
+              }
+            }
+          });
+        }
+      });
+    } catch(e) {
+      console.warn('[DATA HYDRATION ERROR]', e);
+    }
+
+    try {
+      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title
+      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {
+        var inner = widget.querySelector('.elementor-heading-title');
+        if (inner && !widget.__hasTextProxy) {
+          widget.__hasTextProxy = true;
+          Object.defineProperty(widget, 'textContent', {
+            get: function() { return inner.textContent; },
+            set: function(val) { inner.textContent = val; },
+            configurable: true
+          });
+          Object.defineProperty(widget, 'innerText', {
+            get: function() { return inner.innerText; },
+            set: function(val) { inner.innerText = val; },
+            configurable: true
+          });
+        }
+      });
+
+      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)
+      
+      if (!window.__delegatedBridgesBound) {
+        window.__delegatedBridgesBound = true;
+        
+      (function(){
+        var k = "bridge_#faq-btn-2|.faq-card";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest("#faq-btn-2");
+            if (!trig) return;
+            var anc = trig.closest(".faq-card");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-open"] = anc.classList.contains("is-open");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest("#faq-btn-2");
+          if (!trig) return;
+          var anc = trig.closest(".faq-card");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-open"] : null;
+          var isNowPresent = anc.classList.contains("is-open");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-open");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+
+      (function(){
+        var k = "bridge_#faq-btn-3|.faq-card";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest("#faq-btn-3");
+            if (!trig) return;
+            var anc = trig.closest(".faq-card");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-open"] = anc.classList.contains("is-open");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest("#faq-btn-3");
+          if (!trig) return;
+          var anc = trig.closest(".faq-card");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-open"] : null;
+          var isNowPresent = anc.classList.contains("is-open");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-open");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+
+      (function(){
+        var k = "bridge_#faq-btn-4|.faq-card";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest("#faq-btn-4");
+            if (!trig) return;
+            var anc = trig.closest(".faq-card");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-open"] = anc.classList.contains("is-open");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest("#faq-btn-4");
+          if (!trig) return;
+          var anc = trig.closest(".faq-card");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-open"] : null;
+          var isNowPresent = anc.classList.contains("is-open");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-open");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+
+      (function(){
+        var k = "bridge_#faq-btn-5|.faq-card";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest("#faq-btn-5");
+            if (!trig) return;
+            var anc = trig.closest(".faq-card");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-open"] = anc.classList.contains("is-open");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest("#faq-btn-5");
+          if (!trig) return;
+          var anc = trig.closest(".faq-card");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-open"] : null;
+          var isNowPresent = anc.classList.contains("is-open");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-open");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+
+      (function(){
+        var k = "bridge_#faq-btn-6|.faq-card";
+        if (window[k]) return; window[k] = true;
+        var preState = typeof WeakMap !== 'undefined' ? new WeakMap() : null;
+        if (preState) {
+          document.addEventListener('click', function(e){
+            var trig = e.target.closest("#faq-btn-6");
+            if (!trig) return;
+            var anc = trig.closest(".faq-card");
+            if (!anc || anc === document.body) return;
+            var s = {};
+            s["is-open"] = anc.classList.contains("is-open");
+            preState.set(e, s);
+          }, true);
+        }
+        document.addEventListener('click', function(e){
+          var trig = e.target.closest("#faq-btn-6");
+          if (!trig) return;
+          var anc = trig.closest(".faq-card");
+          if (!anc || anc === document.body) return;
+          var s = preState ? preState.get(e) : null;
+          
+          var wasPresent = s ? s["is-open"] : null;
+          var isNowPresent = anc.classList.contains("is-open");
+          if (wasPresent === null || wasPresent === isNowPresent) {
+            anc.classList.toggle("is-open");
+          }
+          
+          if (trig.hasAttribute('aria-expanded')) {
+            var isExp = trig.getAttribute('aria-expanded') === 'true';
+            trig.setAttribute('aria-expanded', String(!isExp));
+          }
+        });
+      })();
+      }
+  
+    } catch(err) {
+      console.warn('[COMPILER BRIDGE]', err);
+    }
+
+    // Execute Application Business Logic with Idempotency Protection
+    if (!window.__appLogicInitialized) {
+      window.__appLogicInitialized = true;
+      try {
+        (function () {
+      'use strict';
+
+      // Cache DOM references
+      const faqCards = document.querySelectorAll('.faq-card');
+
+      /**
+       * Opens a given FAQ card and updates ARIA attributes
+       * @param {HTMLElement} card 
+       */
+      function openCard(card) {
+        const trigger = card.querySelector('.faq-trigger');
+        if (!card || !trigger) return;
+
+        card.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+
+      /**
+       * Closes a given FAQ card and updates ARIA attributes
+       * @param {HTMLElement} card 
+       */
+      function closeCard(card) {
+        const trigger = card.querySelector('.faq-trigger');
+        if (!card || !trigger) return;
+
+        card.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      /**
+       * Orchestrates single-active accordion logic
+       * @param {HTMLElement} targetCard 
+       */
+      function toggleAccordion(targetCard) {
+        const isCurrentlyOpen = targetCard.classList.contains('is-open');
+
+        // Auto-collapse: close all active cards
+        faqCards.forEach(card => {
+          if (card !== targetCard && card.classList.contains('is-open')) {
+            closeCard(card);
+          }
+        });
+
+        // Toggle state of target item
+        if (isCurrentlyOpen) {
+          closeCard(targetCard);
+        } else {
+          openCard(targetCard);
+        }
+      }
+
+      // Initialize event listeners
+      faqCards.forEach(card => {
+        const trigger = card.querySelector('.faq-trigger');
+        if (!trigger) return;
+
+        // Mouse click handler
+        trigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          toggleAccordion(card);
+        });
+
+        // Keyboard accessibility: space & enter handled natively by <button>,
+        // but adding defense against accidental browser scroll on space
+        trigger.addEventListener('keydown', (event) => {
+          if (event.key === ' ' || event.key === 'Spacebar') {
+            event.preventDefault();
+            toggleAccordion(card);
+          }
+        });
+      });
+    })();
+      } catch(appErr) {
+        console.warn('[APP LOGIC ERROR]', appErr);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);
+  } else {
+    initDynamicComponentLogic();
+  }
+  setTimeout(initDynamicComponentLogic, 200);
+  setTimeout(initDynamicComponentLogic, 800);
+  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);
+})();
+</script></div>
+  </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

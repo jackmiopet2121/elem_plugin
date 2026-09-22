@@ -1,0 +1,13 @@
+{
+  "id": "calib-08-micro-css-priority",
+  "name": "Isolated Micro-CSS Post-Cascade Specificity Priority",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "target-card": {
+      "styles": {
+        "backgroundColor": "rgb(37, 99, 235)"
+      },
+      "tolerances": { "colorDelta": 0 }
+    }
+  }
+}

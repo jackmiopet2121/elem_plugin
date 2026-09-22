@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Pricing Calculator</title>
+
+  <!-- Google Fonts & FontAwesome 6 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ==========================================================================
+       1. TOKENS & RESET (PURE FLEXBOX ARCHITECTURE)
+       ========================================================================== */
+    :root {
+      --color-primary: #2563EB;
+      --color-primary-hover: #1D4ED8;
+      --color-primary-soft: rgba(37, 99, 235, 0.08);
+      --color-navy: #0F172A;
+      --color-navy-card: #1E293B;
+      --color-navy-border: rgba(255, 255, 255, 0.1);
+      --color-surface: #F8FAFC;
+      --color-card-bg: #FFFFFF;
+      --color-outline: #E2E8F0;
+      --color-slate-900: #0F172A;
+      --color-slate-600: #475569;
+      --color-slate-500: #64748B;
+      --color-slate-400: #94A3B8;
+      --color-green: #10B981;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 24px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+      --shadow-md: 0 10px 30px -4px rgba(15, 23, 42, 0.08);
+      --shadow-card-navy: 0 24px 48px -12px rgba(15, 23, 42, 0.45);
+      --transition: 0.2s ease;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--color-surface);
+      color: var(--color-slate-900);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==========================================================================
+       2. SECTION WRAPPER & HEADER
+       ========================================================================== */
+    .pricing-calc-section {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px;
+      background: radial-gradient(circle at 50% 10%, rgba(37, 99, 235, 0.05) 0%, transparent 65%), var(--color-surface);
+    }
+
+    .calc-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .calc-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      max-width: 760px;
+    }
+
+    .calc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background-color: var(--color-primary-soft);
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      border-radius: var(--radius-full);
+      color: var(--color-primary);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .calc-title {
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      color: var(--color-navy);
+    }
+
+    .calc-subtitle {
+      font-size: 16px;
+      color: var(--color-slate-600);
+      line-height: 1.6;
+    }
+
+    /* Billing Switcher Pill */
+    .billing-toggle-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-outline);
+      border-radius: var(--radius-full);
+      padding: 6px;
+      box-shadow: var(--shadow-sm);
+      gap: 4px;
+    }
+
+    .billing-opt-btn {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border: none;
+      background: transparent;
+      border-radius: var(--radius-full);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-slate-600);
+      cursor: pointer;
+      transition: background-color var(--transition), color var(--transition);
+      user-select: none;
+    }
+
+    #btn-monthly.is-active,
+    #btn-annual.is-active {
+      background-color: var(--color-navy);
+      color: #FFFFFF;
+    }
+
+    .save-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      background-color: var(--color-green);
+      color: #FFFFFF;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    #btn-annual.is-active .save-badge {
+      background-color: #FFFFFF;
+      color: var(--color-navy);
+    }
+
+    /* ==========================================================================
+       3. DUAL-COLUMN FLEXBOX GRID
+       ========================================================================== */
+    .calc-grid {
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: center;
+      gap: 32px;
+      width: 100%;
+    }
+
+    /* LEFT CONTROLS CARD */
+    .calc-controls-card {
+      flex: 1 1 58%;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+      background-color: var(--color-card-bg);
+      border: 1px solid var(--color-outline);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .metric-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .metric-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .metric-label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-slate-500);
+    }
+
+    .metric-description {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-slate-900);
+    }
+
+    .metric-counter-display {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 6px;
+      padding: 6px 14px;
+      background-color: var(--color-primary-soft);
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      border-radius: var(--radius-md);
+    }
+
+    #metric-counter-val {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--color-primary);
+    }
+
+    .metric-counter-unit {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    /* Range Slider Styling */
+    .slider-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .slider-track-wrap {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      padding: 16px 0;
+    }
+
+    #slider-tooltip {
+      position: absolute;
+      top: -18px;
+      left: 10%;
+      transform: translateX(-50%);
+      background-color: var(--color-navy);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+      z-index: 5;
+    }
+
+    #slider-tooltip::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 4px 4px 0 4px;
+      border-style: solid;
+      border-color: var(--color-navy) transparent transparent transparent;
+    }
+
+    .custom-range-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: var(--radius-full);
+      outline: none;
+      cursor: grab;
+      position: relative;
+      z-index: 2;
+      background: linear-gradient(to right, var(--color-primary) 0%, var(--color-primary) 10%, #E2E8F0 10%, #E2E8F0 100%);
+    }
+
+    .custom-range-slider:active {
+      cursor: grabbing;
+    }
+
+    .custom-range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      background-color: #FFFFFF;
+      border: 2px solid var(--color-primary);
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35);
+      cursor: grab;
+      transition: transform var(--transition);
+    }
+
+    .custom-range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    .custom-range-slider::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: var(--radius-full);
+      background-color: #FFFFFF;
+      border: 2px solid var(--color-primary);
+      box-shadow: 0 3px 10px rgba(37, 99, 235, 0.35);
+      cursor: grab;
+      transition: transform var(--transition);
+    }
+
+    /* Milestone Markers */
+    .slider-milestones {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0 2px;
+    }
+
+    .milestone-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-slate-400);
+      cursor: pointer;
+      user-select: none;
+      transition: color var(--transition);
+    }
+
+    .milestone-node:hover {
+      color: var(--color-primary);
+    }
+
+    .milestone-tick {
+      width: 2px;
+      height: 6px;
+      background-color: var(--color-outline);
+      border-radius: var(--radius-full);
+    }
+
+    .milestone-node:hover .milestone-tick {
+      background-color: var(--color-primary);
+    }
+
+    /* Add-ons Block */
+    .addons-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      border-top: 1px solid var(--color-outline);
+      padding-top: 28px;
+    }
+
+    .addons-heading {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-slate-500);
+    }
+
+    .addon-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-outline);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: background-color var(--transition);
+    }
+
+    .addon-card:hover {
+      background-color: #F1F5F9;
+    }
+
+    .addon-left {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .addon-icon-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background-color: #FFFFFF;
+      border: 1px solid var(--color-outline);
+      color: var(--color-slate-600);
+    }
+
+    .addon-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .addon-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-slate-900);
+    }
+
+    .addon-cost {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-slate-500);
+    }
+
+    /* Pure CSS Switch */
+    .switch-wrap {
+      position: relative;
+      display: flex;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .switch-wrap input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .switch-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #CBD5E1;
+      border-radius: var(--radius-full);
+      transition: background-color var(--transition);
+    }
+
+    .switch-slider::before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: #FFFFFF;
+      border-radius: var(--radius-full);
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.2);
+      transition: transform var(--transition);
+    }
+
+    .switch-wrap input:checked + .switch-slider {
+      background-color: var(--color-primary);
+    }
+
+    .switch-wrap input:checked + .switch-slider::before {
+      transform: translateX(20px);
+    }
+
+    /* RIGHT CARD: DARK NAVY SUMMARY */
+    .calc-summary-card {
+      flex: 1 1 42%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      background-color: var(--color-navy);
+      color: #FFFFFF;
+      border: 1px solid var(--color-navy-border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-card-navy);
+    }
+
+    .summary-top {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .summary-tier-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background-color: rgba(37, 99, 235, 0.2);
+      color: #93C5FD;
+      border: 1px solid rgba(147, 197, 253, 0.25);
+    }
+
+    .summary-badge-sub {
+      font-size: 13px;
+      color: var(--color-slate-400);
+      font-weight: 500;
+    }
+
+    .summary-price-lockup {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .price-row {
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .price-currency {
+      font-size: 32px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    #price-total {
+      font-size: 56px;
+      font-weight: 800;
+      line-height: 1;
+      color: #FFFFFF;
+      letter-spacing: -0.03em;
+    }
+
+    #price-cadence {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-slate-400);
+    }
+
+    .price-breakdown {
+      font-size: 13px;
+      color: var(--color-slate-400);
+    }
+
+    .price-breakdown strong {
+      color: #FFFFFF;
+    }
+
+    .summary-divider {
+      height: 1px;
+      width: 100%;
+      background-color: var(--color-navy-border);
+    }
+
+    /* Checklist Section */
+    .summary-features {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .features-heading {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-slate-400);
+    }
+
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      list-style: none;
+    }
+
+    .feature-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: #E2E8F0;
+    }
+
+    .feature-item i {
+      color: var(--color-green);
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(16, 185, 129, 0.2);
+      border-radius: var(--radius-full);
+      flex-shrink: 0;
+    }
+
+    /* Bottom Actions */
+    .summary-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .cta-submit-btn {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px 24px;
+      background-color: var(--color-primary);
+      border: 1.5px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+      transition: background-color var(--transition), transform var(--transition);
+    }
+
+    .cta-submit-btn:hover {
+      background-color: var(--color-primary-hover);
+      border-color: var(--color-primary-hover);
+    }
+
+    .cta-submit-btn:active {
+      transform: scale(0.98);
+    }
+
+    .trust-micro-copy {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--color-slate-400);
+      text-align: center;
+      flex-wrap: wrap;
+    }
+
+    /* ==========================================================================
+       4. RESPONSIVENESS (EXPLICIT FLEXBOX QUERIES)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .calc-grid {
+        flex-direction: column;
+      }
+      .calc-controls-card,
+      .calc-summary-card {
+        flex: 1 1 100%;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-calc-section {
+        padding: 56px 16px;
+      }
+      .calc-title {
+        font-size: 28px;
+      }
+      .calc-controls-card {
+        padding: 24px 18px;
+      }
+      .calc-summary-card {
+        padding: 28px 20px;
+      }
+      #price-total {
+        font-size: 46px;
+      }
+      .billing-toggle-card {
+        width: 100%;
+        justify-content: center;
+      }
+      .billing-opt-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="pricing-calc-section" aria-label="Interactive Pricing Estimator">
+    <div class="calc-container">
+
+      <!-- 1. HEADER & BILLING TOGGLE -->
+      <header class="calc-header">
+        <div class="calc-badge">
+          <i class="fas fa-calculator"></i>
+          <span>REAL-TIME COST ESTIMATOR</span>
+        </div>
+        <h1 class="calc-title">Predictable pricing scaled to your growth</h1>
+        <p class="calc-subtitle">Slide to estimate your monthly compute, storage, and API cost with zero hidden fees.</p>
+
+        <div class="billing-toggle-card" role="radiogroup" aria-label="Billing switcher">
+          <button type="button" id="btn-monthly" class="billing-opt-btn is-active" role="radio" aria-checked="true">
+            Monthly Billing
+          </button>
+          <button type="button" id="btn-annual" class="billing-opt-btn" role="radio" aria-checked="false">
+            Annual Billing <span class="save-badge">Save 25%</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- 2. DUAL-COLUMN LAYOUT -->
+      <div class="calc-grid">
+
+        <!-- Left Column: Controls -->
+        <div class="calc-controls-card">
+          <div class="metric-header">
+            <div class="metric-meta">
+              <span class="metric-label">COMPUTE THROUGHPUT</span>
+              <span class="metric-description">Monthly API Requests &amp; Active Workspaces</span>
+            </div>
+            <div class="metric-counter-display">
+              <span id="metric-counter-val">50,000</span>
+              <span class="metric-counter-unit">Requests / mo</span>
+            </div>
+          </div>
+
+          <!-- Slider Wrapper -->
+          <div class="slider-block">
+            <div class="slider-track-wrap">
+              <div id="slider-tooltip">50K reqs</div>
+              <input 
+                type="range" 
+                min="1000" 
+                max="500000" 
+                step="1000" 
+                value="50000" 
+                id="volume-slider" 
+                class="custom-range-slider"
+                aria-label="API request volume slider"
+              >
+            </div>
+
+            <!-- Clickable Milestones -->
+            <div class="slider-milestones">
+              <div class="milestone-node" data-val="1000">
+                <span class="milestone-tick"></span>
+                <span>1K</span>
+              </div>
+              <div class="milestone-node" data-val="25000">
+                <span class="milestone-tick"></span>
+                <span>25K</span>
+              </div>
+              <div class="milestone-node" data-val="100000">
+                <span class="milestone-tick"></span>
+                <span>100K</span>
+              </div>
+              <div class="milestone-node" data-val="250000">
+                <span class="milestone-tick"></span>
+                <span>250K</span>
+              </div>
+              <div class="milestone-node" data-val="500000">
+                <span class="milestone-tick"></span>
+                <span>500K+</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add-ons Block -->
+          <div class="addons-block">
+            <span class="addons-heading">Production Add-ons &amp; Governance</span>
+
+            <label class="addon-card" for="addon-ssl">
+              <div class="addon-left">
+                <div class="addon-icon-box">
+                  <i class="fas fa-shield-halved"></i>
+                </div>
+                <div class="addon-info">
+                  <span class="addon-title">Dedicated Custom Domain &amp; SSL</span>
+                  <span class="addon-cost">+$19/mo</span>
+                </div>
+              </div>
+              <div class="switch-wrap">
+                <input type="checkbox" id="addon-ssl" aria-label="Toggle custom domain and SSL">
+                <span class="switch-slider"></span>
+              </div>
+            </label>
+
+            <label class="addon-card" for="addon-sla">
+              <div class="addon-left">
+                <div class="addon-icon-box">
+                  <i class="fas fa-headset"></i>
+                </div>
+                <div class="addon-info">
+                  <span class="addon-title">24/7 Priority SLA &amp; Dedicated Agent</span>
+                  <span class="addon-cost">+$49/mo</span>
+                </div>
+              </div>
+              <div class="switch-wrap">
+                <input type="checkbox" id="addon-sla" aria-label="Toggle priority SLA">
+                <span class="switch-slider"></span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Right Column: Dark Navy Summary Card -->
+        <div class="calc-summary-card">
+          <div class="summary-top">
+            <div class="summary-tier-row">
+              <span id="tier-badge" class="tier-badge">Growth Plan</span>
+              <span id="tier-summary-sub" class="summary-badge-sub">Most Popular - scaling teams</span>
+            </div>
+
+            <div class="summary-price-lockup">
+              <div class="price-row">
+                <span class="price-currency">$</span>
+                <span id="price-total">116</span>
+                <span id="price-cadence">/ month</span>
+              </div>
+              <div class="price-breakdown">
+                Baseline: $<span id="bd-base">116</span> | Add-ons: $<span id="bd-addons">0</span>
+              </div>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-features">
+              <span class="features-heading">Included Platform Capabilities</span>
+              <!-- MANDATORY DOM-FIRST FEATURE CHECKLIST -->
+              <ul class="features-list">
+                <li class="feature-item">
+                  <i class="fas fa-check"></i>
+                  <span id="feat-1">8 High-Concurrency Dedicated Workers</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check"></i>
+                  <span id="feat-2">Priority Email Support (&lt; 6h Response SLA)</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check"></i>
+                  <span id="feat-3">30-Day Metric &amp; Deep Trace Ingestion</span>
+                </li>
+                <li class="feature-item">
+                  <i class="fas fa-check"></i>
+                  <span id="feat-4">Automated Edge Cache Purge Rules</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="summary-bottom">
+            <button type="button" id="cta-deploy" class="cta-submit-btn">
+              Deploy Your Cluster <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="trust-micro-copy">
+              <span>14-day free trial</span>
+              <span>•</span>
+              <span>No credit card required</span>
+              <span>•</span>
+              <span>Instant automated setup</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. PURE REACTIVE JAVASCRIPT (ZERO innerHTML / createElement)
+       ========================================================================== */ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // DOM Elements Cache
+      const slider = document.getElementById('volume-slider');
+      const tooltip = document.getElementById('slider-tooltip');
+      const counterVal = document.getElementById('metric-counter-val');
+      const btnMonthly = document.getElementById('btn-monthly');
+      const btnAnnual = document.getElementById('btn-annual');
+      const addonSsl = document.getElementById('addon-ssl');
+      const addonSla = document.getElementById('addon-sla');
+
+      const tierBadge = document.getElementById('tier-badge');
+      const tierSub = document.getElementById('tier-summary-sub');
+      const priceTotal = document.getElementById('price-total');
+      const priceCadence = document.getElementById('price-cadence');
+      const bdBase = document.getElementById('bd-base');
+      const bdAddons = document.getElementById('bd-addons');
+
+      const feat1 = document.getElementById('feat-1');
+      const feat2 = document.getElementById('feat-2');
+      const feat3 = document.getElementById('feat-3');
+      const feat4 = document.getElementById('feat-4');
+      const milestones = document.querySelectorAll('.milestone-node');
+
+      // State
+      let isAnnual = false;
+
+      // Tier Feature Configurations (Text Content Only)
+      const TIER_DATA = {
+        starter: {
+          badge: 'Starter Plan',
+          sub: 'Best for prototypes & side projects',
+          feat1: '2 Concurrent Isolated Workers',
+          feat2: 'Community Discord & Standard Docs',
+          feat3: '7-Day Rolling Telemetry Buffer',
+          feat4: 'Shared Edge CDN Network'
+        },
+        growth: {
+          badge: 'Growth Plan',
+          sub: 'Most Popular - scaling teams',
+          feat1: '8 High-Concurrency Dedicated Workers',
+          feat2: 'Priority Email Support (< 6h Response SLA)',
+          feat3: '30-Day Metric & Deep Trace Ingestion',
+          feat4: 'Automated Edge Cache Purge Rules'
+        },
+        scale: {
+          badge: 'Scale Plan',
+          sub: 'High-throughput mission critical workloads',
+          feat1: '24 High-Performance Parallel Workers',
+          feat2: 'Priority Incident Response (< 1h SLA)',
+          feat3: '90-Day Full Telemetry Retention',
+          feat4: 'Automated Multi-Region Node Failover'
+        },
+        enterprise: {
+          badge: 'Enterprise Fleet',
+          sub: 'Dedicated cluster isolation & strict SLA',
+          feat1: 'Unlimited Elastic Workers & Node Pools',
+          feat2: '15-Minute Critical Enterprise SLA',
+          feat3: '365-Day Immutable Compliance Vault',
+          feat4: 'Dedicated Virtual Private Cloud (VPC) Peering'
+        }
+      };
+
+      /**
+       * Calculates base pricing curve
+       * (Yields exactly $116 at 50,000 requests)
+       */
+      function calculateBasePrice(volume) {
+        if (volume <= 20000) {
+          const progress = (volume - 1000) / 19000;
+          return Math.round(19 + progress * 30);
+        } else if (volume <= 100000) {
+          const progress = (volume - 20000) / 80000;
+          return Math.round(49 + progress * 179);
+        } else if (volume <= 300000) {
+          const progress = (volume - 100000) / 200000;
+          return Math.round(228 + progress * 220);
+        } else {
+          const progress = (volume - 300000) / 200000;
+          return Math.round(448 + progress * 350);
+        }
+      }
+
+      /**
+       * Resolves active tier key from request volume
+       */
+      function resolveTier(volume) {
+        if (volume <= 20000) return 'starter';
+        if (volume <= 100000) return 'growth';
+        if (volume <= 300000) return 'scale';
+        return 'enterprise';
+      }
+
+      /**
+       * Master calculation & DOM update routine
+       * ONLY mutates .textContent, .style, and classes. ZERO DOM creation.
+       */
+      function updateCalculator() {
+        const volume = parseInt(slider.value, 10);
+        const min = parseInt(slider.min, 10);
+        const max = parseInt(slider.max, 10);
+        const pct = ((volume - min) / (max - min)) * 100;
+
+        // 1. Update slider track fill & tooltip position
+        slider.style.background = 'linear-gradient(to right, #2563EB 0%, #2563EB ' + pct + '%, #E2E8F0 ' + pct + '%, #E2E8F0 100%)';
+
+        const thumbOffset = (pct / 100) * (slider.offsetWidth - 24) + 12;
+        tooltip.style.left = thumbOffset + 'px';
+
+        const kValue = volume >= 1000 ? Math.round(volume / 1000) + 'K' : volume;
+        tooltip.textContent = kValue + ' reqs';
+
+        // 2. Update live metric counter
+        counterVal.textContent = volume.toLocaleString('en-US');
+
+        // 3. Calculate baseline & add-ons
+        const rawBase = calculateBasePrice(volume);
+        let rawAddons = 0;
+        if (addonSsl.checked) rawAddons += 19;
+        if (addonSla.checked) rawAddons += 49;
+
+        const subtotal = rawBase + rawAddons;
+        const total = isAnnual ? Math.round(subtotal * 0.75) : subtotal;
+        const displayBase = isAnnual ? Math.round(rawBase * 0.75) : rawBase;
+        const displayAddons = isAnnual ? Math.round(rawAddons * 0.75) : rawAddons;
+
+        // 4. Mutate Price Breakdown Text Elements
+        priceTotal.textContent = total.toLocaleString('en-US');
+        bdBase.textContent = displayBase.toLocaleString('en-US');
+        bdAddons.textContent = displayAddons.toLocaleString('en-US');
+        priceCadence.textContent = isAnnual ? '/ month, billed annually' : '/ month';
+
+        // 5. Mutate Tier Metadata & Checklist Text Elements
+        const tierKey = resolveTier(volume);
+        const tier = TIER_DATA[tierKey];
+
+        tierBadge.textContent = tier.badge;
+        tierSub.textContent = tier.sub;
+        feat1.textContent = tier.feat1;
+        feat2.textContent = tier.feat2;
+        feat3.textContent = tier.feat3;
+        feat4.textContent = tier.feat4;
+      }
+
+      // ======================================================================
+      // EVENT LISTENERS
+      // ======================================================================
+
+      // Slider input
+      slider.addEventListener('input', updateCalculator);
+
+      // Window resize re-aligns tooltip thumb offset
+      window.addEventListener('resize', updateCalculator);
+
+      // Billing switchers
+      btnMonthly.addEventListener('click', function () {
+        if (!isAnnual) return;
+        isAnnual = false;
+        btnMonthly.classList.add('is-active');
+        btnMonthly.setAttribute('aria-checked', 'true');
+        btnAnnual.classList.remove('is-active');
+        btnAnnual.setAttribute('aria-checked', 'false');
+        updateCalculator();
+      });
+
+      btnAnnual.addEventListener('click', function () {
+        if (isAnnual) return;
+        isAnnual = true;
+        btnAnnual.classList.add('is-active');
+        btnAnnual.setAttribute('aria-checked', 'true');
+        btnMonthly.classList.remove('is-active');
+        btnMonthly.setAttribute('aria-checked', 'false');
+        updateCalculator();
+      });
+
+      // Add-on checkboxes
+      addonSsl.addEventListener('change', updateCalculator);
+      addonSla.addEventListener('change', updateCalculator);
+
+      // Milestone clicks
+      milestones.forEach(function (node) {
+        node.addEventListener('click', function () {
+          const targetValue = parseInt(node.getAttribute('data-val'), 10);
+          slider.value = targetValue;
+          updateCalculator();
+        });
+      });
+
+      // Initialize on load
+      updateCalculator();
+    })();
+  </script>
+</body>
+</html>

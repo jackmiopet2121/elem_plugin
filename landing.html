@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium SaaS Landing Page</title>
+    
+    <!-- Google Fonts: Inter for that clean, Stripe/Linear look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. GLOBAL VARIABLES & RESET --- */
+        :root {
+            --color-bg: #ffffff;
+            --color-surface: #f9fafb;
+            --color-text-main: #111827;
+            --color-text-muted: #6b7280;
+            --color-primary: #000000; /* Apple-esque Black */
+            --color-accent: #4f46e5; /* Indigo for subtle highlights */
+            --color-border: #e5e7eb;
+            
+            --font-main: 'Inter', sans-serif;
+            
+            --container-width: 1200px;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --spacing-section: 120px;
+            --spacing-card: 40px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--color-text-main);
+        }
+
+        p { color: var(--color-text-muted); font-size: 1.125rem; }
+        
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        .section-padding { padding: var(--spacing-section) 0; }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            border-radius: var(--radius-full);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); opacity: 0.9; }
+
+        .btn-secondary {
+            background-color: white;
+            border-color: var(--color-border);
+            color: var(--color-text-main);
+        }
+        .btn-secondary:hover { border-color: var(--color-text-main); background-color: var(--color-surface); }
+
+        /* --- 2. HEADER --- */
+        .site-header {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            transition: box-shadow 0.3s ease;
+        }
+        .site-header.is-sticky { box-shadow: var(--shadow-sm); border-bottom: 1px solid rgba(0,0,0,0.05); }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.03em; }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--color-text-muted); }
+        .nav-links a:hover { color: var(--color-text-main); }
+
+        .header-actions { display: flex; align-items: center; gap: 16px; }
+        .whatsapp-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 20px; background: #25D366; color: white;
+            border-radius: var(--radius-full); font-weight: 600; font-size: 0.9rem;
+        }
+        .whatsapp-btn:hover { background: #20bd5a; transform: translateY(-1px); }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px; /* Offset header */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-content { max-width: 600px; }
+        
+        .hero h1 {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #111827, #4b5563);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle { font-size: 1.5rem; font-weight: 500; margin-bottom: 16px; color: var(--color-text-main); }
+        .hero-desc { font-size: 1.125rem; margin-bottom: 40px; max-width: 480px; }
+
+        .hero-buttons { display: flex; gap: 16px; margin-bottom: 48px; }
+
+        .trust-row { display: flex; gap: 24px; align-items: center; opacity: 0.6; }
+        .trust-item { display: flex; align-items: center; gap: 8px; font-size: 0.875rem; font-weight: 500; }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+            width: 100%;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-lg);
+        }
+        .hero-visual img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- 4. TRUST BADGES --- */
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .badge-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            padding: 32px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: 0.3s ease;
+        }
+        .badge-card:hover { border-color: var(--color-text-main); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        
+        .badge-icon {
+            width: 48px; height: 48px; margin: 0 auto 20px;
+            background: var(--color-surface); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        /* --- 5. FEATURES --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 64px;
+        }
+
+        .feature-card {
+            padding: 40px;
+            background: var(--color-surface);
+            border-radius: var(--radius-md);
+            height: 100%; /* Equal height */
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+            transition: 0.3s;
+        }
+        .feature-card:hover { background: white; border-color: var(--color-border); box-shadow: var(--shadow-md); }
+
+        .feature-icon {
+            width: 56px; height: 56px;
+            background: white; border: 1px solid var(--color-border);
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 24px; font-size: 1.5rem; color: var(--color-text-main);
+        }
+
+        .feature-card h3 { font-size: 1.25rem; margin-bottom: 12px; }
+        .feature-card p { font-size: 1rem; line-height: 1.6; }
+
+        /* --- 6. HOW IT WORKS (Timeline) --- */
+        .timeline-container {
+            max-width: 800px;
+            margin: 64px auto 0;
+            position: relative;
+        }
+        /* Vertical Line */
+        .timeline-container::before {
+            content: ''; position: absolute; left: 28px; top: 0; bottom: 0;
+            width: 2px; background: var(--color-border);
+        }
+
+        .timeline-step {
+            display: flex;
+            gap: 32px;
+            margin-bottom: 48px;
+            position: relative;
+        }
+        .timeline-step:last-child { margin-bottom: 0; }
+
+        .step-marker {
+            width: 56px; height: 56px; flex-shrink: 0;
+            background: white; border: 2px solid var(--color-border);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: var(--color-text-main);
+            z-index: 2;
+            transition: 0.3s;
+        }
+        .timeline-step:hover .step-marker { background: var(--color-text-main); color: white; border-color: var(--color-text-main); }
+
+        .step-content { padding-top: 8px; }
+        .step-content h3 { font-size: 1.5rem; margin-bottom: 8px; }
+
+        /* --- 7. SUPPORTED DEVICES --- */
+        .devices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+
+        .device-card {
+            background: white; border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 32px 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .device-card:hover { border-color: var(--color-text-main); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        
+        .device-icon { font-size: 2.5rem; margin-bottom: 16px; color: var(--color-text-muted); }
+        .device-card h4 { font-size: 1.1rem; }
+
+        /* --- 8. WHY CHOOSE US --- */
+        .split-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .checklist { margin-top: 32px; display: flex; flex-direction: column; gap: 20px; }
+        .check-item { display: flex; gap: 16px; align-items: flex-start; }
+        .check-icon { 
+            width: 24px; height: 24px; background: #dcfce7; color: #166534; 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 0.8rem; flex-shrink: 0; margin-top: 2px;
+        }
+
+        .split-image {
+            height: 500px; border-radius: var(--radius-lg); overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .split-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- 9. FAQ --- */
+        .faq-container { max-width: 900px; margin: 0 auto; }
+        
+        .accordion-item {
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 16px;
+        }
+
+        .accordion-header {
+            width: 100%; text-align: left; background: none; border: none;
+            padding: 24px 0; font-size: 1.25rem; font-weight: 600;
+            cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            color: var(--color-text-main);
+        }
+
+        .accordion-body {
+            max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+            color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.7;
+        }
+        .accordion-body p { padding-bottom: 24px; }
+
+        .accordion-icon { transition: transform 0.3s ease; font-size: 1.5rem; font-weight: 300; }
+        .accordion-item.is-active .accordion-icon { transform: rotate(45deg); }
+        .accordion-item.is-active .accordion-body { max-height: 300px; transition: max-height 0.4s ease-in-out; }
+
+        /* --- 10. LATEST GUIDES --- */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 64px;
+        }
+
+        .guide-card {
+            background: white; border-radius: var(--radius-md); overflow: hidden;
+            border: 1px solid var(--color-border); transition: 0.3s;
+            display: flex; flex-direction: column;
+        }
+        .guide-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
+
+        .card-media { height: 240px; width: 100%; overflow: hidden; background: #f3f4f6; }
+        .card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .guide-card:hover .card-media img { transform: scale(1.05); }
+
+        .card-content { padding: 32px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .card-meta { 
+            display: flex; gap: 16px; font-size: 0.8rem; font-weight: 600; 
+            text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-accent); margin-bottom: 12px; 
+        }
+        
+        .card-content h3 { font-size: 1.5rem; margin-bottom: 12px; line-height: 1.3; }
+        .card-content p { font-size: 1rem; margin-bottom: 24px; flex-grow: 1; }
+        
+        .read-more { 
+            font-weight: 600; color: var(--color-text-main); 
+            display: inline-flex; align-items: center; gap: 8px; 
+        }
+        .read-more:hover { gap: 12px; }
+
+        /* --- 11. FINAL CTA --- */
+        .cta-section {
+            background: var(--color-text-main); color: white;
+            border-radius: var(--radius-lg); padding: 80px;
+            display: flex; align-items: center; justify-content: space-between;
+            overflow: hidden; position: relative;
+        }
+        .cta-content { max-width: 600px; z-index: 2; }
+        .cta-content h2 { color: white; font-size: 3rem; margin-bottom: 24px; }
+        .cta-content p { color: #9ca3af; margin-bottom: 40px; font-size: 1.25rem; }
+        
+        .btn-white { background: white; color: var(--color-text-main); }
+        .btn-white:hover { background: #f3f4f6; transform: translateY(-2px); }
+
+        .cta-visual { 
+            width: 400px; height: 300px; background: rgba(255,255,255,0.1); 
+            border-radius: var(--radius-md); position: relative; z-index: 1;
+        }
+
+        /* --- 12. FOOTER --- */
+        .site-footer {
+            background: white; padding: 80px 0 40px; border-top: 1px solid var(--color-border);
+        }
+        .footer-grid {
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px;
+        }
+        .footer-brand p { margin-top: 16px; max-width: 300px; font-size: 0.95rem; }
+        
+        .footer-col h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 24px; color: var(--color-text-main); }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col a { color: var(--color-text-muted); font-size: 0.95rem; }
+        .footer-col a:hover { color: var(--color-text-main); }
+
+        .footer-bottom {
+            display: flex; justify-content: space-between; align-items: center;
+            padding-top: 40px; border-top: 1px solid var(--color-border);
+            color: var(--color-text-muted); font-size: 0.9rem;
+        }
+        .social-links { display: flex; gap: 20px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .hero-grid, .split-section { grid-template-columns: 1fr; gap: 48px; }
+            .hero { min-height: auto; padding: 120px 0 80px; }
+            .hero-visual { height: 400px; order: -1; }
+            .features-grid, .guides-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .cta-section { flex-direction: column; text-align: center; padding: 60px 32px; }
+            .cta-visual { width: 100%; margin-top: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            :root { --spacing-section: 80px; }
+            .nav-links { display: none; } /* Simplified mobile nav handling */
+            .features-grid, .guides-grid, .badges-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1>H1 Premium Value Proposition Headline</h1>
+                    <p class="hero-subtitle">Subtitle Placeholder Supporting the Main Headline</p>
+                    <p class="hero-desc">Description placeholder providing context about the premium technology solution and its benefits to the user.</p>
+                    
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary">Primary CTA</button>
+                        <button class="btn btn-secondary">Secondary CTA</button>
+                    </div>
+
+                    <div class="trust-row">
+                        <div class="trust-item"><span>✓</span> Trust Badge One</div>
+                        <div class="trust-item"><span>✓</span> Trust Badge Two</div>
+                        <div class="trust-item"><span>✓</span> Trust Badge Three</div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=2070" alt="Hero Illustration Placeholder">
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Badges -->
+        <section class="section-padding" style="background: var(--color-surface);">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Section Title Placeholder</h2>
+                    <p>Subtitle describing why users trust this platform.</p>
+                </div>
+                <div class="badges-grid">
+                    <article class="badge-card">
+                        <div class="badge-icon">★</div>
+                        <h3>Trust Badge Heading</h3>
+                        <p>Brief description of this trust element.</p>
+                    </article>
+                    <article class="badge-card">
+                        <div class="badge-icon">⚡</div>
+                        <h3>Trust Badge Heading</h3>
+                        <p>Brief description of this trust element.</p>
+                    </article>
+                    <article class="badge-card">
+                        <div class="badge-icon">🛡️</div>
+                        <h3>Trust Badge Heading</h3>
+                        <p>Brief description of this trust element.</p>
+                    </article>
+                    <article class="badge-card">
+                        <div class="badge-icon">⚙️</div>
+                        <h3>Trust Badge Heading</h3>
+                        <p>Brief description of this trust element.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="section-padding">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Features Section Title</h2>
+                    <p>Overview of core capabilities.</p>
+                </div>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">✦</div>
+                        <h3>Feature Card Heading</h3>
+                        <p>Description placeholder explaining this specific feature in detail with professional tone.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">◈</div>
+                        <h3>Feature Card Heading</h3>
+                        <p>Description placeholder explaining this specific feature in detail with professional tone.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">◎</div>
+                        <h3>Feature Card Heading</h3>
+                        <p>Description placeholder explaining this specific feature in detail with professional tone.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">▣</div>
+                        <h3>Feature Card Heading</h3>
+                        <p>Description placeholder explaining this specific feature in detail with professional tone.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">▲</div>
+                        <h3>Feature Card Heading</h3>
+                        <p>Description placeholder explaining this specific feature in detail with professional tone.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">●</div>
+                        <h3>Feature Card Heading</h3>
+                        <p>Description placeholder explaining this specific feature in detail with professional tone.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="section-padding" style="background: var(--color-surface);">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Process Section Title</h2>
+                    <p>Simple steps to get started.</p>
+                </div>
+                <div class="timeline-container">
+                    <div class="timeline-step">
+                        <div class="step-marker">1</div>
+                        <div class="step-content">
+                            <h3>Step One Heading</h3>
+                            <p>Description of the first step in the process workflow.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-marker">2</div>
+                        <div class="step-content">
+                            <h3>Step Two Heading</h3>
+                            <p>Description of the second step in the process workflow.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-marker">3</div>
+                        <div class="step-content">
+                            <h3>Step Three Heading</h3>
+                            <p>Description of the third step in the process workflow.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supported Devices -->
+        <section id="devices" class="section-padding">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Supported Devices Title</h2>
+                    <p>Compatible with all major platforms.</p>
+                </div>
+                <div class="devices-grid">
+                    <article class="device-card">
+                        <div class="device-icon">📱</div>
+                        <h4>Mobile Device</h4>
+                    </article>
+                    <article class="device-card">
+                        <div class="device-icon">💻</div>
+                        <h4>Laptop / Desktop</h4>
+                    </article>
+                    <article class="device-card">
+                        <div class="device-icon">📺</div>
+                        <h4>Smart TV</h4>
+                    </article>
+                    <article class="device-card">
+                        <div class="device-icon">🎮</div>
+                        <h4>Gaming Console</h4>
+                    </article>
+                    <article class="device-card">
+                        <div class="device-icon">🔌</div>
+                        <h4>Streaming Stick</h4>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="section-padding" style="background: var(--color-surface);">
+            <div class="container split-section">
+                <div class="split-image">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=2070" alt="Why Choose Us Illustration">
+                </div>
+                <div class="split-content">
+                    <h2>Why Choose Us Heading</h2>
+                    <p>Compelling reason why this solution is superior to alternatives.</p>
+                    <div class="checklist">
+                        <div class="check-item">
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Checklist Item Heading</strong>
+                                <p style="font-size: 1rem; margin-top: 4px;">Brief explanation of this benefit.</p>
+                            </div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Checklist Item Heading</strong>
+                                <p style="font-size: 1rem; margin-top: 4px;">Brief explanation of this benefit.</p>
+                            </div>
+                        </div>
+                        <div class="check-item">
+                            <div class="check-icon">✓</div>
+                            <div>
+                                <strong>Checklist Item Heading</strong>
+                                <p style="font-size: 1rem; margin-top: 4px;">Brief explanation of this benefit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section-padding">
+            <div class="container faq-container">
+                <div class="text-center" style="margin-bottom: 60px;">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Common inquiries answered.</p>
+                </div>
+                
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        FAQ Question Placeholder One
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Detailed answer placeholder providing clear and concise information regarding the question asked above.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        FAQ Question Placeholder Two
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Detailed answer placeholder providing clear and concise information regarding the question asked above.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        FAQ Question Placeholder Three
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Detailed answer placeholder providing clear and concise information regarding the question asked above.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        FAQ Question Placeholder Four
+                        <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p>Detailed answer placeholder providing clear and concise information regarding the question asked above.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Guides -->
+        <section id="guides" class="section-padding" style="background: var(--color-surface);">
+            <div class="container">
+                <div class="text-center">
+                    <h2>Latest Guides & Resources</h2>
+                    <p>Educational content for users.</p>
+                </div>
+                <div class="guides-grid">
+                    <article class="guide-card">
+                        <div class="card-media">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=2072" alt="Blog Image">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-meta">
+                                <span>Category</span>
+                                <span>•</span>
+                                <span>5 Min Read</span>
+                            </div>
+                            <h3>Article Card Heading Placeholder</h3>
+                            <p>Short excerpt describing the content of this guide or article.</p>
+                            <a href="#" class="read-more">Read Article →</a>
+                        </div>
+                    </article>
+                    <article class="guide-card">
+                        <div class="card-media">
+                            <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=2070" alt="Blog Image">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-meta">
+                                <span>Category</span>
+                                <span>•</span>
+                                <span>8 Min Read</span>
+                            </div>
+                            <h3>Article Card Heading Placeholder</h3>
+                            <p>Short excerpt describing the content of this guide or article.</p>
+                            <a href="#" class="read-more">Read Article →</a>
+                        </div>
+                    </article>
+                    <article class="guide-card">
+                        <div class="card-media">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=2070" alt="Blog Image">
+                        </div>
+                        <div class="card-content">
+                            <div class="card-meta">
+                                <span>Category</span>
+                                <span>•</span>
+                                <span>4 Min Read</span>
+                            </div>
+                            <h3>Article Card Heading Placeholder</h3>
+                            <p>Short excerpt describing the content of this guide or article.</p>
+                            <a href="#" class="read-more">Read Article →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="cta-section">
+                    <div class="cta-content">
+                        <h2>Final Call to Action Heading</h2>
+                        <p>Persuasive closing statement encouraging immediate action from the visitor.</p>
+                        <button class="btn btn-white">Primary CTA Button</button>
+                    </div>
+                    <div class="cta-visual">
+                        <!-- Abstract visual placeholder handled by CSS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sticky Header Logic
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('is-sticky');
+                } else {
+                    header.classList.remove('is-sticky');
+                }
+            });
+
+            // FAQ Accordion Logic
+            const accordions = document.querySelectorAll('.accordion-header');
+            
+            accordions.forEach(acc => {
+                acc.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    const isActive = item.classList.contains('is-active');
+                    
+                    // Close all others
+                    document.querySelectorAll('.accordion-item').forEach(i => {
+                        i.classList.remove('is-active');
+                    });
+
+                    // Toggle current
+                    if (!isActive) {
+                        item.classList.add('is-active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "id": "calib-03-flexbox-gap-collapse",
+  "name": "Flexbox Container Gap Preservation & Spacing Dedup",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "gap-1-2": {
+      "expectedGap": 24,
+      "tolerances": { "geometry": 2 }
+    },
+    "gap-2-3": {
+      "expectedGap": 24,
+      "tolerances": { "geometry": 2 }
+    },
+    "flex-parent": {
+      "rect": { "h": 198 },
+      "tolerances": { "geometry": 2 }
+    }
+  }
+}

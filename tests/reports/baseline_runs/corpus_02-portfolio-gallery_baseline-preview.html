@@ -1,0 +1,4070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elementor Free Template - Virtual Elementor Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Plus%20Jakarta%20Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* 1. Base Elementor Free Grid & Layout Engine */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: transparent;
+      color: #0f172a;
+    }
+    .elementor {
+      position: relative;
+      width: 100%;
+    }
+    .e-con {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      position: relative;
+      width: 100%;
+      --widgets-spacing: 20px;
+    }
+    .e-con-boxed {
+      width: 100% !important;
+    }
+    .e-con-boxed > .e-con-inner {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      width: 100%;
+      max-width: var(--content-width, 1200px);
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      --widgets-spacing: 20px;
+    }
+    .e-con-full {
+      width: 100%;
+    }
+    .elementor-widget {
+      position: relative;
+      margin-bottom: 0;
+    }
+    /* Elementor Core Flexbox Runtime Layout Reset:
+       In live Elementor, widgets inside flex containers default to 100% width
+       unless explicitly flagged as auto-width. This ensures 1:1 parity between
+       local emulation and live WordPress. */
+    .e-con > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial),
+    .e-con-inner > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial) {
+      width: 100%;
+    }
+    .elementor-widget__width-auto {
+      width: auto;
+      max-width: 100%;
+      display: inline-block;
+    }
+    .elementor-widget__width-initial {
+      max-width: 100%;
+    }
+    .elementor-widget__width-inherit {
+      width: 100% !important;
+      max-width: 100%;
+    }
+    .elementor-widget-container {
+      position: relative;
+      transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+    }
+    .elementor-heading-title {
+      margin: 0;
+      padding: 0;
+      line-height: 1.2;
+    }
+    .elementor-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .elementor-button-wrapper.elementor-align-justify,
+    .elementor-button-wrapper.elementor-align-justify .elementor-button {
+      width: 100%;
+      display: flex;
+    }
+    .elementor-button-content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .elementor-widget-icon .elementor-icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
+    .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .elementor-icon i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1em;
+      height: 1em;
+      line-height: 1;
+      text-align: center;
+    }
+    .elementor-view-stacked .elementor-icon,
+    .elementor-view-framed .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5em;
+      aspect-ratio: 1 / 1;
+    }
+    .elementor-shape-circle,
+    .elementor-shape-circle .elementor-icon,
+    .elementor-icon.elementor-shape-circle {
+      border-radius: 50% !important;
+    }
+    .elementor-shape-square,
+    .elementor-shape-square .elementor-icon,
+    .elementor-icon.elementor-shape-square {
+      border-radius: 0 !important;
+    }
+    .elementor-icon-list-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .elementor-icon-list-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .elementor-divider-separator {
+      display: block;
+      border-top-style: solid;
+      border-top-width: 1px;
+      width: 100%;
+    }
+
+    /* Elementor Free Frontend Core Defaults (WP Parity) */
+    .elementor-widget-image {
+      text-align: center;
+    }
+    .elementor-widget-image a {
+      display: inline-block;
+    }
+    .elementor-widget-image img {
+      vertical-align: middle;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .elementor-text-editor {
+      color: inherit;
+      font-family: inherit;
+    }
+    .elementor-text-editor p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 2. Compiled Elementor Template Styles (Desktop / Post CSS) */
+    .e-sid-2 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  --content-width: 1200px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100% !important;
+  --min-height: 1562px;
+  min-height: 1562px;
+}
+
+.e-sid-3 {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 48px;
+  --column-gap: 0px;
+  --gap: 48px 0px;
+  gap: 48px 0px;
+  row-gap: 48px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 80px;
+  --padding-right: 20px;
+  --padding-bottom: 80px;
+  --padding-left: 20px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 93.8%;
+  --min-height: 1562px;
+  min-height: 1562px;
+  align-self: center !important;
+}
+
+.section-header {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 16px;
+  --column-gap: 0px;
+  --gap: 16px 0px;
+  gap: 16px 0px;
+  row-gap: 16px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 180px;
+  --margin-bottom: 0px;
+  --margin-left: 180px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 69%;
+  --min-height: 235px;
+  min-height: 235px;
+}
+
+.badge-pill, .badge-pill p, .badge-pill .elementor-text-editor {
+  color: #6366f1;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1em;
+  letter-spacing: 0.7px;
+}
+
+.badge-pill {
+  background-color: rgba(99, 102, 241, 0.1);
+  border-radius: 999px 999px 999px 999px;
+  margin: 0px 0px 0px 0px;
+  padding: 8px 0px 0px 0px;
+}
+
+.badge-pill {
+  width: 160px !important;
+  max-width: 160px;
+}
+
+.section-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2em;
+  letter-spacing: -0.96px;
+}
+
+.section-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.section-title {
+  width: 800px !important;
+  max-width: 800px;
+}
+
+.section-subtitle, .section-subtitle p, .section-subtitle .elementor-text-editor {
+  color: #64748b;
+  text-align: center;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6em;
+}
+
+.section-subtitle {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.section-subtitle {
+  width: 800px !important;
+  max-width: 800px;
+}
+
+.filter-bar {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: center;
+  justify-content: center;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  --gap: 12px 12px;
+  gap: 12px 12px;
+  row-gap: 12px;
+  column-gap: 12px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.filter-btn .elementor-button {
+  color: #ffffff;
+  background-color: #6366f1;
+  border-radius: 999px 999px 999px 999px;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 24px 10px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #6366f1;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.filter-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.filter-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.filter-btn {
+  width: 132px !important;
+  max-width: 132px;
+}
+
+.filter-btn .elementor-button {
+  color: #64748b;
+  background-color: transparent;
+  border-radius: 999px 999px 999px 999px;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 24px 10px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.filter-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.filter-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.filter-btn {
+  width: 146px !important;
+  max-width: 146px;
+}
+
+.filter-btn .elementor-button {
+  color: #64748b;
+  background-color: transparent;
+  border-radius: 999px 999px 999px 999px;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 24px 10px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.filter-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.filter-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.filter-btn {
+  width: 154px !important;
+  max-width: 154px;
+}
+
+.filter-btn .elementor-button {
+  color: #64748b;
+  background-color: transparent;
+  border-radius: 999px 999px 999px 999px;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 24px 10px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.filter-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.filter-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.filter-btn {
+  width: 187px !important;
+  max-width: 187px;
+}
+
+.filter-btn .elementor-button {
+  color: #64748b;
+  background-color: transparent;
+  border-radius: 999px 999px 999px 999px;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 24px 10px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.filter-btn .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.filter-btn {
+  margin: 0px 0px 0px 0px;
+}
+
+.filter-btn {
+  width: 142px !important;
+  max-width: 142px;
+}
+
+.portfolio-grid {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: stretch;
+  align-items: stretch;
+  --flex-wrap: wrap;
+  flex-wrap: wrap;
+  --row-gap: 32px;
+  --column-gap: 32px;
+  --gap: 32px 32px;
+  gap: 32px 32px;
+  row-gap: 32px;
+  column-gap: 32px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 1030px;
+  min-height: 1030px;
+}
+
+.project-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  overflow: hidden;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.media-wrapper {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+}
+
+.category-badge, .category-badge p, .category-badge .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6em;
+  letter-spacing: 0.6px;
+}
+
+.category-badge {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px 8px 8px 8px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.category-badge {
+  width: 117px !important;
+  max-width: 117px;
+}
+
+.e-sid-18 img, .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  border-radius: 24px 24px 0px 0px;
+}
+
+.e-sid-18, .e-sid-18 .elementor-widget-image, .e-sid-18 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 240px !important;
+}
+
+.e-sid-18 {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.card-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 24px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.project-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2em;
+}
+
+.project-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.project-desc, .project-desc p, .project-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.project-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-meta {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  --gap: 8px 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  background-color: transparent;
+  --padding-top: 16px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #e2e8f0;
+  width: 100%;
+}
+
+.e-sid-22-inline, .e-sid-22-inline p, .e-sid-22-inline .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.e-sid-22-inline {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  min-height: 24px;
+  flex-shrink: 0 !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.project-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  overflow: hidden;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.media-wrapper {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+}
+
+.category-badge, .category-badge p, .category-badge .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6em;
+  letter-spacing: 0.6px;
+}
+
+.category-badge {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px 8px 8px 8px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.category-badge {
+  width: 171px !important;
+  max-width: 171px;
+}
+
+.e-sid-31 img, .e-sid-31 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  border-radius: 24px 24px 0px 0px;
+}
+
+.e-sid-31, .e-sid-31 .elementor-widget-image, .e-sid-31 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 240px !important;
+}
+
+.e-sid-31 {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.card-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 24px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.project-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2em;
+}
+
+.project-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.project-desc, .project-desc p, .project-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.project-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-meta {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  --gap: 8px 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  background-color: transparent;
+  --padding-top: 16px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #e2e8f0;
+  width: 100%;
+}
+
+.e-sid-35-inline, .e-sid-35-inline p, .e-sid-35-inline .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.e-sid-35-inline {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  min-height: 24px;
+  flex-shrink: 0 !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.project-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  overflow: hidden;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.media-wrapper {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+}
+
+.category-badge, .category-badge p, .category-badge .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6em;
+  letter-spacing: 0.6px;
+}
+
+.category-badge {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px 8px 8px 8px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.category-badge {
+  width: 109px !important;
+  max-width: 109px;
+}
+
+.e-sid-44 img, .e-sid-44 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  border-radius: 24px 24px 0px 0px;
+}
+
+.e-sid-44, .e-sid-44 .elementor-widget-image, .e-sid-44 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 240px !important;
+}
+
+.e-sid-44 {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.card-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 24px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.project-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2em;
+}
+
+.project-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.project-desc, .project-desc p, .project-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.project-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-meta {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  --gap: 8px 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  background-color: transparent;
+  --padding-top: 16px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #e2e8f0;
+  width: 100%;
+}
+
+.e-sid-48-inline, .e-sid-48-inline p, .e-sid-48-inline .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.e-sid-48-inline {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  min-height: 24px;
+  flex-shrink: 0 !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.project-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  overflow: hidden;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.media-wrapper {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+}
+
+.category-badge, .category-badge p, .category-badge .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6em;
+  letter-spacing: 0.6px;
+}
+
+.category-badge {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px 8px 8px 8px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.category-badge {
+  width: 149px !important;
+  max-width: 149px;
+}
+
+.e-sid-57 img, .e-sid-57 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  border-radius: 24px 24px 0px 0px;
+}
+
+.e-sid-57, .e-sid-57 .elementor-widget-image, .e-sid-57 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 240px !important;
+}
+
+.e-sid-57 {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.card-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 24px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.project-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2em;
+}
+
+.project-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.project-desc, .project-desc p, .project-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.project-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-meta {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  --gap: 8px 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  background-color: transparent;
+  --padding-top: 16px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #e2e8f0;
+  width: 100%;
+}
+
+.e-sid-61-inline, .e-sid-61-inline p, .e-sid-61-inline .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.e-sid-61-inline {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  min-height: 24px;
+  flex-shrink: 0 !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.project-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  overflow: hidden;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.media-wrapper {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+}
+
+.category-badge, .category-badge p, .category-badge .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6em;
+  letter-spacing: 0.6px;
+}
+
+.category-badge {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px 8px 8px 8px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.category-badge {
+  width: 108px !important;
+  max-width: 108px;
+}
+
+.e-sid-70 img, .e-sid-70 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  border-radius: 24px 24px 0px 0px;
+}
+
+.e-sid-70, .e-sid-70 .elementor-widget-image, .e-sid-70 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 240px !important;
+}
+
+.e-sid-70 {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.card-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 24px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.project-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2em;
+}
+
+.project-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.project-desc, .project-desc p, .project-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.project-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-meta {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  --gap: 8px 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  background-color: transparent;
+  --padding-top: 16px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #e2e8f0;
+  width: 100%;
+}
+
+.e-sid-74-inline, .e-sid-74-inline p, .e-sid-74-inline .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.e-sid-74-inline {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  min-height: 24px;
+  flex-shrink: 0 !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.project-card {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: #ffffff;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 24px 24px 24px 24px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  overflow: hidden;
+  flex-shrink: 0 !important;
+  box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.media-wrapper {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  overflow: hidden;
+}
+
+.category-badge, .category-badge p, .category-badge .elementor-text-editor {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6em;
+  letter-spacing: 0.6px;
+}
+
+.category-badge {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px 8px 8px 8px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.category-badge {
+  width: 127px !important;
+  max-width: 127px;
+}
+
+.e-sid-83 img, .e-sid-83 .elementor-widget-container img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  border-radius: 24px 24px 0px 0px;
+}
+
+.e-sid-83, .e-sid-83 .elementor-widget-image, .e-sid-83 .elementor-widget-container {
+  height: 100% !important;
+  min-height: 240px !important;
+}
+
+.e-sid-83 {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.card-content {
+  --flex-direction: column;
+  flex-direction: column;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  --gap: 0px 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  background-color: transparent;
+  --padding-top: 24px;
+  --padding-right: 24px;
+  --padding-bottom: 24px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+}
+
+.project-title .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2em;
+}
+
+.project-title {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.project-desc, .project-desc p, .project-desc .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+.project-desc {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.card-meta {
+  --flex-direction: row;
+  flex-direction: row;
+  --justify-content: normal;
+  justify-content: normal;
+  --align-items: normal;
+  align-items: normal;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  --gap: 8px 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  background-color: transparent;
+  --padding-top: 16px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #e2e8f0;
+  width: 100%;
+}
+
+.e-sid-87-inline, .e-sid-87-inline p, .e-sid-87-inline .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "Plus Jakarta Sans", Sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.e-sid-87-inline {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  min-height: 24px;
+  flex-shrink: 0 !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+    /* 3. Compiled Elementor Tablet Styles (max-width: 1024px) */
+    @media (max-width: 1024px) {
+  .e-sid-3 {
+  width: 100%;
+  --padding-top: 60px;
+  --padding-right: 16px;
+  --padding-bottom: 60px;
+  --padding-left: 16px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .section-header {
+  width: 100%;
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .badge-pill {
+  width: 160px !important;
+  max-width: 160px;
+}
+  .section-title .elementor-heading-title {
+  font-size: 32px;
+  line-height: 1.2em;
+  letter-spacing: -0.64px;
+}
+  .filter-bar {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 110px !important;
+  max-width: 110px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 123px !important;
+  max-width: 123px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 160px !important;
+  max-width: 160px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 118px !important;
+  max-width: 118px;
+}
+  .portfolio-grid {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 24px 24px;
+  --row-gap: 24px;
+  --column-gap: 24px;
+  gap: 24px 24px;
+  row-gap: 24px;
+  column-gap: 24px;
+}
+  .project-card {
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .category-badge {
+  width: 117px !important;
+  max-width: 117px;
+}
+  .e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-18 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+  .card-meta {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+}
+  .e-sid-22-inline, .e-sid-22-inline p, .e-sid-22-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 19.6% !important;
+  max-width: 19.6%;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .category-badge {
+  width: 171px !important;
+  max-width: 171px;
+}
+  .e-sid-31,
+.e-sid-31 .elementor-widget-image,
+.e-sid-31 .elementor-widget-container,
+.e-sid-31 .elementor-widget-container img,
+.e-sid-31 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-31 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+  .card-meta {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+}
+  .e-sid-35-inline, .e-sid-35-inline p, .e-sid-35-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 19.6% !important;
+  max-width: 19.6%;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .category-badge {
+  width: 109px !important;
+  max-width: 109px;
+}
+  .e-sid-44,
+.e-sid-44 .elementor-widget-image,
+.e-sid-44 .elementor-widget-container,
+.e-sid-44 .elementor-widget-container img,
+.e-sid-44 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-44 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+  .card-meta {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+}
+  .e-sid-48-inline, .e-sid-48-inline p, .e-sid-48-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 19.6% !important;
+  max-width: 19.6%;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .category-badge {
+  width: 149px !important;
+  max-width: 149px;
+}
+  .e-sid-57,
+.e-sid-57 .elementor-widget-image,
+.e-sid-57 .elementor-widget-container,
+.e-sid-57 .elementor-widget-container img,
+.e-sid-57 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-57 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+  .card-meta {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+}
+  .e-sid-61-inline, .e-sid-61-inline p, .e-sid-61-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 19.6% !important;
+  max-width: 19.6%;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .category-badge {
+  width: 108px !important;
+  max-width: 108px;
+}
+  .e-sid-70,
+.e-sid-70 .elementor-widget-image,
+.e-sid-70 .elementor-widget-container,
+.e-sid-70 .elementor-widget-container img,
+.e-sid-70 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-70 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+  .card-meta {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+}
+  .e-sid-74-inline, .e-sid-74-inline p, .e-sid-74-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 19.6% !important;
+  max-width: 19.6%;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .category-badge {
+  width: 127px !important;
+  max-width: 127px;
+}
+  .e-sid-83,
+.e-sid-83 .elementor-widget-image,
+.e-sid-83 .elementor-widget-container,
+.e-sid-83 .elementor-widget-container img,
+.e-sid-83 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-83 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+}
+  .card-meta {
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+}
+  .e-sid-87-inline, .e-sid-87-inline p, .e-sid-87-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 19.6% !important;
+  max-width: 19.6%;
+  flex-shrink: 0 !important;
+}
+}
+
+    /* 4. Compiled Elementor Mobile Styles (max-width: 767px) */
+    @media (max-width: 767px) {
+  .e-sid-2 {
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+}
+  .e-sid-3 {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --padding-top: 60px;
+  --padding-right: 16px;
+  --padding-bottom: 60px;
+  --padding-left: 16px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .section-header {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+}
+  .badge-pill {
+  width: 160px !important;
+  max-width: 160px;
+}
+  .section-title .elementor-heading-title {
+  font-size: 32px;
+  line-height: 1.2em;
+  letter-spacing: -0.64px;
+}
+  .section-title {
+  width: 338px !important;
+  max-width: 338px;
+}
+  .section-subtitle {
+  width: 338px !important;
+  max-width: 338px;
+}
+  .filter-bar {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 100%;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 110px !important;
+  max-width: 110px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 123px !important;
+  max-width: 123px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 130px !important;
+  max-width: 130px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 160px !important;
+  max-width: 160px;
+}
+  .filter-btn .elementor-button {
+  font-size: 14px;
+  padding: 8px 16px 8px 16px;
+}
+  .filter-btn {
+  width: 118px !important;
+  max-width: 118px;
+}
+  .portfolio-grid {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 24px 24px;
+  --row-gap: 24px;
+  --column-gap: 24px;
+  gap: 24px 24px;
+  row-gap: 24px;
+  column-gap: 24px;
+  width: 100%;
+}
+  .project-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .media-wrapper {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .category-badge {
+  width: 117px !important;
+  max-width: 117px;
+}
+  .e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-18 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+}
+  .card-meta {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 100%;
+}
+  .e-sid-22-inline, .e-sid-22-inline p, .e-sid-22-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .media-wrapper {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .category-badge {
+  width: 171px !important;
+  max-width: 171px;
+}
+  .e-sid-31,
+.e-sid-31 .elementor-widget-image,
+.e-sid-31 .elementor-widget-container,
+.e-sid-31 .elementor-widget-container img,
+.e-sid-31 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-31 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+}
+  .card-meta {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 100%;
+}
+  .e-sid-35-inline, .e-sid-35-inline p, .e-sid-35-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .media-wrapper {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .category-badge {
+  width: 109px !important;
+  max-width: 109px;
+}
+  .e-sid-44,
+.e-sid-44 .elementor-widget-image,
+.e-sid-44 .elementor-widget-container,
+.e-sid-44 .elementor-widget-container img,
+.e-sid-44 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-44 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+}
+  .card-meta {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 100%;
+}
+  .e-sid-48-inline, .e-sid-48-inline p, .e-sid-48-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .media-wrapper {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .category-badge {
+  width: 149px !important;
+  max-width: 149px;
+}
+  .e-sid-57,
+.e-sid-57 .elementor-widget-image,
+.e-sid-57 .elementor-widget-container,
+.e-sid-57 .elementor-widget-container img,
+.e-sid-57 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-57 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+}
+  .card-meta {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 100%;
+}
+  .e-sid-61-inline, .e-sid-61-inline p, .e-sid-61-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .media-wrapper {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .category-badge {
+  width: 108px !important;
+  max-width: 108px;
+}
+  .e-sid-70,
+.e-sid-70 .elementor-widget-image,
+.e-sid-70 .elementor-widget-container,
+.e-sid-70 .elementor-widget-container img,
+.e-sid-70 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-70 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+}
+  .card-meta {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 100%;
+}
+  .e-sid-74-inline, .e-sid-74-inline p, .e-sid-74-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  flex-shrink: 0 !important;
+}
+  .project-card {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  flex-shrink: 0 !important;
+}
+  .media-wrapper {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  width: 100%;
+}
+  .category-badge {
+  width: 127px !important;
+  max-width: 127px;
+}
+  .e-sid-83,
+.e-sid-83 .elementor-widget-image,
+.e-sid-83 .elementor-widget-container,
+.e-sid-83 .elementor-widget-container img,
+.e-sid-83 img {
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  width: 100% !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+  .e-sid-83 {
+  width: 100% !important;
+  max-width: 100%;
+  max-height: 240px !important;
+  min-height: 240px;
+}
+  .card-content {
+  --flex-direction: column;
+  flex-direction: column !important;
+  --flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
+  --gap: 0px 0px;
+  --row-gap: 0px;
+  --column-gap: 0px;
+  gap: 0px 0px;
+  row-gap: 0px;
+  column-gap: 0px;
+  width: 100%;
+}
+  .card-meta {
+  --flex-direction: row;
+  flex-direction: row !important;
+  --flex-wrap: wrap;
+  flex-wrap: wrap !important;
+  --gap: 8px 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  gap: 8px 8px;
+  row-gap: 8px;
+  column-gap: 8px;
+  width: 100%;
+}
+  .e-sid-87-inline, .e-sid-87-inline p, .e-sid-87-inline .elementor-text-editor {
+  font-size: 16px;
+}
+  .case-study-link {
+  width: 144px !important;
+  max-width: 144px;
+  flex-shrink: 0 !important;
+}
+}
+
+    /* 5. Isolated Micro-CSS & Atomic Overrides (Post-Cascade Priority) */
+    
+    /* Isolated Micro-CSS */
+    
+ul {
+  list-style: none;
+}
+
+.filter-btn {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn .elementor-button:hover, .elementor-widget-button.filter-btn .elementor-button:hover {
+  border-color: #6366f1 !important;
+  color: #6366f1 !important;
+}
+
+.filter-btn.is-active {
+  background-color: #6366f1 !important;
+  border-color: #6366f1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+}
+
+.project-card {
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+}
+
+.project-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+.project-card.hide {
+  display: none !important;
+}
+
+.project-card.fade-out {
+  opacity: 0 !important;
+  transform: scale(0.95) !important;
+}
+
+.media-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.media-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .media-wrapper img {
+  transform: scale(1.08) !important;
+}
+
+.category-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.project-desc {
+  flex-grow: 1;
+}
+
+.case-study-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #6366f1;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: fit-content;
+}
+
+.case-study-link i {
+  transition: transform 0.3s ease;
+}
+
+.case-study-link:hover {
+  color: #4f46e5 !important;
+}
+
+.case-study-link:hover i {
+  transform: translateX(4px) !important;
+}
+
+[class*="media"], [class*="thumb"], [class*="cover"] {
+  overflow: hidden !important;
+}
+
+[class*="media"] .elementor-widget-image,
+[class*="media"] .elementor-widget-image .elementor-widget-container,
+[class*="thumb"] .elementor-widget-image,
+[class*="thumb"] .elementor-widget-image .elementor-widget-container,
+[class*="cover"] .elementor-widget-image,
+[class*="cover"] .elementor-widget-image .elementor-widget-container {
+  height: 100% !important;
+  display: flex !important;
+  width: 100% !important;
+}
+
+[class*="media"] .elementor-widget-image img,
+[class*="thumb"] .elementor-widget-image img,
+[class*="cover"] .elementor-widget-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.e-sid-31,
+.e-sid-31 .elementor-widget-image,
+.e-sid-31 .elementor-widget-container,
+.e-sid-31 .elementor-widget-container img,
+.e-sid-31 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-44,
+.e-sid-44 .elementor-widget-image,
+.e-sid-44 .elementor-widget-container,
+.e-sid-44 .elementor-widget-container img,
+.e-sid-44 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-57,
+.e-sid-57 .elementor-widget-image,
+.e-sid-57 .elementor-widget-container,
+.e-sid-57 .elementor-widget-container img,
+.e-sid-57 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-70,
+.e-sid-70 .elementor-widget-image,
+.e-sid-70 .elementor-widget-container,
+.e-sid-70 .elementor-widget-container img,
+.e-sid-70 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-83,
+.e-sid-83 .elementor-widget-image,
+.e-sid-83 .elementor-widget-container,
+.e-sid-83 .elementor-widget-container img,
+.e-sid-83 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 1024px) {
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-31,
+  .e-sid-31 .elementor-widget-image,
+  .e-sid-31 .elementor-widget-container,
+  .e-sid-31 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-44,
+  .e-sid-44 .elementor-widget-image,
+  .e-sid-44 .elementor-widget-container,
+  .e-sid-44 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-57,
+  .e-sid-57 .elementor-widget-image,
+  .e-sid-57 .elementor-widget-container,
+  .e-sid-57 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-70,
+  .e-sid-70 .elementor-widget-image,
+  .e-sid-70 .elementor-widget-container,
+  .e-sid-70 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-83,
+  .e-sid-83 .elementor-widget-image,
+  .e-sid-83 .elementor-widget-container,
+  .e-sid-83 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-31,
+  .e-sid-31 .elementor-widget-image,
+  .e-sid-31 .elementor-widget-container,
+  .e-sid-31 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-44,
+  .e-sid-44 .elementor-widget-image,
+  .e-sid-44 .elementor-widget-container,
+  .e-sid-44 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-57,
+  .e-sid-57 .elementor-widget-image,
+  .e-sid-57 .elementor-widget-container,
+  .e-sid-57 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-70,
+  .e-sid-70 .elementor-widget-image,
+  .e-sid-70 .elementor-widget-container,
+  .e-sid-70 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-83,
+  .e-sid-83 .elementor-widget-image,
+  .e-sid-83 .elementor-widget-container,
+  .e-sid-83 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+}
+
+
+  </style>
+</head>
+<body class="elementor-default elementor-page">
+  <div class="elementor elementor-virtual-root">
+    <div class="elementor-element elementor-element-b8f8998a e-sid-2 e-flex e-con-boxed e-con e-parent" data-sid="sid-2" data-dom-id="sid-2" data-id="b8f8998a" data-element_type="container">
+      <div class="e-con-inner">
+        <div class="elementor-element elementor-element-45d19cc4 embedded-stylesheet-engine e-sid-45d19cc4  elementor-widget elementor-widget-html" data-id="45d19cc4" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><style>
+ul {
+  list-style: none;
+}
+
+.filter-btn {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-btn .elementor-button:hover, .elementor-widget-button.filter-btn .elementor-button:hover {
+  border-color: #6366f1 !important;
+  color: #6366f1 !important;
+}
+
+.filter-btn.is-active {
+  background-color: #6366f1 !important;
+  border-color: #6366f1 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3) !important;
+}
+
+.project-card {
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+}
+
+.project-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+.project-card.hide {
+  display: none !important;
+}
+
+.project-card.fade-out {
+  opacity: 0 !important;
+  transform: scale(0.95) !important;
+}
+
+.media-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.media-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover .media-wrapper img {
+  transform: scale(1.08) !important;
+}
+
+.category-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.card-content {
+  flex-grow: 1;
+}
+
+.project-desc {
+  flex-grow: 1;
+}
+
+.case-study-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #6366f1;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  width: fit-content;
+}
+
+.case-study-link i {
+  transition: transform 0.3s ease;
+}
+
+.case-study-link:hover {
+  color: #4f46e5 !important;
+}
+
+.case-study-link:hover i {
+  transform: translateX(4px) !important;
+}
+
+[class*="media"], [class*="thumb"], [class*="cover"] {
+  overflow: hidden !important;
+}
+
+[class*="media"] .elementor-widget-image,
+[class*="media"] .elementor-widget-image .elementor-widget-container,
+[class*="thumb"] .elementor-widget-image,
+[class*="thumb"] .elementor-widget-image .elementor-widget-container,
+[class*="cover"] .elementor-widget-image,
+[class*="cover"] .elementor-widget-image .elementor-widget-container {
+  height: 100% !important;
+  display: flex !important;
+  width: 100% !important;
+}
+
+[class*="media"] .elementor-widget-image img,
+[class*="thumb"] .elementor-widget-image img,
+[class*="cover"] .elementor-widget-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+.e-sid-18,
+.e-sid-18 .elementor-widget-image,
+.e-sid-18 .elementor-widget-container,
+.e-sid-18 .elementor-widget-container img,
+.e-sid-18 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.case-study-link button,
+.case-study-link .composite-trigger {
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  color: #6366f1 !important;
+  padding: 0px !important;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: normal !important;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 0px !important;
+}
+
+.e-sid-31,
+.e-sid-31 .elementor-widget-image,
+.e-sid-31 .elementor-widget-container,
+.e-sid-31 .elementor-widget-container img,
+.e-sid-31 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-44,
+.e-sid-44 .elementor-widget-image,
+.e-sid-44 .elementor-widget-container,
+.e-sid-44 .elementor-widget-container img,
+.e-sid-44 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-57,
+.e-sid-57 .elementor-widget-image,
+.e-sid-57 .elementor-widget-container,
+.e-sid-57 .elementor-widget-container img,
+.e-sid-57 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-70,
+.e-sid-70 .elementor-widget-image,
+.e-sid-70 .elementor-widget-container,
+.e-sid-70 .elementor-widget-container img,
+.e-sid-70 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+.e-sid-83,
+.e-sid-83 .elementor-widget-image,
+.e-sid-83 .elementor-widget-container,
+.e-sid-83 .elementor-widget-container img,
+.e-sid-83 img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+}
+
+@media (max-width: 1024px) {
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-31,
+  .e-sid-31 .elementor-widget-image,
+  .e-sid-31 .elementor-widget-container,
+  .e-sid-31 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-44,
+  .e-sid-44 .elementor-widget-image,
+  .e-sid-44 .elementor-widget-container,
+  .e-sid-44 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-57,
+  .e-sid-57 .elementor-widget-image,
+  .e-sid-57 .elementor-widget-container,
+  .e-sid-57 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-70,
+  .e-sid-70 .elementor-widget-image,
+  .e-sid-70 .elementor-widget-container,
+  .e-sid-70 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-83,
+  .e-sid-83 .elementor-widget-image,
+  .e-sid-83 .elementor-widget-container,
+  .e-sid-83 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .e-sid-18,
+  .e-sid-18 .elementor-widget-image,
+  .e-sid-18 .elementor-widget-container,
+  .e-sid-18 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-31,
+  .e-sid-31 .elementor-widget-image,
+  .e-sid-31 .elementor-widget-container,
+  .e-sid-31 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-44,
+  .e-sid-44 .elementor-widget-image,
+  .e-sid-44 .elementor-widget-container,
+  .e-sid-44 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-57,
+  .e-sid-57 .elementor-widget-image,
+  .e-sid-57 .elementor-widget-container,
+  .e-sid-57 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-70,
+  .e-sid-70 .elementor-widget-image,
+  .e-sid-70 .elementor-widget-container,
+  .e-sid-70 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+
+  .e-sid-83,
+  .e-sid-83 .elementor-widget-image,
+  .e-sid-83 .elementor-widget-container,
+  .e-sid-83 .elementor-widget-container img {
+  width: 100% !important;
+  height: 240px !important;
+  max-height: 240px !important;
+  min-height: 240px !important;
+  object-fit: cover !important;
+  }
+}
+</style></div>
+  </div>
+<div class="elementor-element elementor-element-ac3e5879 container e-sid-3 e-flex e-con-full e-con e-child" data-sid="sid-3" data-dom-id="sid-3" data-id="ac3e5879" data-element_type="container">
+    <div class="elementor-element elementor-element-a0b7f973 section-header text-center e-sid-4 e-flex e-con-full e-con e-child" data-sid="sid-4" data-dom-id="sid-4" data-id="a0b7f973" data-element_type="container">
+    <div class="elementor-element elementor-element-219201a3 badge-pill e-sid-5  elementor-widget elementor-widget-text-editor" data-sid="sid-5" data-dom-id="sid-5" data-id="219201a3" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Featured Work</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-b889a15f section-title e-sid-6  elementor-widget elementor-widget-heading" data-sid="sid-6" data-dom-id="sid-6" data-id="b889a15f" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h2 class="elementor-heading-title elementor-size-default">Crafting Digital Experiences That Drive Growth</h2></div>
+  </div>
+<div class="elementor-element elementor-element-5f07e719 section-subtitle e-sid-7  elementor-widget elementor-widget-text-editor" data-sid="sid-7" data-dom-id="sid-7" data-id="5f07e719" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>We partner with visionary brands to build products that define categories. Explore our multidisciplinary work across design, technology, and strategy.</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-43083e88 filter-bar e-sid-8 e-flex e-con-full e-con e-child" data-sid="sid-8" data-dom-id="sid-8" data-id="43083e88" data-element_type="container">
+    <div class="elementor-element elementor-element-417edc61 filter-btn is-active e-sid-9  elementor-widget elementor-widget-button" data-sid="sid-9" data-dom-id="sid-9" data-id="417edc61" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">All Projects</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-4df26f1a filter-btn e-sid-10  elementor-widget elementor-widget-button" data-sid="sid-10" data-dom-id="sid-10" data-id="4df26f1a" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">UI/UX Design</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-24ed8482 filter-btn e-sid-11  elementor-widget elementor-widget-button" data-sid="sid-11" data-dom-id="sid-11" data-id="24ed8482" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Brand Identity</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-8317e706 filter-btn e-sid-12  elementor-widget elementor-widget-button" data-sid="sid-12" data-dom-id="sid-12" data-id="8317e706" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Web Development</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+<div class="elementor-element elementor-element-4c8b63f6 filter-btn e-sid-13  elementor-widget elementor-widget-button" data-sid="sid-13" data-dom-id="sid-13" data-id="4c8b63f6" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Mobile Apps</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-f72df9b8 portfolio-grid e-sid-14 e-flex e-con-full e-con e-child" data-sid="sid-14" data-dom-id="sid-14" data-id="f72df9b8" data-element_type="container">
+    <div class="elementor-element elementor-element-67687f11 project-card e-sid-15 e-flex e-con-full e-con e-child" data-sid="sid-15" data-dom-id="sid-15" data-id="67687f11" data-element_type="container">
+    <div class="elementor-element elementor-element-9795874f media-wrapper e-sid-16 e-flex e-con-full e-con e-child" data-sid="sid-16" data-dom-id="sid-16" data-id="9795874f" data-element_type="container">
+    <div class="elementor-element elementor-element-63d4c6d5 category-badge e-sid-17  elementor-widget elementor-widget-text-editor" data-sid="sid-17" data-dom-id="sid-17" data-id="63d4c6d5" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Fintech SaaS</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-6fe2b502 e-sid-18  elementor-widget elementor-widget-image" data-sid="sid-18" data-dom-id="sid-18" data-id="6fe2b502" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;q=80&amp;w=800.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-ea90245d card-content e-sid-19 e-flex e-con-full e-con e-child" data-sid="sid-19" data-dom-id="sid-19" data-id="ea90245d" data-element_type="container">
+    <div class="elementor-element elementor-element-7de84a62 project-title e-sid-20  elementor-widget elementor-widget-heading" data-sid="sid-20" data-dom-id="sid-20" data-id="7de84a62" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Apex Financial Dashboard</h3></div>
+  </div>
+<div class="elementor-element elementor-element-e577bb79 project-desc e-sid-21  elementor-widget elementor-widget-text-editor" data-sid="sid-21" data-dom-id="sid-21" data-id="e577bb79" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>A comprehensive analytics platform redesign focusing on data visualization clarity and user retention.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-06d6f0c4 card-meta e-sid-22 e-flex e-con-full e-con e-child" data-sid="sid-22" data-dom-id="sid-22" data-id="06d6f0c4" data-element_type="container">
+    <div class="elementor-element elementor-element-51ac3700 e-sid-22-inline  elementor-widget elementor-widget-text-editor" data-sid="sid-22-inline" data-dom-id="sid-22-inline" data-id="51ac3700" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p style="margin: 0; line-height: 1.6; display: flex; align-items: center; gap: 8px;"><span data-sid="sid-23" class="tech-tag e-sid-23">Figma</span><span data-sid="sid-24" class="tech-tag e-sid-24">Design System</span><span data-sid="sid-25" class="tech-tag e-sid-25">2025</span></p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-c3646eab case-study-link e-sid-26  elementor-widget elementor-widget-html" data-sid="sid-26" data-dom-id="sid-26" data-id="c3646eab" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><a href="#" class="case-study-link composite-trigger">View Case Study <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-3bce1a12 project-card e-sid-28 e-flex e-con-full e-con e-child" data-sid="sid-28" data-dom-id="sid-28" data-id="3bce1a12" data-element_type="container">
+    <div class="elementor-element elementor-element-488ac4c1 media-wrapper e-sid-29 e-flex e-con-full e-con e-child" data-sid="sid-29" data-dom-id="sid-29" data-id="488ac4c1" data-element_type="container">
+    <div class="elementor-element elementor-element-ade71b3e category-badge e-sid-30  elementor-widget elementor-widget-text-editor" data-sid="sid-30" data-dom-id="sid-30" data-id="ade71b3e" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Luxury E-commerce</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-f22dd7ec e-sid-31  elementor-widget elementor-widget-image" data-sid="sid-31" data-dom-id="sid-31" data-id="f22dd7ec" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;q=80&amp;w=800.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-a230c163 card-content e-sid-32 e-flex e-con-full e-con e-child" data-sid="sid-32" data-dom-id="sid-32" data-id="a230c163" data-element_type="container">
+    <div class="elementor-element elementor-element-0c9509e5 project-title e-sid-33  elementor-widget elementor-widget-heading" data-sid="sid-33" data-dom-id="sid-33" data-id="0c9509e5" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Luxe Horizon Apparel</h3></div>
+  </div>
+<div class="elementor-element elementor-element-4ee36859 project-desc e-sid-34  elementor-widget elementor-widget-text-editor" data-sid="sid-34" data-dom-id="sid-34" data-id="4ee36859" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Headless Shopify implementation delivering sub-second page loads and immersive product storytelling.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-783f7ccc card-meta e-sid-35 e-flex e-con-full e-con e-child" data-sid="sid-35" data-dom-id="sid-35" data-id="783f7ccc" data-element_type="container">
+    <div class="elementor-element elementor-element-cb9590cf e-sid-35-inline  elementor-widget elementor-widget-text-editor" data-sid="sid-35-inline" data-dom-id="sid-35-inline" data-id="cb9590cf" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p style="margin: 0; line-height: 1.6; display: flex; align-items: center; gap: 8px;"><span data-sid="sid-36" class="tech-tag e-sid-36">Next.js</span><span data-sid="sid-37" class="tech-tag e-sid-37">Shopify API</span><span data-sid="sid-38" class="tech-tag e-sid-38">GSAP</span></p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-2e721a0c case-study-link e-sid-39  elementor-widget elementor-widget-html" data-sid="sid-39" data-dom-id="sid-39" data-id="2e721a0c" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><a href="#" class="case-study-link composite-trigger">View Case Study <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-975308f7 project-card e-sid-41 e-flex e-con-full e-con e-child" data-sid="sid-41" data-dom-id="sid-41" data-id="975308f7" data-element_type="container">
+    <div class="elementor-element elementor-element-e7c3a470 media-wrapper e-sid-42 e-flex e-con-full e-con e-child" data-sid="sid-42" data-dom-id="sid-42" data-id="e7c3a470" data-element_type="container">
+    <div class="elementor-element elementor-element-4b40dc88 category-badge e-sid-43  elementor-widget elementor-widget-text-editor" data-sid="sid-43" data-dom-id="sid-43" data-id="4b40dc88" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>AI Platform</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-92d9b195 e-sid-44  elementor-widget elementor-widget-image" data-sid="sid-44" data-dom-id="sid-44" data-id="92d9b195" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&amp;fit=crop&amp;q=80&amp;w=800.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-5afaa694 card-content e-sid-45 e-flex e-con-full e-con e-child" data-sid="sid-45" data-dom-id="sid-45" data-id="5afaa694" data-element_type="container">
+    <div class="elementor-element elementor-element-bcfb371b project-title e-sid-46  elementor-widget elementor-widget-heading" data-sid="sid-46" data-dom-id="sid-46" data-id="bcfb371b" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">NeuroFlow AI Assistant</h3></div>
+  </div>
+<div class="elementor-element elementor-element-e9568ebf project-desc e-sid-47  elementor-widget elementor-widget-text-editor" data-sid="sid-47" data-dom-id="sid-47" data-id="e9568ebf" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Native iOS application featuring real-time voice processing and personalized cognitive training modules.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-e1117656 card-meta e-sid-48 e-flex e-con-full e-con e-child" data-sid="sid-48" data-dom-id="sid-48" data-id="e1117656" data-element_type="container">
+    <div class="elementor-element elementor-element-b05903de e-sid-48-inline  elementor-widget elementor-widget-text-editor" data-sid="sid-48-inline" data-dom-id="sid-48-inline" data-id="b05903de" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p style="margin: 0; line-height: 1.6; display: flex; align-items: center; gap: 8px;"><span data-sid="sid-49" class="tech-tag e-sid-49">Swift</span><span data-sid="sid-50" class="tech-tag e-sid-50">CoreML</span><span data-sid="sid-51" class="tech-tag e-sid-51">iOS 18</span></p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-cb9af975 case-study-link e-sid-52  elementor-widget elementor-widget-html" data-sid="sid-52" data-dom-id="sid-52" data-id="cb9af975" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><a href="#" class="case-study-link composite-trigger">View Case Study <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-77ba51cd project-card e-sid-54 e-flex e-con-full e-con e-child" data-sid="sid-54" data-dom-id="sid-54" data-id="77ba51cd" data-element_type="container">
+    <div class="elementor-element elementor-element-03700b7a media-wrapper e-sid-55 e-flex e-con-full e-con e-child" data-sid="sid-55" data-dom-id="sid-55" data-id="03700b7a" data-element_type="container">
+    <div class="elementor-element elementor-element-581435a6 category-badge e-sid-56  elementor-widget elementor-widget-text-editor" data-sid="sid-56" data-dom-id="sid-56" data-id="581435a6" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Sustainable Tech</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-6d80c272 e-sid-57  elementor-widget elementor-widget-image" data-sid="sid-57" data-dom-id="sid-57" data-id="6d80c272" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&amp;fit=crop&amp;q=80&amp;w=800.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-189e5ead card-content e-sid-58 e-flex e-con-full e-con e-child" data-sid="sid-58" data-dom-id="sid-58" data-id="189e5ead" data-element_type="container">
+    <div class="elementor-element elementor-element-63385471 project-title e-sid-59  elementor-widget elementor-widget-heading" data-sid="sid-59" data-dom-id="sid-59" data-id="63385471" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Verdant Energy Rebrand</h3></div>
+  </div>
+<div class="elementor-element elementor-element-5a1a0c1d project-desc e-sid-60  elementor-widget elementor-widget-text-editor" data-sid="sid-60" data-dom-id="sid-60" data-id="5a1a0c1d" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Complete visual identity overhaul for a renewable energy startup, including logo, typography, and packaging.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-55ea6118 card-meta e-sid-61 e-flex e-con-full e-con e-child" data-sid="sid-61" data-dom-id="sid-61" data-id="55ea6118" data-element_type="container">
+    <div class="elementor-element elementor-element-b7f1c487 e-sid-61-inline  elementor-widget elementor-widget-text-editor" data-sid="sid-61-inline" data-dom-id="sid-61-inline" data-id="b7f1c487" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p style="margin: 0; line-height: 1.6; display: flex; align-items: center; gap: 8px;"><span data-sid="sid-62" class="tech-tag e-sid-62">Illustrator</span><span data-sid="sid-63" class="tech-tag e-sid-63">Print</span><span data-sid="sid-64" class="tech-tag e-sid-64">Strategy</span></p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-f57cce61 case-study-link e-sid-65  elementor-widget elementor-widget-html" data-sid="sid-65" data-dom-id="sid-65" data-id="f57cce61" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><a href="#" class="case-study-link composite-trigger">View Case Study <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-9b69d3f2 project-card e-sid-67 e-flex e-con-full e-con e-child" data-sid="sid-67" data-dom-id="sid-67" data-id="9b69d3f2" data-element_type="container">
+    <div class="elementor-element elementor-element-53dbd00c media-wrapper e-sid-68 e-flex e-con-full e-con e-child" data-sid="sid-68" data-dom-id="sid-68" data-id="53dbd00c" data-element_type="container">
+    <div class="elementor-element elementor-element-225b0483 category-badge e-sid-69  elementor-widget elementor-widget-text-editor" data-sid="sid-69" data-dom-id="sid-69" data-id="225b0483" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Healthcare</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-eacd1a3d e-sid-70  elementor-widget elementor-widget-image" data-sid="sid-70" data-dom-id="sid-70" data-id="eacd1a3d" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&amp;fit=crop&amp;q=80&amp;w=800.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-4ed345ee card-content e-sid-71 e-flex e-con-full e-con e-child" data-sid="sid-71" data-dom-id="sid-71" data-id="4ed345ee" data-element_type="container">
+    <div class="elementor-element elementor-element-bfeb7fab project-title e-sid-72  elementor-widget elementor-widget-heading" data-sid="sid-72" data-dom-id="sid-72" data-id="bfeb7fab" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">MediConnect Portal</h3></div>
+  </div>
+<div class="elementor-element elementor-element-9017679a project-desc e-sid-73  elementor-widget elementor-widget-text-editor" data-sid="sid-73" data-dom-id="sid-73" data-id="9017679a" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Accessibility-first patient dashboard streamlining appointment scheduling and telehealth integration.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-419cfd9d card-meta e-sid-74 e-flex e-con-full e-con e-child" data-sid="sid-74" data-dom-id="sid-74" data-id="419cfd9d" data-element_type="container">
+    <div class="elementor-element elementor-element-9cdcdc8f e-sid-74-inline  elementor-widget elementor-widget-text-editor" data-sid="sid-74-inline" data-dom-id="sid-74-inline" data-id="9cdcdc8f" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p style="margin: 0; line-height: 1.6; display: flex; align-items: center; gap: 8px;"><span data-sid="sid-75" class="tech-tag e-sid-75">WCAG 2.1</span><span data-sid="sid-76" class="tech-tag e-sid-76">React</span><span data-sid="sid-77" class="tech-tag e-sid-77">UX Research</span></p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-a6263cc3 case-study-link e-sid-78  elementor-widget elementor-widget-html" data-sid="sid-78" data-dom-id="sid-78" data-id="a6263cc3" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><a href="#" class="case-study-link composite-trigger">View Case Study <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-9f100930 project-card e-sid-80 e-flex e-con-full e-con e-child" data-sid="sid-80" data-dom-id="sid-80" data-id="9f100930" data-element_type="container">
+    <div class="elementor-element elementor-element-c033f18a media-wrapper e-sid-81 e-flex e-con-full e-con e-child" data-sid="sid-81" data-dom-id="sid-81" data-id="c033f18a" data-element_type="container">
+    <div class="elementor-element elementor-element-15ccad67 category-badge e-sid-82  elementor-widget elementor-widget-text-editor" data-sid="sid-82" data-dom-id="sid-82" data-id="15ccad67" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Web3 / Crypto</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-d3ceeac0 e-sid-83  elementor-widget elementor-widget-image" data-sid="sid-83" data-dom-id="sid-83" data-id="d3ceeac0" data-element_type="widget" data-widget_type="image.default">
+    <div class="elementor-widget-container"><img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&amp;fit=crop&amp;q=80&amp;w=800.jpg" alt="" style="max-width: 100%; width: 100%; height: 100%; object-fit: cover;" /></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-4dcff979 card-content e-sid-84 e-flex e-con-full e-con e-child" data-sid="sid-84" data-dom-id="sid-84" data-id="4dcff979" data-element_type="container">
+    <div class="elementor-element elementor-element-4f5323bc project-title e-sid-85  elementor-widget elementor-widget-heading" data-sid="sid-85" data-dom-id="sid-85" data-id="4f5323bc" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Cipher Vault Security</h3></div>
+  </div>
+<div class="elementor-element elementor-element-b9201e13 project-desc e-sid-86  elementor-widget elementor-widget-text-editor" data-sid="sid-86" data-dom-id="sid-86" data-id="b9201e13" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>High-performance landing page with WebGL interactions for a decentralized storage protocol.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-3d65dff2 card-meta e-sid-87 e-flex e-con-full e-con e-child" data-sid="sid-87" data-dom-id="sid-87" data-id="3d65dff2" data-element_type="container">
+    <div class="elementor-element elementor-element-d2c60d5a e-sid-87-inline  elementor-widget elementor-widget-text-editor" data-sid="sid-87-inline" data-dom-id="sid-87-inline" data-id="d2c60d5a" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p style="margin: 0; line-height: 1.6; display: flex; align-items: center; gap: 8px;"><span data-sid="sid-88" class="tech-tag e-sid-88">Three.js</span><span data-sid="sid-89" class="tech-tag e-sid-89">Vue</span><span data-sid="sid-90" class="tech-tag e-sid-90">WebGL</span></p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-7a9ca351 case-study-link e-sid-91  elementor-widget elementor-widget-html" data-sid="sid-91" data-dom-id="sid-91" data-id="7a9ca351" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><a href="#" class="case-study-link composite-trigger">View Case Study <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-07556200 embedded-script-engine e-sid-07556200  elementor-widget elementor-widget-html" data-id="07556200" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><script>
+(function() {
+  // 1. Universal DOM Lifecycle Polyfill:
+  // If user scripts listen for DOMContentLoaded or load after Elementor has already initialized the page,
+  // immediately invoke the callback so dynamic scripts never enter a deadzone.
+  try {
+    var _origDocAdd = Document.prototype.addEventListener;
+    var _lifecycleAdd = function(type, fn, opts) {
+      if ((type === 'DOMContentLoaded' || type === 'readystatechange') && document.readyState !== 'loading') {
+        try {
+          setTimeout(function() { fn.call(document, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origDocAdd.call(this, type, fn, opts);
+    };
+    Document.prototype.addEventListener = _lifecycleAdd;
+    try { document.addEventListener = _lifecycleAdd; } catch(e) {}
+
+    var _origWinAdd = Window.prototype.addEventListener;
+    Window.prototype.addEventListener = function(type, fn, opts) {
+      if (type === 'load' && document.readyState === 'complete') {
+        try {
+          setTimeout(function() { fn.call(window, new Event(type)); }, 0);
+        } catch(e) {
+          console.error('[LIFECYCLE]', e);
+        }
+        return;
+      }
+      return _origWinAdd.call(this, type, fn, opts);
+    };
+  } catch(e) {
+    console.warn('[LIFECYCLE POLYFILL ERROR]', e);
+  }
+
+  function initDynamicComponentLogic() {
+    // 2. Universal Data-Attribute Hydration Bridge:
+    // Elementor Free strips custom_attributes. Rehydrate data-* attributes from class aliases
+    // (e.g. data-category--design -> el.dataset.category = "design", el.setAttribute("data-category", "design"))
+    try {
+      document.querySelectorAll('*').forEach(function(el) {
+        if (!el.className || typeof el.className !== 'string' || el.className.indexOf('data-') === -1) return;
+        if (el.dataset && el.dataset.__hasDataHydrated) return;
+        if (el.dataset) el.dataset.__hasDataHydrated = 'true';
+        if (el.classList) {
+          el.classList.forEach(function(cls) {
+            if (cls.startsWith('data-') && cls.indexOf('--') !== -1) {
+              var sepIdx = cls.indexOf('--');
+              var attrName = cls.slice(0, sepIdx);
+              var rawVal = cls.slice(sepIdx + 2);
+              // Decode hex characters (_xHH_) losslessly back to original string (e.g. _x20_ -> space)
+              var attrVal = rawVal.replace(/_x([0-9a-fA-F]{2})_/g, function(_, hex) {
+                return String.fromCharCode(parseInt(hex, 16));
+              });
+              el.setAttribute(attrName, attrVal);
+              if (el.dataset) {
+                var prop = attrName.slice(5).replace(/-([a-z])/g, function(_, c) { return c.toUpperCase(); });
+                el.dataset[prop] = attrVal;
+              }
+            }
+          });
+        }
+      });
+    } catch(e) {
+      console.warn('[DATA HYDRATION ERROR]', e);
+    }
+
+    try {
+      // Ensure textContent and innerText mutations on Elementor heading widget wrappers target the inner heading title
+      document.querySelectorAll('.elementor-widget-heading').forEach(function(widget) {
+        var inner = widget.querySelector('.elementor-heading-title');
+        if (inner && !widget.__hasTextProxy) {
+          widget.__hasTextProxy = true;
+          Object.defineProperty(widget, 'textContent', {
+            get: function() { return inner.textContent; },
+            set: function(val) { inner.textContent = val; },
+            configurable: true
+          });
+          Object.defineProperty(widget, 'innerText', {
+            get: function() { return inner.innerText; },
+            set: function(val) { inner.innerText = val; },
+            configurable: true
+          });
+        }
+      });
+
+      // Compile-time Generated Delegation Bridges from Probe Traces (Z3, Z8, Z9)
+      
+    } catch(err) {
+      console.warn('[COMPILER BRIDGE]', err);
+    }
+
+    // Execute Application Business Logic with Idempotency Protection
+    if (!window.__appLogicInitialized) {
+      window.__appLogicInitialized = true;
+      try {
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 1. Update Active Button State
+                    filterBtns.forEach(b => b.classList.remove('is-active'));
+                    btn.classList.add('is-active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // 2. Filter Logic with Animation
+                    projectCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        if (filterValue === 'all' || category === filterValue) {
+                            // Show Card
+                            card.classList.remove('hide');
+                            // Small timeout to allow display:block to apply before opacity transition
+                            setTimeout(() => {
+                                card.classList.remove('fade-out');
+                            }, 10);
+                        } else {
+                            // Hide Card
+                            card.classList.add('fade-out');
+                            // Wait for transition to finish before removing from layout flow
+                            setTimeout(() => {
+                                card.classList.add('hide');
+                            }, 300); // Matches CSS transition duration
+                        }
+                    });
+                });
+            });
+        });
+      } catch(appErr) {
+        console.warn('[APP LOGIC ERROR]', appErr);
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDynamicComponentLogic);
+  } else {
+    initDynamicComponentLogic();
+  }
+  setTimeout(initDynamicComponentLogic, 200);
+  setTimeout(initDynamicComponentLogic, 800);
+  window.addEventListener('elementor/frontend/init', initDynamicComponentLogic);
+})();
+</script></div>
+  </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

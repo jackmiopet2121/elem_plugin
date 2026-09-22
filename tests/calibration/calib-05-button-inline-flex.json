@@ -1,0 +1,14 @@
+{
+  "id": "calib-05-button-inline-flex",
+  "name": "Button Widget Content Wrapper & Icon Gap",
+  "viewport": { "width": 1280, "height": 800 },
+  "nodes": {
+    "btn-elem": {
+      "rect": { "h": 48 },
+      "styles": {
+        "display": "inline-flex"
+      },
+      "tolerances": { "geometry": 2 }
+    }
+  }
+}

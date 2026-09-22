@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elementor Free Template - Virtual Elementor Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Roboto:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=Plus%20Jakarta%20Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=-apple-system:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* 1. Base Elementor Free Grid & Layout Engine */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: transparent;
+      color: #0f172a;
+    }
+    .elementor {
+      position: relative;
+      width: 100%;
+    }
+    .e-con {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      position: relative;
+      width: 100%;
+      --widgets-spacing: 20px;
+    }
+    .e-con-boxed {
+      width: 100% !important;
+    }
+    .e-con-boxed > .e-con-inner {
+      display: var(--display, flex);
+      flex-direction: var(--flex-direction, column);
+      justify-content: var(--justify-content, flex-start);
+      align-items: var(--align-items, stretch);
+      flex-wrap: var(--flex-wrap, nowrap);
+      gap: var(--gap, 0px);
+      row-gap: var(--row-gap, var(--gap, 0px));
+      column-gap: var(--column-gap, var(--gap, 0px));
+      width: 100%;
+      max-width: var(--content-width, 1200px);
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      --widgets-spacing: 20px;
+    }
+    .e-con-full {
+      width: 100%;
+    }
+    .elementor-widget {
+      position: relative;
+      margin-bottom: 0;
+    }
+    /* Elementor Core Flexbox Runtime Layout Reset:
+       In live Elementor, widgets inside flex containers default to 100% width
+       unless explicitly flagged as auto-width. This ensures 1:1 parity between
+       local emulation and live WordPress. */
+    .e-con > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial),
+    .e-con-inner > .elementor-widget:not(.elementor-widget__width-auto):not(.elementor-widget__width-initial) {
+      width: 100%;
+    }
+    .elementor-widget__width-auto {
+      width: auto;
+      max-width: 100%;
+      display: inline-block;
+    }
+    .elementor-widget__width-initial {
+      max-width: 100%;
+    }
+    .elementor-widget__width-inherit {
+      width: 100% !important;
+      max-width: 100%;
+    }
+    .elementor-widget-container {
+      position: relative;
+      transition: background .3s, border .3s, border-radius .3s, box-shadow .3s;
+    }
+    .elementor-heading-title {
+      margin: 0;
+      padding: 0;
+      line-height: 1.2;
+    }
+    .elementor-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 4px;
+      padding: 12px 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .elementor-button-wrapper.elementor-align-justify,
+    .elementor-button-wrapper.elementor-align-justify .elementor-button {
+      width: 100%;
+      display: flex;
+    }
+    .elementor-button-content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .elementor-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .elementor-icon-list-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .elementor-icon-list-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .elementor-divider-separator {
+      display: block;
+      border-top-style: solid;
+      border-top-width: 1px;
+      width: 100%;
+    }
+
+    /* 2. Compiled Elementor Template Styles (Desktop) */
+    .elementor-element-f970c1c1 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 48px;
+  --row-gap: 48px;
+  --column-gap: 48px;
+  --content-width: 1280px;
+  background-color: transparent;
+  --padding-top: 60px;
+  --padding-right: 24px;
+  --padding-bottom: 60px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 40px;
+  --margin-bottom: 0px;
+  --margin-left: 40px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100% !important;
+  --min-height: 1716px;
+  min-height: 1716px;
+}
+
+.elementor-element-42568b34 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 17px;
+  --row-gap: 17px;
+  --column-gap: 17px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 48px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 146px;
+  min-height: 146px;
+}
+
+.elementor-element-9f8a4d0d, .elementor-element-9f8a4d0d p, .elementor-element-9f8a4d0d .elementor-text-editor {
+  color: #4338ca;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4em;
+}
+
+.elementor-element-9f8a4d0d {
+  background-color: #e0e7ff;
+  border-radius: 20px 20px 20px 20px;
+  margin: 0px 0px 0px 0px;
+  padding: 6px 0px 0px 0px;
+}
+
+.elementor-element-9f8a4d0d {
+  width: 113px !important;
+  max-width: 113px;
+}
+
+.elementor-element-50ced378 .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2em;
+}
+
+.elementor-element-50ced378 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-348a7361, .elementor-element-348a7361 p, .elementor-element-348a7361 .elementor-text-editor {
+  color: #64748b;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-348a7361 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-bc4a8239 {
+  --display: flex;
+  --flex-direction: row;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: wrap;
+  --gap: 32px;
+  --row-gap: 32px;
+  --column-gap: 32px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 80px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 497px;
+  min-height: 497px;
+}
+
+.elementor-element-80ac5cfc {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  background-color: #ffffff;
+  --padding-top: 40px;
+  --padding-right: 32px;
+  --padding-bottom: 40px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  --min-height: 497px;
+  min-height: 497px;
+}
+
+.elementor-element-d9fcd9ea .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-d9fcd9ea {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-7ca457f6 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.6em;
+}
+
+.elementor-element-7ca457f6 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-85f5cf69, .elementor-element-85f5cf69 p, .elementor-element-85f5cf69 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-85f5cf69 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-ceddf31f, .elementor-element-ceddf31f p, .elementor-element-ceddf31f .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-ceddf31f {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-82c225b9, .elementor-element-82c225b9 p, .elementor-element-82c225b9 .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-82c225b9 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-aa16b92f, .elementor-element-aa16b92f p, .elementor-element-aa16b92f .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-aa16b92f {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-12ab6a56, .elementor-element-12ab6a56 p, .elementor-element-12ab6a56 .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-12ab6a56 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-650a8ea5 .elementor-button {
+  color: #ffffff;
+  background-color: #0f172a;
+  border-radius: 8px 8px 8px 8px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 24px 14px 24px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.elementor-element-650a8ea5 .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.elementor-element-650a8ea5 {
+  margin: 0px 0px 0px 0px;
+}
+
+.elementor-element-4c794a92 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  background-color: #ffffff;
+  --padding-top: 40px;
+  --padding-right: 32px;
+  --padding-bottom: 40px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 2px 2px 2px 2px;
+  border-color: #4f46e5;
+  width: 31.5%;
+  --min-height: 497px;
+  min-height: 497px;
+}
+
+.elementor-element-ece83071 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-ece83071 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-a5477686 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.6em;
+}
+
+.elementor-element-a5477686 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-9970e8f6, .elementor-element-9970e8f6 p, .elementor-element-9970e8f6 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-9970e8f6 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-538364fd, .elementor-element-538364fd p, .elementor-element-538364fd .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-538364fd {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-bc689987, .elementor-element-bc689987 p, .elementor-element-bc689987 .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-bc689987 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-94337df2, .elementor-element-94337df2 p, .elementor-element-94337df2 .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-94337df2 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-474a61e3, .elementor-element-474a61e3 p, .elementor-element-474a61e3 .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-474a61e3 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-e1fbbed0 .elementor-button {
+  color: #ffffff;
+  background-color: #4f46e5;
+  border-radius: 8px 8px 8px 8px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 24px 14px 24px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.elementor-element-e1fbbed0 .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.elementor-element-e1fbbed0 {
+  margin: 0px 0px 0px 0px;
+}
+
+.elementor-element-f365c4ac {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 12px;
+  --row-gap: 12px;
+  --column-gap: 12px;
+  background-color: #ffffff;
+  --padding-top: 40px;
+  --padding-right: 32px;
+  --padding-bottom: 40px;
+  --padding-left: 32px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 16px 16px 16px 16px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  --min-height: 497px;
+  min-height: 497px;
+}
+
+.elementor-element-276b7271 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-276b7271 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-97dd14b2 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.6em;
+}
+
+.elementor-element-97dd14b2 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-160eb946, .elementor-element-160eb946 p, .elementor-element-160eb946 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-160eb946 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-cff8486e, .elementor-element-cff8486e p, .elementor-element-cff8486e .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-cff8486e {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-9c0f7283, .elementor-element-9c0f7283 p, .elementor-element-9c0f7283 .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-9c0f7283 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-332472fd, .elementor-element-332472fd p, .elementor-element-332472fd .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-332472fd {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-4c49a18a, .elementor-element-4c49a18a p, .elementor-element-4c49a18a .elementor-text-editor {
+  color: #334155;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-4c49a18a {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-5b80a5b6 .elementor-button {
+  color: #ffffff;
+  background-color: #0f172a;
+  border-radius: 8px 8px 8px 8px;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 14px 24px 14px 24px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+
+.elementor-element-5b80a5b6 .elementor-button-wrapper {
+  text-align: justify;
+  width: 100%;
+}
+
+.elementor-element-5b80a5b6 {
+  margin: 0px 0px 0px 0px;
+}
+
+.elementor-element-2d72168b .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-2d72168b {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-7f11fb4b {
+  --display: flex;
+  --flex-direction: row;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: wrap;
+  --gap: 32px;
+  --row-gap: 32px;
+  --column-gap: 32px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 80px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 168px;
+  min-height: 168px;
+}
+
+.elementor-element-84f01b02 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  background-color: #ffffff;
+  --padding-top: 32px;
+  --padding-right: 28px;
+  --padding-bottom: 32px;
+  --padding-left: 28px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 12px 12px 12px 12px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  --min-height: 168px;
+  min-height: 168px;
+}
+
+.elementor-element-4a61cc9f .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-4a61cc9f {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-dc5ecf8b, .elementor-element-dc5ecf8b p, .elementor-element-dc5ecf8b .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-dc5ecf8b {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-a2ee31e7 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  background-color: #ffffff;
+  --padding-top: 32px;
+  --padding-right: 28px;
+  --padding-bottom: 32px;
+  --padding-left: 28px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 12px 12px 12px 12px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  --min-height: 168px;
+  min-height: 168px;
+}
+
+.elementor-element-ecbbf499 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-ecbbf499 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-a4006208, .elementor-element-a4006208 p, .elementor-element-a4006208 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-a4006208 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-ef5d2a55 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 10px;
+  --row-gap: 10px;
+  --column-gap: 10px;
+  background-color: #ffffff;
+  --padding-top: 32px;
+  --padding-right: 28px;
+  --padding-bottom: 32px;
+  --padding-left: 28px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 0px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 12px 12px 12px 12px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 31.5%;
+  --min-height: 168px;
+  min-height: 168px;
+}
+
+.elementor-element-da3bb5b3 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-da3bb5b3 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-6e99b12a, .elementor-element-6e99b12a p, .elementor-element-6e99b12a .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-6e99b12a {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-a912a0f6 .elementor-heading-title {
+  color: #0f172a;
+  text-align: center;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.6em;
+}
+
+.elementor-element-a912a0f6 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-44d312e4 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 16px;
+  --row-gap: 16px;
+  --column-gap: 16px;
+  background-color: transparent;
+  --padding-top: 0px;
+  --padding-right: 0px;
+  --padding-bottom: 0px;
+  --padding-left: 0px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 40px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  width: 100%;
+  --min-height: 355px;
+  min-height: 355px;
+}
+
+.elementor-element-923a1c8f {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  background-color: #ffffff;
+  --padding-top: 24px;
+  --padding-right: 28px;
+  --padding-bottom: 24px;
+  --padding-left: 28px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 16px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 10px 10px 10px 10px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 108px;
+  min-height: 108px;
+}
+
+.elementor-element-2d37bf88 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.elementor-element-2d37bf88 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-5cea7953, .elementor-element-5cea7953 p, .elementor-element-5cea7953 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-5cea7953 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-18420fd8 {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  background-color: #ffffff;
+  --padding-top: 24px;
+  --padding-right: 28px;
+  --padding-bottom: 24px;
+  --padding-left: 28px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 16px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 10px 10px 10px 10px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 108px;
+  min-height: 108px;
+}
+
+.elementor-element-59e53383 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.elementor-element-59e53383 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-d6194ded, .elementor-element-d6194ded p, .elementor-element-d6194ded .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-d6194ded {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-2da73eba {
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: normal;
+  --align-items: normal;
+  --flex-wrap: nowrap;
+  --gap: 8px;
+  --row-gap: 8px;
+  --column-gap: 8px;
+  background-color: #ffffff;
+  --padding-top: 24px;
+  --padding-right: 28px;
+  --padding-bottom: 24px;
+  --padding-left: 28px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+  --margin-top: 0px;
+  --margin-right: 0px;
+  --margin-bottom: 16px;
+  --margin-left: 0px;
+  margin: var(--margin-top) var(--margin-right) var(--margin-bottom) var(--margin-left);
+  border-radius: 10px 10px 10px 10px;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  border-color: #e2e8f0;
+  width: 100%;
+  --min-height: 108px;
+  min-height: 108px;
+}
+
+.elementor-element-e8ff4c23 .elementor-heading-title {
+  color: #0f172a;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.6em;
+}
+
+.elementor-element-e8ff4c23 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+
+.elementor-element-b00a75e7, .elementor-element-b00a75e7 p, .elementor-element-b00a75e7 .elementor-text-editor {
+  color: #64748b;
+  text-align: left;
+  font-family: "-apple-system", Sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4em;
+}
+
+.elementor-element-b00a75e7 {
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+}
+    
+
+    /* 3. Compiled Elementor Tablet Styles (max-width: 1024px) */
+    @media (max-width: 1024px) {
+  .elementor-element-9f8a4d0d {
+  width: 113px !important;
+  max-width: 113px;
+}
+  .elementor-element-348a7361, .elementor-element-348a7361 p, .elementor-element-348a7361 .elementor-text-editor {
+  font-size: 18px;
+}
+  .elementor-element-bc4a8239 {
+  --flex-wrap: nowrap;
+}
+  .elementor-element-80ac5cfc {
+  width: 39.2%;
+}
+  .elementor-element-4c794a92 {
+  width: 40.3%;
+}
+  .elementor-element-f365c4ac {
+  width: 39.9%;
+}
+  .elementor-element-7f11fb4b {
+  --flex-wrap: nowrap;
+}
+}
+
+    /* 4. Compiled Elementor Mobile Styles (max-width: 767px) */
+    @media (max-width: 767px) {
+  .elementor-element-f970c1c1 {
+  --padding-top: 60px;
+  --padding-right: 24px;
+  --padding-bottom: 60px;
+  --padding-left: 24px;
+  padding: var(--padding-top) var(--padding-right) var(--padding-bottom) var(--padding-left);
+}
+  .elementor-element-42568b34 {
+  width: 100%;
+}
+  .elementor-element-9f8a4d0d {
+  width: 113px !important;
+  max-width: 113px;
+}
+  .elementor-element-348a7361, .elementor-element-348a7361 p, .elementor-element-348a7361 .elementor-text-editor {
+  font-size: 18px;
+}
+  .elementor-element-bc4a8239 {
+  --flex-wrap: nowrap;
+  width: 100%;
+}
+  .elementor-element-80ac5cfc {
+  width: 100%;
+}
+  .elementor-element-650a8ea5 .elementor-button-wrapper {
+  width: 100% !important;
+}
+  .elementor-element-650a8ea5 .elementor-button {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+  .elementor-element-4c794a92 {
+  width: 100%;
+}
+  .elementor-element-e1fbbed0 .elementor-button-wrapper {
+  width: 100% !important;
+}
+  .elementor-element-e1fbbed0 .elementor-button {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+  .elementor-element-f365c4ac {
+  width: 100%;
+}
+  .elementor-element-5b80a5b6 .elementor-button-wrapper {
+  width: 100% !important;
+}
+  .elementor-element-5b80a5b6 .elementor-button {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center;
+  text-align: center;
+}
+  .elementor-element-7f11fb4b {
+  --flex-wrap: nowrap;
+  width: 100%;
+}
+  .elementor-element-84f01b02 {
+  width: 43.8%;
+}
+  .elementor-element-a2ee31e7 {
+  width: 40.1%;
+}
+  .elementor-element-ef5d2a55 {
+  width: 42.2%;
+}
+  .elementor-element-44d312e4 {
+  width: 100%;
+}
+  .elementor-element-923a1c8f {
+  width: 100%;
+}
+  .elementor-element-18420fd8 {
+  width: 100%;
+}
+  .elementor-element-2da73eba {
+  width: 100%;
+}
+}
+  </style>
+</head>
+<body class="elementor-default elementor-page">
+  <div class="elementor elementor-virtual-root">
+    <div class="elementor-element elementor-element-f970c1c1 main-container main-container e-flex e-con-boxed e-con e-parent" data-sid="sid-2" data-dom-id="sid-2" data-id="f970c1c1" data-element_type="container">
+      <div class="e-con-inner">
+        <div class="elementor-element elementor-element-121647ad embedded-stylesheet-engine embedded-stylesheet-engine  elementor-widget elementor-widget-html" data-id="121647ad" data-element_type="widget" data-widget_type="html.default">
+    <div class="elementor-widget-container"><style>
+.badge {
+  display: inline-block;
+}
+
+.pricing-card {
+  display: flex;
+}
+
+.cta-btn {
+  display: inline-block;
+}
+
+.elementor-widget-heading[class*="badge"] .elementor-heading-title,
+.elementor-widget-heading[class*="pill"] .elementor-heading-title,
+[class*="badge"] .elementor-heading-title,
+[class*="pill"] .elementor-heading-title {
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+</style></div>
+  </div>
+<div class="elementor-element elementor-element-42568b34 header-section header-section e-flex e-con-full e-con e-child" data-sid="sid-3" data-dom-id="sid-3" data-id="42568b34" data-element_type="container">
+    <div class="elementor-element elementor-element-9f8a4d0d badge badge  elementor-widget elementor-widget-text-editor" data-sid="sid-4" data-dom-id="sid-4" data-id="9f8a4d0d" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Pricing Plans</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-50ced378 main-title main-title  elementor-widget elementor-widget-heading" data-sid="sid-5" data-dom-id="sid-5" data-id="50ced378" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h1 class="elementor-heading-title elementor-size-default">Simple, Transparent Pricing</h1></div>
+  </div>
+<div class="elementor-element elementor-element-348a7361 subtitle subtitle  elementor-widget elementor-widget-text-editor" data-sid="sid-6" data-dom-id="sid-6" data-id="348a7361" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Choose the perfect plan for your team. Scale up or down at any time with zero commitment.</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-bc4a8239 pricing-grid pricing-grid e-flex e-con-full e-con e-child" data-sid="sid-7" data-dom-id="sid-7" data-id="bc4a8239" data-element_type="container">
+    <div class="elementor-element elementor-element-80ac5cfc pricing-card pricing-card e-flex e-con-full e-con e-child" data-sid="sid-8" data-dom-id="sid-8" data-id="80ac5cfc" data-element_type="container">
+    <div class="elementor-element elementor-element-d9fcd9ea plan-name plan-name  elementor-widget elementor-widget-heading" data-sid="sid-9" data-dom-id="sid-9" data-id="d9fcd9ea" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Starter Plan</h3></div>
+  </div>
+<div class="elementor-element elementor-element-7ca457f6 plan-price plan-price  elementor-widget elementor-widget-heading" data-sid="sid-10" data-dom-id="sid-10" data-id="7ca457f6" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">$19/month</h3></div>
+  </div>
+<div class="elementor-element elementor-element-85f5cf69 plan-desc plan-desc  elementor-widget elementor-widget-text-editor" data-sid="sid-11" data-dom-id="sid-11" data-id="85f5cf69" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>For individuals and small side projects.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-ceddf31f feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-12" data-dom-id="sid-12" data-id="ceddf31f" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Up to 5 active projects</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-82c225b9 feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-13" data-dom-id="sid-13" data-id="82c225b9" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>10 GB cloud storage</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-aa16b92f feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-14" data-dom-id="sid-14" data-id="aa16b92f" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Basic analytics dashboard</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-12ab6a56 feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-15" data-dom-id="sid-15" data-id="12ab6a56" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Standard email support</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-650a8ea5 cta-btn cta-btn  elementor-widget elementor-widget-button" data-sid="sid-16" data-dom-id="sid-16" data-id="650a8ea5" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#starter">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Get Started</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-4c794a92 pricing-card featured pricing-card featured e-flex e-con-full e-con e-child" data-sid="sid-17" data-dom-id="sid-17" data-id="4c794a92" data-element_type="container">
+    <div class="elementor-element elementor-element-ece83071 plan-name plan-name  elementor-widget elementor-widget-heading" data-sid="sid-18" data-dom-id="sid-18" data-id="ece83071" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Professional Plan</h3></div>
+  </div>
+<div class="elementor-element elementor-element-a5477686 plan-price plan-price  elementor-widget elementor-widget-heading" data-sid="sid-19" data-dom-id="sid-19" data-id="a5477686" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">$49/month</h3></div>
+  </div>
+<div class="elementor-element elementor-element-9970e8f6 plan-desc plan-desc  elementor-widget elementor-widget-text-editor" data-sid="sid-20" data-dom-id="sid-20" data-id="9970e8f6" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>For growing teams and scaling startups.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-538364fd feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-21" data-dom-id="sid-21" data-id="538364fd" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Unlimited active projects</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-bc689987 feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-22" data-dom-id="sid-22" data-id="bc689987" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>100 GB cloud storage</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-94337df2 feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-23" data-dom-id="sid-23" data-id="94337df2" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Advanced custom metrics</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-474a61e3 feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-24" data-dom-id="sid-24" data-id="474a61e3" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>24/7 priority email &amp; chat</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-e1fbbed0 cta-btn primary cta-btn primary  elementor-widget elementor-widget-button" data-sid="sid-25" data-dom-id="sid-25" data-id="e1fbbed0" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#pro">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Start Free Trial</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-f365c4ac pricing-card pricing-card e-flex e-con-full e-con e-child" data-sid="sid-26" data-dom-id="sid-26" data-id="f365c4ac" data-element_type="container">
+    <div class="elementor-element elementor-element-276b7271 plan-name plan-name  elementor-widget elementor-widget-heading" data-sid="sid-27" data-dom-id="sid-27" data-id="276b7271" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">Enterprise Plan</h3></div>
+  </div>
+<div class="elementor-element elementor-element-97dd14b2 plan-price plan-price  elementor-widget elementor-widget-heading" data-sid="sid-28" data-dom-id="sid-28" data-id="97dd14b2" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h3 class="elementor-heading-title elementor-size-default">$99/month</h3></div>
+  </div>
+<div class="elementor-element elementor-element-160eb946 plan-desc plan-desc  elementor-widget elementor-widget-text-editor" data-sid="sid-29" data-dom-id="sid-29" data-id="160eb946" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>For organizations with advanced security needs.</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-cff8486e feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-30" data-dom-id="sid-30" data-id="cff8486e" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Unlimited everything</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-9c0f7283 feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-31" data-dom-id="sid-31" data-id="9c0f7283" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>1 TB dedicated storage</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-332472fd feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-32" data-dom-id="sid-32" data-id="332472fd" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Custom SSO &amp; compliance</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-4c49a18a feature-item feature-item  elementor-widget elementor-widget-text-editor" data-sid="sid-33" data-dom-id="sid-33" data-id="4c49a18a" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Dedicated account manager</p></div></div>
+  </div>
+<div class="elementor-element elementor-element-5b80a5b6 cta-btn cta-btn  elementor-widget elementor-widget-button" data-sid="sid-34" data-dom-id="sid-34" data-id="5b80a5b6" data-element_type="widget" data-widget_type="button.default">
+    <div class="elementor-widget-container">
+        <div class="elementor-button-wrapper elementor-align-justify">
+          <a class="elementor-button elementor-size-sm" href="#enterprise">
+            <span class="elementor-button-content-wrapper">
+              
+              <span class="elementor-button-text">Contact Sales</span>
+            </span>
+          </a>
+        </div>
+      </div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-2d72168b section-title section-title  elementor-widget elementor-widget-heading" data-sid="sid-35" data-dom-id="sid-35" data-id="2d72168b" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h2 class="elementor-heading-title elementor-size-default">Built for Modern Engineering Teams</h2></div>
+  </div>
+<div class="elementor-element elementor-element-7f11fb4b features-grid features-grid e-flex e-con-full e-con e-child" data-sid="sid-36" data-dom-id="sid-36" data-id="7f11fb4b" data-element_type="container">
+    <div class="elementor-element elementor-element-84f01b02 feature-card feature-card e-flex e-con-full e-con e-child" data-sid="sid-37" data-dom-id="sid-37" data-id="84f01b02" data-element_type="container">
+    <div class="elementor-element elementor-element-4a61cc9f feature-card-title feature-card-title  elementor-widget elementor-widget-heading" data-sid="sid-38" data-dom-id="sid-38" data-id="4a61cc9f" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h4 class="elementor-heading-title elementor-size-default">Instant Setup</h4></div>
+  </div>
+<div class="elementor-element elementor-element-dc5ecf8b feature-card-text feature-card-text  elementor-widget elementor-widget-text-editor" data-sid="sid-39" data-dom-id="sid-39" data-id="dc5ecf8b" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Deploy in seconds with zero configuration required. Seamlessly connects with your existing stack.</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-a2ee31e7 feature-card feature-card e-flex e-con-full e-con e-child" data-sid="sid-40" data-dom-id="sid-40" data-id="a2ee31e7" data-element_type="container">
+    <div class="elementor-element elementor-element-ecbbf499 feature-card-title feature-card-title  elementor-widget elementor-widget-heading" data-sid="sid-41" data-dom-id="sid-41" data-id="ecbbf499" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h4 class="elementor-heading-title elementor-size-default">Bank-Grade Security</h4></div>
+  </div>
+<div class="elementor-element elementor-element-a4006208 feature-card-text feature-card-text  elementor-widget elementor-widget-text-editor" data-sid="sid-42" data-dom-id="sid-42" data-id="a4006208" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>End-to-end encryption with SOC2 Type II compliance to keep your mission-critical data secure.</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-ef5d2a55 feature-card feature-card e-flex e-con-full e-con e-child" data-sid="sid-43" data-dom-id="sid-43" data-id="ef5d2a55" data-element_type="container">
+    <div class="elementor-element elementor-element-da3bb5b3 feature-card-title feature-card-title  elementor-widget elementor-widget-heading" data-sid="sid-44" data-dom-id="sid-44" data-id="da3bb5b3" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h4 class="elementor-heading-title elementor-size-default">Global Low Latency</h4></div>
+  </div>
+<div class="elementor-element elementor-element-6e99b12a feature-card-text feature-card-text  elementor-widget elementor-widget-text-editor" data-sid="sid-45" data-dom-id="sid-45" data-id="6e99b12a" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Distributed edge nodes ensure sub-50ms latency for all your international team members.</p></div></div>
+  </div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-a912a0f6 section-title section-title  elementor-widget elementor-widget-heading" data-sid="sid-46" data-dom-id="sid-46" data-id="a912a0f6" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h2 class="elementor-heading-title elementor-size-default">Frequently Asked Questions</h2></div>
+  </div>
+<div class="elementor-element elementor-element-44d312e4 faq-container faq-container e-flex e-con-full e-con e-child" data-sid="sid-47" data-dom-id="sid-47" data-id="44d312e4" data-element_type="container">
+    <div class="elementor-element elementor-element-923a1c8f faq-item faq-item e-flex e-con-full e-con e-child" data-sid="sid-48" data-dom-id="sid-48" data-id="923a1c8f" data-element_type="container">
+    <div class="elementor-element elementor-element-2d37bf88 faq-question faq-question  elementor-widget elementor-widget-heading" data-sid="sid-49" data-dom-id="sid-49" data-id="2d37bf88" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h4 class="elementor-heading-title elementor-size-default">Can I switch plans at any time?</h4></div>
+  </div>
+<div class="elementor-element elementor-element-5cea7953 faq-answer faq-answer  elementor-widget elementor-widget-text-editor" data-sid="sid-50" data-dom-id="sid-50" data-id="5cea7953" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>Yes, you can upgrade, downgrade, or cancel your subscription whenever you wish directly from your account settings.</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-18420fd8 faq-item faq-item e-flex e-con-full e-con e-child" data-sid="sid-51" data-dom-id="sid-51" data-id="18420fd8" data-element_type="container">
+    <div class="elementor-element elementor-element-59e53383 faq-question faq-question  elementor-widget elementor-widget-heading" data-sid="sid-52" data-dom-id="sid-52" data-id="59e53383" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h4 class="elementor-heading-title elementor-size-default">Is there a free trial available?</h4></div>
+  </div>
+<div class="elementor-element elementor-element-d6194ded faq-answer faq-answer  elementor-widget elementor-widget-text-editor" data-sid="sid-53" data-dom-id="sid-53" data-id="d6194ded" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>All paid plans come with a 14-day free trial. No credit card is required to begin testing.</p></div></div>
+  </div>
+  </div>
+<div class="elementor-element elementor-element-2da73eba faq-item faq-item e-flex e-con-full e-con e-child" data-sid="sid-54" data-dom-id="sid-54" data-id="2da73eba" data-element_type="container">
+    <div class="elementor-element elementor-element-e8ff4c23 faq-question faq-question  elementor-widget elementor-widget-heading" data-sid="sid-55" data-dom-id="sid-55" data-id="e8ff4c23" data-element_type="widget" data-widget_type="heading.default">
+    <div class="elementor-widget-container"><h4 class="elementor-heading-title elementor-size-default">What payment methods are supported?</h4></div>
+  </div>
+<div class="elementor-element elementor-element-b00a75e7 faq-answer faq-answer  elementor-widget elementor-widget-text-editor" data-sid="sid-56" data-dom-id="sid-56" data-id="b00a75e7" data-element_type="widget" data-widget_type="text-editor.default">
+    <div class="elementor-widget-container"><div class="elementor-text-editor elementor-clearfix"><p>We accept all major credit cards including Visa, Mastercard, American Express, as well as PayPal and wire transfers.</p></div></div>
+  </div>
+  </div>
+  </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

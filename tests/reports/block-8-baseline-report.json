@@ -1,0 +1,390 @@
+{
+  "schemaVersion": "8.0.0",
+  "contract": "Block 8.0 Universal Baseline & Anti-Hardcoding Contract",
+  "viewportConfiguration": [
+    {
+      "name": "desktop",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "name": "tablet",
+      "width": 768,
+      "height": 1024
+    },
+    {
+      "name": "mobile",
+      "width": 375,
+      "height": 812
+    }
+  ],
+  "totalFixtures": 8,
+  "passedCompilations": 8,
+  "failedCompilations": 0,
+  "invariantViolationsCount": 0,
+  "fixtures": [
+    {
+      "fixtureId": "corpus/01-pricing-table",
+      "relativePath": "tests/corpus/01-pricing-table/input.html",
+      "contentHash": "6017dcc70e35",
+      "compilationStatus": "SUCCESS",
+      "errorMessage": null,
+      "metrics": {
+        "globalFidelityScore": 77,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 0,
+          "high": 6,
+          "medium": 0,
+          "low": 0,
+          "advisory": 72
+        },
+        "coreWidgetsCount": 53,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 4,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:switch",
+          "NON_ELEMENTOR_PRIMITIVE:pseudo-content",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 93,
+        "microCssSizeBytes": 4571,
+        "scriptSizeBytes": 10552,
+        "missingSidCount": 2,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    },
+    {
+      "fixtureId": "corpus/02-portfolio-gallery",
+      "relativePath": "tests/corpus/02-portfolio-gallery/input.html",
+      "contentHash": "ba650d11e4e2",
+      "compilationStatus": "SUCCESS",
+      "errorMessage": null,
+      "metrics": {
+        "globalFidelityScore": 34,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 0,
+          "high": 90,
+          "medium": 38,
+          "low": 108,
+          "advisory": 75
+        },
+        "coreWidgetsCount": 38,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 8,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 83,
+        "microCssSizeBytes": 8469,
+        "scriptSizeBytes": 6236,
+        "missingSidCount": 0,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    },
+    {
+      "fixtureId": "corpus/03-faq-accordion",
+      "relativePath": "tests/corpus/03-faq-accordion/input.html",
+      "contentHash": "73c22a922e23",
+      "compilationStatus": "SUCCESS (ADVISORY)",
+      "errorMessage": "[AUDIT NOTICE] Quality Contract Advisories detected (1):\n  ! Badge container 8b65531d (.faq-pill-badge e-sid-5) lacks _flex_size: 'none'. May stretch on flex parents!\nProceeding with template generation...\n\n\n========================================================================\n  ! [ADVISORY EXPOR",
+      "metrics": {
+        "globalFidelityScore": 0,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 15,
+          "high": 36,
+          "medium": 18,
+          "low": 0,
+          "advisory": 42
+        },
+        "coreWidgetsCount": 49,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 9,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 84,
+        "microCssSizeBytes": 4769,
+        "scriptSizeBytes": 13768,
+        "missingSidCount": 20,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    },
+    {
+      "fixtureId": "corpus/04-pricing-calculator",
+      "relativePath": "tests/corpus/04-pricing-calculator/input.html",
+      "contentHash": "ad6445cfd6ff",
+      "compilationStatus": "SUCCESS (ADVISORY)",
+      "errorMessage": "[AUDIT NOTICE] Quality Contract Advisories detected (1):\n  ! Badge container dc3bdc0c (.calc-badge e-sid-5) lacks _flex_size: 'none'. May stretch on flex parents!\nProceeding with template generation...\n\n\n========================================================================\n  ! [ADVISORY EXPORT (n",
+      "metrics": {
+        "globalFidelityScore": 39,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 0,
+          "high": 95,
+          "medium": 57,
+          "low": 39,
+          "advisory": 42
+        },
+        "coreWidgetsCount": 35,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 9,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:input[type=range]",
+          "NON_ELEMENTOR_PRIMITIVE:switch",
+          "NON_ELEMENTOR_PRIMITIVE:pseudo-content",
+          "NON_ELEMENTOR_PRIMITIVE:switch",
+          "NON_ELEMENTOR_PRIMITIVE:pseudo-content",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 80,
+        "microCssSizeBytes": 7301,
+        "scriptSizeBytes": 19219,
+        "missingSidCount": 2,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    },
+    {
+      "fixtureId": "corpus/05-feature-devices",
+      "relativePath": "tests/corpus/05-feature-devices/input.html",
+      "contentHash": "261575f7d151",
+      "compilationStatus": "SUCCESS",
+      "errorMessage": null,
+      "metrics": {
+        "globalFidelityScore": 99,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 18
+        },
+        "coreWidgetsCount": 107,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 6,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 95,
+        "microCssSizeBytes": 12958,
+        "scriptSizeBytes": 7289,
+        "missingSidCount": 3,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    },
+    {
+      "fixtureId": "corpus/06-full-landing",
+      "relativePath": "tests/corpus/06-full-landing/input.html",
+      "contentHash": "f4041f3d68fa",
+      "compilationStatus": "SUCCESS",
+      "errorMessage": null,
+      "metrics": {
+        "globalFidelityScore": 79,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 49
+        },
+        "coreWidgetsCount": 20,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 4,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 83,
+        "microCssSizeBytes": 5452,
+        "scriptSizeBytes": 6662,
+        "missingSidCount": 0,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    },
+    {
+      "fixtureId": "landing",
+      "relativePath": "landing.html",
+      "contentHash": "261575f7d151",
+      "compilationStatus": "SUCCESS",
+      "errorMessage": null,
+      "metrics": {
+        "globalFidelityScore": 99,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 18
+        },
+        "coreWidgetsCount": 107,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 6,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 95,
+        "microCssSizeBytes": 12958,
+        "scriptSizeBytes": 7289,
+        "missingSidCount": 3,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    },
+    {
+      "fixtureId": "landingv2",
+      "relativePath": "landingv2.html",
+      "contentHash": "9c98c99b11c6",
+      "compilationStatus": "SUCCESS (ADVISORY)",
+      "errorMessage": "[AUDIT NOTICE] Quality Contract Advisories detected (1):\n  ! Badge container 5d6e3f8e (.badge-pill e-sid-6) lacks _flex_size: 'none'. May stretch on flex parents!\nProceeding with template generation...\n\n\n========================================================================\n  ! [ADVISORY EXPORT (n",
+      "metrics": {
+        "globalFidelityScore": 84,
+        "viewportFidelity": null,
+        "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
+        "defects": {
+          "critical": 0,
+          "high": 63,
+          "medium": 36,
+          "low": 18,
+          "advisory": 133
+        },
+        "coreWidgetsCount": 97,
+        "customPluginWidgetsCount": null,
+        "customPluginWidgetsReason": "No custom plugin widgets registered in core compiler",
+        "htmlWidgetsCount": 13,
+        "htmlWidgetReasons": [
+          "SYSTEM:stylesheet-engine",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "NON_ELEMENTOR_PRIMITIVE:composite-control",
+          "SYSTEM:script-engine"
+        ],
+        "nativeEditabilityPercentage": 88,
+        "microCssSizeBytes": 18095,
+        "scriptSizeBytes": 6155,
+        "missingSidCount": 1,
+        "consoleErrorsCount": 0,
+        "unverifiedNodeCount": null,
+        "unverifiedNodeReason": "Visual audit verifies all nodes mapped in Ground Truth flat index; separate unverified mask metric scheduled for Block 8.1",
+        "unsupportedCapabilityCount": null,
+        "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
+      },
+      "invariants": {
+        "passed": true,
+        "violations": []
+      }
+    }
+  ]
+}

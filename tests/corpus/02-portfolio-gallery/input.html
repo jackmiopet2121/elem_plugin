@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Digital Agency Portfolio</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans for a modern, geometric SaaS/Agency look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 2. DESIGN SYSTEM & CSS VARIABLES --- */
+        :root {
+            --color-bg: #f8fafc;
+            --color-surface: #ffffff;
+            --color-primary: #6366f1;
+            --color-primary-hover: #4f46e5;
+            --color-text-main: #0f172a;
+            --color-text-muted: #64748b;
+            --color-border: #e2e8f0;
+            
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 8px;
+            --radius-pill: 999px;
+            
+            --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--color-text-main);
+        }
+
+        p {
+            color: var(--color-text-muted);
+            font-size: 1rem;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .text-center { text-align: center; }
+
+        /* --- 1. SECTION HEADER --- */
+        .section-header {
+            margin-bottom: 48px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+            line-height: 1;
+            padding: 8px 16px;
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--color-primary);
+            font-size: 0.875rem;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-muted);
+        }
+
+        /* --- 2. INTERACTIVE FILTER BAR --- */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 48px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            padding: 10px 24px;
+            border-radius: var(--radius-pill);
+            font-family: var(--font-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: var(--transition-base);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .filter-btn.is-active {
+            background-color: var(--color-primary);
+            border-color: var(--color-primary);
+            color: #ffffff;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        /* --- 3. PORTFOLIO GRID --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        /* Card Styles */
+        .project-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-base);
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* Filtering Animation States */
+        .project-card.hide {
+            display: none;
+        }
+        
+        .project-card.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        /* Media Container */
+        .media-wrapper {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .media-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card:hover .media-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .category-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Card Content */
+        .card-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .tech-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            background: var(--color-bg);
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+        }
+
+        /* CTA Link/Button */
+        .case-study-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: var(--color-primary);
+            font-size: 0.95rem;
+            transition: var(--transition-base);
+            width: fit-content;
+        }
+
+        .case-study-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .case-study-link:hover {
+            color: var(--color-primary-hover);
+        }
+
+        .case-study-link:hover i {
+            transform: translateX(4px);
+        }
+
+        /* --- 8. MOBILE RESPONSIVENESS --- */
+        @media (max-width: 1024px) {
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 16px;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .filter-bar {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.875rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <section class="container">
+            
+            <!-- 1. Section Header -->
+            <header class="section-header text-center">
+                <span class="badge-pill">Featured Work</span>
+                <h2 class="section-title">Crafting Digital Experiences That Drive Growth</h2>
+                <p class="section-subtitle">We partner with visionary brands to build products that define categories. Explore our multidisciplinary work across design, technology, and strategy.</p>
+            </header>
+
+            <!-- 2. Interactive Filter Bar -->
+            <nav class="filter-bar" aria-label="Portfolio Filters">
+                <button class="filter-btn is-active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="ui-ux">UI/UX Design</button>
+                <button class="filter-btn" data-filter="branding">Brand Identity</button>
+                <button class="filter-btn" data-filter="web-dev">Web Development</button>
+                <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+            </nav>
+
+            <!-- 3. Portfolio Showcase Grid -->
+            <div class="portfolio-grid">
+                
+                <!-- Project 1: UI/UX -->
+                <article class="project-card" data-category="ui-ux">
+                    <div class="media-wrapper">
+                        <span class="category-badge">Fintech SaaS</span>
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Apex Financial Dashboard Analytics View">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-title">Apex Financial Dashboard</h3>
+                        <p class="project-desc">A comprehensive analytics platform redesign focusing on data visualization clarity and user retention.</p>
+                        <div class="card-meta">
+                            <span class="tech-tag">Figma</span>
+                            <span class="tech-tag">Design System</span>
+                            <span class="tech-tag">2025</span>
+                        </div>
+                        <a href="#" class="case-study-link">
+                            View Case Study <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 2: Web Dev -->
+                <article class="project-card" data-category="web-dev">
+                    <div class="media-wrapper">
+                        <span class="category-badge">Luxury E-commerce</span>
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800" alt="Luxe Horizon Apparel Website Interface">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-title">Luxe Horizon Apparel</h3>
+                        <p class="project-desc">Headless Shopify implementation delivering sub-second page loads and immersive product storytelling.</p>
+                        <div class="card-meta">
+                            <span class="tech-tag">Next.js</span>
+                            <span class="tech-tag">Shopify API</span>
+                            <span class="tech-tag">GSAP</span>
+                        </div>
+                        <a href="#" class="case-study-link">
+                            View Case Study <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 3: Mobile -->
+                <article class="project-card" data-category="mobile">
+                    <div class="media-wrapper">
+                        <span class="category-badge">AI Platform</span>
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&q=80&w=800" alt="NeuroFlow AI Mobile App Screens">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-title">NeuroFlow AI Assistant</h3>
+                        <p class="project-desc">Native iOS application featuring real-time voice processing and personalized cognitive training modules.</p>
+                        <div class="card-meta">
+                            <span class="tech-tag">Swift</span>
+                            <span class="tech-tag">CoreML</span>
+                            <span class="tech-tag">iOS 18</span>
+                        </div>
+                        <a href="#" class="case-study-link">
+                            View Case Study <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 4: Branding -->
+                <article class="project-card" data-category="branding">
+                    <div class="media-wrapper">
+                        <span class="category-badge">Sustainable Tech</span>
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800" alt="Verdant Energy Brand Identity Mockup">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-title">Verdant Energy Rebrand</h3>
+                        <p class="project-desc">Complete visual identity overhaul for a renewable energy startup, including logo, typography, and packaging.</p>
+                        <div class="card-meta">
+                            <span class="tech-tag">Illustrator</span>
+                            <span class="tech-tag">Print</span>
+                            <span class="tech-tag">Strategy</span>
+                        </div>
+                        <a href="#" class="case-study-link">
+                            View Case Study <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 5: UI/UX -->
+                <article class="project-card" data-category="ui-ux">
+                    <div class="media-wrapper">
+                        <span class="category-badge">Healthcare</span>
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800" alt="MediConnect Patient Portal Interface">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-title">MediConnect Portal</h3>
+                        <p class="project-desc">Accessibility-first patient dashboard streamlining appointment scheduling and telehealth integration.</p>
+                        <div class="card-meta">
+                            <span class="tech-tag">WCAG 2.1</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">UX Research</span>
+                        </div>
+                        <a href="#" class="case-study-link">
+                            View Case Study <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project 6: Web Dev -->
+                <article class="project-card" data-category="web-dev">
+                    <div class="media-wrapper">
+                        <span class="category-badge">Web3 / Crypto</span>
+                        <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=800" alt="Cipher Vault Security Platform Dark Mode">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="project-title">Cipher Vault Security</h3>
+                        <p class="project-desc">High-performance landing page with WebGL interactions for a decentralized storage protocol.</p>
+                        <div class="card-meta">
+                            <span class="tech-tag">Three.js</span>
+                            <span class="tech-tag">Vue</span>
+                            <span class="tech-tag">WebGL</span>
+                        </div>
+                        <a href="#" class="case-study-link">
+                            View Case Study <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- 7. Interactivity & Vanilla JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // 1. Update Active Button State
+                    filterBtns.forEach(b => b.classList.remove('is-active'));
+                    btn.classList.add('is-active');
+
+                    const filterValue = btn.getAttribute('data-filter');
+
+                    // 2. Filter Logic with Animation
+                    projectCards.forEach(card => {
+                        const category = card.getAttribute('data-category');
+                        
+                        if (filterValue === 'all' || category === filterValue) {
+                            // Show Card
+                            card.classList.remove('hide');
+                            // Small timeout to allow display:block to apply before opacity transition
+                            setTimeout(() => {
+                                card.classList.remove('fade-out');
+                            }, 10);
+                        } else {
+                            // Hide Card
+                            card.classList.add('fade-out');
+                            // Wait for transition to finish before removing from layout flow
+                            setTimeout(() => {
+                                card.classList.add('hide');
+                            }, 300); // Matches CSS transition duration
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
