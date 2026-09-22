@@ -22,7 +22,7 @@
   "totalFixtures": 8,
   "passedCompilations": 8,
   "failedCompilations": 0,
-  "invariantViolationsCount": 7,
+  "invariantViolationsCount": 20,
   "fixtures": [
     {
       "fixtureId": "corpus/01-pricing-table",
@@ -31,17 +31,17 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 77,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 6,
+          "high": 0,
           "medium": 0,
           "low": 0,
-          "advisory": 72
+          "advisory": 0
         },
         "coreWidgetsCount": 53,
         "customPluginWidgetsCount": null,
@@ -90,6 +90,7 @@
       "invariants": {
         "passed": false,
         "violations": [
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)"
         ]
       }
@@ -101,17 +102,17 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 34,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 90,
-          "medium": 38,
-          "low": 108,
-          "advisory": 75
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
         },
         "coreWidgetsCount": 38,
         "customPluginWidgetsCount": null,
@@ -162,8 +163,10 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\""
+        ]
       }
     },
     {
@@ -173,17 +176,17 @@
       "compilationStatus": "SUCCESS (ADVISORY)",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 0,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
-          "critical": 15,
-          "high": 36,
-          "medium": 18,
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
           "low": 0,
-          "advisory": 42
+          "advisory": 0
         },
         "coreWidgetsCount": 49,
         "customPluginWidgetsCount": null,
@@ -205,7 +208,14 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget 71d17b1d contains simple button markup that must be native button widget",
+          "HTML widget 1a5ebe9b contains simple button markup that must be native button widget",
+          "HTML widget 6070cbb9 contains simple button markup that must be native button widget",
+          "HTML widget 9820f80e contains simple button markup that must be native button widget",
+          "HTML widget 79aa4b22 contains simple button markup that must be native button widget",
+          "HTML widget bb2dfce3 contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 84,
         "microCssSizeBytes": 4769,
         "scriptSizeBytes": 13768,
@@ -237,7 +247,9 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "20 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 20, customWidgets: 0, contentHtml: 0)"
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
+          "20 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 20, customWidgets: 0, contentHtml: 0)",
+          "6 HTML widget contract violation(s) (e.g., HTML widget 71d17b1d contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -248,17 +260,17 @@
       "compilationStatus": "SUCCESS (ADVISORY)",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 39,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 95,
-          "medium": 57,
-          "low": 39,
-          "advisory": 42
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
         },
         "coreWidgetsCount": 35,
         "customPluginWidgetsCount": null,
@@ -280,7 +292,9 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget d9b91352 contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 80,
         "microCssSizeBytes": 7301,
         "scriptSizeBytes": 19219,
@@ -312,7 +326,9 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)"
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
+          "2 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 2, customWidgets: 0, contentHtml: 0)",
+          "1 HTML widget contract violation(s) (e.g., HTML widget d9b91352 contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -323,9 +339,9 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 99,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -333,7 +349,7 @@
           "high": 0,
           "medium": 0,
           "low": 0,
-          "advisory": 18
+          "advisory": 0
         },
         "coreWidgetsCount": 107,
         "customPluginWidgetsCount": null,
@@ -352,7 +368,12 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget 36baba09 contains simple button markup that must be native button widget",
+          "HTML widget 9fae483e contains simple button markup that must be native button widget",
+          "HTML widget e3bf94e0 contains simple button markup that must be native button widget",
+          "HTML widget 8e1feb1f contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
@@ -384,7 +405,9 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
+          "4 HTML widget contract violation(s) (e.g., HTML widget 36baba09 contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -395,9 +418,9 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 79,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -405,7 +428,7 @@
           "high": 0,
           "medium": 0,
           "low": 0,
-          "advisory": 49
+          "advisory": 0
         },
         "coreWidgetsCount": 20,
         "customPluginWidgetsCount": null,
@@ -422,7 +445,10 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget 26360558 contains simple button markup that must be native button widget",
+          "HTML widget 36860732 contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 83,
         "microCssSizeBytes": 5452,
         "scriptSizeBytes": 6662,
@@ -452,8 +478,11 @@
         "unsupportedCapabilityReason": "Capability abstraction layer scheduled for Block 8.1; currently logged as advisory defects"
       },
       "invariants": {
-        "passed": true,
-        "violations": []
+        "passed": false,
+        "violations": [
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
+          "2 HTML widget contract violation(s) (e.g., HTML widget 26360558 contains simple button markup that must be native button widget)"
+        ]
       }
     },
     {
@@ -463,9 +492,9 @@
       "compilationStatus": "SUCCESS",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 99,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
@@ -473,7 +502,7 @@
           "high": 0,
           "medium": 0,
           "low": 0,
-          "advisory": 18
+          "advisory": 0
         },
         "coreWidgetsCount": 107,
         "customPluginWidgetsCount": null,
@@ -492,7 +521,12 @@
           "NON_ELEMENTOR_PRIMITIVE:composite-control",
           "SYSTEM:script-engine"
         ],
-        "htmlReasonViolations": [],
+        "htmlReasonViolations": [
+          "HTML widget 36baba09 contains simple button markup that must be native button widget",
+          "HTML widget 9fae483e contains simple button markup that must be native button widget",
+          "HTML widget e3bf94e0 contains simple button markup that must be native button widget",
+          "HTML widget 8e1feb1f contains simple button markup that must be native button widget"
+        ],
         "nativeEditabilityPercentage": 95,
         "microCssSizeBytes": 12958,
         "scriptSizeBytes": 7289,
@@ -524,7 +558,9 @@
       "invariants": {
         "passed": false,
         "violations": [
-          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)"
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
+          "3 non-exempt element(s) missing SID (containers: 0, nativeWidgets: 3, customWidgets: 0, contentHtml: 0)",
+          "4 HTML widget contract violation(s) (e.g., HTML widget 36baba09 contains simple button markup that must be native button widget)"
         ]
       }
     },
@@ -535,17 +571,17 @@
       "compilationStatus": "SUCCESS (ADVISORY)",
       "errorMessage": null,
       "metrics": {
-        "globalFidelityScore": 84,
-        "auditStatus": "VALID",
-        "auditError": null,
+        "globalFidelityScore": null,
+        "auditStatus": "INVALID",
+        "auditError": "Audit counts contains unrecognized severity key: \"total\"",
         "viewportFidelity": null,
         "viewportFidelityReason": "Current audit scorecard emits unified global fidelity score; per-viewport breakdown score scheduled for Block 8.1",
         "defects": {
           "critical": 0,
-          "high": 63,
-          "medium": 36,
-          "low": 18,
-          "advisory": 133
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
         },
         "coreWidgetsCount": 97,
         "customPluginWidgetsCount": null,
@@ -572,14 +608,25 @@
           "SYSTEM:script-engine"
         ],
         "htmlReasonViolations": [
+          "HTML widget 074fcd2a contains simple button markup that must be native button widget",
           "HTML widget 074fcd2a contains standard heading markup that must be native heading widget",
           "HTML widget 074fcd2a contains standard paragraph markup that must be native text-editor widget",
+          "HTML widget 27b50e70 contains simple button markup that must be native button widget",
           "HTML widget 27b50e70 contains standard heading markup that must be native heading widget",
           "HTML widget 27b50e70 contains standard paragraph markup that must be native text-editor widget",
+          "HTML widget 4cca0d68 contains simple button markup that must be native button widget",
           "HTML widget 4cca0d68 contains standard heading markup that must be native heading widget",
           "HTML widget 4cca0d68 contains standard paragraph markup that must be native text-editor widget",
+          "HTML widget d2d26d7c contains simple button markup that must be native button widget",
           "HTML widget d2d26d7c contains standard heading markup that must be native heading widget",
-          "HTML widget d2d26d7c contains standard paragraph markup that must be native text-editor widget"
+          "HTML widget d2d26d7c contains standard paragraph markup that must be native text-editor widget",
+          "HTML widget c05654f5 contains simple button markup that must be native button widget",
+          "HTML widget 14f52e55 contains simple button markup that must be native button widget",
+          "HTML widget 8983d32f contains simple button markup that must be native button widget",
+          "HTML widget 3c739ac7 contains simple button markup that must be native button widget",
+          "HTML widget a161d61c contains simple button markup that must be native button widget",
+          "HTML widget d1bd70cf contains simple button markup that must be native button widget",
+          "HTML widget 6e5c1304 contains simple button markup that must be native button widget"
         ],
         "nativeEditabilityPercentage": 88,
         "microCssSizeBytes": 18095,
@@ -612,8 +659,9 @@
       "invariants": {
         "passed": false,
         "violations": [
+          "Audit artifact verification failed (INVALID): Audit counts contains unrecognized severity key: \"total\"",
           "2 non-exempt element(s) missing SID (containers: 1, nativeWidgets: 1, customWidgets: 0, contentHtml: 0)",
-          "8 HTML widget contract violation(s) (e.g., HTML widget 074fcd2a contains standard heading markup that must be native heading widget)"
+          "19 HTML widget contract violation(s) (e.g., HTML widget 074fcd2a contains simple button markup that must be native button widget)"
         ]
       }
     }

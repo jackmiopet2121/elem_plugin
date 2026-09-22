@@ -57,9 +57,10 @@ function sanitizeErrorMessage(errorMessage, rootDir = ROOT_DIR) {
     clean = clean.split(rootNormFwd).join('<ROOT>');
   }
 
-  // Windows absolute paths
-  clean = clean.replace(/[A-Za-z]:\\[^\\/:*?"<>|\r\n\t]+/g, '<PATH>');
-  clean = clean.replace(/[A-Za-z]:\/[^\\/:*?"<>|\r\n\t]+/g, '<PATH>');
+  // Windows absolute paths (quoted and unquoted, single and multi-segment)
+  clean = clean.replace(/(["'])[A-Za-z]:[\\\/][^\r\n"']+\1/g, '$1<PATH>$1');
+  clean = clean.replace(/[A-Za-z]:[\\\/][^\s"':*?<>|;,)]+/g, '<PATH>');
+  clean = clean.replace(/[A-Za-z]:[\\\/][^\r\n"':*?<>|]+/g, '<PATH>');
 
   // Unix absolute paths
   clean = clean.replace(/\/(?:home|tmp|var|usr|etc|opt)\/[^\s:*?"<>|\r\n\t]+/g, '<PATH>');
@@ -81,9 +82,15 @@ const RECOGNIZED_SEVERITIES = new Set(['critical', 'high', 'medium', 'low', 'adv
  * An audit is VALID only when:
  * - root is a non-array object;
  * - fidelity is a finite number from 0 through 100;
+ * - precedence is audit.fidelity > audit.global.fidelity > audit.score;
+ * - conflicting fidelity values across audit fields are rejected;
  * - either defects is an array or counts is a valid object;
- * - every defect entry is a valid object with a recognized severity;
- * - every count is a finite non-negative integer;
+ * - every defect entry is a valid object with a recognized severity or explicit advisory: true;
+ * - missing severity is never defaulted to low;
+ * - counts object must be non-empty, with only recognized severity keys and finite non-negative integers;
+ * - defects and counts totals must be mutually consistent when both are present;
+ * - advisoryDefectCount must be a finite non-negative integer consistent with defects and counts;
+ * - consoleErrors must be an array when provided;
  * - malformed defect data must not silently become zero defects.
  * 
  * @param {*} auditData 
@@ -100,11 +107,46 @@ function validateAuditSchema(auditData) {
     };
   }
 
-  // 1. Fidelity Validation: finite number from 0 through 100
-  const rawFidelity = auditData.fidelity !== undefined
-    ? auditData.fidelity
-    : (auditData.global?.fidelity !== undefined ? auditData.global.fidelity : auditData.score);
+  // 1. Fidelity Precedence and Conflict Rejection
+  // Locations: audit.fidelity > audit.global.fidelity > audit.score
+  const definedFidelities = [];
+  if (auditData.fidelity !== undefined) {
+    definedFidelities.push({ name: 'fidelity', val: auditData.fidelity });
+  }
+  if (auditData.global?.fidelity !== undefined) {
+    definedFidelities.push({ name: 'global.fidelity', val: auditData.global.fidelity });
+  }
+  if (auditData.score !== undefined) {
+    definedFidelities.push({ name: 'score', val: auditData.score });
+  }
 
+  if (definedFidelities.length === 0) {
+    return {
+      valid: false,
+      error: 'Audit JSON missing required numerical fidelity score',
+      fidelity: null,
+      defectCounts: null,
+      consoleErrorsCount: 0
+    };
+  }
+
+  // Reject conflicting fidelity values across multiple locations
+  if (definedFidelities.length > 1) {
+    const firstVal = definedFidelities[0].val;
+    for (let i = 1; i < definedFidelities.length; i++) {
+      if (definedFidelities[i].val !== firstVal) {
+        return {
+          valid: false,
+          error: `Conflicting fidelity values across audit fields (${definedFidelities.map(f => `${f.name}=${f.val}`).join(', ')})`,
+          fidelity: null,
+          defectCounts: null,
+          consoleErrorsCount: 0
+        };
+      }
+    }
+  }
+
+  const rawFidelity = definedFidelities[0].val;
   if (typeof rawFidelity !== 'number' || !Number.isFinite(rawFidelity) || rawFidelity < 0 || rawFidelity > 100) {
     return {
       valid: false,
@@ -115,11 +157,11 @@ function validateAuditSchema(auditData) {
     };
   }
 
-  // 2. Structural requirement: either defects is an array OR counts is a valid object
+  // 2. Structural requirement: at least one complete defect representation
   const hasDefects = Array.isArray(auditData.defects);
-  const hasCounts = auditData.counts !== null && typeof auditData.counts === 'object' && !Array.isArray(auditData.counts);
+  const hasCounts = auditData.counts !== null && typeof auditData.counts === 'object' && !Array.isArray(auditData.counts) && Object.keys(auditData.counts).length > 0;
 
-  if (!hasDefects && !hasCounts) {
+  if (auditData.defects === undefined && auditData.counts === undefined) {
     return {
       valid: false,
       error: 'Audit must contain either a valid defects array or a valid counts object',
@@ -129,7 +171,8 @@ function validateAuditSchema(auditData) {
     };
   }
 
-  const defectCounts = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
+  const defectCountsFromDefects = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
+  const defectCountsFromCounts = { critical: 0, high: 0, medium: 0, low: 0, advisory: 0 };
 
   // 3. Validate defects array if provided
   if (auditData.defects !== undefined) {
@@ -147,34 +190,47 @@ function validateAuditSchema(auditData) {
       if (!d || typeof d !== 'object' || Array.isArray(d)) {
         return {
           valid: false,
-          error: `Defect entry at index ${i} must be a valid object`,
+          error: `Defect entry at index ${i} must be a valid non-array object`,
           fidelity: null,
           defectCounts: null,
           consoleErrorsCount: 0
         };
       }
-      const rawSev = (d.severity || (d.advisory ? 'advisory' : 'low'));
-      if (typeof rawSev !== 'string' || !RECOGNIZED_SEVERITIES.has(rawSev.toLowerCase())) {
+
+      const hasValidSeverity = typeof d.severity === 'string' && d.severity.trim().length > 0 && RECOGNIZED_SEVERITIES.has(d.severity.trim().toLowerCase());
+      const isExplicitAdvisory = d.advisory === true;
+
+      // Severity string validation if present
+      if (d.severity !== undefined && d.severity !== null && d.severity !== '') {
+        if (typeof d.severity !== 'string' || !RECOGNIZED_SEVERITIES.has(d.severity.trim().toLowerCase())) {
+          return {
+            valid: false,
+            error: `Defect entry at index ${i} has unrecognized severity: "${d.severity}"`,
+            fidelity: null,
+            defectCounts: null,
+            consoleErrorsCount: 0
+          };
+        }
+      }
+
+      if (!hasValidSeverity && !isExplicitAdvisory) {
         return {
           valid: false,
-          error: `Defect entry at index ${i} has unrecognized severity: "${rawSev}"`,
+          error: `Defect entry at index ${i} must have a recognized severity or explicit advisory: true (got severity="${d.severity}", advisory=${d.advisory})`,
           fidelity: null,
           defectCounts: null,
           consoleErrorsCount: 0
         };
       }
-      const sev = rawSev.toLowerCase();
-      if (d.advisory) {
-        defectCounts.advisory++;
-      } else {
-        defectCounts[sev]++;
-      }
+
+      const normalizedSev = hasValidSeverity ? d.severity.trim().toLowerCase() : 'advisory';
+      defectCountsFromDefects[normalizedSev]++;
     }
   }
 
   // 4. Validate counts object if provided
   if (auditData.counts !== undefined) {
-    if (!hasCounts) {
+    if (auditData.counts === null || typeof auditData.counts !== 'object' || Array.isArray(auditData.counts)) {
       return {
         valid: false,
         error: 'Audit counts must be a valid non-array object when provided',
@@ -183,7 +239,27 @@ function validateAuditSchema(auditData) {
         consoleErrorsCount: 0
       };
     }
-    for (const [key, val] of Object.entries(auditData.counts)) {
+    const countEntries = Object.entries(auditData.counts);
+    if (countEntries.length === 0) {
+      return {
+        valid: false,
+        error: 'Audit counts object must be non-empty when provided',
+        fidelity: null,
+        defectCounts: null,
+        consoleErrorsCount: 0
+      };
+    }
+    for (const [key, val] of countEntries) {
+      const lowerKey = key.toLowerCase();
+      if (!RECOGNIZED_SEVERITIES.has(lowerKey)) {
+        return {
+          valid: false,
+          error: `Audit counts contains unrecognized severity key: "${key}"`,
+          fidelity: null,
+          defectCounts: null,
+          consoleErrorsCount: 0
+        };
+      }
       if (typeof val !== 'number' || !Number.isFinite(val) || !Number.isInteger(val) || val < 0) {
         return {
           valid: false,
@@ -193,29 +269,74 @@ function validateAuditSchema(auditData) {
           consoleErrorsCount: 0
         };
       }
-      const lowerKey = key.toLowerCase();
-      if (RECOGNIZED_SEVERITIES.has(lowerKey)) {
-        if (!hasDefects) {
-          defectCounts[lowerKey] = val;
-        }
-      }
+      defectCountsFromCounts[lowerKey] = val;
     }
-    if (!hasDefects && auditData.advisoryDefectCount !== undefined) {
-      const adv = auditData.advisoryDefectCount;
-      if (typeof adv !== 'number' || !Number.isFinite(adv) || !Number.isInteger(adv) || adv < 0) {
+  }
+
+  // 5. Ensure at least one complete representation is present
+  if (!hasDefects && !hasCounts) {
+    return {
+      valid: false,
+      error: 'Audit must contain either a valid defects array or a valid counts object',
+      fidelity: null,
+      defectCounts: null,
+      consoleErrorsCount: 0
+    };
+  }
+
+  // 6. Cross-validate defects and counts consistency when both are present
+  if (hasDefects && hasCounts) {
+    for (const sev of ['critical', 'high', 'medium', 'low', 'advisory']) {
+      const fromDefects = defectCountsFromDefects[sev] || 0;
+      const fromCounts = defectCountsFromCounts[sev] || 0;
+      if (fromDefects !== fromCounts) {
         return {
           valid: false,
-          error: `Audit advisoryDefectCount must be a finite non-negative integer (got ${adv})`,
+          error: `Contradictory defect counts between defects array (${fromDefects}) and counts object (${fromCounts}) for severity "${sev}"`,
           fidelity: null,
           defectCounts: null,
           consoleErrorsCount: 0
         };
       }
-      defectCounts.advisory = adv;
     }
   }
 
-  // 5. Validate consoleErrors if provided
+  // 7. Validate advisoryDefectCount if provided
+  if (auditData.advisoryDefectCount !== undefined) {
+    const adv = auditData.advisoryDefectCount;
+    if (typeof adv !== 'number' || !Number.isFinite(adv) || !Number.isInteger(adv) || adv < 0) {
+      return {
+        valid: false,
+        error: `Audit advisoryDefectCount must be a finite non-negative integer (got ${adv})`,
+        fidelity: null,
+        defectCounts: null,
+        consoleErrorsCount: 0
+      };
+    }
+    if (hasDefects && adv !== defectCountsFromDefects.advisory) {
+      return {
+        valid: false,
+        error: `Audit advisoryDefectCount (${adv}) contradicts defects array advisory count (${defectCountsFromDefects.advisory})`,
+        fidelity: null,
+        defectCounts: null,
+        consoleErrorsCount: 0
+      };
+    }
+    if (hasCounts && auditData.counts.advisory !== undefined && adv !== defectCountsFromCounts.advisory) {
+      return {
+        valid: false,
+        error: `Audit advisoryDefectCount (${adv}) contradicts counts object advisory count (${defectCountsFromCounts.advisory})`,
+        fidelity: null,
+        defectCounts: null,
+        consoleErrorsCount: 0
+      };
+    }
+    if (!hasDefects && auditData.counts?.advisory === undefined) {
+      defectCountsFromCounts.advisory = adv;
+    }
+  }
+
+  // 8. Validate consoleErrors if provided
   let consoleErrorsCount = 0;
   if (auditData.consoleErrors !== undefined) {
     if (!Array.isArray(auditData.consoleErrors)) {
@@ -230,11 +351,13 @@ function validateAuditSchema(auditData) {
     consoleErrorsCount = auditData.consoleErrors.length;
   }
 
+  const finalDefectCounts = hasDefects ? defectCountsFromDefects : defectCountsFromCounts;
+
   return {
     valid: true,
     error: null,
     fidelity: rawFidelity,
-    defectCounts,
+    defectCounts: finalDefectCounts,
     consoleErrorsCount
   };
 }
@@ -249,15 +372,33 @@ function validateAuditSchema(auditData) {
 function checkStructuralHtmlViolations(html, reason) {
   const violations = [];
   const trimmed = String(html || '').trim();
+  if (!trimmed) {
+    return violations;
+  }
 
-  // Exempt system widgets
-  if (reason === 'SYSTEM:stylesheet-engine' || reason === 'SYSTEM:script-engine' ||
-      trimmed.startsWith('<style') || trimmed.startsWith('<script')) {
+  // Dual condition for system HTML exemption:
+  // 1. Valid registered system reason
+  // 2. Matching system content
+  const isSystemStylesheet = (reason === 'SYSTEM:stylesheet-engine') && (trimmed.includes('<style') || trimmed.includes('</style>'));
+  const isSystemScript = (reason === 'SYSTEM:script-engine') && (trimmed.includes('<script') || trimmed.includes('</script>'));
+
+  if (isSystemStylesheet || isSystemScript) {
     return violations;
   }
 
   // Parse HTML into AST using the project's actual HTML tree parser (parseHtmlToAst)
-  const ast = parseHtmlToAst(trimmed);
+  let ast;
+  try {
+    ast = parseHtmlToAst(trimmed);
+  } catch (err) {
+    violations.push(`HTML AST parser failed to verify structural markup: ${err.message || String(err)}`);
+    return violations;
+  }
+
+  if (!ast || typeof ast !== 'object') {
+    violations.push('HTML AST parser failed to produce verifiable AST');
+    return violations;
+  }
 
   function walkAst(node) {
     if (!node || typeof node !== 'object') return;
@@ -281,13 +422,7 @@ function checkStructuralHtmlViolations(html, reason) {
     }
   }
 
-  if (Array.isArray(ast.children) && ast.children.length > 0) {
-    for (const child of ast.children) {
-      walkAst(child);
-    }
-  } else {
-    walkAst(ast);
-  }
+  walkAst(ast);
 
   return violations;
 }
@@ -386,8 +521,8 @@ function analyzeTemplateTree(content = [], templateJson = null, auditData = null
           htmlWidgetReasons.push(reason);
         }
 
-        const isStylesheet = reason === 'SYSTEM:stylesheet-engine' || html.startsWith('<style') || html.includes('</style>');
-        const isScript = reason === 'SYSTEM:script-engine' || html.startsWith('<script') || html.includes('</script>');
+        const isStylesheet = (reason === 'SYSTEM:stylesheet-engine') && (html.includes('<style') || html.includes('</style>'));
+        const isScript = (reason === 'SYSTEM:script-engine') && (html.includes('<script') || html.includes('</script>'));
 
         if (isStylesheet) {
           systemHtmlWidgetsCount.stylesheet++;

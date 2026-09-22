@@ -83,3 +83,54 @@ HTML widgets (`widgetType: "html"`) are strictly reserved for:
 1. **No Fake Passes:** A conversion must not report a passing fidelity score (or 100%) if any section, element, or viewport was skipped, errored, or left unverified.
 2. **Deterministic Reporting:** All regression and baseline audit reports must be deterministic. They must not embed volatile system timestamps, local machine file paths, or random IDs in comparison hashes.
 3. **Honest Metric Reporting:** If a metric is not yet captured or implemented in the engine, it must be reported as `null` with an explicit reason. Fabricating or defaulting unmeasured values to `0` or `100` is strictly forbidden.
+
+---
+
+## 7. Complete Audit Schema Contract & Validation Precedence
+
+### Rule 7.1: Valid Root & Fidelity Contract
+- The audit root must be a non-null, non-array object.
+- Fidelity score must be a finite number between 0 and 100 inclusive.
+- Allowed locations for fidelity:
+  1. `audit.fidelity` (highest priority)
+  2. `audit.global.fidelity`
+  3. `audit.score` (lowest priority)
+- If multiple fidelity locations are defined, their values must match exactly. Conflicting fidelity values across audit fields are rejected.
+
+### Rule 7.2: Defects & Counts Dual Representation
+- An audit must contain at least one complete defect representation: a valid `defects` array or a valid `counts` object. An audit containing only fidelity is invalid.
+- If `defects` is provided, every defect entry must be an object with either a non-empty recognized severity (`critical`, `high`, `medium`, `low`, `advisory`) or an explicit `advisory: true`. Missing severity is never defaulted to `low`.
+- If `counts` is provided, it must be a non-empty object containing only recognized severity keys mapped to finite non-negative integers.
+- If both `defects` and `counts` are supplied, their totals must be mutually consistent across all severities; any contradiction fails validation.
+- If `advisoryDefectCount` is provided, it must be a finite non-negative integer consistent with the advisory count in `defects` and `counts`.
+- If `consoleErrors` is provided, it must be an array.
+
+---
+
+## 8. Conservative Structural HTML AST Checker & Block 8.1 Migration Scope
+
+The structural HTML primitive checker uses clean AST parsing (`parseHtmlToAst`) and deep recursive traversal:
+- Inspects all nodes independently, including those inside forms, custom wrappers, and composite controls.
+- Flags standard headings (`<h1>`-`<h6>`), paragraphs (`<p>`), images (`<img>`), and simple buttons (`<button>`).
+- System HTML exemption requires **both** a registered system reason (`SYSTEM:stylesheet-engine` or `SYSTEM:script-engine`) **and** matching system content (`<style>` or `<script>`).
+- **Conservative Checker Scope Note:** The current checker is intentionally conservative. It flags composite HTML for later migration to custom plugin widgets in Block 8.1. If parsing fails, it fails closed with an explicit unverifiable structural validation violation.
+
+---
+
+## 9. Compilation-Scoped Elementor ID Architecture & Fallback Behavior
+
+Elementor IDs are generated deterministically per compilation context:
+- Input HTML content produces a SHA-256 derived seed (`computeContentSeed`), ensuring identical ordered IDs for the same input and distinct IDs for different inputs without depending on filenames or absolute machine paths.
+- Each compilation owns an isolated `usedIds` set via `AsyncLocalStorage` (`runWithGenerator`).
+- **Honest Fallback Behavior:** Production compiler calls run inside an isolated compilation context. Legacy calls outside a compilation context currently use the fallback generator. A shared fallback state exists for unbracketed legacy invocations.
+
+---
+
+## 10. SID Classification Taxonomy & Traceability
+
+Nodes in the compiled template are classified into four explicit categories:
+1. **Source-Derived:** Nodes representing source DOM elements mapped in Ground Truth; expected to preserve source SIDs (`_sid` / `settings._sid` / `e-sid-*`). Missing SID fails the invariant gate.
+2. **Generated Helpers:** Explicit compiler-generated layout containers with `settings._is_helper: true`; reported separately without invented SIDs.
+3. **Exempt System:** System stylesheet and script engine widgets with registered reasons and matching tags.
+4. **Unverifiable:** Nodes without SID whose source derivation cannot be proven; strictly fails the invariant gate.
+
