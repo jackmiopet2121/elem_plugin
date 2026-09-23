@@ -19,7 +19,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 48708,
-          "totalStoredPropertyEntries": 30012,
+          "totalStoredPropertyEntries": 30996,
           "minimumPropertiesOnAnyEligibleElement": 492,
           "maximumPropertiesOnAnyEligibleElement": 492,
           "averagePropertiesPerEligibleElement": 492,
@@ -27,15 +27,54 @@
           "customPropertyResolvedEntryCount": 1485,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 1,
-          "styleDictionaryEntryCount": 61,
-          "styleReferenceCount": 102,
+          "stateSnapshotCount": 3,
+          "styleDictionaryEntryCount": 63,
+          "styleReferenceCount": 104,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1070964
+          "interactionProbeSummary": {
+            "totalCandidates": 6,
+            "capturedCount": 3,
+            "unchangedCount": 3,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-8",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-9",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-10",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-21",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-47",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-77",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1099685
         },
         "tablet": {
           "viewport": "tablet",
@@ -44,7 +83,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 48708,
-          "totalStoredPropertyEntries": 29520,
+          "totalStoredPropertyEntries": 30504,
           "minimumPropertiesOnAnyEligibleElement": 492,
           "maximumPropertiesOnAnyEligibleElement": 492,
           "averagePropertiesPerEligibleElement": 492,
@@ -52,15 +91,54 @@
           "customPropertyResolvedEntryCount": 1485,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 1,
-          "styleDictionaryEntryCount": 60,
-          "styleReferenceCount": 102,
+          "stateSnapshotCount": 3,
+          "styleDictionaryEntryCount": 62,
+          "styleReferenceCount": 104,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1056804
+          "interactionProbeSummary": {
+            "totalCandidates": 6,
+            "capturedCount": 3,
+            "unchangedCount": 3,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-8",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-9",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-10",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-21",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-47",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-77",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1085886
         },
         "mobile": {
           "viewport": "mobile",
@@ -69,7 +147,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 48708,
-          "totalStoredPropertyEntries": 27552,
+          "totalStoredPropertyEntries": 28044,
           "minimumPropertiesOnAnyEligibleElement": 492,
           "maximumPropertiesOnAnyEligibleElement": 492,
           "averagePropertiesPerEligibleElement": 492,
@@ -77,15 +155,54 @@
           "customPropertyResolvedEntryCount": 1485,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 1,
-          "styleDictionaryEntryCount": 56,
-          "styleReferenceCount": 102,
+          "stateSnapshotCount": 3,
+          "styleDictionaryEntryCount": 57,
+          "styleReferenceCount": 104,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1001793
+          "interactionProbeSummary": {
+            "totalCandidates": 6,
+            "capturedCount": 3,
+            "unchangedCount": 3,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-8",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-9",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-10",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-21",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-47",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-77",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1017174
         }
       }
     },
@@ -103,7 +220,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 46221,
-          "totalStoredPropertyEntries": 28826,
+          "totalStoredPropertyEntries": 30814,
           "minimumPropertiesOnAnyEligibleElement": 497,
           "maximumPropertiesOnAnyEligibleElement": 497,
           "averagePropertiesPerEligibleElement": 497,
@@ -111,15 +228,109 @@
           "customPropertyResolvedEntryCount": 1860,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 6,
-          "stateSnapshotCount": 12,
-          "styleDictionaryEntryCount": 58,
-          "styleReferenceCount": 112,
+          "stateSnapshotCount": 22,
+          "styleDictionaryEntryCount": 62,
+          "styleReferenceCount": 122,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1053006
+          "interactionProbeSummary": {
+            "totalCandidates": 17,
+            "capturedCount": 10,
+            "unchangedCount": 7,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-9",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-12",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-13",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-26",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-27",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-65",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-66",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-78",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-79",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-91",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-92",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1114683
         },
         "tablet": {
           "viewport": "tablet",
@@ -128,7 +339,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 46221,
-          "totalStoredPropertyEntries": 26838,
+          "totalStoredPropertyEntries": 28826,
           "minimumPropertiesOnAnyEligibleElement": 497,
           "maximumPropertiesOnAnyEligibleElement": 497,
           "averagePropertiesPerEligibleElement": 497,
@@ -136,15 +347,109 @@
           "customPropertyResolvedEntryCount": 1860,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 6,
-          "stateSnapshotCount": 12,
-          "styleDictionaryEntryCount": 54,
-          "styleReferenceCount": 112,
+          "stateSnapshotCount": 22,
+          "styleDictionaryEntryCount": 58,
+          "styleReferenceCount": 122,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 996369
+          "interactionProbeSummary": {
+            "totalCandidates": 17,
+            "capturedCount": 10,
+            "unchangedCount": 7,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-9",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-12",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-13",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-26",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-27",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-65",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-66",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-78",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-79",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-91",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-92",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1058408
         },
         "mobile": {
           "viewport": "mobile",
@@ -153,7 +458,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 46221,
-          "totalStoredPropertyEntries": 25844,
+          "totalStoredPropertyEntries": 27335,
           "minimumPropertiesOnAnyEligibleElement": 497,
           "maximumPropertiesOnAnyEligibleElement": 497,
           "averagePropertiesPerEligibleElement": 497,
@@ -161,15 +466,109 @@
           "customPropertyResolvedEntryCount": 1860,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 6,
-          "stateSnapshotCount": 12,
-          "styleDictionaryEntryCount": 52,
-          "styleReferenceCount": 112,
+          "stateSnapshotCount": 22,
+          "styleDictionaryEntryCount": 55,
+          "styleReferenceCount": 122,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 968270
+          "interactionProbeSummary": {
+            "totalCandidates": 17,
+            "capturedCount": 10,
+            "unchangedCount": 7,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-9",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-12",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-13",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-26",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-27",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-65",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-66",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-78",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-79",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-91",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-92",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1016217
         }
       }
     },
@@ -187,7 +586,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 63373,
-          "totalStoredPropertyEntries": 40419,
+          "totalStoredPropertyEntries": 31936,
           "minimumPropertiesOnAnyEligibleElement": 499,
           "maximumPropertiesOnAnyEligibleElement": 499,
           "averagePropertiesPerEligibleElement": 499,
@@ -195,15 +594,204 @@
           "customPropertyResolvedEntryCount": 2794,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 43,
-          "styleDictionaryEntryCount": 81,
-          "styleReferenceCount": 171,
+          "stateSnapshotCount": 39,
+          "styleDictionaryEntryCount": 64,
+          "styleReferenceCount": 167,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 1482898
+          "interactionProbeSummary": {
+            "totalCandidates": 36,
+            "capturedCount": 9,
+            "unchangedCount": 27,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-15",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-16",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-17",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-18",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-19",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-30",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-31",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-32",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-51",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-54",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-55",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-78",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-79",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-80",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-81",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-82",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-91",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-94",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-95",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-96",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-97",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-98",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-123",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-124",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-125",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-126",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1247105
         },
         "tablet": {
           "viewport": "tablet",
@@ -212,7 +800,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 63373,
-          "totalStoredPropertyEntries": 35429,
+          "totalStoredPropertyEntries": 32435,
           "minimumPropertiesOnAnyEligibleElement": 499,
           "maximumPropertiesOnAnyEligibleElement": 499,
           "averagePropertiesPerEligibleElement": 499,
@@ -220,15 +808,204 @@
           "customPropertyResolvedEntryCount": 2794,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 31,
-          "styleDictionaryEntryCount": 71,
-          "styleReferenceCount": 159,
+          "stateSnapshotCount": 39,
+          "styleDictionaryEntryCount": 65,
+          "styleReferenceCount": 167,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 1337965
+          "interactionProbeSummary": {
+            "totalCandidates": 36,
+            "capturedCount": 9,
+            "unchangedCount": 27,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-15",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-16",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-17",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-18",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-19",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-30",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-31",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-32",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-51",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-54",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-55",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-78",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-79",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-80",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-81",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-82",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-91",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-94",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-95",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-96",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-97",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-98",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-123",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-124",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-125",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-126",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1261384
         },
         "mobile": {
           "viewport": "mobile",
@@ -237,7 +1014,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 63373,
-          "totalStoredPropertyEntries": 38922,
+          "totalStoredPropertyEntries": 34431,
           "minimumPropertiesOnAnyEligibleElement": 499,
           "maximumPropertiesOnAnyEligibleElement": 499,
           "averagePropertiesPerEligibleElement": 499,
@@ -245,15 +1022,204 @@
           "customPropertyResolvedEntryCount": 2794,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 24,
-          "styleDictionaryEntryCount": 78,
-          "styleReferenceCount": 152,
+          "stateSnapshotCount": 39,
+          "styleDictionaryEntryCount": 69,
+          "styleReferenceCount": 167,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 1434861
+          "interactionProbeSummary": {
+            "totalCandidates": 36,
+            "capturedCount": 9,
+            "unchangedCount": 27,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-15",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-16",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-17",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-18",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-19",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-30",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-31",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-32",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-51",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-54",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-55",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-78",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-79",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-80",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-81",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-82",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-91",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-94",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-95",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-96",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-97",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-98",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-123",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-124",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-125",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-126",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1317993
         }
       }
     },
@@ -279,15 +1245,229 @@
           "customPropertyResolvedEntryCount": 2781,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 11,
-          "stateSnapshotCount": 19,
+          "stateSnapshotCount": 28,
           "styleDictionaryEntryCount": 105,
-          "styleReferenceCount": 134,
+          "styleReferenceCount": 143,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1753022
+          "interactionProbeSummary": {
+            "totalCandidates": 41,
+            "capturedCount": 8,
+            "unchangedCount": 33,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-11",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-12",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-13",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-26",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-28",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-30",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-31",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-32",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-34",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-35",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-36",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-37",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-38",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-41",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-42",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-45",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-46",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-47",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-48",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-49",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-50",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-51",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-54",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-55",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-56",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-57",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-58",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-59",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-60",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-61",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-62",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-63",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-64",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-95",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-96",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1762118
         },
         "tablet": {
           "viewport": "tablet",
@@ -296,7 +1476,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 51912,
-          "totalStoredPropertyEntries": 51408,
+          "totalStoredPropertyEntries": 52920,
           "minimumPropertiesOnAnyEligibleElement": 504,
           "maximumPropertiesOnAnyEligibleElement": 504,
           "averagePropertiesPerEligibleElement": 504,
@@ -304,15 +1484,229 @@
           "customPropertyResolvedEntryCount": 2781,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 11,
-          "stateSnapshotCount": 16,
-          "styleDictionaryEntryCount": 102,
-          "styleReferenceCount": 131,
+          "stateSnapshotCount": 28,
+          "styleDictionaryEntryCount": 105,
+          "styleReferenceCount": 143,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1709091
+          "interactionProbeSummary": {
+            "totalCandidates": 41,
+            "capturedCount": 8,
+            "unchangedCount": 33,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-11",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-12",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-13",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-26",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-28",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-30",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-31",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-32",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-34",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-35",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-36",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-37",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-38",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-41",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-42",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-45",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-46",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-47",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-48",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-49",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-50",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-51",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-54",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-55",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-56",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-57",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-58",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-59",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-60",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-61",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-62",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-63",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-64",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-95",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-96",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1761996
         },
         "mobile": {
           "viewport": "mobile",
@@ -321,7 +1715,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 51912,
-          "totalStoredPropertyEntries": 48888,
+          "totalStoredPropertyEntries": 52416,
           "minimumPropertiesOnAnyEligibleElement": 504,
           "maximumPropertiesOnAnyEligibleElement": 504,
           "averagePropertiesPerEligibleElement": 504,
@@ -329,15 +1723,229 @@
           "customPropertyResolvedEntryCount": 2781,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 11,
-          "stateSnapshotCount": 13,
-          "styleDictionaryEntryCount": 97,
-          "styleReferenceCount": 128,
+          "stateSnapshotCount": 28,
+          "styleDictionaryEntryCount": 104,
+          "styleReferenceCount": 143,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 2,
-          "snapshotSizeBytes": 1636981
+          "interactionProbeSummary": {
+            "totalCandidates": 41,
+            "capturedCount": 8,
+            "unchangedCount": 33,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-11",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-12",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-13",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-26",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-28",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-30",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-31",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-32",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-34",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-35",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-36",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-37",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-38",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-41",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-42",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-45",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-46",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-47",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-48",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-49",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-50",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-51",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-52",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-53",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-54",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-55",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-56",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-57",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-58",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-59",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-60",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-61",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-62",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-63",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-64",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-95",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-96",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 1747641
         }
       }
     },
@@ -355,7 +1963,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 103950,
-          "totalStoredPropertyEntries": 60885,
+          "totalStoredPropertyEntries": 62370,
           "minimumPropertiesOnAnyEligibleElement": 495,
           "maximumPropertiesOnAnyEligibleElement": 495,
           "averagePropertiesPerEligibleElement": 495,
@@ -363,15 +1971,169 @@
           "customPropertyResolvedEntryCount": 3780,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 7,
-          "styleDictionaryEntryCount": 123,
-          "styleReferenceCount": 219,
+          "stateSnapshotCount": 11,
+          "styleDictionaryEntryCount": 126,
+          "styleReferenceCount": 223,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 2210604
+          "interactionProbeSummary": {
+            "totalCandidates": 29,
+            "capturedCount": 11,
+            "unchangedCount": 18,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-100",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-101",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-102",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-103",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-104",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-105",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-106",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-112",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-113",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-114",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-149",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-150",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-154",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-155",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-159",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-160",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-179",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 2257152
         },
         "tablet": {
           "viewport": "tablet",
@@ -380,7 +2142,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 103950,
-          "totalStoredPropertyEntries": 52470,
+          "totalStoredPropertyEntries": 53460,
           "minimumPropertiesOnAnyEligibleElement": 495,
           "maximumPropertiesOnAnyEligibleElement": 495,
           "averagePropertiesPerEligibleElement": 495,
@@ -388,15 +2150,169 @@
           "customPropertyResolvedEntryCount": 3780,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 7,
-          "styleDictionaryEntryCount": 106,
-          "styleReferenceCount": 219,
+          "stateSnapshotCount": 11,
+          "styleDictionaryEntryCount": 108,
+          "styleReferenceCount": 223,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1975210
+          "interactionProbeSummary": {
+            "totalCandidates": 29,
+            "capturedCount": 11,
+            "unchangedCount": 18,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-100",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-101",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-102",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-103",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-104",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-105",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-106",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-112",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-113",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-114",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-149",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-150",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-154",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-155",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-159",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-160",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-179",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 2008933
         },
         "mobile": {
           "viewport": "mobile",
@@ -405,7 +2321,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 103950,
-          "totalStoredPropertyEntries": 52965,
+          "totalStoredPropertyEntries": 53955,
           "minimumPropertiesOnAnyEligibleElement": 495,
           "maximumPropertiesOnAnyEligibleElement": 495,
           "averagePropertiesPerEligibleElement": 495,
@@ -413,15 +2329,169 @@
           "customPropertyResolvedEntryCount": 3780,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 7,
-          "styleDictionaryEntryCount": 107,
-          "styleReferenceCount": 219,
+          "stateSnapshotCount": 11,
+          "styleDictionaryEntryCount": 109,
+          "styleReferenceCount": 223,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1988964
+          "interactionProbeSummary": {
+            "totalCandidates": 29,
+            "capturedCount": 11,
+            "unchangedCount": 18,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-100",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-101",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-102",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-103",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-104",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-105",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-106",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-112",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-113",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-114",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-149",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-150",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-154",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-155",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-159",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-160",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-179",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 2022691
         }
       }
     },
@@ -439,7 +2509,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 21340,
-          "totalStoredPropertyEntries": 16005,
+          "totalStoredPropertyEntries": 17460,
           "minimumPropertiesOnAnyEligibleElement": 485,
           "maximumPropertiesOnAnyEligibleElement": 485,
           "averagePropertiesPerEligibleElement": 485,
@@ -447,15 +2517,74 @@
           "customPropertyResolvedEntryCount": 352,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 0,
-          "styleDictionaryEntryCount": 33,
-          "styleReferenceCount": 45,
+          "stateSnapshotCount": 4,
+          "styleDictionaryEntryCount": 36,
+          "styleReferenceCount": 49,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 547705
+          "interactionProbeSummary": {
+            "totalCandidates": 10,
+            "capturedCount": 4,
+            "unchangedCount": 6,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-7",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-15",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-22",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-34",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-35",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-41",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 590549
         },
         "tablet": {
           "viewport": "tablet",
@@ -464,7 +2593,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 21340,
-          "totalStoredPropertyEntries": 16005,
+          "totalStoredPropertyEntries": 17460,
           "minimumPropertiesOnAnyEligibleElement": 485,
           "maximumPropertiesOnAnyEligibleElement": 485,
           "averagePropertiesPerEligibleElement": 485,
@@ -472,15 +2601,74 @@
           "customPropertyResolvedEntryCount": 352,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 0,
-          "styleDictionaryEntryCount": 33,
-          "styleReferenceCount": 45,
+          "stateSnapshotCount": 4,
+          "styleDictionaryEntryCount": 36,
+          "styleReferenceCount": 49,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 547671
+          "interactionProbeSummary": {
+            "totalCandidates": 10,
+            "capturedCount": 4,
+            "unchangedCount": 6,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-7",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-15",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-22",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-34",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-35",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-41",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 590650
         },
         "mobile": {
           "viewport": "mobile",
@@ -489,7 +2677,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 21340,
-          "totalStoredPropertyEntries": 19885,
+          "totalStoredPropertyEntries": 21825,
           "minimumPropertiesOnAnyEligibleElement": 485,
           "maximumPropertiesOnAnyEligibleElement": 485,
           "averagePropertiesPerEligibleElement": 485,
@@ -497,15 +2685,74 @@
           "customPropertyResolvedEntryCount": 352,
           "customPropertyDiscoveryStatus": "COMPLETE",
           "pseudoElementCount": 0,
-          "stateSnapshotCount": 0,
-          "styleDictionaryEntryCount": 41,
-          "styleReferenceCount": 45,
+          "stateSnapshotCount": 4,
+          "styleDictionaryEntryCount": 45,
+          "styleReferenceCount": 49,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 0,
-          "snapshotSizeBytes": 654448
+          "interactionProbeSummary": {
+            "totalCandidates": 10,
+            "capturedCount": 4,
+            "unchangedCount": 6,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-7",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-15",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-22",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-29",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-33",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-34",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-35",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-39",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-40",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-41",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 710758
         }
       }
     },
@@ -523,7 +2770,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 103950,
-          "totalStoredPropertyEntries": 60885,
+          "totalStoredPropertyEntries": 62370,
           "minimumPropertiesOnAnyEligibleElement": 495,
           "maximumPropertiesOnAnyEligibleElement": 495,
           "averagePropertiesPerEligibleElement": 495,
@@ -531,15 +2778,169 @@
           "customPropertyResolvedEntryCount": 3780,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 7,
-          "styleDictionaryEntryCount": 123,
-          "styleReferenceCount": 219,
+          "stateSnapshotCount": 11,
+          "styleDictionaryEntryCount": 126,
+          "styleReferenceCount": 223,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 2210604
+          "interactionProbeSummary": {
+            "totalCandidates": 29,
+            "capturedCount": 11,
+            "unchangedCount": 18,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-100",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-101",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-102",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-103",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-104",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-105",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-106",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-112",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-113",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-114",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-149",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-150",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-154",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-155",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-159",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-160",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-179",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 2257152
         },
         "tablet": {
           "viewport": "tablet",
@@ -548,7 +2949,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 103950,
-          "totalStoredPropertyEntries": 52470,
+          "totalStoredPropertyEntries": 53460,
           "minimumPropertiesOnAnyEligibleElement": 495,
           "maximumPropertiesOnAnyEligibleElement": 495,
           "averagePropertiesPerEligibleElement": 495,
@@ -556,15 +2957,169 @@
           "customPropertyResolvedEntryCount": 3780,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 7,
-          "styleDictionaryEntryCount": 106,
-          "styleReferenceCount": 219,
+          "stateSnapshotCount": 11,
+          "styleDictionaryEntryCount": 108,
+          "styleReferenceCount": 223,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1975210
+          "interactionProbeSummary": {
+            "totalCandidates": 29,
+            "capturedCount": 11,
+            "unchangedCount": 18,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-100",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-101",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-102",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-103",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-104",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-105",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-106",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-112",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-113",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-114",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-149",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-150",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-154",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-155",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-159",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-160",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-179",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 2008933
         },
         "mobile": {
           "viewport": "mobile",
@@ -573,7 +3128,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 103950,
-          "totalStoredPropertyEntries": 52965,
+          "totalStoredPropertyEntries": 53955,
           "minimumPropertiesOnAnyEligibleElement": 495,
           "maximumPropertiesOnAnyEligibleElement": 495,
           "averagePropertiesPerEligibleElement": 495,
@@ -581,15 +3136,169 @@
           "customPropertyResolvedEntryCount": 3780,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 7,
-          "styleDictionaryEntryCount": 107,
-          "styleReferenceCount": 219,
+          "stateSnapshotCount": 11,
+          "styleDictionaryEntryCount": 109,
+          "styleReferenceCount": 223,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 1988964
+          "interactionProbeSummary": {
+            "totalCandidates": 29,
+            "capturedCount": 11,
+            "unchangedCount": 18,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-10",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-11",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-100",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-101",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-102",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-103",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-104",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-105",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-106",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-107",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-108",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-109",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-110",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-111",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-112",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-113",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-114",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-149",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-150",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-154",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-155",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-159",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-160",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-179",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 2022691
         }
       }
     },
@@ -607,7 +3316,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 145440,
-          "totalStoredPropertyEntries": 104030,
+          "totalStoredPropertyEntries": 94435,
           "minimumPropertiesOnAnyEligibleElement": 505,
           "maximumPropertiesOnAnyEligibleElement": 505,
           "averagePropertiesPerEligibleElement": 505,
@@ -615,15 +3324,324 @@
           "customPropertyResolvedEntryCount": 8064,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 47,
-          "styleDictionaryEntryCount": 206,
-          "styleReferenceCount": 337,
+          "stateSnapshotCount": 53,
+          "styleDictionaryEntryCount": 187,
+          "styleReferenceCount": 343,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 3654618
+          "interactionProbeSummary": {
+            "totalCandidates": 60,
+            "capturedCount": 11,
+            "unchangedCount": 49,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-13",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-14",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-124",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-125",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-126",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-127",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-128",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-129",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-130",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-131",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-132",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-133",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-134",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-135",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-136",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-137",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-138",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-139",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-140",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-141",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-142",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-143",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-146",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-147",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-188",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-189",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-191",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-192",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-198",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-199",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-200",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-202",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-209",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-210",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-211",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-212",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-218",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-219",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-220",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-221",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-222",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-244",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-245",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-246",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-247",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-258",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-259",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-260",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-261",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-272",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-273",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-274",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-275",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-284",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-285",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 3394601
         },
         "tablet": {
           "viewport": "tablet",
@@ -632,7 +3650,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 145440,
-          "totalStoredPropertyEntries": 97465,
+          "totalStoredPropertyEntries": 87365,
           "minimumPropertiesOnAnyEligibleElement": 505,
           "maximumPropertiesOnAnyEligibleElement": 505,
           "averagePropertiesPerEligibleElement": 505,
@@ -640,15 +3658,324 @@
           "customPropertyResolvedEntryCount": 8064,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 52,
-          "styleDictionaryEntryCount": 193,
-          "styleReferenceCount": 342,
+          "stateSnapshotCount": 53,
+          "styleDictionaryEntryCount": 173,
+          "styleReferenceCount": 343,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 3469824
+          "interactionProbeSummary": {
+            "totalCandidates": 60,
+            "capturedCount": 11,
+            "unchangedCount": 49,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-13",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-14",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-124",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-125",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-126",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-127",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-128",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-129",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-130",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-131",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-132",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-133",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-134",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-135",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-136",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-137",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-138",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-139",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-140",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-141",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-142",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-143",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-146",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-147",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-188",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-189",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-191",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-192",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-198",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-199",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-200",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-202",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-209",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-210",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-211",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-212",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-218",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-219",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-220",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-221",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-222",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-244",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-245",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-246",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-247",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-258",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-259",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-260",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-261",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-272",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-273",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-274",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-275",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-284",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-285",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 3194866
         },
         "mobile": {
           "viewport": "mobile",
@@ -657,7 +3984,7 @@
           "elementsMissingComputedStyle": 0,
           "computedStyleCoveragePercent": 100,
           "totalEnumeratedPropertyEntries": 145440,
-          "totalStoredPropertyEntries": 96455,
+          "totalStoredPropertyEntries": 91405,
           "minimumPropertiesOnAnyEligibleElement": 505,
           "maximumPropertiesOnAnyEligibleElement": 505,
           "averagePropertiesPerEligibleElement": 505,
@@ -665,15 +3992,324 @@
           "customPropertyResolvedEntryCount": 8064,
           "customPropertyDiscoveryStatus": "PARTIAL",
           "pseudoElementCount": 1,
-          "stateSnapshotCount": 48,
-          "styleDictionaryEntryCount": 191,
-          "styleReferenceCount": 338,
+          "stateSnapshotCount": 53,
+          "styleDictionaryEntryCount": 181,
+          "styleReferenceCount": 343,
           "unresolvedStyleReferenceCount": 0,
           "invalidReferenceDetails": [],
           "duplicateSidRecordsCount": 0,
           "unsupportedRegionCount": 0,
           "captureWarningCount": 1,
-          "snapshotSizeBytes": 3440144
+          "interactionProbeSummary": {
+            "totalCandidates": 60,
+            "capturedCount": 11,
+            "unchangedCount": 49,
+            "unsupportedCount": 0,
+            "failedCount": 0,
+            "outcomes": [
+              {
+                "sid": "sid-13",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-14",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-124",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-125",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-126",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-127",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-128",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-129",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-130",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-131",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-132",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-133",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-134",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-135",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-136",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-137",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-138",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-139",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-140",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-141",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-142",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-143",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-144",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-145",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-146",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-147",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-188",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-189",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-190",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-191",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-192",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-198",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-199",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-200",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-201",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-202",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-208",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-209",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-210",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-211",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-212",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-218",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-219",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-220",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-221",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-222",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-244",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-245",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-246",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-247",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-258",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-259",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-260",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-261",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-272",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-273",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-274",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-275",
+                "outcome": "UNCHANGED",
+                "reason": "No computed style delta on :hover"
+              },
+              {
+                "sid": "sid-284",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              },
+              {
+                "sid": "sid-285",
+                "outcome": "CAPTURED",
+                "reason": "Computed style delta detected on :hover"
+              }
+            ]
+          },
+          "snapshotSizeBytes": 3309477
         }
       }
     }

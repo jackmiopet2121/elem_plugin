@@ -1,0 +1,86 @@
+{
+  "sourceCommit": "8fa8ee3",
+  "generatedAt": "2026-09-22T20:15:00Z",
+  "fixtures": {
+    "corpus/01-pricing-table": {
+      "filePath": "tests\\corpus\\01-pricing-table\\input.html",
+      "contentHash": "e2a8d1f02634cc72",
+      "sha256": "6017dcc70e357d42fad62c6b8afaa9e74889056d881ab4cdee98f54bafb33c7f",
+      "nodeCounts": {
+        "desktop": 98,
+        "tablet": 98,
+        "mobile": 98
+      }
+    },
+    "corpus/02-portfolio-gallery": {
+      "filePath": "tests\\corpus\\02-portfolio-gallery\\input.html",
+      "contentHash": "015716a3ea361e1b",
+      "sha256": "ba650d11e4e25229ccd4cc459e97812e1b37731c4be5f0c0991e212dc3d60eea",
+      "nodeCounts": {
+        "desktop": 92,
+        "tablet": 92,
+        "mobile": 92
+      }
+    },
+    "corpus/03-faq-accordion": {
+      "filePath": "tests\\corpus\\03-faq-accordion\\input.html",
+      "contentHash": "d330735bcb3cbdf2",
+      "sha256": "73c22a922e238ccde34bac12639f859efadfa2c06558d90b2abecf6fe3fe377e",
+      "nodeCounts": {
+        "desktop": 126,
+        "tablet": 126,
+        "mobile": 126
+      }
+    },
+    "corpus/04-pricing-calculator": {
+      "filePath": "tests\\corpus\\04-pricing-calculator\\input.html",
+      "contentHash": "5da126fba0035147",
+      "sha256": "ad6445cfd6ffe546f6e2a9e8f531320736a1d6787a83dd7113474b64157deb99",
+      "nodeCounts": {
+        "desktop": 102,
+        "tablet": 102,
+        "mobile": 102
+      }
+    },
+    "corpus/05-feature-devices": {
+      "filePath": "tests\\corpus\\05-feature-devices\\input.html",
+      "contentHash": "ac27196adb9094be",
+      "sha256": "261575f7d151e1b7b302dfc83c6516f875ee187c5a0913de41b3701f8a90fd63",
+      "nodeCounts": {
+        "desktop": 209,
+        "tablet": 209,
+        "mobile": 209
+      }
+    },
+    "corpus/06-full-landing": {
+      "filePath": "tests\\corpus\\06-full-landing\\input.html",
+      "contentHash": "86c861bec7abda4f",
+      "sha256": "f4041f3d68fa70ee35b8963112e4f2a9cd23ed0a303ed8f27986000fd0e7bc74",
+      "nodeCounts": {
+        "desktop": 43,
+        "tablet": 43,
+        "mobile": 43
+      }
+    },
+    "landing": {
+      "filePath": "landing.html",
+      "contentHash": "ac27196adb9094be",
+      "sha256": "261575f7d151e1b7b302dfc83c6516f875ee187c5a0913de41b3701f8a90fd63",
+      "nodeCounts": {
+        "desktop": 209,
+        "tablet": 209,
+        "mobile": 209
+      }
+    },
+    "landingv2": {
+      "filePath": "landingv2.html",
+      "contentHash": "47b2d07ac9718abe",
+      "sha256": "9c98c99b11c63dfdc3400fbad83d2d482888d88fb2497ec05ed34d1974469c4e",
+      "nodeCounts": {
+        "desktop": 287,
+        "tablet": 287,
+        "mobile": 287
+      }
+    }
+  }
+}

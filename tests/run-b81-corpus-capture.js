@@ -124,6 +124,10 @@ async function runCorpusCapture(options = {}) {
           fixtureCoveragePass = false;
           failureReasons.push(`${vpKey}: ${metrics.duplicateSidRecordsCount} duplicate SID(s) detected`);
         }
+        if (metrics.interactionProbeSummary && metrics.interactionProbeSummary.failedCount > 0) {
+          fixtureCoveragePass = false;
+          failureReasons.push(`${vpKey}: ${metrics.interactionProbeSummary.failedCount} hover probe(s) FAILED`);
+        }
         if (vp.captureErrors && vp.captureErrors.length > 0) {
           fixtureCoveragePass = false;
           failureReasons.push(`${vpKey}: ${vp.captureErrors.length} capture error(s)`);
@@ -173,12 +177,13 @@ async function runCorpusCapture(options = {}) {
   log('\n========================================================================================================');
   log('BLOCK 8.1 GROUND TRUTH COVERAGE SUMMARY:');
   log('========================================================================================================');
-  log('Fixture                         | D-Nodes | AvgProps | Coverage | Canvas | DictEntries | CustomProps | Status');
-  log('--------------------------------+---------+----------+----------+--------+-------------+-------------+-------');
+  log('Fixture                         | D-Nodes | AvgProps | Coverage | Canvas | DictEntries | CustomProps | Probes(C/U/Un) | Status');
+  log('--------------------------------+---------+----------+----------+--------+-------------+-------------+----------------+-------');
 
   for (const r of results) {
     if (r.status === 'PASS') {
       const d = r.viewports.desktop;
+      const ps = d.interactionProbeSummary || { capturedCount: 0, unchangedCount: 0, unsupportedCount: 0 };
       const idStr = r.fixtureId.padEnd(31);
       const nodesStr = String(d.capturedElementCount).padStart(7);
       const avgPropsStr = String(d.averagePropertiesPerEligibleElement).padStart(8);
@@ -186,10 +191,11 @@ async function runCorpusCapture(options = {}) {
       const canvasStr = '  YES   ';
       const dictStr = String(d.styleDictionaryEntryCount).padStart(11);
       const cpStr = `${d.customPropertyDiscoveryStatus}(${d.customPropertyNameCount})`.padStart(11);
+      const probeStr = `${ps.capturedCount}/${ps.unchangedCount}/${ps.unsupportedCount}`.padStart(14);
       const statusStr = ' PASS ';
-      log(`${idStr} | ${nodesStr} | ${avgPropsStr} | ${covStr} |${canvasStr}| ${dictStr} | ${cpStr} |${statusStr}`);
+      log(`${idStr} | ${nodesStr} | ${avgPropsStr} | ${covStr} |${canvasStr}| ${dictStr} | ${cpStr} | ${probeStr} |${statusStr}`);
     } else {
-      log(`${r.fixtureId.padEnd(31)} |   ERROR |    ERROR |    ERROR |  ERROR |       ERROR |       ERROR |  FAIL `);
+      log(`${r.fixtureId.padEnd(31)} |   ERROR |    ERROR |    ERROR |  ERROR |       ERROR |       ERROR |          ERROR |  FAIL `);
     }
   }
 

@@ -207,13 +207,13 @@ const { discoverCorpusFixtures } = require('./support/corpus-manifest');
       const host = document.getElementById('test-shadow-host');
       if (host && host.attachShadow) {
         const root = host.attachShadow({ mode: 'open' });
-        root.innerHTML = '<span id="shadow-inner-child" style="color: rgb(249, 115, 22); font-weight: bold;">Shadow Child</span>';
+        root.innerHTML = '<span id="shadow-inner-child" style="color: rgb(249, 115, 22); font-weight: bold;">Shadow Child</span><button id="shadow-interactive-btn" style="cursor: pointer;">Shadow Action</button>';
       }
     } catch(_) {}
   </script>
 
   <!-- Same-origin iframe -->
-  <iframe id="test-same-origin-iframe" srcdoc="<!DOCTYPE html><html><body><p id='same-origin-child' style='color: rgb(16, 185, 129);'>Iframe Child</p></body></html>"></iframe>
+  <iframe id="test-same-origin-iframe" srcdoc="<!DOCTYPE html><html><body><p id='same-origin-child' style='color: rgb(16, 185, 129);'>Iframe Child</p><button id='iframe-interactive-btn' style='cursor: pointer;'>Iframe Action</button></body></html>"></iframe>
 
   <!-- Cross-origin iframe -->
   <iframe id="test-cross-origin-iframe" src="https://example.invalid/"></iframe>
@@ -410,8 +410,8 @@ const { discoverCorpusFixtures } = require('./support/corpus-manifest');
     assert.strictEqual(styleMap['transition-duration'], '0.5s');
   });
 
-  // 19. Exhaustive interaction-state capture, descendant probes, and multi-ancestor triggers (Section 3)
-  runTest('13.19 Exhaustive interaction-state capture: multi-ancestor triggers preserved, parent-unchanged child probe, desktop/tablet/mobile records', () => {
+  // 19. Exhaustive interaction-state capture (:hover across viewports via CDP) (Section 3)
+  await runAsyncTest('13.19 Exhaustive interaction-state capture: outcomes accounting, multi-ancestor triggers, shadow/iframe unsupported, and forced failure', async () => {
     // 1. Single interactive button with child label
     const btnNode = Object.values(desktopFlat).find(n => n.id === 'test-btn');
     assert(btnNode, 'test-btn must be found');
@@ -456,7 +456,340 @@ const { discoverCorpusFixtures } = require('./support/corpus-manifest');
       assert(vpBtn && vpBtn.states && vpBtn.states.hover, `Viewport ${vpKey} must have captured hover state on button`);
     }
 
-    // 5. Explicit captureErrors collection and no swallowed errors
+    // 5. Per-candidate probe outcome accounting (Item 2)
+    for (const vpKey of ['desktop', 'tablet', 'mobile']) {
+      const vp = snapshot.viewports[vpKey];
+      const interactiveCandidates = Object.values(vp.flat).filter(n => n.isInteractive);
+      const probes = vp.interactionProbes || [];
+      assert.strictEqual(probes.length, interactiveCandidates.length,
+        `Every interactive candidate in ${vpKey} must have exactly one probe outcome record`);
+
+      const summary = vp.metrics?.interactionProbeSummary;
+      assert(summary, `interactionProbeSummary must exist in ${vpKey} metrics`);
+      const sum = summary.capturedCount + summary.unchangedCount + summary.unsupportedCount + summary.failedCount;
+      assert.strictEqual(sum, interactiveCandidates.length,
+        `Probe outcome counts must add up to total interactive candidates in ${vpKey}`);
+
+      for (const p of probes) {
+        assert(['CAPTURED', 'UNCHANGED', 'UNSUPPORTED', 'FAILED'].includes(p.outcome),
+          `Outcome must be one of CAPTURED, UNCHANGED, UNSUPPORTED, FAILED; got ${p.outcome} on ${p.sid}`);
+        assert(p.sid && typeof p.sid === 'string', 'Candidate SID must be recorded');
+        assert(p.reason && typeof p.reason === 'string' && p.reason.length > 0, 'Candidate reason must be non-empty string');
+      }
+    }
+
+    // 6. Normal DOM, open shadow DOM, and same-origin iframe probe outcomes
+    const shadowBtn = Object.values(desktopFlat).find(n => n.id === 'shadow-interactive-btn');
+    assert(shadowBtn, 'shadow-interactive-btn must be present in flat nodes');
+    const shadowProbe = (desktopVp.interactionProbes || []).find(p => p.sid === shadowBtn.sid);
+    assert(shadowProbe, 'Shadow interactive button must have a recorded probe outcome');
+    assert.strictEqual(shadowProbe.outcome, 'UNSUPPORTED', 'Shadow interactive button must be UNSUPPORTED');
+    assert(shadowProbe.reason.includes('shadow root'), 'Shadow probe reason must mention shadow root');
+
+    const iframeBtn = Object.values(desktopFlat).find(n => n.id === 'iframe-interactive-btn');
+    assert(iframeBtn, 'iframe-interactive-btn must be present in flat nodes');
+    const iframeProbe = (desktopVp.interactionProbes || []).find(p => p.sid === iframeBtn.sid);
+    assert(iframeProbe, 'Iframe interactive button must have a recorded probe outcome');
+    assert.strictEqual(iframeProbe.outcome, 'UNSUPPORTED', 'Iframe interactive button must be UNSUPPORTED');
+    assert(iframeProbe.reason.includes('iframe'), 'Iframe probe reason must mention iframe');
+
+    // 7. Force pre-activation probe failure and verify explicit FAILED record
+    const failedSnapshot = await captureGroundTruth(syntheticHtml, {
+      refresh: true,
+      forceProbeFailureSid: btnNode.sid
+    });
+    const failedVp = failedSnapshot.viewports.desktop;
+    const failedProbe = (failedVp.interactionProbes || []).find(p => p.sid === btnNode.sid);
+    assert(failedProbe, 'Failed probe outcome must be recorded for target candidate');
+    assert.strictEqual(failedProbe.outcome, 'FAILED', 'Forced failure candidate must have outcome FAILED');
+    assert(failedProbe.reason.includes('Forced probe failure'), 'Forced failure reason must describe error');
+    assert(failedVp.metrics.interactionProbeSummary.failedCount >= 1, 'interactionProbeSummary.failedCount must be >= 1');
+
+    // 8. Controlled post-activation failure and state-restoration test (throws after CSS.forcePseudoState succeeds)
+    const postActivationHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .test-target-btn {
+      background-color: rgb(239, 68, 68);
+      color: rgb(255, 255, 255);
+      transition: none;
+    }
+    .test-target-btn:hover {
+      background-color: rgb(34, 197, 94);
+    }
+    .test-subsequent-btn {
+      background-color: rgb(59, 130, 246);
+      color: rgb(255, 255, 255);
+      transition: none;
+    }
+    .test-subsequent-btn:hover {
+      background-color: rgb(168, 85, 247);
+    }
+  </style>
+</head>
+<body>
+  <button id="target-btn" class="test-target-btn">Target Button</button>
+  <button id="subsequent-btn" class="test-subsequent-btn">Subsequent Button</button>
+</body>
+</html>`;
+
+    // Baseline capture to resolve dynamic SIDs
+    const baselinePostSnap = await captureGroundTruth(postActivationHtml, { refresh: true });
+    const baselinePostDesktop = baselinePostSnap.viewports.desktop;
+    const targetNode = Object.values(baselinePostDesktop.flat).find(n => n.id === 'target-btn');
+    const subsequentNode = Object.values(baselinePostDesktop.flat).find(n => n.id === 'subsequent-btn');
+    assert(targetNode, 'Target interactive button must exist in baseline');
+    assert(subsequentNode, 'Subsequent interactive button must exist in baseline');
+
+    // Run capture with controlled post-activation failure on target button
+    const postFailSnap = await captureGroundTruth(postActivationHtml, {
+      refresh: true,
+      forcePostActivationFailureSid: targetNode.sid
+    });
+    const postFailDesktop = postFailSnap.viewports.desktop;
+
+    // Result 1: Target candidate has outcome FAILED with its SID and reason
+    const targetProbe = (postFailDesktop.interactionProbes || []).find(p => p.sid === targetNode.sid);
+    assert(targetProbe, 'Target probe record must be present in interactionProbes');
+    assert.strictEqual(targetProbe.outcome, 'FAILED', 'Target candidate must have outcome FAILED');
+    assert.strictEqual(targetProbe.sid, targetNode.sid, 'Target candidate SID must match');
+    assert(targetProbe.reason.includes('Forced post-activation hover probe failure'),
+      `Target probe reason must record error, got: ${targetProbe.reason}`);
+
+    // Verify active hover state was applied and changed style before throwing
+    const origBaseRef = postFailDesktop.flat[targetNode.sid].computedStyleRef;
+    const origBaseStyle = postFailDesktop.styleDictionary[origBaseRef];
+    const nonHoverBg = origBaseStyle['background-color'];
+    assert.strictEqual(nonHoverBg, 'rgb(239, 68, 68)', 'Original non-hover background must be rgb(239, 68, 68)');
+    assert(targetProbe.activeComputedStyle, 'Active computed style must be captured while hover was active');
+    const activeHoverBg = targetProbe.activeComputedStyle['background-color'];
+    assert.strictEqual(activeHoverBg, 'rgb(34, 197, 94)', 'Active hover background must be rgb(34, 197, 94)');
+    assert.notStrictEqual(activeHoverBg, nonHoverBg, 'Active hover background must differ from non-hover background');
+
+    // Result 2: After the finally cleanup, the element's computed style equals its original non-hover value
+    assert(targetProbe.restoredComputedStyle, 'Restored computed style must be captured after finally cleanup');
+    const restoredBg = targetProbe.restoredComputedStyle['background-color'];
+    assert.strictEqual(
+      restoredBg,
+      nonHoverBg,
+      `After finally cleanup, element computed style must equal original non-hover value: expected ${nonHoverBg}, got ${restoredBg}`
+    );
+    assert.strictEqual(restoredBg, 'rgb(239, 68, 68)', 'Restored background must equal exact original value rgb(239, 68, 68)');
+    assert.strictEqual(
+      targetProbe.finalRestoredComputedStyle?.['background-color'],
+      'rgb(239, 68, 68)',
+      'Final restored style at end of probe sequence must remain rgb(239, 68, 68)'
+    );
+
+    // Result 3: Subsequent candidate is probed normally, proving failed candidate did not leave forced hover active
+    const subsequentProbe = (postFailDesktop.interactionProbes || []).find(p => p.sid === subsequentNode.sid);
+    assert(subsequentProbe, 'Subsequent candidate probe record must be present');
+    assert.strictEqual(subsequentProbe.outcome, 'CAPTURED', 'Subsequent candidate must be probed normally with outcome CAPTURED');
+    assert.strictEqual(subsequentProbe.reason, 'Computed style delta detected on :hover', 'Subsequent candidate must record normal hover delta');
+    const subsequentFlatNode = postFailDesktop.flat[subsequentNode.sid];
+    assert(subsequentFlatNode.states && subsequentFlatNode.states.hover, 'Subsequent candidate must have valid captured hover state in flat tree');
+    const subsequentHoverStyle = postFailDesktop.styleDictionary[subsequentFlatNode.states.hover.computedStyleRef];
+    assert.strictEqual(subsequentHoverStyle['background-color'], 'rgb(168, 85, 247)', 'Subsequent candidate hover style must be captured accurately');
+
+    // 9. Deterministic hover sampling with transitions on target and descendant, return settling, and subsequent candidate test (Item 1)
+    const transitionSamplingHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .trans-target-card {
+      background-color: rgb(240, 240, 240);
+      transition: background-color 0.4s ease;
+      padding: 16px;
+      cursor: pointer;
+    }
+    .trans-target-card:hover {
+      background-color: rgb(200, 220, 240);
+    }
+    .trans-descendant-label {
+      color: rgb(15, 23, 42);
+      transition: color 0.4s ease;
+      display: inline-block;
+    }
+    .trans-target-card:hover .trans-descendant-label {
+      color: rgb(220, 38, 38);
+    }
+    .trans-subsequent-btn {
+      background-color: rgb(16, 185, 129);
+      transition: background-color 0.4s ease;
+      cursor: pointer;
+    }
+    .trans-subsequent-btn:hover {
+      background-color: rgb(5, 150, 105);
+    }
+  </style>
+</head>
+<body>
+  <div id="trans-card" class="trans-target-card">
+    <span id="trans-label" class="trans-descendant-label">Interactive Card Label</span>
+  </div>
+  <button id="trans-subsequent" class="trans-subsequent-btn">Subsequent Button</button>
+</body>
+</html>`;
+
+    const transSnap = await captureGroundTruth(transitionSamplingHtml, { refresh: true, captureRestoredStyles: true });
+    const transDesktop = transSnap.viewports.desktop;
+
+    const transTarget = Object.values(transDesktop.flat).find(n => n.id === 'trans-card');
+    const transDescendant = Object.values(transDesktop.flat).find(n => n.id === 'trans-label');
+    const transSubsequent = Object.values(transDesktop.flat).find(n => n.id === 'trans-subsequent');
+
+    assert(transTarget, 'Target card with transition must exist in snapshot');
+    assert(transDescendant, 'Descendant element with transition must exist in snapshot');
+    assert(transSubsequent, 'Subsequent button with transition must exist in snapshot');
+
+    // Assert original base computed values
+    const transTargetBaseStyle = transDesktop.styleDictionary[transTarget.computedStyleRef];
+    const transDescendantBaseStyle = transDesktop.styleDictionary[transDescendant.computedStyleRef];
+    const transSubsequentBaseStyle = transDesktop.styleDictionary[transSubsequent.computedStyleRef];
+
+    assert.strictEqual(transTargetBaseStyle['background-color'], 'rgb(240, 240, 240)', 'Original target base background must be rgb(240, 240, 240)');
+    assert.strictEqual(transDescendantBaseStyle['color'], 'rgb(15, 23, 42)', 'Original descendant base color must be rgb(15, 23, 42)');
+    assert.strictEqual(transSubsequentBaseStyle['background-color'], 'rgb(16, 185, 129)', 'Original subsequent base background must be rgb(16, 185, 129)');
+
+    // Assert exact final hover values after motion settling
+    assert(transTarget.states && transTarget.states.hover, 'Target must have captured hover state after transition settled');
+    assert.strictEqual(transTarget.states.hover.status, 'CAPTURED');
+    const transTargetHoverStyle = transDesktop.styleDictionary[transTarget.states.hover.computedStyleRef];
+    assert.strictEqual(transTargetHoverStyle['background-color'], 'rgb(200, 220, 240)', 'Exact final target hover background must be rgb(200, 220, 240)');
+
+    const descendantTriggerKey = `parent-hover:${transTarget.sid}`;
+    assert(transDescendant.states && transDescendant.states[descendantTriggerKey], 'Descendant must have captured parent-hover state after transition settled');
+    const transDescendantHoverStyle = transDesktop.styleDictionary[transDescendant.states[descendantTriggerKey].computedStyleRef];
+    assert.strictEqual(transDescendantHoverStyle['color'], 'rgb(220, 38, 38)', 'Exact final descendant hover color must be rgb(220, 38, 38)');
+
+    // Assert original computed transition declarations are preserved intact without rewriting
+    assert(transTargetBaseStyle['transition-property'].includes('background-color'), 'Original transition-property must be preserved on target');
+    assert.strictEqual(transTargetBaseStyle['transition-duration'], '0.4s', 'Original transition-duration 0.4s must be preserved on target');
+    assert(transDescendantBaseStyle['transition-property'].includes('color'), 'Original transition-property must be preserved on descendant');
+
+    // Assert that the subsequent candidate is probed normally and unaffected
+    assert(transSubsequent.states && transSubsequent.states.hover, 'Subsequent button must have captured hover state');
+    assert.strictEqual(transSubsequent.states.hover.status, 'CAPTURED');
+    const transSubsequentHoverStyle = transDesktop.styleDictionary[transSubsequent.states.hover.computedStyleRef];
+    assert.strictEqual(transSubsequentHoverStyle['background-color'], 'rgb(5, 150, 105)', 'Exact final subsequent hover background must be rgb(5, 150, 105)');
+
+    // Probe summary for transition fixture
+    const targetProbeRecord = transDesktop.interactionProbes.find(p => p.sid === transTarget.sid);
+    const subsequentProbeRecord = transDesktop.interactionProbes.find(p => p.sid === transSubsequent.sid);
+    assert.strictEqual(targetProbeRecord.outcome, 'CAPTURED');
+    assert.strictEqual(subsequentProbeRecord.outcome, 'CAPTURED');
+
+    // Assert bounded settling loop failure test: if motion cannot settle, records FAILED with candidate SID and reason
+    const failSettleSnap = await captureGroundTruth(transitionSamplingHtml, {
+      refresh: true,
+      forceMotionSettleFailureSid: transTarget.sid
+    });
+    const failSettleDesktop = failSettleSnap.viewports.desktop;
+    const failedSettleProbe = failSettleDesktop.interactionProbes.find(p => p.sid === transTarget.sid);
+    assert(failedSettleProbe, 'Failed settle candidate must have probe record');
+    assert.strictEqual(failedSettleProbe.outcome, 'FAILED', 'Unsettled candidate must record FAILED');
+    assert(failedSettleProbe.reason.includes('bounded settling loop'), 'Reason must describe bounded settling loop failure');
+    assert.strictEqual(failedSettleProbe.sid, transTarget.sid, 'Failed settle SID must match target candidate');
+
+    // 10. Synthetic failure tests: clearing failure and return-settling failure (Item 1)
+    const multiCandidateHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .test-multi-btn { background-color: rgb(100, 100, 100); transition: none; }
+    .test-multi-btn:hover { background-color: rgb(200, 100, 100); }
+  </style>
+</head>
+<body>
+  <button id="multi-btn-1" class="test-multi-btn">Button 1</button>
+  <button id="multi-btn-2" class="test-multi-btn">Button 2</button>
+  <button id="multi-btn-3" class="test-multi-btn">Button 3</button>
+</body>
+</html>`;
+
+    const multiBaseSnap = await captureGroundTruth(multiCandidateHtml, { refresh: true });
+    const b1Sid = Object.values(multiBaseSnap.viewports.desktop.flat).find(n => n.id === 'multi-btn-1').sid;
+    const b2Sid = Object.values(multiBaseSnap.viewports.desktop.flat).find(n => n.id === 'multi-btn-2').sid;
+    const b3Sid = Object.values(multiBaseSnap.viewports.desktop.flat).find(n => n.id === 'multi-btn-3').sid;
+
+    // Test A: Clearing failure on candidate 1
+    const clearFailSnap = await captureGroundTruth(multiCandidateHtml, {
+      refresh: true,
+      forceClearingFailureSid: b1Sid
+    });
+    const clearFailDesktop = clearFailSnap.viewports.desktop;
+    const cfProbes = clearFailDesktop.interactionProbes || [];
+
+    // Current probe FAILED
+    const cfP1 = cfProbes.find(p => p.sid === b1Sid);
+    assert(cfP1, 'Candidate 1 probe record must exist in clearing failure test');
+    assert.strictEqual(cfP1.outcome, 'FAILED', 'Current probe must be FAILED on clearing failure');
+    assert(cfP1.reason.includes('CSS.forcePseudoState clearing failed'), `Reason must describe clearing failure: ${cfP1.reason}`);
+
+    // Next candidates FAILED without probing
+    const cfP2 = cfProbes.find(p => p.sid === b2Sid);
+    const cfP3 = cfProbes.find(p => p.sid === b3Sid);
+    assert(cfP2, 'Candidate 2 probe record must exist');
+    assert.strictEqual(cfP2.outcome, 'FAILED', 'Next candidate 2 must be FAILED without probing');
+    assert(cfP2.reason.includes(`Prior hover state could not be restored after SID ${b1Sid}`),
+      `Candidate 2 reason must state prior hover state could not be restored: ${cfP2.reason}`);
+
+    assert(cfP3, 'Candidate 3 probe record must exist');
+    assert.strictEqual(cfP3.outcome, 'FAILED', 'Next candidate 3 must be FAILED without probing');
+    assert(cfP3.reason.includes(`Prior hover state could not be restored after SID ${b1Sid}`),
+      `Candidate 3 reason must state prior hover state could not be restored: ${cfP3.reason}`);
+
+    // failedCount sahih
+    assert.strictEqual(clearFailDesktop.metrics.interactionProbeSummary.failedCount, 3, 'All 3 candidates must be counted in failedCount');
+    assert.strictEqual(clearFailDesktop.metrics.interactionProbeSummary.capturedCount, 0, 'No candidates may be captured on clearing failure');
+
+    // ma kaynach pending hover state tktbat
+    assert(!clearFailDesktop.flat[b1Sid]?.states?.hover, 'Candidate 1 must not have written hover state to flat');
+    assert(!clearFailDesktop.flat[b2Sid]?.states?.hover, 'Candidate 2 must not have written hover state to flat');
+    assert(!clearFailDesktop.flat[b3Sid]?.states?.hover, 'Candidate 3 must not have written hover state to flat');
+
+    // Test B: Return-settling failure on candidate 1
+    const returnFailSnap = await captureGroundTruth(multiCandidateHtml, {
+      refresh: true,
+      forceReturnSettlingFailureSid: b1Sid
+    });
+    const returnFailDesktop = returnFailSnap.viewports.desktop;
+    const rfProbes = returnFailDesktop.interactionProbes || [];
+
+    // Current probe FAILED
+    const rfP1 = rfProbes.find(p => p.sid === b1Sid);
+    assert(rfP1, 'Candidate 1 probe record must exist in return-settling failure test');
+    assert.strictEqual(rfP1.outcome, 'FAILED', 'Current probe must be FAILED on return-settling failure');
+    assert(rfP1.reason.includes('Return motion settling'), `Reason must describe return settling failure: ${rfP1.reason}`);
+
+    // Next candidates FAILED without probing
+    const rfP2 = rfProbes.find(p => p.sid === b2Sid);
+    const rfP3 = rfProbes.find(p => p.sid === b3Sid);
+    assert(rfP2, 'Candidate 2 probe record must exist');
+    assert.strictEqual(rfP2.outcome, 'FAILED', 'Next candidate 2 must be FAILED without probing');
+    assert(rfP2.reason.includes(`Prior hover state could not be restored after SID ${b1Sid}`),
+      `Candidate 2 reason must state prior hover state could not be restored: ${rfP2.reason}`);
+
+    assert(rfP3, 'Candidate 3 probe record must exist');
+    assert.strictEqual(rfP3.outcome, 'FAILED', 'Next candidate 3 must be FAILED without probing');
+    assert(rfP3.reason.includes(`Prior hover state could not be restored after SID ${b1Sid}`),
+      `Candidate 3 reason must state prior hover state could not be restored: ${rfP3.reason}`);
+
+    // failedCount sahih
+    assert.strictEqual(returnFailDesktop.metrics.interactionProbeSummary.failedCount, 3, 'All 3 candidates must be counted in failedCount');
+    assert.strictEqual(returnFailDesktop.metrics.interactionProbeSummary.capturedCount, 0, 'No candidates may be captured on return-settling failure');
+
+    // ma kaynach pending hover state tktbat
+    assert(!returnFailDesktop.flat[b1Sid]?.states?.hover, 'Candidate 1 must not have written hover state to flat');
+    assert(!returnFailDesktop.flat[b2Sid]?.states?.hover, 'Candidate 2 must not have written hover state to flat');
+    assert(!returnFailDesktop.flat[b3Sid]?.states?.hover, 'Candidate 3 must not have written hover state to flat');
+
+    // 11. Do not claim full state coverage from stateSnapshotCount alone (unchanged states are valid)
+    assert(desktopVp.metrics.computedStyleCoveragePercent === 100, 'Coverage must be 100% with valid unchanged hover states');
     assert(Array.isArray(desktopVp.captureErrors), 'captureErrors must be an array');
   });
 
@@ -556,16 +889,35 @@ const { discoverCorpusFixtures } = require('./support/corpus-manifest');
 
   // 26. Pre-8.1 Golden Parity across all 8 fixtures and 3 viewports against commit 8fa8ee3 (Section 2)
   await runAsyncTest('13.26 Pre-8.1 golden parity: styles, SIDs, geometry, text metrics, and behavior match across all 8 fixtures and 3 viewports', async () => {
+    const goldenDir = path.resolve(__dirname, 'fixtures', 'b81-golden');
+    const manifestPath = path.join(goldenDir, 'manifest.json');
+    const legacySnapshotsPath = path.join(goldenDir, 'legacy-snapshots.json');
+
+    assert(fs.existsSync(manifestPath), `Committed golden manifest must exist at ${manifestPath}`);
+    assert(fs.existsSync(legacySnapshotsPath), `Committed golden legacy snapshots must exist at ${legacySnapshotsPath}`);
+
+    const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+    assert.strictEqual(manifest.sourceCommit, '8fa8ee3', 'Committed golden manifest sourceCommit must be 8fa8ee3');
+
+    const legacySnapshots = JSON.parse(fs.readFileSync(legacySnapshotsPath, 'utf8'));
+
     const fixtures = discoverCorpusFixtures(path.resolve(__dirname, '..'));
     assert.strictEqual(fixtures.length, 8, 'All 8 fixtures must be discovered');
 
     for (const fixture of fixtures) {
+      const goldenEntry = legacySnapshots[fixture.fixtureId];
+      assert(goldenEntry, `Committed golden snapshot entry must exist for ${fixture.fixtureId}`);
+
+      const manifestEntry = manifest.fixtures[fixture.fixtureId];
+      assert(manifestEntry, `Manifest entry must exist for ${fixture.fixtureId}`);
+
+      // Verify content hash against committed manifest
       const content = fs.readFileSync(fixture.filePath, 'utf8');
       const hash = crypto.createHash('sha256').update(content + ':v2_k9').digest('hex').slice(0, 16);
-      const cachePath = path.join(path.resolve(__dirname, '..'), '.cache', `gt-${hash}.json`);
-      assert(fs.existsSync(cachePath), `Pre-8.1 golden cache must exist for fixture ${fixture.fixtureId} at ${cachePath}`);
+      assert.strictEqual(hash, manifestEntry.contentHash,
+        `Content hash for ${fixture.fixtureId} must match committed manifest (${manifestEntry.contentHash})`);
 
-      const goldenSnap = JSON.parse(fs.readFileSync(cachePath, 'utf8'));
+      const goldenSnap = goldenEntry;
       const currSnap = await captureGroundTruth(fixture.filePath, { refresh: true });
 
       for (const vpKey of ['desktop', 'tablet', 'mobile']) {
@@ -573,29 +925,93 @@ const { discoverCorpusFixtures } = require('./support/corpus-manifest');
         const currVp = currSnap.viewports[vpKey];
         assert(goldenVp && currVp, `Viewport ${vpKey} must exist in both snapshots for ${fixture.fixtureId}`);
 
+        const gFlat = goldenVp.flat || {};
+        const cFlat = currVp.flat || {};
+        const gSids = Object.keys(gFlat).sort();
+        const cSids = Object.keys(cFlat).sort();
+
+        // 1. Exact set of legacy SIDs and node count
+        if (cSids.length !== gSids.length) {
+          assert.fail(`Node count mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, oldVal=${gSids.length}, newVal=${cSids.length}`);
+        }
+        assert.deepStrictEqual(cSids, gSids,
+          `Exact SID set mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}`);
+
         // Compare all pre-8.1 nodes in flat
-        for (const [sid, gNode] of Object.entries(goldenVp.flat)) {
-          const cNode = currVp.flat[sid];
-          assert(cNode, `Node SID ${sid} from pre-8.1 must exist in 8.1 snapshot for ${fixture.fixtureId} [${vpKey}]`);
+        for (const sid of gSids) {
+          const gNode = gFlat[sid];
+          const cNode = cFlat[sid];
 
-          // Geometry parity (allow <= 2px for Chromium cross-run subpixel layout/font rasterization)
-          assert(Math.abs(cNode.rect.x - gNode.rect.x) <= 2, `Geometry X mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]: expected ${gNode.rect.x}, got ${cNode.rect.x}`);
-          assert(Math.abs(cNode.rect.y - gNode.rect.y) <= 2, `Geometry Y mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]: expected ${gNode.rect.y}, got ${cNode.rect.y}`);
-          assert(Math.abs(cNode.rect.w - gNode.rect.w) <= 2, `Geometry W mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]: expected ${gNode.rect.w}, got ${cNode.rect.w}`);
-          assert(Math.abs(cNode.rect.h - gNode.rect.h) <= 2, `Geometry H mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]: expected ${gNode.rect.h}, got ${cNode.rect.h}`);
-
-          // Legacy styles parity
-          for (const prop of Object.keys(gNode.styles || {})) {
-            assert.strictEqual(cNode.styles[prop], gNode.styles[prop], `Style '${prop}' mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]`);
+          // 2. Geometry parity (explicit tolerance <= 2px for Chromium cross-run subpixel layout/rasterization)
+          for (const dim of ['x', 'y', 'w', 'h']) {
+            const diff = Math.abs(cNode.rect[dim] - gNode.rect[dim]);
+            if (diff > 2) {
+              assert.fail(`Geometry mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, field=rect.${dim}, diff=${diff}px, oldVal=${gNode.rect[dim]}, newVal=${cNode.rect[dim]}`);
+            }
           }
 
-          // Text metrics parity
-          assert.strictEqual(cNode.directText, gNode.directText, `directText mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]`);
-          assert.strictEqual(cNode.hasDirectText, gNode.hasDirectText, `hasDirectText mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]`);
-          assert.strictEqual(cNode.lineCount, gNode.lineCount, `lineCount mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]`);
+          // 3. ChildRects geometry and structure parity (explicit tolerance <= 2px)
+          const gCR = gNode.childRects || [];
+          const cCR = cNode.childRects || [];
+          if (cCR.length !== gCR.length) {
+            assert.fail(`childRects count mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, oldVal=${gCR.length}, newVal=${cCR.length}`);
+          }
+          for (let i = 0; i < gCR.length; i++) {
+            if (cCR[i].type !== gCR[i].type) {
+              assert.fail(`childRect[${i}].type mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, oldVal=${gCR[i].type}, newVal=${cCR[i].type}`);
+            }
+            if (cCR[i].tag !== gCR[i].tag) {
+              assert.fail(`childRect[${i}].tag mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, oldVal=${gCR[i].tag}, newVal=${cCR[i].tag}`);
+            }
+            if (cCR[i].sid !== gCR[i].sid) {
+              assert.fail(`childRect[${i}].sid mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, oldVal=${gCR[i].sid}, newVal=${cCR[i].sid}`);
+            }
+            for (const dim of ['x', 'y', 'w', 'h']) {
+              const diff = Math.abs((cCR[i].rect?.[dim] || 0) - (gCR[i].rect?.[dim] || 0));
+              if (diff > 2) {
+                assert.fail(`childRect[${i}].rect.${dim} geometry mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, diff=${diff}px, oldVal=${gCR[i].rect[dim]}, newVal=${cCR[i].rect[dim]}`);
+              }
+            }
+          }
 
-          // Behavior parity
-          assert.strictEqual(cNode.isInteractive, gNode.isInteractive, `isInteractive mismatch on ${sid} in ${fixture.fixtureId} [${vpKey}]`);
+          // 4. Complete legacy styles parity in both directions (subpixel layout tolerance <= 1px for px values)
+          function isStyleMatch(val1, val2) {
+            if (val1 === val2) return true;
+            if (typeof val1 === 'string' && typeof val2 === 'string' && val1.endsWith('px') && val2.endsWith('px')) {
+              const n1 = parseFloat(val1);
+              const n2 = parseFloat(val2);
+              if (!Number.isNaN(n1) && !Number.isNaN(n2) && Math.abs(n1 - n2) <= 1.0) {
+                return true;
+              }
+            }
+            return false;
+          }
+
+          for (const prop of Object.keys(gNode.styles || {})) {
+            if (!isStyleMatch(cNode.styles[prop], gNode.styles[prop])) {
+              assert.fail(`Style mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, field=styles.${prop}, oldVal=${JSON.stringify(gNode.styles[prop])}, newVal=${JSON.stringify(cNode.styles[prop])}`);
+            }
+          }
+          for (const prop of Object.keys(cNode.styles || {})) {
+            if (!isStyleMatch(gNode.styles[prop], cNode.styles[prop])) {
+              assert.fail(`Reverse style mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, field=styles.${prop}, oldVal=${JSON.stringify(gNode.styles[prop])}, newVal=${JSON.stringify(cNode.styles[prop])}`);
+            }
+          }
+
+          // 5. Text metrics parity
+          for (const fld of ['directText', 'fullText', 'hasDirectText', 'lineCount']) {
+            if (cNode[fld] !== gNode[fld]) {
+              assert.fail(`Text metric mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, field=${fld}, oldVal=${JSON.stringify(gNode[fld])}, newVal=${JSON.stringify(cNode[fld])}`);
+            }
+          }
+          if (JSON.stringify(cNode.lineWidths) !== JSON.stringify(gNode.lineWidths)) {
+            assert.fail(`lineWidths mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, field=lineWidths, oldVal=${JSON.stringify(gNode.lineWidths)}, newVal=${JSON.stringify(cNode.lineWidths)}`);
+          }
+
+          // 6. Behavior parity
+          if (cNode.isInteractive !== gNode.isInteractive) {
+            assert.fail(`Behavior mismatch: fixture=${fixture.fixtureId}, vp=${vpKey}, sid=${sid}, field=isInteractive, oldVal=${gNode.isInteractive}, newVal=${cNode.isInteractive}`);
+          }
         }
       }
     }

@@ -196,6 +196,7 @@ function inPageExtract(options = {}) {
 
   // 1. Independent DOM Inventory Pass (Section 1)
   function enumerateLiveDomInventory() {
+    let invCounter = 0;
     const eligibleSids = [];
     const visited = new Set();
 
@@ -209,9 +210,8 @@ function inPageExtract(options = {}) {
           if (el === docEl) {
             sid = 'sid-0';
           } else {
-            sid = `sid-${++sidCounter}`;
+            sid = `sid-${++invCounter}`;
           }
-          el.setAttribute('data-sid', sid);
         }
         eligibleSids.push(sid);
       }
@@ -1170,6 +1170,14 @@ function calculateGroundTruthCoverage(snapshot, viewportKey = 'desktop') {
     duplicateSidRecordsCount: duplicateSidsCount,
     unsupportedRegionCount: (vp.unsupportedRegions || []).length,
     captureWarningCount: (vp.captureErrors || []).length + (vp.customPropertyDiscovery?.warnings || []).length,
+    interactionProbeSummary: {
+      totalCandidates: (vp.interactionProbes || []).length,
+      capturedCount: (vp.interactionProbes || []).filter(p => p.outcome === 'CAPTURED').length,
+      unchangedCount: (vp.interactionProbes || []).filter(p => p.outcome === 'UNCHANGED').length,
+      unsupportedCount: (vp.interactionProbes || []).filter(p => p.outcome === 'UNSUPPORTED').length,
+      failedCount: (vp.interactionProbes || []).filter(p => p.outcome === 'FAILED').length,
+      outcomes: vp.interactionProbes || []
+    },
     snapshotSizeBytes
   };
 }
@@ -1247,7 +1255,7 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
         const htmlToLoad = rawHtml.includes('<head>')
           ? rawHtml.replace('<head>', '<head>' + shadowHook)
           : (shadowHook + rawHtml);
-        await page.setContent(htmlToLoad, { waitUntil: 'domcontentloaded', timeout: 10000 }).catch(() => {});
+        await page.setContent(htmlToLoad, { waitUntil: ['domcontentloaded', 'load'], timeout: 10000 }).catch(() => {});
       }
 
       // 1. Live font readiness wait with bounded timeout (Section 7)
@@ -1334,7 +1342,8 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
         snapshot.fonts = vpResults.fonts;
       }
 
-      // 5. Exhaustive Interaction-State Capture (:hover across viewports via CDP) (Section 3)
+      // 5. Exhaustive Interaction-State Capture (:hover across viewports via CDP)
+      vpResults.interactionProbes = [];
       try {
         const client = await page.target().createCDPSession();
         await client.send('DOM.enable').catch(() => {});
@@ -1342,136 +1351,401 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
         const doc = await client.send('DOM.getDocument').catch(() => null);
         const rootNodeId = doc?.root?.nodeId;
 
-        if (rootNodeId) {
-          const interactiveSids = Object.values(vpResults.flat).filter(n => n.isInteractive).map(n => n.sid);
+        // Deterministic motion settling helper using Web Animations API (Item 1)
+        async function settleHoverMotion(maxIterations = 10, sampleTime = 0) {
+          return await page.evaluate(({ maxPasses, sTime }) => {
+            if (document.body) void document.body.offsetHeight;
+            if (document.documentElement) void document.documentElement.clientHeight;
 
-          for (const sid of interactiveSids) {
-            try {
-              const { nodeId } = await client.send('DOM.querySelector', {
+            if (typeof document.getAnimations !== 'function') {
+              return { settled: true, iterations: 0 };
+            }
+
+            let iterations = 0;
+            while (iterations < maxPasses) {
+              iterations++;
+              if (document.body) void document.body.offsetHeight;
+
+              const anims = document.getAnimations({ subtree: true });
+              let hasUnsettled = false;
+
+              for (const a of anims) {
+                const isTransition = a.constructor.name === 'CSSTransition' || Boolean(a.transitionProperty);
+                if (isTransition) {
+                  if (a.playState === 'running' || a.playState === 'pending') {
+                    try {
+                      a.finish();
+                    } catch (_) {
+                      try {
+                        a.currentTime = a.effect?.getTiming()?.duration || 0;
+                      } catch (_) {}
+                    }
+                    hasUnsettled = true;
+                  }
+                } else {
+                  if (a.playState === 'running' || a.playState === 'pending') {
+                    try {
+                      a.pause();
+                      a.currentTime = sTime;
+                    } catch (_) {}
+                    hasUnsettled = true;
+                  }
+                }
+              }
+
+              if (document.body) void document.body.offsetHeight;
+
+              if (!hasUnsettled) {
+                return { settled: true, iterations };
+              }
+
+              const remaining = document.getAnimations({ subtree: true });
+              const running = remaining.filter(a => a.playState === 'running' || a.playState === 'pending');
+              if (running.length === 0) {
+                return { settled: true, iterations };
+              }
+            }
+
+            const remaining = document.getAnimations({ subtree: true });
+            const running = remaining.filter(a => a.playState === 'running' || a.playState === 'pending');
+            if (running.length > 0) {
+              const details = running.map(a => `${a.constructor.name}(${a.transitionProperty || a.animationName || 'unknown'}, playState=${a.playState})`).join(', ');
+              return { settled: false, iterations, error: `Unsettled motion remaining after ${maxPasses} iterations: ${details}` };
+            }
+
+            return { settled: true, iterations };
+          }, { maxPasses: maxIterations, sTime: sampleTime });
+        }
+
+        const interactiveSids = Object.values(vpResults.flat).filter(n => n.isInteractive).map(n => n.sid);
+
+        for (const sid of interactiveSids) {
+          let outcome = 'UNCHANGED';
+          let reason = '';
+          let nodeId = null;
+          let activeComputedStyle = null;
+          let restoredComputedStyle = null;
+          let cleanupError = null;
+          const pendingStateUpdates = [];
+
+          try {
+            // Test seam: force probe failure on specific candidate
+            if (options.forceProbeFailureSid && options.forceProbeFailureSid === sid) {
+              throw new Error(`Forced probe failure on candidate ${sid} for verification testing`);
+            }
+
+            if (rootNodeId) {
+              const res = await client.send('DOM.querySelector', {
                 nodeId: rootNodeId,
                 selector: `[data-sid="${sid}"]`
-              });
+              }).catch(() => ({ nodeId: null }));
+              nodeId = res?.nodeId || null;
+            }
 
-              if (nodeId) {
-                try {
-                  await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: ['hover'] });
+            if (!nodeId) {
+              // Interactive candidate is outside main document root (e.g. open shadow root or iframe)
+              const loc = await page.evaluate(s => {
+                const el = document.querySelector(`[data-sid="${s}"]`);
+                if (el) return 'main-dom';
+                const hosts = Array.from(document.querySelectorAll('*')).filter(e => e.shadowRoot);
+                for (const h of hosts) {
+                  try {
+                    if (h.shadowRoot.querySelector(`[data-sid="${s}"]`)) return 'shadow-dom';
+                  } catch (_) {}
+                }
+                const iframes = Array.from(document.querySelectorAll('iframe'));
+                for (const ifr of iframes) {
+                  try {
+                    if (ifr.contentDocument && ifr.contentDocument.querySelector(`[data-sid="${s}"]`)) return 'iframe';
+                  } catch (_) {}
+                }
+                return 'unknown';
+              }, sid);
 
-                  // Extract complete Chromium computed style during hover
-                  const hoverStyleMap = await page.evaluate(s => {
-                    const el = document.querySelector(`[data-sid="${s}"]`);
-                    if (!el) return null;
-                    const comp = window.getComputedStyle(el);
-                    const map = {};
-                    for (let i = 0; i < comp.length; i++) {
-                      const p = comp.item(i);
-                      map[p] = comp.getPropertyValue(p);
+              outcome = 'UNSUPPORTED';
+              if (loc === 'shadow-dom') {
+                reason = `Interactive node inside open shadow root (nodeId unavailable in main document CDP root)`;
+              } else if (loc === 'iframe') {
+                reason = `Interactive node inside same-origin iframe (nodeId unavailable in main document CDP root)`;
+              } else {
+                reason = `Interactive node not reachable via main document root querySelector`;
+              }
+            } else {
+              try {
+                await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: ['hover'] });
+
+                // 1 & 2 & 3. Recalculate styles, settle active transitions on element and descendants, and freeze keyframe animations
+                if (options.forceMotionSettleFailureSid && options.forceMotionSettleFailureSid === sid) {
+                  throw new Error(`Hover motion failed to settle within bounded settling loop: Forced motion settling failure on candidate ${sid}`);
+                }
+                const settleRes = await settleHoverMotion(10, 0);
+                if (!settleRes.settled) {
+                  throw new Error(`Hover motion failed to settle within bounded settling loop: ${settleRes.error}`);
+                }
+
+                // 4. Extract complete Chromium computed style during hover only after motion is settled
+                const hoverStyleMap = await page.evaluate(s => {
+                  const el = document.querySelector(`[data-sid="${s}"]`);
+                  if (!el) return null;
+                  const comp = window.getComputedStyle(el);
+                  const map = {};
+                  for (let i = 0; i < comp.length; i++) {
+                    const p = comp.item(i);
+                    map[p] = comp.getPropertyValue(p);
+                  }
+                  return map;
+                }, sid);
+
+                // Controlled test seam: force failure after active hover state is applied
+                if (options.forcePostActivationFailureSid && options.forcePostActivationFailureSid === sid) {
+                  activeComputedStyle = hoverStyleMap;
+                  throw new Error(`Forced post-activation hover probe failure on candidate ${sid} for state restoration testing`);
+                }
+
+                let hasSelfDelta = false;
+                if (hoverStyleMap) {
+                  const baseRef = vpResults.flat[sid].computedStyleRef;
+                  const baseStyleMap = vpResults.styleDictionary[baseRef] || {};
+                  for (const k in hoverStyleMap) {
+                    if (hoverStyleMap[k] !== baseStyleMap[k]) {
+                      hasSelfDelta = true;
+                      break;
                     }
-                    return map;
-                  }, sid);
+                  }
 
-                  if (hoverStyleMap) {
-                    const baseRef = vpResults.flat[sid].computedStyleRef;
-                    const baseStyleMap = vpResults.styleDictionary[baseRef] || {};
-                    let hasDelta = false;
-                    for (const k in hoverStyleMap) {
-                      if (hoverStyleMap[k] !== baseStyleMap[k]) {
-                        hasDelta = true;
-                        break;
-                      }
-                    }
-
-                    if (hasDelta) {
-                      const internMeta = internStyleMap(hoverStyleMap, vpResults.styleDictionary);
-                      vpResults.flat[sid].states = vpResults.flat[sid].states || {};
-                      vpResults.flat[sid].states.hover = {
+                  if (hasSelfDelta) {
+                    const internMeta = internStyleMap(hoverStyleMap, vpResults.styleDictionary);
+                    pendingStateUpdates.push({
+                      type: 'self',
+                      sid,
+                      stateData: {
                         computedStyleRef: internMeta.computedStyleRef,
                         styleHash: internMeta.styleHash,
                         stylePropertyCount: internMeta.stylePropertyCount,
                         trigger: 'hover',
                         status: 'CAPTURED'
-                      };
-                    }
-                  }
-
-                  // ALWAYS probe descendants for every hovered interactive parent (Section 3)
-                  function getDescendantSids(pSid) {
-                    const direct = Object.values(vpResults.flat).filter(n => n.parentSid === pSid);
-                    let all = [];
-                    for (const d of direct) {
-                      all.push(d.sid);
-                      all = all.concat(getDescendantSids(d.sid));
-                    }
-                    return all;
-                  }
-                  const childSids = getDescendantSids(sid);
-
-                  for (const cSid of childSids) {
-                    const cHoverStyle = await page.evaluate(cs => {
-                      const cel = document.querySelector(`[data-sid="${cs}"]`);
-                      if (!cel) return null;
-                      const comp = window.getComputedStyle(cel);
-                      const cmap = {};
-                      for (let ci = 0; ci < comp.length; ci++) {
-                        const cp = comp.item(ci);
-                        cmap[cp] = comp.getPropertyValue(cp);
                       }
-                      return cmap;
-                    }, cSid);
+                    });
+                  }
+                }
 
-                    if (cHoverStyle) {
-                      const cBaseRef = vpResults.flat[cSid]?.computedStyleRef;
-                      const cBaseMap = vpResults.styleDictionary[cBaseRef] || {};
-                      let cHasDelta = false;
-                      for (const ck in cHoverStyle) {
-                        if (cHoverStyle[ck] !== cBaseMap[ck]) {
-                          cHasDelta = true;
-                          break;
-                        }
+                // ALWAYS probe descendants for every hovered interactive parent
+                function getDescendantSids(pSid) {
+                  const direct = Object.values(vpResults.flat).filter(n => n.parentSid === pSid);
+                  let all = [];
+                  for (const d of direct) {
+                    all.push(d.sid);
+                    all = all.concat(getDescendantSids(d.sid));
+                  }
+                  return all;
+                }
+                const childSids = getDescendantSids(sid);
+                let hasDescendantDelta = false;
+
+                for (const cSid of childSids) {
+                  const cHoverStyle = await page.evaluate(cs => {
+                    const cel = document.querySelector(`[data-sid="${cs}"]`);
+                    if (!cel) return null;
+                    const comp = window.getComputedStyle(cel);
+                    const cmap = {};
+                    for (let ci = 0; ci < comp.length; ci++) {
+                      const cp = comp.item(ci);
+                      cmap[cp] = comp.getPropertyValue(cp);
+                    }
+                    return cmap;
+                  }, cSid);
+
+                  if (cHoverStyle) {
+                    const cBaseRef = vpResults.flat[cSid]?.computedStyleRef;
+                    const cBaseMap = vpResults.styleDictionary[cBaseRef] || {};
+                    let cHasDelta = false;
+                    for (const ck in cHoverStyle) {
+                      if (cHoverStyle[ck] !== cBaseMap[ck]) {
+                        cHasDelta = true;
+                        break;
                       }
+                    }
 
-                      if (cHasDelta) {
-                        const cIntern = internStyleMap(cHoverStyle, vpResults.styleDictionary);
-                        vpResults.flat[cSid].states = vpResults.flat[cSid].states || {};
-                        const triggerKey = `parent-hover:${sid}`;
-                        vpResults.flat[cSid].states[triggerKey] = {
+                    if (cHasDelta) {
+                      hasDescendantDelta = true;
+                      const cIntern = internStyleMap(cHoverStyle, vpResults.styleDictionary);
+                      const triggerKey = `parent-hover:${sid}`;
+                      pendingStateUpdates.push({
+                        type: 'descendant',
+                        sid: cSid,
+                        triggerKey,
+                        stateData: {
                           computedStyleRef: cIntern.computedStyleRef,
                           styleHash: cIntern.styleHash,
                           stylePropertyCount: cIntern.stylePropertyCount,
                           trigger: triggerKey,
                           ancestorSid: sid,
                           status: 'CAPTURED'
-                        };
-                        // Maintain primary .hover pointer without overwriting if already set
-                        if (!vpResults.flat[cSid].states.hover) {
-                          vpResults.flat[cSid].states.hover = vpResults.flat[cSid].states[triggerKey];
                         }
-                      }
+                      });
                     }
                   }
-                } catch (probeErr) {
-                  vpResults.captureErrors.push({
-                    operation: 'hover-probe',
-                    sid,
-                    error: probeErr.message
-                  });
-                } finally {
-                  // Restore state unconditionally using finally (Section 3 item 6)
-                  await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] }).catch(cleanupErr => {
+                }
+
+                if (hasSelfDelta) {
+                  outcome = 'CAPTURED';
+                  reason = 'Computed style delta detected on :hover';
+                } else if (hasDescendantDelta) {
+                  outcome = 'CAPTURED';
+                  reason = 'Descendant style delta detected on :hover';
+                } else {
+                  outcome = 'UNCHANGED';
+                  reason = 'No computed style delta on :hover';
+                }
+              } catch (probeErr) {
+                outcome = 'FAILED';
+                reason = probeErr.message;
+                vpResults.captureErrors.push({
+                  operation: 'hover-probe',
+                  sid,
+                  error: probeErr.message
+                });
+              } finally {
+                // Exact cleanup sequence in order (Item 1):
+                // 1. CSS.forcePseudoState with forcedPseudoClasses: []. If it fails, set cleanupError.
+                if (nodeId) {
+                  try {
+                    if ((options.forceClearingFailureSid && options.forceClearingFailureSid === sid) ||
+                        (options.forcePseudoStateClearingFailureSid && options.forcePseudoStateClearingFailureSid === sid)) {
+                      throw new Error(`Forced pseudo-state clearing failure on candidate ${sid}`);
+                    }
+                    await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] });
+                  } catch (clearErr) {
+                    cleanupError = `CSS.forcePseudoState clearing failed: ${clearErr.message}`;
+                  }
+
+                  // 2. If clearing succeeded, call settleHoverMotion(10, 0). If returns settled: false or throws, set cleanupError.
+                  if (!cleanupError) {
+                    try {
+                      if ((options.forceReturnSettlingFailureSid && options.forceReturnSettlingFailureSid === sid) ||
+                          (options.forceReturnMotionSettleFailureSid && options.forceReturnMotionSettleFailureSid === sid)) {
+                        throw new Error(`Forced return settling failure on candidate ${sid}`);
+                      }
+                      const returnSettle = await settleHoverMotion(10, 0);
+                      if (!returnSettle.settled) {
+                        cleanupError = `Return motion settling failed: ${returnSettle.error}`;
+                      }
+                    } catch (settleErr) {
+                      cleanupError = `Return motion settling threw: ${settleErr.message}`;
+                    }
+                  }
+
+                  // 3. If there is a cleanupError, record in captureErrors, change outcome to FAILED, add SID and cause, and discard pending updates
+                  if (cleanupError) {
                     vpResults.captureErrors.push({
-                      operation: 'restorePseudoState',
+                      operation: 'hover-cleanup',
                       sid,
-                      error: cleanupErr.message
+                      error: cleanupError
                     });
-                  });
+                    outcome = 'FAILED';
+                    reason = `Cleanup failed on candidate ${sid}: ${cleanupError}`;
+                    pendingStateUpdates.length = 0;
+                  }
+
+                  if (outcome === 'FAILED' || options.captureRestoredStyles) {
+                    try {
+                      restoredComputedStyle = await page.evaluate(s => {
+                        const el = document.querySelector(`[data-sid="${s}"]`);
+                        if (!el) return null;
+                        const comp = window.getComputedStyle(el);
+                        const map = {};
+                        for (let i = 0; i < comp.length; i++) {
+                          const p = comp.item(i);
+                          map[p] = comp.getPropertyValue(p);
+                        }
+                        return map;
+                      }, sid);
+                    } catch (_) {}
+                  }
                 }
               }
-            } catch (nodeErr) {
+            }
+          } catch (candErr) {
+            outcome = 'FAILED';
+            reason = candErr.message;
+            vpResults.captureErrors.push({
+              operation: 'candidate-probe-setup',
+              sid,
+              error: candErr.message
+            });
+            if (nodeId) {
+              await client.send('CSS.forcePseudoState', { nodeId, forcedPseudoClasses: [] }).catch(() => {});
+            }
+          }
+
+          const probeRecord = {
+            sid,
+            outcome,
+            reason
+          };
+          if (activeComputedStyle) {
+            probeRecord.activeComputedStyle = activeComputedStyle;
+          }
+          if (restoredComputedStyle) {
+            probeRecord.restoredComputedStyle = restoredComputedStyle;
+          }
+          vpResults.interactionProbes.push(probeRecord);
+
+          // 4. After adding current probeRecord, if cleanupError occurred, stop loop and record FAILED for remaining candidates
+          if (cleanupError) {
+            pendingStateUpdates.length = 0;
+            const currentIndex = interactiveSids.indexOf(sid);
+            const remainingSids = interactiveSids.slice(currentIndex + 1);
+            for (const remSid of remainingSids) {
+              vpResults.interactionProbes.push({
+                sid: remSid,
+                outcome: 'FAILED',
+                reason: `Prior hover state could not be restored after SID ${sid}: ${cleanupError}`
+              });
               vpResults.captureErrors.push({
-                operation: 'node-hover-setup',
-                sid,
-                error: nodeErr.message
+                operation: 'skipped-unclean-state',
+                sid: remSid,
+                error: `Prior hover state could not be restored after SID ${sid}`
               });
             }
+            break;
+          } else {
+            // 5. If no cleanupError, apply pending style updates and continue to next candidate
+            if (outcome === 'CAPTURED') {
+              for (const upd of pendingStateUpdates) {
+                const targetNode = vpResults.flat[upd.sid];
+                if (!targetNode) continue;
+                targetNode.states = targetNode.states || {};
+                if (upd.type === 'self') {
+                  targetNode.states.hover = upd.stateData;
+                } else if (upd.type === 'descendant') {
+                  targetNode.states[upd.triggerKey] = upd.stateData;
+                  if (!targetNode.states.hover) {
+                    targetNode.states.hover = upd.stateData;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        // Verify all failed candidates remain restored after entire probe sequence
+        for (const p of vpResults.interactionProbes) {
+          if (p.outcome === 'FAILED' && p.restoredComputedStyle) {
+            try {
+              const finalStyle = await page.evaluate(s => {
+                const el = document.querySelector(`[data-sid="${s}"]`);
+                if (!el) return null;
+                const comp = window.getComputedStyle(el);
+                const map = {};
+                for (let i = 0; i < comp.length; i++) {
+                  const k = comp.item(i);
+                  map[k] = comp.getPropertyValue(k);
+                }
+                return map;
+              }, p.sid);
+              p.finalRestoredComputedStyle = finalStyle;
+            } catch (_) {}
           }
         }
       } catch (cdpErr) {
@@ -1479,6 +1753,16 @@ async function captureGroundTruth(htmlPathOrContent, options = {}) {
           operation: 'cdp-session',
           error: cdpErr.message
         });
+        const remainingSids = Object.values(vpResults.flat).filter(n => n.isInteractive).map(n => n.sid);
+        for (const sid of remainingSids) {
+          if (!vpResults.interactionProbes.some(p => p.sid === sid)) {
+            vpResults.interactionProbes.push({
+              sid,
+              outcome: 'FAILED',
+              reason: `CDP session error: ${cdpErr.message}`
+            });
+          }
+        }
       }
 
       // Attach calculated coverage metrics to viewport
