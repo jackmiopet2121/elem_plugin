@@ -331,18 +331,186 @@ const { compileHtmlToElementor } = require('../src/engine');
   // ---------------------------------------------------------------------------
   console.log('\n▶ [TEST 6] Invalid / Multilayer / none / Unsafe -> Zero Guessed Overrides');
 
-  runTest('6.1. Responsive value "none" emits zero tablet override', () => {
+  runTest('6.1. Responsive value "none" (URL -> none -> URL) emits scoped CSS reset and mobile re-apply', () => {
+    const heroUrl = 'https://example.com/hero.jpg';
     const gt = make3VpGtImageSnapshot({
       sid: 'c_none_tab',
-      desktopImg: 'url("https://example.com/hero.jpg")',
+      desktopImg: `url("${heroUrl}")`,
       tabletImg: 'none',
-      mobileImg: 'url("https://example.com/hero.jpg")'
+      mobileImg: `url("${heroUrl}")`
     });
     const ast = parseHtmlToAst(gt.annotatedHtml);
     const elements = compileGroundTruthToElementor(ast, gt, { viewport: 'desktop', atomicRules: [] });
-    mergeNodeResponsive(elements[0], null, gt);
 
-    assert.strictEqual(elements[0].settings.background_image_tablet, undefined, 'Must not guess setting for "none"');
+    // Fail-closed test: calling without atomicRules must throw IMAGE_CSS_ROUTE_UNAVAILABLE
+    assert.throws(() => {
+      mergeNodeResponsive(elements[0], null, gt, {});
+    }, (err) => {
+      return err && err.code === 'IMAGE_CSS_ROUTE_UNAVAILABLE';
+    }, 'Must throw IMAGE_CSS_ROUTE_UNAVAILABLE when atomicRules is missing');
+
+    const atomicRules = [];
+    mergeNodeResponsive(elements[0], null, gt, { atomicRules });
+
+    // Native settings check
+    assert.strictEqual(elements[0].settings.background_image_tablet, undefined, 'Must not emit native background_image_tablet for "none"');
+
+    // Scoped CSS rules check
+    const tabletRule = atomicRules.find(r => r.includes('1024px') && r.includes('e-sid-c_none_tab'));
+    assert.ok(tabletRule, 'Must emit scoped tablet media query rule');
+    assert.ok(tabletRule.includes('background-image: none !important;'), 'Tablet rule must reset background-image to none !important');
+
+    const mobileRule = atomicRules.find(r => r.includes('767px') && r.includes('e-sid-c_none_tab'));
+    assert.ok(mobileRule, 'Must emit scoped mobile media query rule to re-apply image');
+    assert.ok(mobileRule.includes(`background-image: url("${heroUrl}") !important;`), 'Mobile rule must re-apply URL with !important');
+  });
+
+  runTest('6.1b. Transition URL -> none -> none emits tablet none !important and zero mobile duplicate', () => {
+    const urlA = 'https://example.com/hero.jpg';
+    const gt = make3VpGtImageSnapshot({
+      sid: 'c_none_none',
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const ast = parseHtmlToAst(gt.annotatedHtml);
+    const elements = compileGroundTruthToElementor(ast, gt, { viewport: 'desktop', atomicRules: [] });
+    const atomicRules = [];
+    mergeNodeResponsive(elements[0], null, gt, { atomicRules });
+
+    assert.strictEqual(elements[0].settings.background_image_tablet, undefined);
+    assert.strictEqual(elements[0].settings.background_image_mobile, undefined);
+
+    const tabletRule = atomicRules.find(r => r.includes('1024px') && r.includes('e-sid-c_none_none'));
+    assert.ok(tabletRule && tabletRule.includes('background-image: none !important;'), 'Must emit tablet none rule');
+
+    const mobileRule = atomicRules.find(r => r.includes('767px') && r.includes('e-sid-c_none_none'));
+    assert.strictEqual(mobileRule, undefined, 'Mobile must inherit tablet none rule with zero duplicate');
+  });
+
+  runTest('6.1c. Transition URL-A -> none -> URL-B emits tablet none !important and mobile URL-B !important', () => {
+    const urlA = 'https://example.com/hero-a.jpg';
+    const urlB = 'https://example.com/hero-b.jpg';
+    const gt = make3VpGtImageSnapshot({
+      sid: 'c_none_diff_url',
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlB}")`
+    });
+    const ast = parseHtmlToAst(gt.annotatedHtml);
+    const elements = compileGroundTruthToElementor(ast, gt, { viewport: 'desktop', atomicRules: [] });
+    const atomicRules = [];
+    mergeNodeResponsive(elements[0], null, gt, { atomicRules });
+
+    assert.strictEqual(elements[0].settings.background_image_tablet, undefined);
+
+    const tabletRule = atomicRules.find(r => r.includes('1024px') && r.includes('e-sid-c_none_diff_url'));
+    assert.ok(tabletRule && tabletRule.includes('background-image: none !important;'));
+
+    const mobileRule = atomicRules.find(r => r.includes('767px') && r.includes('e-sid-c_none_diff_url'));
+    assert.ok(mobileRule && mobileRule.includes(`background-image: url("${urlB}") !important;`));
+  });
+
+  runTest('6.1d. Transition none -> URL -> none emits tablet URL !important and mobile none !important', () => {
+    const urlA = 'https://example.com/tab.jpg';
+    const gt = make3VpGtImageSnapshot({
+      sid: 'c_none_url_none',
+      desktopImg: 'none',
+      tabletImg: `url("${urlA}")`,
+      mobileImg: 'none'
+    });
+    const ast = parseHtmlToAst(gt.annotatedHtml);
+    const elements = compileGroundTruthToElementor(ast, gt, { viewport: 'desktop', atomicRules: [] });
+    const atomicRules = [];
+    mergeNodeResponsive(elements[0], null, gt, { atomicRules });
+
+    const tabletRule = atomicRules.find(r => r.includes('1024px') && r.includes('e-sid-c_none_url_none'));
+    assert.ok(tabletRule && tabletRule.includes(`background-image: url("${urlA}") !important;`));
+
+    const mobileRule = atomicRules.find(r => r.includes('767px') && r.includes('e-sid-c_none_url_none'));
+    assert.ok(mobileRule && mobileRule.includes('background-image: none !important;'));
+  });
+
+  runTest('6.1e. Transition none -> URL -> URL emits tablet URL !important and zero mobile duplicate', () => {
+    const urlA = 'https://example.com/tab.jpg';
+    const gt = make3VpGtImageSnapshot({
+      sid: 'c_none_url_url',
+      desktopImg: 'none',
+      tabletImg: `url("${urlA}")`,
+      mobileImg: `url("${urlA}")`
+    });
+    const ast = parseHtmlToAst(gt.annotatedHtml);
+    const elements = compileGroundTruthToElementor(ast, gt, { viewport: 'desktop', atomicRules: [] });
+    const atomicRules = [];
+    mergeNodeResponsive(elements[0], null, gt, { atomicRules });
+
+    const tabletRule = atomicRules.find(r => r.includes('1024px') && r.includes('e-sid-c_none_url_url'));
+    assert.ok(tabletRule && tabletRule.includes(`background-image: url("${urlA}") !important;`));
+
+    const mobileRule = atomicRules.find(r => r.includes('767px') && r.includes('e-sid-c_none_url_url'));
+    assert.strictEqual(mobileRule, undefined, 'Mobile inherits tablet rule with zero duplicate');
+  });
+
+  runTest('6.1f. Transition URL-A -> URL-B -> none emits native tablet setting and mobile none !important', () => {
+    const urlA = 'https://example.com/hero-a.jpg';
+    const urlB = 'https://example.com/hero-b.jpg';
+    const gt = make3VpGtImageSnapshot({
+      sid: 'c_url_url_none',
+      desktopImg: `url("${urlA}")`,
+      tabletImg: `url("${urlB}")`,
+      mobileImg: 'none'
+    });
+    const ast = parseHtmlToAst(gt.annotatedHtml);
+    const elements = compileGroundTruthToElementor(ast, gt, { viewport: 'desktop', atomicRules: [] });
+    const atomicRules = [];
+    mergeNodeResponsive(elements[0], null, gt, { atomicRules });
+
+    assert.deepStrictEqual(elements[0].settings.background_image_tablet, { url: urlB, id: '' });
+    assert.strictEqual(elements[0].settings.background_image_mobile, undefined);
+
+    const tabletRule = atomicRules.find(r => r.includes('1024px') && r.includes('e-sid-c_url_url_none'));
+    assert.strictEqual(tabletRule, undefined, 'Tablet uses native setting, zero CSS rule');
+
+    const mobileRule = atomicRules.find(r => r.includes('767px') && r.includes('e-sid-c_url_url_none'));
+    assert.ok(mobileRule && mobileRule.includes('background-image: none !important;'));
+  });
+
+  runTest('6.1g. Class isolation across multiple nodes prevents rule collision', () => {
+    const urlA = 'https://example.com/node1.jpg';
+    const urlB = 'https://example.com/node2.jpg';
+    const gt1 = make3VpGtImageSnapshot({
+      sid: 'c_iso_1',
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const gt2 = make3VpGtImageSnapshot({
+      sid: 'c_iso_2',
+      desktopImg: `url("${urlB}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlB}")`
+    });
+    const el1 = { elType: 'container', _sid: 'c_iso_1', settings: { background_background: 'classic', background_image: { url: urlA, id: '' } } };
+    const el2 = { elType: 'container', _sid: 'c_iso_2', settings: { background_background: 'classic', background_image: { url: urlB, id: '' } } };
+    const combinedGt = {
+      viewports: {
+        desktop: { flat: { ...gt1.viewports.desktop.flat, ...gt2.viewports.desktop.flat } },
+        tablet: { flat: { ...gt1.viewports.tablet.flat, ...gt2.viewports.tablet.flat } },
+        mobile: { flat: { ...gt1.viewports.mobile.flat, ...gt2.viewports.mobile.flat } }
+      }
+    };
+    const atomicRules = [];
+    mergeNodeResponsive(el1, null, combinedGt, { atomicRules });
+    mergeNodeResponsive(el2, null, combinedGt, { atomicRules });
+
+    assert.ok(el1.settings._css_classes.includes('e-sid-c_iso_1'));
+    assert.ok(el2.settings._css_classes.includes('e-sid-c_iso_2'));
+    assert(!el1.settings._css_classes.includes('e-sid-c_iso_2'));
+    assert(!el2.settings._css_classes.includes('e-sid-c_iso_1'));
+
+    const rule1 = atomicRules.find(r => r.includes('e-sid-c_iso_1'));
+    const rule2 = atomicRules.find(r => r.includes('e-sid-c_iso_2'));
+    assert.ok(rule1 && rule2);
   });
 
   runTest('6.2. Multilayer url(...), url(...) emits zero tablet override', () => {

@@ -303,6 +303,172 @@ function hasContainerCssRoute(templateJson, sid, options = {}) {
 }
 
 /**
+ * Parses CSS text into structured rules with media query, selector, and body.
+ */
+function parseCssRules(cssText) {
+  const rules = [];
+  if (!cssText || typeof cssText !== 'string') return rules;
+
+  let pos = 0;
+  const len = cssText.length;
+
+  let currentMedia = null;
+  let currentSelector = null;
+  let currentBodyStart = -1;
+  let depth = 0;
+  let buffer = '';
+
+  while (pos < len) {
+    const ch = cssText[pos];
+
+    if (ch === '{') {
+      const header = buffer.trim();
+      buffer = '';
+      if (depth === 0) {
+        if (/^@media/i.test(header)) {
+          currentMedia = header;
+          depth = 1;
+        } else {
+          currentSelector = header;
+          currentBodyStart = pos + 1;
+          depth = 1;
+        }
+      } else if (depth === 1 && currentMedia) {
+        currentSelector = header;
+        currentBodyStart = pos + 1;
+        depth = 2;
+      }
+    } else if (ch === '}') {
+      if ((depth === 1 && !currentMedia && currentSelector) || (depth === 2 && currentMedia && currentSelector)) {
+        const body = cssText.substring(currentBodyStart, pos);
+        rules.push({
+          media: currentMedia,
+          selector: currentSelector,
+          body: body.trim()
+        });
+        currentSelector = null;
+        currentBodyStart = -1;
+        depth--;
+      } else if (depth === 1 && currentMedia) {
+        currentMedia = null;
+        depth = 0;
+      }
+      buffer = '';
+    } else {
+      buffer += ch;
+    }
+    pos++;
+  }
+
+  return rules;
+}
+
+function extractBackgroundImageFromCssBody(body) {
+  if (!body) return null;
+  const match = body.match(/background-image\s*:\s*([^;]+)(?:;|$)/i);
+  if (!match) return null;
+  const rawVal = match[1].trim();
+  const isImportant = /!\s*important\s*$/i.test(rawVal);
+  const value = rawVal.replace(/!\s*important\s*$/i, '').trim();
+  return { value, isImportant };
+}
+
+/**
+ * Finds the effective scoped CSS background-image declaration for a given SID and viewport.
+ *
+ * @param {Object} templateJson
+ * @param {string} sid
+ * @param {'desktop'|'tablet'|'mobile'} vp
+ * @param {Object} [options]
+ * @returns {{ found: boolean, explicit: boolean, value: string, isImportant: boolean, cascaded: boolean } | null}
+ */
+function findScopedImageCssDeclaration(templateJson, sid, vp, options = {}) {
+  if (!sid) return null;
+  const cleanSid = String(sid).replace(/^sid-/, '');
+  const targetClass = `e-sid-${cleanSid}`;
+
+  const allCssTexts = [];
+  if (Array.isArray(templateJson?.atomicRules)) {
+    allCssTexts.push(...templateJson.atomicRules);
+  }
+  if (Array.isArray(options?.atomicRules)) {
+    allCssTexts.push(...options.atomicRules);
+  }
+  if (typeof templateJson?.microCss === 'string') {
+    allCssTexts.push(templateJson.microCss);
+  }
+  if (typeof options?.microCss === 'string') {
+    allCssTexts.push(options.microCss);
+  }
+
+  function walk(els) {
+    if (!Array.isArray(els)) return;
+    for (const el of els) {
+      if (el && el.widgetType === 'html') {
+        const html = el.settings?.html;
+        if (typeof html === 'string' && html.includes('<style')) {
+          const match = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+          if (match && match[1]) {
+            allCssTexts.push(match[1]);
+          }
+        }
+      }
+      if (el && el.elements) walk(el.elements);
+    }
+  }
+  walk(templateJson?.content || (Array.isArray(templateJson) ? templateJson : []));
+
+  let desktopDecl = null;
+  let tabletDecl = null;
+  let mobileDecl = null;
+
+  for (const text of allCssTexts) {
+    if (!text || typeof text !== 'string' || !text.includes(targetClass)) continue;
+    const rules = parseCssRules(text);
+    for (const rule of rules) {
+      if (!rule.selector || !rule.selector.includes(targetClass)) continue;
+      const decl = extractBackgroundImageFromCssBody(rule.body);
+      if (!decl) continue;
+
+      if (!rule.media) {
+        desktopDecl = decl;
+      } else if (/max-width\s*:\s*(?:1024|1024\.98)px/i.test(rule.media)) {
+        tabletDecl = decl;
+      } else if (/max-width\s*:\s*(?:767|767\.98)px/i.test(rule.media)) {
+        mobileDecl = decl;
+      }
+    }
+  }
+
+  if (vp === 'desktop') {
+    if (desktopDecl) {
+      return { found: true, explicit: true, value: desktopDecl.value, isImportant: desktopDecl.isImportant, cascaded: false };
+    }
+    return null;
+  }
+
+  if (vp === 'tablet') {
+    if (tabletDecl) {
+      return { found: true, explicit: true, value: tabletDecl.value, isImportant: tabletDecl.isImportant, cascaded: false };
+    }
+    return null;
+  }
+
+  if (vp === 'mobile') {
+    if (mobileDecl) {
+      return { found: true, explicit: true, value: mobileDecl.value, isImportant: mobileDecl.isImportant, cascaded: false };
+    }
+    // Mobile cascades from tablet max-width 1024px rule if tablet has declaration
+    if (tabletDecl) {
+      return { found: true, explicit: false, value: tabletDecl.value, isImportant: tabletDecl.isImportant, cascaded: true };
+    }
+    return null;
+  }
+
+  return null;
+}
+
+/**
  * Runs verification matrix comparison between GT snapshot and Render snapshot.
  */
 function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, options = {}) {
@@ -1009,56 +1175,100 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
       const gtHasNoneImage = isNoneBackgroundImage(gtBgImage);
 
       if (gtHasNoneImage) {
-        // If GT at tablet/mobile is none, but template still retains a classic background image:
-        if (
-          (vp === 'tablet' || vp === 'mobile') &&
-          tmplSettings.background_background === 'classic' &&
-          tmplSettings.background_image &&
-          typeof tmplSettings.background_image.url === 'string' &&
-          tmplSettings.background_image.url.trim() !== ''
-        ) {
-          const res = resolveEffectiveTemplateImageUrl(tmplSettings, vp);
-          defects.push(createDefect({
-            nodeSid: sid,
-            widgetId: containerEl.id || null,
-            viewport: vp,
-            property: 'backgroundImage',
-            original: 'none',
-            rendered: String(rawRnBgImg).trim(),
-            severity: 'HIGH',
-            rule: 'RULE-SURFACE-01',
-            rung: 'R0',
-            advisory: false,
-            message: `Unverified surface: container ${sid} has unsupported transition to background-image: none at ${vp}: effective template retains image "${res.url || tmplSettings.background_image.url.trim()}". Native clear to none is unsupported.`
-          }));
-        } else if (rnBgImgMissingOrEmpty) {
-          defects.push(createDefect({
-            nodeSid: sid,
-            widgetId: containerEl.id || null,
-            viewport: vp,
-            property: 'backgroundImage',
-            original: 'none',
-            rendered: 'missing_render_background_image',
-            severity: 'HIGH',
-            rule: 'RULE-SURFACE-01',
-            rung: 'R0',
-            advisory: false,
-            message: `Container ${sid} rendered backgroundImage missing or empty at ${vp}: expected "none".`
-          }));
-        } else if (!rnHasNoneImage) {
-          defects.push(createDefect({
-            nodeSid: sid,
-            widgetId: containerEl.id || null,
-            viewport: vp,
-            property: 'backgroundImage',
-            original: 'none',
-            rendered: String(rawRnBgImg).trim(),
-            severity: 'HIGH',
-            rule: 'RULE-SURFACE-01',
-            rung: 'R0',
-            advisory: false,
-            message: `Container ${sid} rendered with unexpected backgroundImage at ${vp}: expected "none", got ${rawRnBgImg}.`
-          }));
+        const scopedImageDecl = findScopedImageCssDeclaration(templateJson, sid, vp, options);
+        const hasValidNoneCssRoute = Boolean(
+          hasSidClass &&
+          scopedImageDecl &&
+          scopedImageDecl.value === 'none' &&
+          scopedImageDecl.isImportant
+        );
+        const isVerifiedNoneReset = hasValidNoneCssRoute && rnHasNoneImage;
+
+        if (!isVerifiedNoneReset) {
+          if (hasValidNoneCssRoute) {
+            // Template is verified via scoped CSS; defect is strictly in rendered output
+            if (rnBgImgMissingOrEmpty) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundImage',
+                original: 'none',
+                rendered: 'missing_render_background_image',
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} rendered backgroundImage missing or empty at ${vp}: expected "none".`
+              }));
+            } else if (!rnHasNoneImage) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundImage',
+                original: 'none',
+                rendered: String(rawRnBgImg).trim(),
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} rendered with unexpected backgroundImage at ${vp}: expected "none", got ${rawRnBgImg}.`
+              }));
+            }
+          } else {
+            // Template does not have a verified scoped CSS reset
+            if (
+              (vp === 'tablet' || vp === 'mobile') &&
+              tmplSettings.background_background === 'classic' &&
+              tmplSettings.background_image &&
+              typeof tmplSettings.background_image.url === 'string' &&
+              tmplSettings.background_image.url.trim() !== ''
+            ) {
+              const res = resolveEffectiveTemplateImageUrl(tmplSettings, vp);
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundImage',
+                original: 'none',
+                rendered: String(rawRnBgImg).trim(),
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Unverified surface: container ${sid} has unsupported transition to background-image: none at ${vp}: effective template retains image "${res.url || tmplSettings.background_image.url.trim()}". Native clear to none is unsupported.`
+              }));
+            } else if (rnBgImgMissingOrEmpty) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundImage',
+                original: 'none',
+                rendered: 'missing_render_background_image',
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} rendered backgroundImage missing or empty at ${vp}: expected "none".`
+              }));
+            } else if (!rnHasNoneImage) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundImage',
+                original: 'none',
+                rendered: String(rawRnBgImg).trim(),
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} rendered with unexpected backgroundImage at ${vp}: expected "none", got ${rawRnBgImg}.`
+              }));
+            }
+          }
         }
       } else {
         // GT has image or gradient
@@ -1234,18 +1444,40 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
             let templateMismatchReason = '';
             let effectiveTmplUrl = '';
 
-            if (tmplSettings.background_background !== 'classic') {
-              templateValid = false;
-              templateMismatchReason = `Template background_background expected "classic", got "${tmplSettings.background_background}"`;
+            const scopedImageDecl = findScopedImageCssDeclaration(templateJson, sid, vp, options);
+            const cssImgUrl = scopedImageDecl?.value ? extractSingleImageUrl(scopedImageDecl.value) : null;
+            const isCssImageRouteValid = Boolean(hasSidClass && cssImgUrl === gtSingleImg && scopedImageDecl?.isImportant);
+
+            const tabletScopedDecl = (vp === 'mobile') ? findScopedImageCssDeclaration(templateJson, sid, 'tablet', options) : null;
+            const tabletHasNoneReset = Boolean(hasSidClass && tabletScopedDecl?.value === 'none' && tabletScopedDecl?.isImportant);
+
+            if (tabletHasNoneReset && vp === 'mobile') {
+              // Tablet has active none reset. Mobile MUST explicitly re-apply via scoped CSS rule
+              if (!isCssImageRouteValid || !scopedImageDecl.explicit) {
+                templateValid = false;
+                templateMismatchReason = `Container ${sid} tablet has active scoped "none !important" reset; mobile must explicitly re-apply image via scoped CSS route (GT URL: "${gtSingleImg}")`;
+              } else {
+                templateValid = true;
+                effectiveTmplUrl = cssImgUrl;
+              }
+            } else if (isCssImageRouteValid) {
+              templateValid = true;
+              effectiveTmplUrl = cssImgUrl;
             } else {
-              const res = resolveEffectiveTemplateImageUrl(tmplSettings, vp);
-              effectiveTmplUrl = res.url;
-              if (!res.valid) {
+              // Check native Elementor settings
+              if (tmplSettings.background_background !== 'classic') {
                 templateValid = false;
-                templateMismatchReason = res.reason;
-              } else if (res.url !== gtSingleImg) {
-                templateValid = false;
-                templateMismatchReason = `Template background_image.url mismatch: expected "${gtSingleImg}", got "${res.url}"`;
+                templateMismatchReason = `Template background_background expected "classic", got "${tmplSettings.background_background}"`;
+              } else {
+                const res = resolveEffectiveTemplateImageUrl(tmplSettings, vp);
+                effectiveTmplUrl = res.url;
+                if (!res.valid) {
+                  templateValid = false;
+                  templateMismatchReason = res.reason;
+                } else if (res.url !== gtSingleImg) {
+                  templateValid = false;
+                  templateMismatchReason = `Template background_image.url mismatch: expected "${gtSingleImg}", got "${res.url}"`;
+                }
               }
             }
 
@@ -2238,5 +2470,6 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
 
 module.exports = {
   AVAILABLE_RULES,
-  auditVerificationMatrix
+  auditVerificationMatrix,
+  findScopedImageCssDeclaration
 };

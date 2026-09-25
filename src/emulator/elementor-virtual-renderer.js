@@ -11,7 +11,8 @@ const { resolveElementSelector, ensureDeterministicClass } = require('../smart/s
 const {
   VALID_SIZES,
   VALID_POSITIONS,
-  VALID_REPEATS
+  VALID_REPEATS,
+  isSafeCssUrl
 } = require('../smart/image-background-geometry');
 const { parseColorParts } = require('../smart/tolerances');
 
@@ -49,61 +50,33 @@ function getLocalFontAwesomeCss() {
   return '';
 }
 
-function isSafeCssUrl(url) {
-  if (!url || typeof url !== 'string') return false;
-  const s = url.trim();
-  if (!s) return false;
-
-  // Case-insensitive </style check (prevents breakout from style tags)
-  if (/<\/style/i.test(s)) return false;
-
-  // ASCII control characters (0x00 to 0x1F and 0x7F)
-  if (/[\x00-\x1f\x7f]/.test(s)) return false;
-
-  // CSS string-breaking syntax: " (quote), \ (escape), ; (declaration end), { or } (block boundaries)
-  if (/["\\;{}]/.test(s)) return false;
-
-  // Scheme validation: if URL starts with a scheme, permit only http/https with valid hostname
-  const schemeMatch = s.match(/^([a-z][a-z0-9+.-]*):/i);
-  if (schemeMatch) {
-    const scheme = schemeMatch[1].toLowerCase();
-    if (scheme !== 'http' && scheme !== 'https') {
-      return false;
-    }
-    try {
-      const parsed = new URL(s);
-      if (!parsed.hostname || (parsed.protocol !== 'http:' && parsed.protocol !== 'https:')) {
-        return false;
-      }
-    } catch {
-      return false;
-    }
-  }
-
-  return true;
-}
-
 function renderElementorToHtml(templateData, options = {}) {
   const content = templateData.content || (Array.isArray(templateData) ? templateData : []);
   const title = templateData.title || options.title || 'Elementor Virtual Preview';
 
-  // Task K3: Ensure microCss from stylesheet-engine HTML widget is extracted if not in options
+  // Task K3: Ensure microCss from stylesheet-engine HTML widget or atomicRules is extracted if not in options
   let effectiveMicroCss = options.microCss || '';
   if (!effectiveMicroCss) {
-    function findMicroCss(nodes) {
-      for (const n of nodes) {
-        if (n.widgetType === 'html' && n.settings?.html && n.settings.html.includes('<style')) {
-          const match = n.settings.html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
-          if (match && match[1]) return match[1];
+    if (Array.isArray(options.atomicRules) && options.atomicRules.length > 0) {
+      effectiveMicroCss = options.atomicRules.join('\n\n');
+    } else if (Array.isArray(templateData?.atomicRules) && templateData.atomicRules.length > 0) {
+      effectiveMicroCss = templateData.atomicRules.join('\n\n');
+    } else {
+      function findMicroCss(nodes) {
+        for (const n of nodes) {
+          if (n.widgetType === 'html' && n.settings?.html && n.settings.html.includes('<style')) {
+            const match = n.settings.html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+            if (match && match[1]) return match[1];
+          }
+          if (n.elements) {
+            const found = findMicroCss(n.elements);
+            if (found) return found;
+          }
         }
-        if (n.elements) {
-          const found = findMicroCss(n.elements);
-          if (found) return found;
-        }
+        return '';
       }
-      return '';
+      effectiveMicroCss = findMicroCss(content);
     }
-    effectiveMicroCss = findMicroCss(content);
   }
 
   const collectedCss = [];

@@ -241,12 +241,210 @@ function extractSingleImageUrl(bgImageStr) {
   return null;
 }
 
+/**
+ * Validates whether a URL string is safe to embed in generated CSS url("...") rules.
+ * Prevents CSS injection, HTML tag escapes, control characters, and dangerous URI schemes.
+ *
+ * @param {string} url
+ * @returns {boolean}
+ */
+function isSafeCssUrl(url) {
+  if (!url || typeof url !== 'string') return false;
+  const s = url.trim();
+  if (!s) return false;
+
+  // Case-insensitive </style check (prevents breakout from style tags)
+  if (/<\/style/i.test(s)) return false;
+
+  // ASCII control characters (0x00 to 0x1F and 0x7F)
+  if (/[\x00-\x1f\x7f]/.test(s)) return false;
+
+  // CSS string-breaking syntax: " (quote), \ (escape), ; (declaration end), { or } (block boundaries)
+  if (/["\\;{}]/.test(s)) return false;
+
+  // Scheme validation: if URL starts with a scheme, permit only http/https with valid hostname
+  const schemeMatch = s.match(/^([a-z][a-z0-9+.-]*):/i);
+  if (schemeMatch) {
+    const scheme = schemeMatch[1].toLowerCase();
+    if (scheme !== 'http' && scheme !== 'https') {
+      return false;
+    }
+    try {
+      const parsed = new URL(s);
+      if (!parsed.hostname || (parsed.protocol !== 'http:' && parsed.protocol !== 'https:')) {
+        return false;
+      }
+    } catch {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
+ * Classifies the image background state of a computed background-image string.
+ *
+ * @param {string} bgImageStr
+ * @returns {{
+ *   state: 'none' | 'url' | 'unsupported',
+ *   url: string | null,
+ *   reason: string | null
+ * }}
+ */
+function classifyImageBackgroundState(bgImageStr) {
+  if (bgImageStr === undefined || bgImageStr === null) {
+    return { state: 'unsupported', url: null, reason: 'missing_computed_style' };
+  }
+  if (typeof bgImageStr !== 'string') {
+    return { state: 'unsupported', url: null, reason: 'invalid_type' };
+  }
+
+  const s = bgImageStr.trim();
+  if (s === '' || s.toLowerCase() === 'none') {
+    return { state: 'none', url: null, reason: null };
+  }
+
+  const url = extractSingleImageUrl(s);
+  if (url) {
+    if (isSafeCssUrl(url)) {
+      return { state: 'url', url, reason: null };
+    } else {
+      return { state: 'unsupported', url: null, reason: 'unsafe_url' };
+    }
+  }
+
+  return { state: 'unsupported', url: null, reason: 'unsupported_image_syntax' };
+}
+
+/**
+ * Resolves the responsive image background plan across desktop, tablet, and mobile.
+ *
+ * @param {Object} dState - { state: 'url'|'none'|'unsupported', url: string|null }
+ * @param {Object} tState - { state: 'url'|'none'|'unsupported', url: string|null }
+ * @param {Object} mState - { state: 'url'|'none'|'unsupported', url: string|null }
+ * @param {Function} [resolveAssetUrl] - Function to resolve asset URL
+ * @param {Object} [options] - Compiler options
+ * @returns {{
+ *   nativeSettings: {
+ *     background_image_tablet: { url: string, id: string } | undefined,
+ *     background_image_mobile: { url: string, id: string } | undefined
+ *   },
+ *   cssRules: {
+ *     tablet: string | null,
+ *     mobile: string | null
+ *   },
+ *   hasCssRoute: boolean
+ * }}
+ */
+function resolveResponsiveImagePlan(dState, tState, mState, resolveAssetUrl = null, options = {}) {
+  const resolve = (rawUrl) => {
+    if (!rawUrl) return null;
+    return typeof resolveAssetUrl === 'function' ? resolveAssetUrl(rawUrl, options) : rawUrl;
+  };
+
+  const dUrl = dState && dState.state === 'url' ? resolve(dState.url) : null;
+  const tUrl = tState && tState.state === 'url' ? resolve(tState.url) : null;
+  const mUrl = mState && mState.state === 'url' ? resolve(mState.url) : null;
+
+  const dSafe = dUrl ? isSafeCssUrl(dUrl) : false;
+  const tSafe = tUrl ? isSafeCssUrl(tUrl) : false;
+  const mSafe = mUrl ? isSafeCssUrl(mUrl) : false;
+
+  const effDState = dState?.state === 'url' && dSafe ? 'url' : (dState?.state === 'none' ? 'none' : 'unsupported');
+  const effTState = tState?.state === 'url' && tSafe ? 'url' : (tState?.state === 'none' ? 'none' : 'unsupported');
+  const effMState = mState?.state === 'url' && mSafe ? 'url' : (mState?.state === 'none' ? 'none' : 'unsupported');
+
+  const nativeSettings = {
+    background_image_tablet: undefined,
+    background_image_mobile: undefined
+  };
+
+  const cssRules = {
+    tablet: null,
+    mobile: null
+  };
+
+  // Case 1: Desktop is URL
+  if (effDState === 'url') {
+    if (effTState === 'none') {
+      // Tablet cannot natively clear image -> Scoped CSS reset
+      cssRules.tablet = 'background-image: none !important;';
+
+      if (effMState === 'none') {
+        // Mobile inherits tablet's <= 1024px rule -> zero duplicate rule
+        cssRules.mobile = null;
+      } else if (effMState === 'url') {
+        // Mobile re-applies URL (either same as desktop or different)
+        cssRules.mobile = `background-image: url("${mUrl}") !important;`;
+      }
+    } else if (effTState === 'url') {
+      let effTabUrl = dUrl;
+      if (tUrl !== dUrl) {
+        nativeSettings.background_image_tablet = { url: tUrl, id: '' };
+        effTabUrl = tUrl;
+      }
+
+      if (effMState === 'none') {
+        // Mobile cannot natively clear image -> Scoped CSS reset
+        cssRules.mobile = 'background-image: none !important;';
+      } else if (effMState === 'url') {
+        if (mUrl !== effTabUrl) {
+          nativeSettings.background_image_mobile = { url: mUrl, id: '' };
+        }
+      }
+    } else {
+      // Tablet is unsupported -> no guessed native setting
+      if (effMState === 'url' && mUrl !== dUrl) {
+        nativeSettings.background_image_mobile = { url: mUrl, id: '' };
+      }
+    }
+  }
+
+  // Case 2: Desktop is none
+  if (effDState === 'none') {
+    if (effTState === 'url') {
+      // Desktop has no image, so tablet cannot be set natively -> Scoped CSS
+      cssRules.tablet = `background-image: url("${tUrl}") !important;`;
+
+      if (effMState === 'none') {
+        // Mobile must explicitly reset to none to avoid inheriting tablet's !important rule
+        cssRules.mobile = 'background-image: none !important;';
+      } else if (effMState === 'url') {
+        if (mUrl === tUrl) {
+          // Mobile inherits tablet rule -> zero duplicate rule
+          cssRules.mobile = null;
+        } else {
+          // Mobile has distinct URL -> explicit override
+          cssRules.mobile = `background-image: url("${mUrl}") !important;`;
+        }
+      }
+    } else if (effTState === 'none') {
+      if (effMState === 'url') {
+        // Mobile-only image when desktop & tablet are none
+        cssRules.mobile = `background-image: url("${mUrl}") !important;`;
+      }
+    }
+  }
+
+  const hasCssRoute = Boolean(cssRules.tablet || cssRules.mobile);
+
+  return {
+    nativeSettings,
+    cssRules,
+    hasCssRoute
+  };
+}
+
 module.exports = {
   resolveImageBackgroundGeometry,
   mapBackgroundSize,
   mapBackgroundPosition,
   mapBackgroundRepeat,
   extractSingleImageUrl,
+  isSafeCssUrl,
+  classifyImageBackgroundState,
+  resolveResponsiveImagePlan,
   VALID_POSITIONS,
   VALID_SIZES,
   VALID_REPEATS

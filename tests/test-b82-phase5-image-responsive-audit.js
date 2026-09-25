@@ -153,9 +153,11 @@ const { auditVerificationMatrix } = require('../src/smart/verification-matrix');
 
   function makeTemplateJson({
     sid = 'c_test_resp',
-    settings = {}
+    settings = {},
+    atomicRules = []
   } = {}) {
     return {
+      atomicRules,
       content: [
         {
           _sid: sid,
@@ -594,6 +596,281 @@ const { auditVerificationMatrix } = require('../src/smart/verification-matrix');
     assert.strictEqual(mobDefects[0].original, 'none');
   });
 
+  runTest('2.9. Positive: Verified scoped CSS transition URL -> none -> none produces 0 defects', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const sid = 'c_pos_none_none';
+    const cleanSid = 'c_pos_none_none';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-${cleanSid} {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Must have zero RULE-SURFACE-01 defects for verified URL -> none -> none');
+  });
+
+  runTest('2.10. Positive: Verified scoped CSS transition URL -> none -> URL produces 0 defects', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const sid = 'c_pos_none_url';
+    const cleanSid = 'c_pos_none_url';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlA}")`
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlA}")`
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-${cleanSid} {\n    background-image: none !important;\n  }\n}`,
+        `@media (max-width: 767px) {\n  .e-sid-${cleanSid} {\n    background-image: url("${urlA}") !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Must have zero RULE-SURFACE-01 defects for verified URL -> none -> URL');
+  });
+
+  runTest('2.11. Positive: Verified scoped CSS transition URL-A -> none -> URL-B produces 0 defects', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const urlB = 'https://example.com/image-b.jpg';
+    const sid = 'c_pos_diff_url';
+    const cleanSid = 'c_pos_diff_url';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlB}")`
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlB}")`
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-${cleanSid} {\n    background-image: none !important;\n  }\n}`,
+        `@media (max-width: 767px) {\n  .e-sid-${cleanSid} {\n    background-image: url("${urlB}") !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Must have zero RULE-SURFACE-01 defects for verified URL-A -> none -> URL-B');
+  });
+
+  runTest('2.12. Positive: Verified scoped CSS transition none -> URL -> none produces 0 defects', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const sid = 'c_pos_none_url_none';
+    const cleanSid = 'c_pos_none_url_none';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: 'none',
+      tabletImg: `url("${urlA}")`,
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: 'none',
+      tabletImg: `url("${urlA}")`,
+      mobileImg: 'none'
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-${cleanSid} {\n    background-image: url("${urlA}") !important;\n  }\n}`,
+        `@media (max-width: 767px) {\n  .e-sid-${cleanSid} {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Must have zero RULE-SURFACE-01 defects for verified none -> URL -> none');
+  });
+
+  runTest('2.13. Positive: Verified scoped CSS transition none -> URL -> URL produces 0 defects', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const sid = 'c_pos_none_url_url';
+    const cleanSid = 'c_pos_none_url_url';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: 'none',
+      tabletImg: `url("${urlA}")`,
+      mobileImg: `url("${urlA}")`
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: 'none',
+      tabletImg: `url("${urlA}")`,
+      mobileImg: `url("${urlA}")`
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-${cleanSid} {\n    background-image: url("${urlA}") !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Must have zero RULE-SURFACE-01 defects for verified none -> URL -> URL');
+  });
+
+  runTest('2.14. Positive: Verified transition URL-A -> URL-B -> none produces 0 defects', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const urlB = 'https://example.com/image-b.jpg';
+    const sid = 'c_pos_url_url_none';
+    const cleanSid = 'c_pos_url_url_none';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: `url("${urlB}")`,
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: `url("${urlB}")`,
+      mobileImg: 'none'
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        background_image_tablet: { url: urlB, id: '' },
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 767px) {\n  .e-sid-${cleanSid} {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Must have zero RULE-SURFACE-01 defects for verified URL-A -> URL-B -> none');
+  });
+
+  runTest('2.15. Negative: Missing mobile re-apply rule when tablet has none reset flags HIGH defect', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const sid = 'c_neg_missing_reapply';
+    const cleanSid = 'c_neg_missing_reapply';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlA}")`
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: `url("${urlA}")`
+    });
+    // Template has tablet none reset, but relies only on native mobile setting without scoped CSS rule
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        background_image_mobile: { url: urlA, id: '' },
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-${cleanSid} {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    const mobDefects = defects.filter(d => d.viewport === 'mobile');
+    assert.strictEqual(mobDefects.length, 1, 'Must flag missing mobile scoped rule as HIGH defect');
+    assert.strictEqual(mobDefects[0].severity, 'HIGH');
+    assert(mobDefects[0].message.includes('tablet has active scoped "none !important" reset; mobile must explicitly re-apply image'));
+  });
+
+  runTest('2.16. Negative: Corrupted tablet render for URL -> none -> none flags HIGH defect', () => {
+    const urlA = 'https://example.com/image-a.jpg';
+    const sid = 'c_neg_corrupt_tab_render';
+    const cleanSid = 'c_neg_corrupt_tab_render';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    // Render snapshot has desktop image on tablet instead of none
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: `url("${urlA}")`,
+      mobileImg: 'none'
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: `e-sid-${cleanSid}`
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-${cleanSid} {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    const tabDefects = defects.filter(d => d.viewport === 'tablet');
+    assert.strictEqual(tabDefects.length, 1, 'Must flag corrupted tablet render');
+    assert.strictEqual(tabDefects[0].severity, 'HIGH');
+    assert(tabDefects[0].message.includes('rendered with unexpected backgroundImage at tablet: expected "none"'));
+  });
+
   // ---------------------------------------------------------------------------
   // Real Headless Chromium Fixture
   // ---------------------------------------------------------------------------
@@ -706,6 +983,149 @@ const { auditVerificationMatrix } = require('../src/smart/verification-matrix');
 
     assert.strictEqual(surfaceDefects.length, 0, 'Real Chromium A/B/A fixture must have exactly 0 RULE-SURFACE-01 defects across all 3 viewports');
     assert.strictEqual(geometryDefects.length, 0, 'Real Chromium A/B/A fixture must have exactly 0 RULE-SURFACE-02 defects across all 3 viewports');
+  });
+
+  await runAsyncTest('3.2. Real Chromium media-query fixture: URL -> none -> URL (real GT -> compile -> preview -> Chromium render -> 0 defects)', async () => {
+    const fixtureHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { margin: 0; padding: 0; }
+    .hero-none-url {
+      background-color: rgb(15, 23, 42);
+      background-image: url("https://images.unsplash.com/photo-1579546929518-9e396f3cc809");
+      background-size: cover;
+      background-position: 50% 50%;
+      background-repeat: no-repeat;
+      min-height: 300px;
+    }
+    @media (max-width: 1024px) {
+      .hero-none-url {
+        background-image: none;
+      }
+    }
+    @media (max-width: 767px) {
+      .hero-none-url {
+        background-image: url("https://images.unsplash.com/photo-1557683316-973673baf926");
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-none-url" id="real-hero-none-url">
+    <h2>URL to None to URL</h2>
+  </div>
+</body>
+</html>`;
+
+    const gtSnapshot = await captureGroundTruth(fixtureHtml, { cache: false });
+    const heroNode = Object.values(gtSnapshot.viewports.desktop.flat).find(n => n.id === 'real-hero-none-url');
+    assert(heroNode, 'GT hero node must exist');
+    const sid = heroNode.sid;
+
+    const deskGtImg = gtSnapshot.viewports.desktop.flat[sid].styles.backgroundImage;
+    const tabGtImg = gtSnapshot.viewports.tablet.flat[sid].styles.backgroundImage;
+    const mobGtImg = gtSnapshot.viewports.mobile.flat[sid].styles.backgroundImage;
+
+    assert.ok(deskGtImg.includes('photo-1579546929518-9e396f3cc809'));
+    assert.strictEqual(tabGtImg, 'none');
+    assert.ok(mobGtImg.includes('photo-1557683316-973673baf926'));
+
+    const compileResult = await compileHtmlToElementor(fixtureHtml, {
+      offline: true,
+      useAi: false,
+      inspect: false,
+      probeBehavior: false,
+      behaviorTraces: [],
+      captureGroundTruth: async () => gtSnapshot
+    });
+
+    const previewHtml = renderElementorToHtml(compileResult.templateJson);
+    const renderSnapshot = await captureRenderSnapshot(previewHtml);
+
+    const deskRnImg = renderSnapshot.viewports.desktop.flat[sid].styles.backgroundImage;
+    const tabRnImg = renderSnapshot.viewports.tablet.flat[sid].styles.backgroundImage;
+    const mobRnImg = renderSnapshot.viewports.mobile.flat[sid].styles.backgroundImage;
+
+    assert.strictEqual(deskRnImg, deskGtImg, 'Desktop render must match GT');
+    assert.strictEqual(tabRnImg, 'none', 'Tablet render must be none');
+    assert.strictEqual(mobRnImg, mobGtImg, 'Mobile render must match GT URL');
+
+    const auditReport = auditVerificationMatrix(gtSnapshot, renderSnapshot, compileResult.templateJson);
+    const surfaceDefects = auditReport.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+
+    assert.strictEqual(surfaceDefects.length, 0, 'Real Chromium URL -> none -> URL fixture must have exactly 0 RULE-SURFACE-01 defects');
+  });
+
+  await runAsyncTest('3.3. Real Chromium media-query fixture: none -> URL -> none (real GT -> compile -> preview -> Chromium render -> 0 defects)', async () => {
+    const fixtureHtml = `<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { margin: 0; padding: 0; }
+    .hero-tab-only {
+      background-color: rgb(30, 41, 59);
+      background-image: none;
+      min-height: 250px;
+    }
+    @media (max-width: 1024px) {
+      .hero-tab-only {
+        background-image: url("https://images.unsplash.com/photo-1579546929518-9e396f3cc809");
+      }
+    }
+    @media (max-width: 767px) {
+      .hero-tab-only {
+        background-image: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero-tab-only" id="real-hero-tab-only">
+    <h2>None to URL to None</h2>
+  </div>
+</body>
+</html>`;
+
+    const gtSnapshot = await captureGroundTruth(fixtureHtml, { cache: false });
+    const heroNode = Object.values(gtSnapshot.viewports.desktop.flat).find(n => n.id === 'real-hero-tab-only');
+    assert(heroNode, 'GT hero node must exist');
+    const sid = heroNode.sid;
+
+    const deskGtImg = gtSnapshot.viewports.desktop.flat[sid].styles.backgroundImage;
+    const tabGtImg = gtSnapshot.viewports.tablet.flat[sid].styles.backgroundImage;
+    const mobGtImg = gtSnapshot.viewports.mobile.flat[sid].styles.backgroundImage;
+
+    assert.strictEqual(deskGtImg, 'none');
+    assert.ok(tabGtImg.includes('photo-1579546929518-9e396f3cc809'));
+    assert.strictEqual(mobGtImg, 'none');
+
+    const compileResult = await compileHtmlToElementor(fixtureHtml, {
+      offline: true,
+      useAi: false,
+      inspect: false,
+      probeBehavior: false,
+      behaviorTraces: [],
+      captureGroundTruth: async () => gtSnapshot
+    });
+
+    const previewHtml = renderElementorToHtml(compileResult.templateJson);
+    const renderSnapshot = await captureRenderSnapshot(previewHtml);
+
+    const deskRnImg = renderSnapshot.viewports.desktop.flat[sid].styles.backgroundImage;
+    const tabRnImg = renderSnapshot.viewports.tablet.flat[sid].styles.backgroundImage;
+    const mobRnImg = renderSnapshot.viewports.mobile.flat[sid].styles.backgroundImage;
+
+    assert.strictEqual(deskRnImg, 'none', 'Desktop render must be none');
+    assert.strictEqual(tabRnImg, tabGtImg, 'Tablet render must match GT');
+    assert.strictEqual(mobRnImg, 'none', 'Mobile render must be none');
+
+    const auditReport = auditVerificationMatrix(gtSnapshot, renderSnapshot, compileResult.templateJson);
+    const surfaceDefects = auditReport.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+
+    assert.strictEqual(surfaceDefects.length, 0, 'Real Chromium none -> URL -> none fixture must have exactly 0 RULE-SURFACE-01 defects');
   });
 
   // ---------------------------------------------------------------------------

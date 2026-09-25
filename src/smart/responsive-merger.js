@@ -17,10 +17,15 @@ const {
   resolveAssetUrl
 } = require('./geometry-mapper');
 const { resolveElementSelector, ensureDeterministicClass } = require('./semantic-scoper');
-const { resolveImageBackgroundGeometry, extractSingleImageUrl } = require('./image-background-geometry');
+const {
+  resolveImageBackgroundGeometry,
+  extractSingleImageUrl,
+  isSafeCssUrl,
+  classifyImageBackgroundState,
+  resolveResponsiveImagePlan
+} = require('./image-background-geometry');
 const { resolveGradientBackground, resolveScopedGradientPlan } = require('./gradient-background-resolver');
 const { readComputedCssProperty } = require('./computed-style-resolver');
-const { isSafeCssUrl } = require('../emulator/elementor-virtual-renderer');
 
 function parsePx(val) {
   if (!val) return 0;
@@ -447,96 +452,126 @@ function mergeNodeResponsive(node, parentNode, gtSnapshot, options) {
     }
 
     // Block 8.2 — Phase 5, Part 5B-1: Native Responsive Background Image Source
-    // & Part 3B: Responsive Image Background Geometry
-    if (s.background_background === 'classic' && typeof s.background_image?.url === 'string' && s.background_image.url.trim() !== '') {
-      delete s.background_image_tablet;
-      delete s.background_image_mobile;
+    // & Part 5B-2: Responsive Image Background Transitions & Geometry
+    if (s.background_background !== 'gradient') {
+      const rawDeskBgImg = gtDesktop ? readComputedCssProperty(gtDesktop, gtSnapshot, 'desktop', 'background-image', 'backgroundImage') : null;
+      const rawTabBgImg = gtTablet ? readComputedCssProperty(gtTablet, gtSnapshot, 'tablet', 'background-image', 'backgroundImage') : null;
+      const rawMobBgImg = gtMobile ? readComputedCssProperty(gtMobile, gtSnapshot, 'mobile', 'background-image', 'backgroundImage') : null;
 
-      const effectiveDesktopImgUrl = s.background_image.url.trim();
-      let effectiveTabletImgUrl = effectiveDesktopImgUrl;
+      let dState = classifyImageBackgroundState(rawDeskBgImg);
+      if (dState.state !== 'url' && s.background_background === 'classic' && typeof s.background_image?.url === 'string' && s.background_image.url.trim() !== '') {
+        dState = { state: 'url', url: s.background_image.url.trim(), reason: null };
+      }
+      const tState = classifyImageBackgroundState(rawTabBgImg);
+      const mState = classifyImageBackgroundState(rawMobBgImg);
 
-      // 1. Tablet Image Source override
-      if (gtTablet) {
-        const rawTabBgImg = readComputedCssProperty(gtTablet, gtSnapshot, 'tablet', 'background-image', 'backgroundImage');
-        if (rawTabBgImg) {
-          const parsedTabUrl = extractSingleImageUrl(rawTabBgImg);
-          if (parsedTabUrl) {
-            const resolvedTabUrl = resolveAssetUrl(parsedTabUrl, options);
-            if (resolvedTabUrl && isSafeCssUrl(resolvedTabUrl)) {
-              if (resolvedTabUrl !== effectiveDesktopImgUrl) {
-                s.background_image_tablet = { url: resolvedTabUrl, id: '' };
-                effectiveTabletImgUrl = resolvedTabUrl;
+      if (dState.state === 'url' || tState.state === 'url' || mState.state === 'url' || (s.background_background === 'classic' && s.background_image?.url)) {
+        const plan = resolveResponsiveImagePlan(dState, tState, mState, resolveAssetUrl, options);
+
+        if (plan.hasCssRoute) {
+          if (options !== undefined && options !== null && (!options.atomicRules || !Array.isArray(options.atomicRules))) {
+            const err = new Error(`IMAGE_CSS_ROUTE_UNAVAILABLE: atomicRules array is unavailable for node ${sid}`);
+            err.code = 'IMAGE_CSS_ROUTE_UNAVAILABLE';
+            throw err;
+          }
+
+          if (options?.atomicRules && Array.isArray(options.atomicRules)) {
+            const className = ensureDeterministicClass(node, sid);
+            const selector = `.${className}`;
+
+            if (plan.cssRules.tablet) {
+              const rule = `@media (max-width: 1024px) {\n  ${selector} {\n    ${plan.cssRules.tablet}\n  }\n}`;
+              if (!options.atomicRules.includes(rule)) {
+                options.atomicRules.push(rule);
+              }
+            }
+
+            if (plan.cssRules.mobile) {
+              const rule = `@media (max-width: 767px) {\n  ${selector} {\n    ${plan.cssRules.mobile}\n  }\n}`;
+              if (!options.atomicRules.includes(rule)) {
+                options.atomicRules.push(rule);
               }
             }
           }
         }
-      }
 
-      // 2. Mobile Image Source override (compare against effective tablet URL)
-      if (gtMobile) {
-        const rawMobBgImg = readComputedCssProperty(gtMobile, gtSnapshot, 'mobile', 'background-image', 'backgroundImage');
-        if (rawMobBgImg) {
-          const parsedMobUrl = extractSingleImageUrl(rawMobBgImg);
-          if (parsedMobUrl) {
-            const resolvedMobUrl = resolveAssetUrl(parsedMobUrl, options);
-            if (resolvedMobUrl && isSafeCssUrl(resolvedMobUrl)) {
-              if (resolvedMobUrl !== effectiveTabletImgUrl) {
-                s.background_image_mobile = { url: resolvedMobUrl, id: '' };
-              }
+        // Apply native settings (or clear them)
+        if (plan.nativeSettings.background_image_tablet) {
+          s.background_image_tablet = plan.nativeSettings.background_image_tablet;
+        } else {
+          delete s.background_image_tablet;
+        }
+
+        if (plan.nativeSettings.background_image_mobile) {
+          s.background_image_mobile = plan.nativeSettings.background_image_mobile;
+        } else {
+          delete s.background_image_mobile;
+        }
+
+        const effectiveDesktopSize = s.background_size;
+        const effectiveDesktopPosition = s.background_position;
+        const effectiveDesktopRepeat = s.background_repeat;
+
+        let effectiveTabletSize = effectiveDesktopSize;
+        let effectiveTabletPosition = effectiveDesktopPosition;
+        let effectiveTabletRepeat = effectiveDesktopRepeat;
+
+        // Tablet geometry:
+        if (plan.cssRules.tablet && plan.cssRules.tablet.includes('none')) {
+          delete s.background_size_tablet;
+          delete s.background_position_tablet;
+          delete s.background_repeat_tablet;
+          effectiveTabletSize = undefined;
+          effectiveTabletPosition = undefined;
+          effectiveTabletRepeat = undefined;
+        } else if (gtTablet && (plan.nativeSettings.background_image_tablet || plan.cssRules.tablet || dState.state === 'url')) {
+          const tabletGeo = resolveImageBackgroundGeometry(gtTablet, gtSnapshot, 'tablet');
+          if (tabletGeo && tabletGeo.settings) {
+            const tabSize = tabletGeo.settings.background_size;
+            if (tabSize && tabSize !== effectiveDesktopSize) {
+              s.background_size_tablet = tabSize;
+              effectiveTabletSize = tabSize;
+            }
+
+            const tabPos = tabletGeo.settings.background_position;
+            if (tabPos && tabPos !== effectiveDesktopPosition) {
+              s.background_position_tablet = tabPos;
+              effectiveTabletPosition = tabPos;
+            }
+
+            const tabRepeat = tabletGeo.settings.background_repeat;
+            if (tabRepeat && tabRepeat !== effectiveDesktopRepeat) {
+              s.background_repeat_tablet = tabRepeat;
+              effectiveTabletRepeat = tabRepeat;
             }
           }
         }
-      }
 
-      const effectiveDesktopSize = s.background_size;
-      const effectiveDesktopPosition = s.background_position;
-      const effectiveDesktopRepeat = s.background_repeat;
+        // Mobile geometry:
+        if (
+          (plan.cssRules.mobile && plan.cssRules.mobile.includes('none')) ||
+          (!plan.cssRules.mobile && plan.cssRules.tablet && plan.cssRules.tablet.includes('none') && mState.state === 'none')
+        ) {
+          delete s.background_size_mobile;
+          delete s.background_position_mobile;
+          delete s.background_repeat_mobile;
+        } else if (gtMobile && (plan.nativeSettings.background_image_mobile || plan.cssRules.mobile || (tState.state === 'url' && !plan.cssRules.tablet?.includes('none')) || (dState.state === 'url' && !plan.cssRules.tablet?.includes('none')))) {
+          const mobileGeo = resolveImageBackgroundGeometry(gtMobile, gtSnapshot, 'mobile');
+          if (mobileGeo && mobileGeo.settings) {
+            const mobSize = mobileGeo.settings.background_size;
+            if (mobSize && mobSize !== effectiveTabletSize) {
+              s.background_size_mobile = mobSize;
+            }
 
-      let effectiveTabletSize = effectiveDesktopSize;
-      let effectiveTabletPosition = effectiveDesktopPosition;
-      let effectiveTabletRepeat = effectiveDesktopRepeat;
+            const mobPos = mobileGeo.settings.background_position;
+            if (mobPos && mobPos !== effectiveTabletPosition) {
+              s.background_position_mobile = mobPos;
+            }
 
-      // 1. Tablet overrides (compare against effective desktop value)
-      if (gtTablet) {
-        const tabletGeo = resolveImageBackgroundGeometry(gtTablet, gtSnapshot, 'tablet');
-        if (tabletGeo && tabletGeo.settings) {
-          const tabSize = tabletGeo.settings.background_size;
-          if (tabSize && tabSize !== effectiveDesktopSize) {
-            s.background_size_tablet = tabSize;
-            effectiveTabletSize = tabSize;
-          }
-
-          const tabPos = tabletGeo.settings.background_position;
-          if (tabPos && tabPos !== effectiveDesktopPosition) {
-            s.background_position_tablet = tabPos;
-            effectiveTabletPosition = tabPos;
-          }
-
-          const tabRepeat = tabletGeo.settings.background_repeat;
-          if (tabRepeat && tabRepeat !== effectiveDesktopRepeat) {
-            s.background_repeat_tablet = tabRepeat;
-            effectiveTabletRepeat = tabRepeat;
-          }
-        }
-      }
-
-      // 2. Mobile overrides (compare against effective tablet value)
-      if (gtMobile) {
-        const mobileGeo = resolveImageBackgroundGeometry(gtMobile, gtSnapshot, 'mobile');
-        if (mobileGeo && mobileGeo.settings) {
-          const mobSize = mobileGeo.settings.background_size;
-          if (mobSize && mobSize !== effectiveTabletSize) {
-            s.background_size_mobile = mobSize;
-          }
-
-          const mobPos = mobileGeo.settings.background_position;
-          if (mobPos && mobPos !== effectiveTabletPosition) {
-            s.background_position_mobile = mobPos;
-          }
-
-          const mobRepeat = mobileGeo.settings.background_repeat;
-          if (mobRepeat && mobRepeat !== effectiveTabletRepeat) {
-            s.background_repeat_mobile = mobRepeat;
+            const mobRepeat = mobileGeo.settings.background_repeat;
+            if (mobRepeat && mobRepeat !== effectiveTabletRepeat) {
+              s.background_repeat_mobile = mobRepeat;
+            }
           }
         }
       }
