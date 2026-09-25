@@ -109,8 +109,11 @@ function evaluateConvergenceGate(matrixResult, behaviorResult, gtSnapshot, ladde
   const mappedDefects = defects.map(d => ({
     id: d.id,
     nodeSid: d.nodeSid,
+    widgetId: d.widgetId !== undefined && d.widgetId !== null ? d.widgetId : null,
     viewport: d.viewport,
     property: d.property,
+    original: d.original !== undefined && d.original !== null ? d.original : null,
+    rendered: d.rendered !== undefined && d.rendered !== null ? d.rendered : null,
     message: d.message,
     severity: d.severity,
     rule: d.rule,

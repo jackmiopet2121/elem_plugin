@@ -7,6 +7,16 @@ const { TOLERANCES, isColorEqual, normalizeColor } = require("./tolerances");
 const { createDefect, createAuditReport, CRITICAL_RULES } = require("./audit-schema");
 const { isElementorNativeProperty, isNativeEditableWidget } = require("./style-router");
 const { extractKnownGlyph } = require("./glyph-map");
+const { resolvePageCanvas, parseCssColor } = require("./page-canvas-resolver");
+const { readComputedCssProperty } = require("./computed-style-resolver");
+const {
+  mapBackgroundSize,
+  mapBackgroundPosition,
+  mapBackgroundRepeat,
+  extractSingleImageUrl
+} = require("./image-background-geometry");
+const { parseLinearGradient, resolveScopedGradientPlan } = require("./gradient-background-resolver");
+const { isSafeCssUrl } = require("../emulator/elementor-virtual-renderer");
 
 const AVAILABLE_RULES = Object.freeze([
   'RULE-ASSET-01',
@@ -16,6 +26,9 @@ const AVAILABLE_RULES = Object.freeze([
   'RULE-CLR-01',
   'RULE-CLR-02',
   'RULE-CLR-03',
+  'RULE-CANVAS-01',
+  'RULE-SURFACE-01',
+  'RULE-SURFACE-02',
   'RULE-TYP-01',
   'RULE-TYP-02',
   'RULE-TXT-01',
@@ -32,6 +45,218 @@ const AVAILABLE_RULES = Object.freeze([
   'RULE-BHV-01'
 ]);
 
+function hasNonEmptyBackgroundImage(bgImage) {
+  if (!bgImage) return false;
+  if (typeof bgImage === 'string') {
+    const s = bgImage.trim().toLowerCase();
+    return s !== '' && s !== 'none';
+  }
+  if (typeof bgImage === 'object' && bgImage !== null) {
+    if (typeof bgImage.url === 'string') {
+      const s = bgImage.url.trim().toLowerCase();
+      return s !== '' && s !== 'none';
+    }
+  }
+  return false;
+}
+
+function isNoneBackgroundImage(img) {
+  if (!img) return true;
+  const s = String(img).trim().toLowerCase();
+  return s === '' || s === 'none';
+}
+
+function compareContainerBackgroundColors(gtColorStr, rnColorStr) {
+  const p1 = parseCssColor(gtColorStr);
+  const p2 = parseCssColor(rnColorStr);
+
+  if (!p1 || !p2) {
+    return {
+      match: false,
+      unparseable: true,
+      reason: `Unparseable container background color: GT "${gtColorStr}", Rendered "${rnColorStr}".`
+    };
+  }
+
+  // Transparent colors with alpha === 0 match even if RGB channels differ
+  if (p1.alpha === 0 && p2.alpha === 0) {
+    return { match: true };
+  }
+
+  // If one is alpha 0 and the other is not
+  if ((p1.alpha === 0) !== (p2.alpha === 0)) {
+    return {
+      match: false,
+      reason: `Container transparency mismatch: GT alpha ${p1.alpha}, Rendered alpha ${p2.alpha}.`
+    };
+  }
+
+  // Exact alpha match (allow microscopic float epsilon < 0.001)
+  if (Math.abs(p1.alpha - p2.alpha) >= 0.001) {
+    return {
+      match: false,
+      reason: `Container alpha mismatch: expected ${p1.alpha}, got ${p2.alpha}.`
+    };
+  }
+
+  // Exact RGB channel match (0 tolerance)
+  if (p1.r !== p2.r || p1.g !== p2.g || p1.b !== p2.b) {
+    return {
+      match: false,
+      reason: `Container RGB channel mismatch: expected rgb(${p1.r}, ${p1.g}, ${p1.b}), got rgb(${p2.r}, ${p2.g}, ${p2.b}).`
+    };
+  }
+
+  return { match: true };
+}
+
+function validateGradientAngleSetting(obj) {
+  if (!obj || typeof obj !== 'object') return { ok: false, reason: 'expected object' };
+  if (obj.unit !== 'deg') return { ok: false, reason: `expected unit "deg", got "${obj.unit}"` };
+  if (typeof obj.size !== 'number' || !Number.isFinite(obj.size)) return { ok: false, reason: `size must be finite number, got ${obj.size}` };
+  return { ok: true };
+}
+
+function validateGradientStopSetting(obj) {
+  if (!obj || typeof obj !== 'object') return { ok: false, reason: 'expected object' };
+  if (obj.unit !== '%') return { ok: false, reason: `expected unit "%", got "${obj.unit}"` };
+  if (typeof obj.size !== 'number' || !Number.isFinite(obj.size)) return { ok: false, reason: `size must be finite number, got ${obj.size}` };
+  if (obj.size < 0 || obj.size > 100) return { ok: false, reason: `size must be between 0 and 100, got ${obj.size}` };
+  return { ok: true };
+}
+
+function resolveEffectiveGradientSetting(tmplSettings, baseProp, vp, validator) {
+  const tabProp = `${baseProp}_tablet`;
+  const mobProp = `${baseProp}_mobile`;
+
+  function checkProp(prop) {
+    if (!Object.prototype.hasOwnProperty.call(tmplSettings, prop)) {
+      return { present: false };
+    }
+    const val = tmplSettings[prop];
+    const validation = validator(val);
+    if (!validation.ok) {
+      return { present: true, valid: false, error: `Template ${prop} malformed: ${validation.reason} (${JSON.stringify(val)})` };
+    }
+    return { present: true, valid: true, size: val.size, raw: val };
+  }
+
+  if (vp === 'desktop') {
+    const base = checkProp(baseProp);
+    if (!base.present) {
+      return { valid: false, error: `Template ${baseProp} missing at desktop` };
+    }
+    if (!base.valid) {
+      return { valid: false, error: base.error };
+    }
+    return { valid: true, value: base.size, raw: base.raw };
+  }
+
+  if (vp === 'tablet') {
+    const tab = checkProp(tabProp);
+    if (tab.present) {
+      if (!tab.valid) return { valid: false, error: tab.error };
+      return { valid: true, value: tab.size, raw: tab.raw };
+    }
+    const base = checkProp(baseProp);
+    if (!base.present || !base.valid) {
+      return { valid: false, error: base.error || `Template base ${baseProp} missing for tablet fallback` };
+    }
+    return { valid: true, value: base.size, raw: base.raw };
+  }
+
+  if (vp === 'mobile') {
+    const mob = checkProp(mobProp);
+    if (mob.present) {
+      if (!mob.valid) return { valid: false, error: mob.error };
+      return { valid: true, value: mob.size, raw: mob.raw };
+    }
+    const tab = checkProp(tabProp);
+    if (tab.present) {
+      if (!tab.valid) return { valid: false, error: tab.error };
+      return { valid: true, value: tab.size, raw: tab.raw };
+    }
+    const base = checkProp(baseProp);
+    if (!base.present || !base.valid) {
+      return { valid: false, error: base.error || `Template base ${baseProp} missing for mobile fallback` };
+    }
+    return { valid: true, value: base.size, raw: base.raw };
+  }
+
+  return { valid: false, error: `Unknown viewport: ${vp}` };
+}
+
+function resolveEffectiveTemplateImageUrl(tmplSettings, vp) {
+  if (!tmplSettings || typeof tmplSettings !== 'object') {
+    return { valid: false, url: '', reason: 'Template settings missing or invalid', settingPresent: false };
+  }
+
+  function checkImageProp(prop) {
+    if (!Object.prototype.hasOwnProperty.call(tmplSettings, prop)) {
+      return { present: false };
+    }
+    const val = tmplSettings[prop];
+    if (val && typeof val === 'object' && typeof val.url === 'string' && val.url.trim() !== '') {
+      const trimmed = val.url.trim();
+      if (!isSafeCssUrl(trimmed)) {
+        return { present: true, valid: false, error: `Template ${prop} contains unsafe URL "${trimmed}"` };
+      }
+      return { present: true, valid: true, url: trimmed };
+    }
+    return { present: true, valid: false, error: `Template ${prop}.url missing, non-string, or empty` };
+  }
+
+  const base = checkImageProp('background_image');
+  const tab = checkImageProp('background_image_tablet');
+  const mob = checkImageProp('background_image_mobile');
+
+  if (vp === 'desktop') {
+    if (!base.present) {
+      return { valid: false, url: '', reason: 'Template background_image property missing', settingPresent: false };
+    }
+    if (!base.valid) {
+      return { valid: false, url: '', reason: base.error, settingPresent: true };
+    }
+    return { valid: true, url: base.url, settingPresent: true };
+  }
+
+  if (vp === 'tablet') {
+    if (tab.present) {
+      if (!tab.valid) {
+        return { valid: false, url: '', reason: tab.error, settingPresent: true };
+      }
+      return { valid: true, url: tab.url, settingPresent: true };
+    }
+    // Tablet inherits from desktop
+    if (!base.present || !base.valid) {
+      return { valid: false, url: '', reason: base.error || 'Template background_image missing for tablet fallback', settingPresent: false };
+    }
+    return { valid: true, url: base.url, settingPresent: false };
+  }
+
+  if (vp === 'mobile') {
+    if (mob.present) {
+      if (!mob.valid) {
+        return { valid: false, url: '', reason: mob.error, settingPresent: true };
+      }
+      return { valid: true, url: mob.url, settingPresent: true };
+    }
+    // Mobile inherits from tablet override if present, else desktop
+    if (tab.present) {
+      if (!tab.valid) {
+        return { valid: false, url: '', reason: tab.error, settingPresent: false };
+      }
+      return { valid: true, url: tab.url, settingPresent: false };
+    }
+    if (!base.present || !base.valid) {
+      return { valid: false, url: '', reason: base.error || 'Template background_image missing for mobile fallback', settingPresent: false };
+    }
+    return { valid: true, url: base.url, settingPresent: false };
+  }
+
+  return { valid: false, url: '', reason: `Unknown viewport: ${vp}`, settingPresent: false };
+}
+
 function parsePx(val) {
   if (!val) return 0;
   const n = parseFloat(val);
@@ -39,6 +264,43 @@ function parsePx(val) {
 }
 
 const EDITABLE_RELAX = 2.5;
+
+function hasContainerCssRoute(templateJson, sid, options = {}) {
+  if (!sid) return false;
+  const cleanSid = String(sid).replace(/^sid-/, '');
+  const targetClass = `e-sid-${cleanSid}`;
+
+  const atomicRules = Array.isArray(templateJson?.atomicRules)
+    ? templateJson.atomicRules
+    : (Array.isArray(options?.atomicRules) ? options.atomicRules : null);
+
+  if (atomicRules && atomicRules.some(r => typeof r === 'string' && r.includes(targetClass))) {
+    return true;
+  }
+  if (typeof templateJson?.microCss === 'string' && templateJson.microCss.includes(targetClass)) {
+    return true;
+  }
+  if (typeof options?.microCss === 'string' && options.microCss.includes(targetClass)) {
+    return true;
+  }
+
+  let foundInStylesheet = false;
+  function walk(els) {
+    if (!Array.isArray(els) || foundInStylesheet) return;
+    for (const el of els) {
+      if (el && el.widgetType === 'html') {
+        const html = el.settings?.html;
+        if (typeof html === 'string' && html.includes(targetClass)) {
+          foundInStylesheet = true;
+          return;
+        }
+      }
+      if (el && el.elements) walk(el.elements);
+    }
+  }
+  walk(templateJson?.content || (Array.isArray(templateJson) ? templateJson : []));
+  return foundInStylesheet;
+}
 
 /**
  * Runs verification matrix comparison between GT snapshot and Render snapshot.
@@ -55,6 +317,8 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
   // Index template elements by SID to detect native editable widgets
   const sidToElement = new Map();
   const leafSids = new Set();
+  const sourceContainers = [];
+  const auditedSurfaceSids = new Set();
 
   function indexElements(elements = []) {
     for (const el of elements) {
@@ -63,6 +327,8 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
         sidToElement.set(sid, el);
         if (el.elType === "widget") {
           leafSids.add(sid);
+        } else if (el.elType === "container") {
+          sourceContainers.push({ el, sid });
         }
       }
       if (Array.isArray(el.elements)) indexElements(el.elements);
@@ -250,6 +516,256 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
     return false;
   }
 
+  // Helper to compare canvas colors by parsed channels & alpha
+  function isCanvasColorMatch(c1Str, c2Str) {
+    if (!c1Str || !c2Str) return false;
+    const p1 = parseCssColor(c1Str);
+    const p2 = parseCssColor(c2Str);
+    if (!p1 || !p2) return false;
+    return p1.r === p2.r &&
+           p1.g === p2.g &&
+           p1.b === p2.b &&
+           Math.abs(p1.alpha - p2.alpha) < 0.001;
+  }
+
+  // RULE-CANVAS-01: Page Canvas Ground Truth Parity Audit
+  if (gtSnapshot) {
+    const canvasDecision = resolvePageCanvas(gtSnapshot);
+
+    if (canvasDecision.status === 'SOLID_COLOR') {
+      const expectedColor = canvasDecision.color;
+      const pageSettings = templateJson?.page_settings;
+      const pageBg = pageSettings?.background_color;
+      const pageBgMode = pageSettings?.background_background;
+      const pageBgImage = pageSettings?.background_image;
+
+      if (hasNonEmptyBackgroundImage(pageBgImage)) {
+        const bgImgVal = typeof pageBgImage === 'object'
+          ? (pageBgImage.url || JSON.stringify(pageBgImage))
+          : pageBgImage;
+        for (const vp of viewports) {
+          defects.push(createDefect({
+            nodeSid: 'canvas',
+            widgetId: null,
+            viewport: vp,
+            property: 'background_image',
+            original: 'none',
+            rendered: bgImgVal,
+            severity: 'HIGH',
+            rule: 'RULE-CANVAS-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Elementor page_settings contains unexpected background_image for solid canvas at ${vp}.`
+          }));
+        }
+      }
+
+      for (const vp of viewports) {
+        if (!pageBg || typeof pageBg !== 'string' || pageBg.trim() === '') {
+          defects.push(createDefect({
+            nodeSid: 'canvas',
+            widgetId: null,
+            viewport: vp,
+            property: 'backgroundColor',
+            original: expectedColor,
+            rendered: 'missing_page_setting',
+            severity: 'HIGH',
+            rule: 'RULE-CANVAS-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Canvas background color missing in templateJson.page_settings at ${vp}: expected ${expectedColor}.`
+          }));
+        } else if (pageBgMode !== 'classic') {
+          defects.push(createDefect({
+            nodeSid: 'canvas',
+            widgetId: null,
+            viewport: vp,
+            property: 'background_background',
+            original: 'classic',
+            rendered: pageBgMode || 'missing_mode',
+            severity: 'HIGH',
+            rule: 'RULE-CANVAS-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Canvas background mode missing or invalid in templateJson.page_settings at ${vp}: expected background_background: 'classic', got ${JSON.stringify(pageBgMode)}.`
+          }));
+        } else if (!isCanvasColorMatch(pageBg, expectedColor)) {
+          defects.push(createDefect({
+            nodeSid: 'canvas',
+            widgetId: null,
+            viewport: vp,
+            property: 'backgroundColor',
+            original: expectedColor,
+            rendered: pageBg,
+            severity: 'HIGH',
+            rule: 'RULE-CANVAS-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Canvas templateJson.page_settings background mismatch at ${vp}: expected ${expectedColor}, got ${pageBg}.`
+          }));
+        } else {
+          // Native Elementor settings are valid; now verify rendered body canvas
+          const renderVp = renderSnapshot?.viewports?.[vp];
+          const renderBody = renderVp?.canvas?.body;
+          const renderBg = renderBody?.backgroundColor;
+          const renderBgImg = renderBody?.backgroundImage;
+
+          if (!renderBody || typeof renderBg !== 'string' || renderBg.trim() === '') {
+            defects.push(createDefect({
+              nodeSid: 'canvas',
+              widgetId: null,
+              viewport: vp,
+              property: 'backgroundColor',
+              original: expectedColor,
+              rendered: 'missing_render_capture',
+              severity: 'HIGH',
+              rule: 'RULE-CANVAS-01',
+              rung: 'R0',
+              advisory: false,
+              message: `Canvas render capture missing for viewport ${vp}: expected ${expectedColor}.`
+            }));
+          } else if (typeof renderBgImg !== 'string' || renderBgImg.trim() === '') {
+            defects.push(createDefect({
+              nodeSid: 'canvas',
+              widgetId: null,
+              viewport: vp,
+              property: 'backgroundImage',
+              original: 'none',
+              rendered: 'missing_render_capture',
+              severity: 'HIGH',
+              rule: 'RULE-CANVAS-01',
+              rung: 'R0',
+              advisory: false,
+              message: `Canvas render capture missing backgroundImage for viewport ${vp}: expected "none".`
+            }));
+          } else if (renderBgImg.trim().toLowerCase() !== 'none') {
+            defects.push(createDefect({
+              nodeSid: 'canvas',
+              widgetId: null,
+              viewport: vp,
+              property: 'backgroundImage',
+              original: 'none',
+              rendered: renderBgImg,
+              severity: 'HIGH',
+              rule: 'RULE-CANVAS-01',
+              rung: 'R0',
+              advisory: false,
+              message: `Canvas rendered with unexpected backgroundImage at ${vp}: expected "none", got ${renderBgImg}.`
+            }));
+          } else if (!isCanvasColorMatch(renderBg, expectedColor)) {
+            defects.push(createDefect({
+              nodeSid: 'canvas',
+              widgetId: null,
+              viewport: vp,
+              property: 'backgroundColor',
+              original: expectedColor,
+              rendered: renderBg,
+              severity: 'HIGH',
+              rule: 'RULE-CANVAS-01',
+              rung: 'R0',
+              advisory: false,
+              message: `Canvas background color mismatch at ${vp}: expected ${expectedColor}, got ${renderBg}.`
+            }));
+          }
+        }
+      }
+    } else if (['UNSUPPORTED_LAYERED', 'RESPONSIVE_CANVAS_UNSUPPORTED', 'INVALID_CAPTURE'].includes(canvasDecision.status)) {
+      defects.push(createDefect({
+        nodeSid: 'canvas',
+        widgetId: null,
+        viewport: 'desktop',
+        property: 'canvasMode',
+        original: canvasDecision.status,
+        rendered: canvasDecision.reason || canvasDecision.status,
+        severity: 'HIGH',
+        rule: 'RULE-CANVAS-01',
+        rung: 'R0',
+        advisory: false,
+        message: `Canvas parity cannot be verified: [${canvasDecision.status}] ${canvasDecision.reason || ''}.`
+      }));
+    } else if (canvasDecision.status === 'TRANSPARENT_DEFAULT') {
+      const pageSettings = templateJson?.page_settings;
+      const pageBg = pageSettings?.background_color;
+      const pageBgMode = pageSettings?.background_background;
+      const pageBgImage = pageSettings?.background_image;
+
+      if (pageBg && typeof pageBg === 'string' && pageBg.trim() !== '' && pageBg.trim() !== 'transparent') {
+        defects.push(createDefect({
+          nodeSid: 'canvas',
+          widgetId: null,
+          viewport: 'desktop',
+          property: 'backgroundColor',
+          original: 'transparent',
+          rendered: pageBg,
+          severity: 'HIGH',
+          rule: 'RULE-CANVAS-01',
+          rung: 'R0',
+          advisory: false,
+          message: `Compiler emitted invented page background color for transparent default canvas: ${pageBg}.`
+        }));
+      }
+
+      if (pageBgMode && typeof pageBgMode === 'string' && pageBgMode.trim() !== '') {
+        defects.push(createDefect({
+          nodeSid: 'canvas',
+          widgetId: null,
+          viewport: 'desktop',
+          property: 'background_background',
+          original: null,
+          rendered: pageBgMode,
+          severity: 'HIGH',
+          rule: 'RULE-CANVAS-01',
+          rung: 'R0',
+          advisory: false,
+          message: `Compiler emitted invented page background mode for transparent default canvas: background_background: '${pageBgMode}'.`
+        }));
+      }
+
+      if (hasNonEmptyBackgroundImage(pageBgImage)) {
+        const bgImgVal = typeof pageBgImage === 'object'
+          ? (pageBgImage.url || JSON.stringify(pageBgImage))
+          : pageBgImage;
+        defects.push(createDefect({
+          nodeSid: 'canvas',
+          widgetId: null,
+          viewport: 'desktop',
+          property: 'background_image',
+          original: null,
+          rendered: bgImgVal,
+          severity: 'HIGH',
+          rule: 'RULE-CANVAS-01',
+          rung: 'R0',
+          advisory: false,
+          message: `Compiler emitted invented page background_image for transparent default canvas.`
+        }));
+      }
+
+      // Check render canvas capture across viewports
+      for (const vp of viewports) {
+        const renderVp = renderSnapshot?.viewports?.[vp];
+        const renderBody = renderVp?.canvas?.body;
+        const renderBg = renderBody?.backgroundColor;
+        const renderBgImg = renderBody?.backgroundImage;
+
+        if (!renderBody || typeof renderBg !== 'string' || renderBg.trim() === '' || typeof renderBgImg !== 'string' || renderBgImg.trim() === '') {
+          defects.push(createDefect({
+            nodeSid: 'canvas',
+            widgetId: null,
+            viewport: vp,
+            property: 'canvasCapture',
+            original: 'valid_capture',
+            rendered: 'missing_render_capture',
+            severity: 'HIGH',
+            rule: 'RULE-CANVAS-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Canvas render capture missing for transparent canvas at ${vp}: unverified.`
+          }));
+        }
+      }
+    }
+  }
+
   for (const vp of viewports) {
     const gtVp = gtSnapshot?.viewports?.[vp];
     const renderVp = renderSnapshot?.viewports?.[vp];
@@ -258,6 +774,866 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
 
     const gtFlat = gtVp.flat || {};
     const renderFlat = renderVp.flat || {};
+
+    // RULE-SURFACE-01: Source-Derived Container Surface Verification
+    for (const { el: containerEl, sid } of sourceContainers) {
+      const gtNode = gtFlat[sid];
+      if (!gtNode || gtNode.tag === 'body') continue;
+
+      auditedSurfaceSids.add(sid);
+
+      let gtBgColor = '';
+      let gtBgImage = '';
+      let gtStyleReadFailed = false;
+
+      try {
+        gtBgColor = readComputedCssProperty(gtNode, gtSnapshot, vp, 'background-color', 'backgroundColor');
+      } catch (err) {
+        gtStyleReadFailed = true;
+        defects.push(createDefect({
+          nodeSid: sid,
+          widgetId: containerEl.id || null,
+          viewport: vp,
+          property: 'backgroundColor',
+          original: 'computedStyle',
+          rendered: err.code || err.reason || 'MISSING_STYLE',
+          severity: 'HIGH',
+          rule: 'RULE-SURFACE-01',
+          rung: 'R0',
+          advisory: false,
+          message: `Container ${sid} failed to read computed background-color at ${vp}: ${err.message}`
+        }));
+      }
+
+      try {
+        gtBgImage = readComputedCssProperty(gtNode, gtSnapshot, vp, 'background-image', 'backgroundImage');
+      } catch (err) {
+        gtStyleReadFailed = true;
+        defects.push(createDefect({
+          nodeSid: sid,
+          widgetId: containerEl.id || null,
+          viewport: vp,
+          property: 'backgroundImage',
+          original: 'computedStyle',
+          rendered: err.code || err.reason || 'MISSING_STYLE',
+          severity: 'HIGH',
+          rule: 'RULE-SURFACE-01',
+          rung: 'R0',
+          advisory: false,
+          message: `Container ${sid} failed to read computed background-image at ${vp}: ${err.message}`
+        }));
+      }
+
+      if (gtStyleReadFailed) continue;
+
+      const renderNode = renderFlat[sid];
+      const rns = renderNode?.styles;
+      const tmplSettings = containerEl?.settings || {};
+
+      if (!renderNode || !rns) {
+        defects.push(createDefect({
+          nodeSid: sid,
+          widgetId: containerEl.id || null,
+          viewport: vp,
+          property: 'surface',
+          original: 'rendered_container',
+          rendered: 'missing',
+          severity: 'HIGH',
+          rule: 'RULE-SURFACE-01',
+          rung: 'R0',
+          advisory: false,
+          message: `Rendered container ${sid} or its styles missing at ${vp}.`
+        }));
+        continue;
+      }
+
+      if (rns.backgroundColor === undefined || rns.backgroundColor === null) {
+        defects.push(createDefect({
+          nodeSid: sid,
+          widgetId: containerEl.id || null,
+          viewport: vp,
+          property: 'backgroundColor',
+          original: gtBgColor,
+          rendered: 'missing',
+          severity: 'HIGH',
+          rule: 'RULE-SURFACE-01',
+          rung: 'R0',
+          advisory: false,
+          message: `Rendered container ${sid} missing backgroundColor style at ${vp}.`
+        }));
+        continue;
+      }
+
+      const rnBgColor = rns.backgroundColor || '';
+      const rawRnBgImg = rns.backgroundImage;
+      const rnBgImgMissingOrEmpty = (rawRnBgImg === undefined || rawRnBgImg === null || String(rawRnBgImg).trim() === '');
+      const rnBgImgLower = !rnBgImgMissingOrEmpty ? String(rawRnBgImg).trim().toLowerCase() : '';
+      const rnHasNoneImage = !rnBgImgMissingOrEmpty && rnBgImgLower === 'none';
+
+      // Block 8.2 — Phase 6, Part 6C-2: CSS-Controlled Gradient Verification
+      let containerGradPlan = null;
+      try {
+        const dNode = gtSnapshot?.viewports?.desktop?.flat?.[sid];
+        const tNode = gtSnapshot?.viewports?.tablet?.flat?.[sid];
+        const mNode = gtSnapshot?.viewports?.mobile?.flat?.[sid];
+        if (dNode && tNode && mNode) {
+          const vStyles = {
+            desktop: {
+              backgroundImage: readComputedCssProperty(dNode, gtSnapshot, 'desktop', 'background-image', 'backgroundImage'),
+              backgroundColor: readComputedCssProperty(dNode, gtSnapshot, 'desktop', 'background-color', 'backgroundColor')
+            },
+            tablet: {
+              backgroundImage: readComputedCssProperty(tNode, gtSnapshot, 'tablet', 'background-image', 'backgroundImage'),
+              backgroundColor: readComputedCssProperty(tNode, gtSnapshot, 'tablet', 'background-color', 'backgroundColor')
+            },
+            mobile: {
+              backgroundImage: readComputedCssProperty(mNode, gtSnapshot, 'mobile', 'background-image', 'backgroundImage'),
+              backgroundColor: readComputedCssProperty(mNode, gtSnapshot, 'mobile', 'background-color', 'backgroundColor')
+            }
+          };
+          containerGradPlan = resolveScopedGradientPlan(vStyles);
+        }
+      } catch (e) {
+        containerGradPlan = null;
+      }
+
+      const rawSid = containerEl._sid || tmplSettings._sid || containerEl._dom_id || tmplSettings._dom_id || sid || '';
+      const cleanSid = String(rawSid).replace(/^sid-/, '');
+      const hasSidClass = Boolean(
+        (tmplSettings._css_classes && tmplSettings._css_classes.includes(`e-sid-${cleanSid}`)) ||
+        (tmplSettings.css_classes && tmplSettings.css_classes.includes(`e-sid-${cleanSid}`))
+      );
+
+      const hasCssRoute = hasContainerCssRoute(templateJson, sid, options);
+      const isCssControlled = Boolean(
+        hasSidClass &&
+        hasCssRoute &&
+        containerGradPlan &&
+        containerGradPlan.supported &&
+        containerGradPlan.cssControlled &&
+        containerGradPlan.cssControlled[vp]
+      );
+
+      if (isCssControlled) {
+        // 1. Verify rendered backgroundImage against full Chromium-computed GT value
+        if (rnBgImgMissingOrEmpty) {
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundImage',
+            original: gtBgImage,
+            rendered: 'missing_render_background_image',
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Container ${sid} rendered backgroundImage missing or empty at ${vp}: expected "${gtBgImage}".`
+          }));
+        } else {
+          function normalizeGrad(s) {
+            return String(s || '').replace(/\s+/g, ' ').replace(/\s*,\s*/g, ', ').replace(/\(\s+/g, '(').replace(/\s+\)/g, ')').trim();
+          }
+          const normGt = normalizeGrad(gtBgImage);
+          const normRn = normalizeGrad(rawRnBgImg);
+
+          if (normGt !== normRn) {
+            defects.push(createDefect({
+              nodeSid: sid,
+              widgetId: containerEl.id || null,
+              viewport: vp,
+              property: 'backgroundImage',
+              original: gtBgImage,
+              rendered: String(rawRnBgImg).trim(),
+              severity: 'HIGH',
+              rule: 'RULE-SURFACE-01',
+              rung: 'R0',
+              advisory: false,
+              message: `Unverified surface: container ${sid} rendered gradient mismatch at ${vp}: expected "${gtBgImage}", got "${rawRnBgImg}".`
+            }));
+          }
+        }
+
+        // 2. Verify rendered backgroundColor semantically including alpha
+        const rawRnBgColor = rns.backgroundColor;
+        if (rawRnBgColor === undefined || rawRnBgColor === null || (typeof rawRnBgColor === 'string' && rawRnBgColor.trim() === '')) {
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundColor',
+            original: gtBgColor,
+            rendered: (rawRnBgColor === undefined || rawRnBgColor === null) ? 'missing' : 'empty',
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Container ${sid} rendered backgroundColor missing or empty at ${vp}: expected "${gtBgColor}".`
+          }));
+        } else {
+          const colorComp = compareContainerBackgroundColors(gtBgColor, String(rawRnBgColor).trim());
+          if (colorComp.unparseable) {
+            defects.push(createDefect({
+              nodeSid: sid,
+              widgetId: containerEl.id || null,
+              viewport: vp,
+              property: 'backgroundColor',
+              original: gtBgColor,
+              rendered: String(rawRnBgColor).trim(),
+              severity: 'HIGH',
+              rule: 'RULE-SURFACE-01',
+              rung: 'R0',
+              advisory: false,
+              message: colorComp.reason || `Container ${sid} has unparseable background color at ${vp}.`
+            }));
+          } else if (!colorComp.match) {
+            defects.push(createDefect({
+              nodeSid: sid,
+              widgetId: containerEl.id || null,
+              viewport: vp,
+              property: 'backgroundColor',
+              original: gtBgColor,
+              rendered: String(rawRnBgColor).trim(),
+              severity: 'HIGH',
+              rule: 'RULE-SURFACE-01',
+              rung: 'R0',
+              advisory: false,
+              message: `Container ${sid} background color mismatch at ${vp}: expected ${gtBgColor}, got ${String(rawRnBgColor).trim()}. ${colorComp.reason || ''}`.trim()
+            }));
+          }
+        }
+
+        continue;
+      }
+
+      const gtHasNoneImage = isNoneBackgroundImage(gtBgImage);
+
+      if (gtHasNoneImage) {
+        // If GT at tablet/mobile is none, but template still retains a classic background image:
+        if (
+          (vp === 'tablet' || vp === 'mobile') &&
+          tmplSettings.background_background === 'classic' &&
+          tmplSettings.background_image &&
+          typeof tmplSettings.background_image.url === 'string' &&
+          tmplSettings.background_image.url.trim() !== ''
+        ) {
+          const res = resolveEffectiveTemplateImageUrl(tmplSettings, vp);
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundImage',
+            original: 'none',
+            rendered: String(rawRnBgImg).trim(),
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Unverified surface: container ${sid} has unsupported transition to background-image: none at ${vp}: effective template retains image "${res.url || tmplSettings.background_image.url.trim()}". Native clear to none is unsupported.`
+          }));
+        } else if (rnBgImgMissingOrEmpty) {
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundImage',
+            original: 'none',
+            rendered: 'missing_render_background_image',
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Container ${sid} rendered backgroundImage missing or empty at ${vp}: expected "none".`
+          }));
+        } else if (!rnHasNoneImage) {
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundImage',
+            original: 'none',
+            rendered: String(rawRnBgImg).trim(),
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Container ${sid} rendered with unexpected backgroundImage at ${vp}: expected "none", got ${rawRnBgImg}.`
+          }));
+        }
+      } else {
+        // GT has image or gradient
+        if (rnBgImgMissingOrEmpty || rnHasNoneImage) {
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundImage',
+            original: gtBgImage,
+            rendered: rnBgImgMissingOrEmpty ? 'missing_render_background_image' : 'none',
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Container ${sid} missing backgroundImage at ${vp}: expected ${gtBgImage}, got "${rnBgImgMissingOrEmpty ? 'missing' : 'none'}".`
+          }));
+        } else {
+          // Both GT and render have background-image
+          const gtGrad = parseLinearGradient(gtBgImage, gtBgColor);
+
+          if (gtGrad.mode === 'native-linear') {
+            let templateValid = true;
+            let templateMismatchReason = '';
+
+            if (tmplSettings.background_background !== 'gradient') {
+              templateValid = false;
+              templateMismatchReason = `Template background_background expected "gradient", got "${tmplSettings.background_background}"`;
+            } else if (tmplSettings.background_gradient_type !== 'linear') {
+              templateValid = false;
+              templateMismatchReason = `Template background_gradient_type expected "linear", got "${tmplSettings.background_gradient_type}"`;
+            } else if (Object.prototype.hasOwnProperty.call(tmplSettings, 'background_image')) {
+              templateValid = false;
+              templateMismatchReason = 'Template background_image must be absent for gradient containers';
+            } else {
+              // Validate colors, stops, and angle against parser settings
+              const color1Comp = compareContainerBackgroundColors(gtGrad.settings.background_color, tmplSettings.background_color);
+              if (!color1Comp.match) {
+                templateValid = false;
+                templateMismatchReason = `Template background_color mismatch: expected ${gtGrad.settings.background_color}, got ${tmplSettings.background_color}`;
+              } else {
+                const color2Comp = compareContainerBackgroundColors(gtGrad.settings.background_color_b, tmplSettings.background_color_b);
+                if (!color2Comp.match) {
+                  templateValid = false;
+                  templateMismatchReason = `Template background_color_b mismatch: expected ${gtGrad.settings.background_color_b}, got ${tmplSettings.background_color_b}`;
+                } else {
+                  const stop1Res = resolveEffectiveGradientSetting(tmplSettings, 'background_color_stop', vp, validateGradientStopSetting);
+                  if (!stop1Res.valid) {
+                    templateValid = false;
+                    templateMismatchReason = stop1Res.error;
+                  } else if (stop1Res.value !== gtGrad.settings.background_color_stop.size) {
+                    templateValid = false;
+                    templateMismatchReason = `Template background_color_stop mismatch: expected ${gtGrad.settings.background_color_stop.size}%, got ${stop1Res.value}%`;
+                  } else {
+                    const stop2Res = resolveEffectiveGradientSetting(tmplSettings, 'background_color_b_stop', vp, validateGradientStopSetting);
+                    if (!stop2Res.valid) {
+                      templateValid = false;
+                      templateMismatchReason = stop2Res.error;
+                    } else if (stop2Res.value !== gtGrad.settings.background_color_b_stop.size) {
+                      templateValid = false;
+                      templateMismatchReason = `Template background_color_b_stop mismatch: expected ${gtGrad.settings.background_color_b_stop.size}%, got ${stop2Res.value}%`;
+                    } else {
+                      const angleRes = resolveEffectiveGradientSetting(tmplSettings, 'background_gradient_angle', vp, validateGradientAngleSetting);
+                      if (!angleRes.valid) {
+                        templateValid = false;
+                        templateMismatchReason = angleRes.error;
+                      } else if (angleRes.value !== gtGrad.settings.background_gradient_angle.size) {
+                        templateValid = false;
+                        templateMismatchReason = `Template background_gradient_angle mismatch: expected ${gtGrad.settings.background_gradient_angle.size}deg, got ${angleRes.value}deg`;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            if (!templateValid) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundImage',
+                original: gtBgImage,
+                rendered: String(rawRnBgImg).trim(),
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Unverified surface: container ${sid} native gradient template settings invalid at ${vp}: ${templateMismatchReason}.`
+              }));
+            } else {
+              // Verify rendered background color is a non-empty string before parsing gradient
+              const rawRnBgColor = rns.backgroundColor;
+              if (typeof rawRnBgColor !== 'string' || rawRnBgColor.trim() === '') {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'backgroundColor',
+                  original: gtBgColor,
+                  rendered: 'missing_render_background_color',
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-01',
+                  rung: 'R0',
+                  advisory: false,
+                  message: `Container ${sid} rendered backgroundColor missing or empty at ${vp}: expected transparent base color.`
+                }));
+              } else {
+                // Parse rendered gradient (using raw rendered background image and background color)
+                const rnGrad = parseLinearGradient(String(rawRnBgImg).trim(), rawRnBgColor.trim());
+
+                if (rnGrad.mode !== 'native-linear') {
+                  defects.push(createDefect({
+                    nodeSid: sid,
+                    widgetId: containerEl.id || null,
+                    viewport: vp,
+                    property: 'backgroundImage',
+                    original: gtBgImage,
+                    rendered: `${String(rawRnBgImg).trim()}${rawRnBgColor ? ` (bgColor: ${rawRnBgColor.trim()})` : ''}`,
+                    severity: 'HIGH',
+                    rule: 'RULE-SURFACE-01',
+                    rung: 'R0',
+                    advisory: false,
+                    message: `Unverified surface: container ${sid} rendered gradient invalid or unsupported at ${vp}: ${rnGrad.reason || 'not_native_linear'}. Expected linear gradient with transparent background, got image "${rawRnBgImg}" and color "${rawRnBgColor.trim()}".`
+                  }));
+                } else {
+                  // Compare GT gradient vs Rendered gradient
+                const gtAngle = gtGrad.settings.background_gradient_angle.size;
+                const rnAngle = rnGrad.settings.background_gradient_angle.size;
+                const gtStop1 = gtGrad.settings.background_color_stop.size;
+                const rnStop1 = rnGrad.settings.background_color_stop.size;
+                const gtStop2 = gtGrad.settings.background_color_b_stop.size;
+                const rnStop2 = rnGrad.settings.background_color_b_stop.size;
+
+                const compColor1 = compareContainerBackgroundColors(gtGrad.settings.background_color, rnGrad.settings.background_color);
+                const compColor2 = compareContainerBackgroundColors(gtGrad.settings.background_color_b, rnGrad.settings.background_color_b);
+
+                let gradMismatchReason = '';
+                if (gtAngle !== rnAngle) {
+                  gradMismatchReason = `gradient angle mismatch: expected ${gtAngle}deg, got ${rnAngle}deg`;
+                } else if (gtStop1 !== rnStop1 || gtStop2 !== rnStop2) {
+                  gradMismatchReason = `gradient stop mismatch: expected [${gtStop1}%, ${gtStop2}%], got [${rnStop1}%, ${rnStop2}%]`;
+                } else if (!compColor1.match) {
+                  gradMismatchReason = `first gradient color mismatch: expected ${gtGrad.settings.background_color}, got ${rnGrad.settings.background_color}. ${compColor1.reason || ''}`.trim();
+                } else if (!compColor2.match) {
+                  gradMismatchReason = `second gradient color mismatch: expected ${gtGrad.settings.background_color_b}, got ${rnGrad.settings.background_color_b}. ${compColor2.reason || ''}`.trim();
+                }
+
+                if (gradMismatchReason) {
+                  defects.push(createDefect({
+                    nodeSid: sid,
+                    widgetId: containerEl.id || null,
+                    viewport: vp,
+                    property: 'backgroundImage',
+                    original: gtBgImage,
+                    rendered: String(rawRnBgImg).trim(),
+                    severity: 'HIGH',
+                    rule: 'RULE-SURFACE-01',
+                    rung: 'R0',
+                    advisory: false,
+                    message: `Unverified surface: container ${sid} rendered gradient mismatch at ${vp}: ${gradMismatchReason}. Expected "${gtBgImage}", got "${rawRnBgImg}".`
+                  }));
+                }
+                // If everything matches: zero defects!
+              }
+            }
+          }
+        } else {
+          const gtSingleImg = extractSingleImageUrl(gtBgImage);
+
+          if (gtSingleImg) {
+            let templateValid = true;
+            let templateMismatchReason = '';
+            let effectiveTmplUrl = '';
+
+            if (tmplSettings.background_background !== 'classic') {
+              templateValid = false;
+              templateMismatchReason = `Template background_background expected "classic", got "${tmplSettings.background_background}"`;
+            } else {
+              const res = resolveEffectiveTemplateImageUrl(tmplSettings, vp);
+              effectiveTmplUrl = res.url;
+              if (!res.valid) {
+                templateValid = false;
+                templateMismatchReason = res.reason;
+              } else if (res.url !== gtSingleImg) {
+                templateValid = false;
+                templateMismatchReason = `Template background_image.url mismatch: expected "${gtSingleImg}", got "${res.url}"`;
+              }
+            }
+
+            if (!templateValid) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundImage',
+                original: gtSingleImg,
+                rendered: effectiveTmplUrl || String(tmplSettings.background_background) || 'missing_or_invalid',
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Unverified surface: container ${sid} native image template settings invalid at ${vp}: ${templateMismatchReason}. (GT URL: "${gtSingleImg}", effective template URL: "${effectiveTmplUrl || 'none'}")`
+              }));
+            } else {
+              // Template is valid: verify rendered backgroundImage
+              const rnSingleImg = extractSingleImageUrl(rawRnBgImg);
+              if (!rnSingleImg) {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'backgroundImage',
+                  original: gtSingleImg,
+                  rendered: String(rawRnBgImg).trim(),
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-01',
+                  rung: 'R0',
+                  advisory: false,
+                  message: `Unverified surface: container ${sid} rendered background image invalid or unparseable at ${vp}: expected single image URL "${gtSingleImg}", got "${String(rawRnBgImg).trim()}".`
+                }));
+              } else if (rnSingleImg !== gtSingleImg) {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'backgroundImage',
+                  original: gtSingleImg,
+                  rendered: rnSingleImg,
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-01',
+                  rung: 'R0',
+                  advisory: false,
+                  message: `Unverified surface: container ${sid} rendered background image URL mismatch at ${vp}: expected "${gtSingleImg}", got "${rnSingleImg}".`
+                }));
+              }
+            }
+
+            // Verify rendered backgroundColor against GT backgroundColor
+            const rawRnBgColor = rns.backgroundColor;
+            if (rawRnBgColor === undefined || rawRnBgColor === null || (typeof rawRnBgColor === 'string' && rawRnBgColor.trim() === '')) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'backgroundColor',
+                original: gtBgColor,
+                rendered: (rawRnBgColor === undefined || rawRnBgColor === null) ? 'missing' : 'empty',
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-01',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} rendered backgroundColor missing or empty at ${vp}: expected "${gtBgColor}".`
+              }));
+            } else {
+              const colorComp = compareContainerBackgroundColors(gtBgColor, String(rawRnBgColor).trim());
+              if (colorComp.unparseable) {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'backgroundColor',
+                  original: gtBgColor,
+                  rendered: String(rawRnBgColor).trim(),
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-01',
+                  rung: 'R0',
+                  advisory: false,
+                  message: colorComp.reason || `Container ${sid} has unparseable background color at ${vp}.`
+                }));
+              } else if (!colorComp.match) {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'backgroundColor',
+                  original: gtBgColor,
+                  rendered: String(rawRnBgColor).trim(),
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-01',
+                  rung: 'R0',
+                  advisory: false,
+                  message: `Container ${sid} background color mismatch at ${vp}: expected ${gtBgColor}, got ${String(rawRnBgColor).trim()}. ${colorComp.reason || ''}`.trim()
+                }));
+              }
+            }
+          } else {
+            const unsuppReason = containerGradPlan && !containerGradPlan.supported
+              ? ` (${containerGradPlan.reason})`
+              : '';
+            defects.push(createDefect({
+              nodeSid: sid,
+              widgetId: containerEl.id || null,
+              viewport: vp,
+              property: 'backgroundImage',
+              original: gtBgImage,
+              rendered: String(rawRnBgImg).trim(),
+              severity: 'HIGH',
+              rule: 'RULE-SURFACE-01',
+              rung: 'R0',
+              advisory: false,
+              message: `Unverified surface: container ${sid} has unsupported gradient${unsuppReason}, multi-layer, or malformed background at ${vp}.`
+            }));
+          }
+        }
+        }
+      }
+
+      if (gtHasNoneImage) {
+        const colorComp = compareContainerBackgroundColors(gtBgColor, rnBgColor);
+        if (colorComp.unparseable) {
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundColor',
+            original: gtBgColor,
+            rendered: rnBgColor,
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: colorComp.reason || `Container ${sid} has unparseable background color at ${vp}.`
+          }));
+        } else if (!colorComp.match) {
+          defects.push(createDefect({
+            nodeSid: sid,
+            widgetId: containerEl.id || null,
+            viewport: vp,
+            property: 'backgroundColor',
+            original: gtBgColor,
+            rendered: rnBgColor,
+            severity: 'HIGH',
+            rule: 'RULE-SURFACE-01',
+            rung: 'R0',
+            advisory: false,
+            message: `Container ${sid} background color mismatch at ${vp}: expected ${gtBgColor}, got ${rnBgColor}. ${colorComp.reason || ''}`.trim()
+          }));
+        }
+      }
+
+      // RULE-SURFACE-02: Source-Derived Container Image Background Geometry Verification
+      const gtSingleImg = extractSingleImageUrl(gtBgImage);
+      if (gtSingleImg) {
+        // Causality guard: If RULE-SURFACE-01 already found the image missing from render,
+        // do not emit duplicate geometry defects on a missing image.
+        if (!rnBgImgMissingOrEmpty && !rnHasNoneImage) {
+          let gtSize = null;
+          let gtPos = null;
+          let gtRepeat = null;
+          let gtSizeReadFailed = false;
+          let gtPosReadFailed = false;
+          let gtRepeatReadFailed = false;
+
+          try {
+            gtSize = readComputedCssProperty(gtNode, gtSnapshot, vp, 'background-size', 'backgroundSize');
+          } catch (err) {
+            gtSizeReadFailed = true;
+            defects.push(createDefect({
+              nodeSid: sid,
+              widgetId: containerEl.id || null,
+              viewport: vp,
+              property: 'background-size',
+              original: 'computedStyle',
+              rendered: err.code || err.reason || 'MISSING_STYLE',
+              severity: 'HIGH',
+              rule: 'RULE-SURFACE-02',
+              rung: 'R0',
+              advisory: false,
+              message: `Container ${sid} failed to read GT computed background-size at ${vp}: ${err.message}`
+            }));
+          }
+
+          try {
+            gtPos = readComputedCssProperty(gtNode, gtSnapshot, vp, 'background-position', 'backgroundPosition');
+          } catch (err) {
+            gtPosReadFailed = true;
+            defects.push(createDefect({
+              nodeSid: sid,
+              widgetId: containerEl.id || null,
+              viewport: vp,
+              property: 'background-position',
+              original: 'computedStyle',
+              rendered: err.code || err.reason || 'MISSING_STYLE',
+              severity: 'HIGH',
+              rule: 'RULE-SURFACE-02',
+              rung: 'R0',
+              advisory: false,
+              message: `Container ${sid} failed to read GT computed background-position at ${vp}: ${err.message}`
+            }));
+          }
+
+          try {
+            gtRepeat = readComputedCssProperty(gtNode, gtSnapshot, vp, 'background-repeat', 'backgroundRepeat');
+          } catch (err) {
+            gtRepeatReadFailed = true;
+            defects.push(createDefect({
+              nodeSid: sid,
+              widgetId: containerEl.id || null,
+              viewport: vp,
+              property: 'background-repeat',
+              original: 'computedStyle',
+              rendered: err.code || err.reason || 'MISSING_STYLE',
+              severity: 'HIGH',
+              rule: 'RULE-SURFACE-02',
+              rung: 'R0',
+              advisory: false,
+              message: `Container ${sid} failed to read GT computed background-repeat at ${vp}: ${err.message}`
+            }));
+          }
+
+          // 1. Background-Size verification
+          if (!gtSizeReadFailed) {
+            const normGtSize = mapBackgroundSize(gtSize);
+            if (!normGtSize) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'background-size',
+                original: gtSize,
+                rendered: 'unsupported',
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-02',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} has unsupported GT background-size at ${vp}: "${gtSize}".`
+              }));
+            } else {
+              const rawRnSize = rns.backgroundSize;
+              if (rawRnSize === undefined || rawRnSize === null || String(rawRnSize).trim() === '') {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'background-size',
+                  original: normGtSize,
+                  rendered: 'missing',
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-02',
+                  rung: 'R0',
+                  advisory: false,
+                  message: `Container ${sid} rendered background-size missing at ${vp}: expected "${normGtSize}".`
+                }));
+              } else {
+                const normRnSize = mapBackgroundSize(rawRnSize);
+                if (normGtSize !== normRnSize) {
+                  defects.push(createDefect({
+                    nodeSid: sid,
+                    widgetId: containerEl.id || null,
+                    viewport: vp,
+                    property: 'background-size',
+                    original: normGtSize,
+                    rendered: normRnSize || String(rawRnSize).trim(),
+                    severity: 'HIGH',
+                    rule: 'RULE-SURFACE-02',
+                    rung: 'R0',
+                    advisory: false,
+                    message: `Container ${sid} background-size mismatch at ${vp}: expected "${normGtSize}", got "${rawRnSize}".`
+                  }));
+                }
+              }
+            }
+          }
+
+          // 2. Background-Position verification
+          if (!gtPosReadFailed) {
+            const normGtPos = mapBackgroundPosition(gtPos);
+            if (!normGtPos) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'background-position',
+                original: gtPos,
+                rendered: 'unsupported',
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-02',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} has unsupported GT background-position at ${vp}: "${gtPos}".`
+              }));
+            } else {
+              const rawRnPos = rns.backgroundPosition;
+              if (rawRnPos === undefined || rawRnPos === null || String(rawRnPos).trim() === '') {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'background-position',
+                  original: normGtPos,
+                  rendered: 'missing',
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-02',
+                  rung: 'R0',
+                  advisory: false,
+                  message: `Container ${sid} rendered background-position missing at ${vp}: expected "${normGtPos}".`
+                }));
+              } else {
+                const normRnPos = mapBackgroundPosition(rawRnPos);
+                if (normGtPos !== normRnPos) {
+                  defects.push(createDefect({
+                    nodeSid: sid,
+                    widgetId: containerEl.id || null,
+                    viewport: vp,
+                    property: 'background-position',
+                    original: normGtPos,
+                    rendered: normRnPos || String(rawRnPos).trim(),
+                    severity: 'HIGH',
+                    rule: 'RULE-SURFACE-02',
+                    rung: 'R0',
+                    advisory: false,
+                    message: `Container ${sid} background-position mismatch at ${vp}: expected "${normGtPos}", got "${rawRnPos}".`
+                  }));
+                }
+              }
+            }
+          }
+
+          // 3. Background-Repeat verification
+          if (!gtRepeatReadFailed) {
+            const normGtRepeat = mapBackgroundRepeat(gtRepeat);
+            if (!normGtRepeat) {
+              defects.push(createDefect({
+                nodeSid: sid,
+                widgetId: containerEl.id || null,
+                viewport: vp,
+                property: 'background-repeat',
+                original: gtRepeat,
+                rendered: 'unsupported',
+                severity: 'HIGH',
+                rule: 'RULE-SURFACE-02',
+                rung: 'R0',
+                advisory: false,
+                message: `Container ${sid} has unsupported GT background-repeat at ${vp}: "${gtRepeat}".`
+              }));
+            } else {
+              const rawRnRepeat = rns.backgroundRepeat;
+              if (rawRnRepeat === undefined || rawRnRepeat === null || String(rawRnRepeat).trim() === '') {
+                defects.push(createDefect({
+                  nodeSid: sid,
+                  widgetId: containerEl.id || null,
+                  viewport: vp,
+                  property: 'background-repeat',
+                  original: normGtRepeat,
+                  rendered: 'missing',
+                  severity: 'HIGH',
+                  rule: 'RULE-SURFACE-02',
+                  rung: 'R0',
+                  advisory: false,
+                  message: `Container ${sid} rendered background-repeat missing at ${vp}: expected "${normGtRepeat}".`
+                }));
+              } else {
+                const normRnRepeat = mapBackgroundRepeat(rawRnRepeat);
+                if (normGtRepeat !== normRnRepeat) {
+                  defects.push(createDefect({
+                    nodeSid: sid,
+                    widgetId: containerEl.id || null,
+                    viewport: vp,
+                    property: 'background-repeat',
+                    original: normGtRepeat,
+                    rendered: normRnRepeat || String(rawRnRepeat).trim(),
+                    severity: 'HIGH',
+                    rule: 'RULE-SURFACE-02',
+                    rung: 'R0',
+                    advisory: false,
+                    message: `Container ${sid} background-repeat mismatch at ${vp}: expected "${normGtRepeat}", got "${rawRnRepeat}".`
+                  }));
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
     for (const [sid, gtNode] of Object.entries(gtFlat)) {
       const renderNode = renderFlat[sid];
@@ -397,7 +1773,8 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
         });
       }
 
-      if (gts.backgroundColor && rns.backgroundColor &&
+      const isAuditedContainerSurface = auditedSurfaceSids.has(sid);
+      if (!isAuditedContainerSurface && gts.backgroundColor && rns.backgroundColor &&
           gts.backgroundColor !== "transparent" && gts.backgroundColor !== "rgba(0, 0, 0, 0)" &&
           !isColorEqual(gts.backgroundColor, rns.backgroundColor)) {
         pushDefect({
@@ -854,7 +2231,8 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
       low
     },
     advisories: defects.filter(d => d.advisory === true).length,
-    defectCensusByRung
+    defectCensusByRung,
+    auditedSurfaceSids: Array.from(auditedSurfaceSids)
   };
 }
 

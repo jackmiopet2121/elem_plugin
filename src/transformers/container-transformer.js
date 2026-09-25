@@ -153,7 +153,9 @@ function createContainer(options = {}) {
     settings.width = typeof width === 'object' ? width : { unit: 'px', size: width };
   }
   if (background_color) {
-    settings.background_background = 'classic';
+    if (!options.background_background) {
+      settings.background_background = 'classic';
+    }
     settings.background_color = background_color;
   }
   if (border) {

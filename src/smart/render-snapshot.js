@@ -17,7 +17,7 @@ const STYLE_PROPS = [
   'width', 'height', 'minWidth', 'minHeight', 'maxWidth', 'maxHeight',
   'marginTop', 'marginRight', 'marginBottom', 'marginLeft',
   'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
-  'backgroundColor', 'backgroundImage',
+  'backgroundColor', 'backgroundImage', 'backgroundSize', 'backgroundPosition', 'backgroundRepeat',
   'color', 'fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing',
   'textAlign', 'textTransform', 'whiteSpace',
   'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
@@ -31,7 +31,40 @@ const STYLE_PROPS = [
 ];
 
 function inPageRenderExtract(STYLE_PROPS = []) {
-  const results = { flat: {}, duplicateSids: [] };
+  const results = { flat: {}, duplicateSids: [], canvas: null };
+
+  try {
+    if (document.body) {
+      const bodyStyle = window.getComputedStyle(document.body);
+      const bgCol = bodyStyle ? (bodyStyle.backgroundColor || (typeof bodyStyle.getPropertyValue === 'function' ? bodyStyle.getPropertyValue('background-color') : '')) : null;
+      const bgImg = bodyStyle ? (bodyStyle.backgroundImage || (typeof bodyStyle.getPropertyValue === 'function' ? bodyStyle.getPropertyValue('background-image') : '')) : null;
+
+      if (typeof bgCol === 'string' && typeof bgImg === 'string' && bgCol.trim() !== '' && bgImg.trim() !== '') {
+        results.canvas = {
+          body: {
+            backgroundColor: bgCol.trim(),
+            backgroundImage: bgImg.trim()
+          }
+        };
+      } else {
+        results.canvas = {
+          body: null,
+          error: `Computed styles on document.body returned invalid values: bgCol=${JSON.stringify(bgCol)}, bgImg=${JSON.stringify(bgImg)}`
+        };
+      }
+    } else {
+      results.canvas = {
+        body: null,
+        error: 'document.body is not available in rendered document'
+      };
+    }
+  } catch (err) {
+    results.canvas = {
+      body: null,
+      error: `Failed to extract canvas from document.body: ${err && err.message}`
+    };
+  }
+
   const seenSids = new Set();
 
   const allElements = document.querySelectorAll('[data-sid]');

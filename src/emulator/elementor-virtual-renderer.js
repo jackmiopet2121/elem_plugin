@@ -8,6 +8,26 @@
 const fs = require('fs');
 const path = require('path');
 const { resolveElementSelector, ensureDeterministicClass } = require('../smart/semantic-scoper');
+const {
+  VALID_SIZES,
+  VALID_POSITIONS,
+  VALID_REPEATS
+} = require('../smart/image-background-geometry');
+const { parseColorParts } = require('../smart/tolerances');
+
+function isFiniteGradientColor(c) {
+  if (typeof c !== 'string' || c.trim() === '') return false;
+  const p = parseColorParts(c);
+  return Boolean(p && Number.isFinite(p.r) && Number.isFinite(p.g) && Number.isFinite(p.b) && Number.isFinite(p.a));
+}
+
+function isValidGradientAngle(obj) {
+  return Boolean(obj && typeof obj === 'object' && obj.unit === 'deg' && typeof obj.size === 'number' && Number.isFinite(obj.size));
+}
+
+function isValidGradientStop(obj) {
+  return Boolean(obj && typeof obj === 'object' && obj.unit === '%' && typeof obj.size === 'number' && Number.isFinite(obj.size) && obj.size >= 0 && obj.size <= 100);
+}
 
 let cachedLocalFontAwesome = null;
 function getLocalFontAwesomeCss() {
@@ -27,6 +47,40 @@ function getLocalFontAwesomeCss() {
     }
   }
   return '';
+}
+
+function isSafeCssUrl(url) {
+  if (!url || typeof url !== 'string') return false;
+  const s = url.trim();
+  if (!s) return false;
+
+  // Case-insensitive </style check (prevents breakout from style tags)
+  if (/<\/style/i.test(s)) return false;
+
+  // ASCII control characters (0x00 to 0x1F and 0x7F)
+  if (/[\x00-\x1f\x7f]/.test(s)) return false;
+
+  // CSS string-breaking syntax: " (quote), \ (escape), ; (declaration end), { or } (block boundaries)
+  if (/["\\;{}]/.test(s)) return false;
+
+  // Scheme validation: if URL starts with a scheme, permit only http/https with valid hostname
+  const schemeMatch = s.match(/^([a-z][a-z0-9+.-]*):/i);
+  if (schemeMatch) {
+    const scheme = schemeMatch[1].toLowerCase();
+    if (scheme !== 'http' && scheme !== 'https') {
+      return false;
+    }
+    try {
+      const parsed = new URL(s);
+      if (!parsed.hostname || (parsed.protocol !== 'http:' && parsed.protocol !== 'https:')) {
+        return false;
+      }
+    } catch {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 function renderElementorToHtml(templateData, options = {}) {
@@ -84,7 +138,7 @@ function renderElementorToHtml(templateData, options = {}) {
     ? `<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?${fontFamilies.map(f => `family=${encodeURIComponent(f)}:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700`).join('&')}&display=swap">`
     : '';
 
-  const rootBgColor = content[0]?.settings?.background_color || options.pageBackground || '#ffffff';
+  const rootBgColor = templateData.page_settings?.background_color || options.pageBackground || '#ffffff';
   const rootTextColor = options.bodyColor || '#0f172a';
   const rootFontFamily = options.bodyFont || '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 
@@ -527,9 +581,41 @@ function compileNodeStyles(node, id, cssContext, fontsToLoad) {
       rules.push(`--content-width: ${s.boxed_width.size}${s.boxed_width.unit || 'px'};`);
     }
 
-    // Background color
-    if (s.background_color) {
-      rules.push(`background-color: ${s.background_color};`);
+    // Background color & image / gradient
+    if (s.background_background === 'gradient') {
+      const isAngleValid = typeof s.background_gradient_angle?.size === 'number' && Number.isFinite(s.background_gradient_angle.size);
+      const isStop1Valid = typeof s.background_color_stop?.size === 'number' && Number.isFinite(s.background_color_stop.size) && s.background_color_stop.size >= 0 && s.background_color_stop.size <= 100;
+      const isStop2Valid = typeof s.background_color_b_stop?.size === 'number' && Number.isFinite(s.background_color_b_stop.size) && s.background_color_b_stop.size >= 0 && s.background_color_b_stop.size <= 100;
+      const isColor1Valid = typeof s.background_color === 'string' && s.background_color.trim() !== '' && Boolean(parseColorParts(s.background_color));
+      const isColor2Valid = typeof s.background_color_b === 'string' && s.background_color_b.trim() !== '' && Boolean(parseColorParts(s.background_color_b));
+      const isTypeValid = s.background_gradient_type === 'linear';
+
+      if (isAngleValid && isStop1Valid && isStop2Valid && isColor1Valid && isColor2Valid && isTypeValid) {
+        rules.push('background-color: transparent;');
+        rules.push(`background-image: linear-gradient(${s.background_gradient_angle.size}deg, ${s.background_color.trim()} ${s.background_color_stop.size}%, ${s.background_color_b.trim()} ${s.background_color_b_stop.size}%);`);
+      }
+    } else {
+      // Background color
+      if (s.background_color) {
+        rules.push(`background-color: ${s.background_color};`);
+      }
+
+      // Background image (classic mode with safe URL)
+      if (s.background_background === 'classic' && typeof s.background_image?.url === 'string') {
+        const imgUrl = s.background_image.url.trim();
+        if (isSafeCssUrl(imgUrl)) {
+          rules.push(`background-image: url("${imgUrl}");`);
+          if (s.background_size && VALID_SIZES.has(s.background_size)) {
+            rules.push(`background-size: ${s.background_size};`);
+          }
+          if (s.background_position && VALID_POSITIONS.has(s.background_position)) {
+            rules.push(`background-position: ${s.background_position};`);
+          }
+          if (s.background_repeat && VALID_REPEATS.has(s.background_repeat)) {
+            rules.push(`background-repeat: ${s.background_repeat};`);
+          }
+        }
+      }
     }
 
     // Container typography
@@ -1120,6 +1206,58 @@ function compileResponsiveStyles(node, id, s, tabletCss, mobileCss) {
       if (s._order_tablet !== undefined || s.order_tablet !== undefined) {
         tabRules.push(`order: ${s._order_tablet ?? s.order_tablet} !important;`);
       }
+
+      // Responsive background image & geometry (tablet)
+      if (s.background_background === 'classic' && typeof s.background_image?.url === 'string' && isSafeCssUrl(s.background_image.url)) {
+        if (
+          Object.prototype.hasOwnProperty.call(s, 'background_image_tablet') &&
+          typeof s.background_image_tablet?.url === 'string' &&
+          s.background_image_tablet.url.trim() !== '' &&
+          isSafeCssUrl(s.background_image_tablet.url)
+        ) {
+          tabRules.push(`background-image: url("${s.background_image_tablet.url.trim()}");`);
+        }
+        if (s.background_size_tablet && VALID_SIZES.has(s.background_size_tablet)) {
+          tabRules.push(`background-size: ${s.background_size_tablet};`);
+        }
+        if (s.background_position_tablet && VALID_POSITIONS.has(s.background_position_tablet)) {
+          tabRules.push(`background-position: ${s.background_position_tablet};`);
+        }
+        if (s.background_repeat_tablet && VALID_REPEATS.has(s.background_repeat_tablet)) {
+          tabRules.push(`background-repeat: ${s.background_repeat_tablet};`);
+        }
+      }
+
+      // Responsive linear gradient (tablet)
+      if (s.background_background === 'gradient') {
+        const hasTabAngle = Object.prototype.hasOwnProperty.call(s, 'background_gradient_angle_tablet');
+        const hasTabStopA = Object.prototype.hasOwnProperty.call(s, 'background_color_stop_tablet');
+        const hasTabStopB = Object.prototype.hasOwnProperty.call(s, 'background_color_b_stop_tablet');
+
+        if (hasTabAngle || hasTabStopA || hasTabStopB) {
+          const tabOverridesValid =
+            (!hasTabAngle || isValidGradientAngle(s.background_gradient_angle_tablet)) &&
+            (!hasTabStopA || isValidGradientStop(s.background_color_stop_tablet)) &&
+            (!hasTabStopB || isValidGradientStop(s.background_color_b_stop_tablet));
+
+          const baseValid =
+            s.background_gradient_type === 'linear' &&
+            isFiniteGradientColor(s.background_color) &&
+            isFiniteGradientColor(s.background_color_b) &&
+            isValidGradientAngle(s.background_gradient_angle) &&
+            isValidGradientStop(s.background_color_stop) &&
+            isValidGradientStop(s.background_color_b_stop);
+
+          if (tabOverridesValid && baseValid) {
+            const tabAngle = hasTabAngle ? s.background_gradient_angle_tablet.size : s.background_gradient_angle.size;
+            const tabStopA = hasTabStopA ? s.background_color_stop_tablet.size : s.background_color_stop.size;
+            const tabStopB = hasTabStopB ? s.background_color_b_stop_tablet.size : s.background_color_b_stop.size;
+
+            tabRules.push('background-color: transparent;');
+            tabRules.push(`background-image: linear-gradient(${tabAngle}deg, ${s.background_color.trim()} ${tabStopA}%, ${s.background_color_b.trim()} ${tabStopB}%);`);
+          }
+        }
+      }
     } else if (node.widgetType === 'heading') {
       const headingTabRules = [];
       if (s.typography_font_size_tablet?.size) {
@@ -1343,6 +1481,77 @@ function compileResponsiveStyles(node, id, s, tabletCss, mobileCss) {
       if (s._order_mobile !== undefined || s.order_mobile !== undefined) {
         mobRules.push(`order: ${s._order_mobile ?? s.order_mobile} !important;`);
       }
+
+      // Responsive background image & geometry (mobile)
+      if (s.background_background === 'classic' && typeof s.background_image?.url === 'string' && isSafeCssUrl(s.background_image.url)) {
+        if (
+          Object.prototype.hasOwnProperty.call(s, 'background_image_mobile') &&
+          typeof s.background_image_mobile?.url === 'string' &&
+          s.background_image_mobile.url.trim() !== '' &&
+          isSafeCssUrl(s.background_image_mobile.url)
+        ) {
+          mobRules.push(`background-image: url("${s.background_image_mobile.url.trim()}");`);
+        }
+        if (s.background_size_mobile && VALID_SIZES.has(s.background_size_mobile)) {
+          mobRules.push(`background-size: ${s.background_size_mobile};`);
+        }
+        if (s.background_position_mobile && VALID_POSITIONS.has(s.background_position_mobile)) {
+          mobRules.push(`background-position: ${s.background_position_mobile};`);
+        }
+        if (s.background_repeat_mobile && VALID_REPEATS.has(s.background_repeat_mobile)) {
+          mobRules.push(`background-repeat: ${s.background_repeat_mobile};`);
+        }
+      }
+
+      // Responsive linear gradient (mobile)
+      if (s.background_background === 'gradient') {
+        const hasMobAngle = Object.prototype.hasOwnProperty.call(s, 'background_gradient_angle_mobile');
+        const hasMobStopA = Object.prototype.hasOwnProperty.call(s, 'background_color_stop_mobile');
+        const hasMobStopB = Object.prototype.hasOwnProperty.call(s, 'background_color_b_stop_mobile');
+
+        // Only emit if mobile has at least one explicit responsive override.
+        // Otherwise, mobile inherits tablet media rule (or desktop) via CSS cascade.
+        if (hasMobAngle || hasMobStopA || hasMobStopB) {
+          const hasTabAngle = Object.prototype.hasOwnProperty.call(s, 'background_gradient_angle_tablet');
+          const hasTabStopA = Object.prototype.hasOwnProperty.call(s, 'background_color_stop_tablet');
+          const hasTabStopB = Object.prototype.hasOwnProperty.call(s, 'background_color_b_stop_tablet');
+
+          const mobOverridesValid =
+            (!hasMobAngle || isValidGradientAngle(s.background_gradient_angle_mobile)) &&
+            (!hasMobStopA || isValidGradientStop(s.background_color_stop_mobile)) &&
+            (!hasMobStopB || isValidGradientStop(s.background_color_b_stop_mobile));
+
+          const tabFallbackValid =
+            (hasMobAngle || !hasTabAngle || isValidGradientAngle(s.background_gradient_angle_tablet)) &&
+            (hasMobStopA || !hasTabStopA || isValidGradientStop(s.background_color_stop_tablet)) &&
+            (hasMobStopB || !hasTabStopB || isValidGradientStop(s.background_color_b_stop_tablet));
+
+          const baseValid =
+            s.background_gradient_type === 'linear' &&
+            isFiniteGradientColor(s.background_color) &&
+            isFiniteGradientColor(s.background_color_b) &&
+            isValidGradientAngle(s.background_gradient_angle) &&
+            isValidGradientStop(s.background_color_stop) &&
+            isValidGradientStop(s.background_color_b_stop);
+
+          if (mobOverridesValid && tabFallbackValid && baseValid) {
+            const mobAngle = hasMobAngle
+              ? s.background_gradient_angle_mobile.size
+              : (hasTabAngle ? s.background_gradient_angle_tablet.size : s.background_gradient_angle.size);
+
+            const mobStopA = hasMobStopA
+              ? s.background_color_stop_mobile.size
+              : (hasTabStopA ? s.background_color_stop_tablet.size : s.background_color_stop.size);
+
+            const mobStopB = hasMobStopB
+              ? s.background_color_b_stop_mobile.size
+              : (hasTabStopB ? s.background_color_b_stop_tablet.size : s.background_color_b_stop.size);
+
+            mobRules.push('background-color: transparent;');
+            mobRules.push(`background-image: linear-gradient(${mobAngle}deg, ${s.background_color.trim()} ${mobStopA}%, ${s.background_color_b.trim()} ${mobStopB}%);`);
+          }
+        }
+      }
     } else if (node.widgetType === 'heading') {
       const headingMobRules = [];
       if (s.typography_font_size_mobile?.size) {
@@ -1502,5 +1711,6 @@ function compileResponsiveStyles(node, id, s, tabletCss, mobileCss) {
 }
 
 module.exports = {
-  renderElementorToHtml
+  renderElementorToHtml,
+  isSafeCssUrl
 };

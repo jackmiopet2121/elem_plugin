@@ -1,0 +1,648 @@
+{
+  "schemaVersion": "8.2.0-regression",
+  "baselineCommit": "0d5d71de763bc839320cc0ef8e084434beb682ba",
+  "overallStatus": "PASS",
+  "summary": {
+    "totalFixtures": 8,
+    "passCount": 8,
+    "needsReviewCount": 0,
+    "newFixturesCount": 0,
+    "incomparableCount": 0,
+    "hardFailuresCount": 0
+  },
+  "fixtures": [
+    {
+      "fixtureId": "corpus/01-pricing-table",
+      "relativePath": "tests/corpus/01-pricing-table/input.html",
+      "contentHash": "6017dcc70e35",
+      "status": "PASS",
+      "classificationReason": "All baseline metrics, fidelity score, and defect counts maintained or matched",
+      "baseline": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 77,
+        "defects": {
+          "critical": 0,
+          "high": 6,
+          "medium": 0,
+          "low": 0,
+          "advisory": 72
+        },
+        "invariantViolations": 1,
+        "nativeEditabilityPercentage": 93,
+        "htmlWidgetsCount": 4,
+        "microCssSizeBytes": 4571,
+        "scriptSizeBytes": 10552
+      },
+      "current": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 77,
+        "defects": {
+          "critical": 0,
+          "high": 6,
+          "medium": 0,
+          "low": 0,
+          "advisory": 72
+        },
+        "invariantViolations": 1,
+        "nativeEditabilityPercentage": 93,
+        "htmlWidgetsCount": 4,
+        "microCssSizeBytes": 4587,
+        "scriptSizeBytes": 10552
+      },
+      "delta": {
+        "fidelityDelta": 0,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 16,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 0,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": []
+      }
+    },
+    {
+      "fixtureId": "corpus/02-portfolio-gallery",
+      "relativePath": "tests/corpus/02-portfolio-gallery/input.html",
+      "contentHash": "ba650d11e4e2",
+      "status": "PASS",
+      "classificationReason": "All baseline metrics, fidelity score, and defect counts maintained or matched",
+      "baseline": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 34,
+        "defects": {
+          "critical": 0,
+          "high": 90,
+          "medium": 38,
+          "low": 108,
+          "advisory": 75
+        },
+        "invariantViolations": 0,
+        "nativeEditabilityPercentage": 83,
+        "htmlWidgetsCount": 8,
+        "microCssSizeBytes": 8469,
+        "scriptSizeBytes": 6236
+      },
+      "current": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 34,
+        "defects": {
+          "critical": 0,
+          "high": 90,
+          "medium": 38,
+          "low": 108,
+          "advisory": 75
+        },
+        "invariantViolations": 0,
+        "nativeEditabilityPercentage": 83,
+        "htmlWidgetsCount": 8,
+        "microCssSizeBytes": 8469,
+        "scriptSizeBytes": 6236
+      },
+      "delta": {
+        "fidelityDelta": 0,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 0,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 0,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": []
+      }
+    },
+    {
+      "fixtureId": "corpus/03-faq-accordion",
+      "relativePath": "tests/corpus/03-faq-accordion/input.html",
+      "contentHash": "73c22a922e23",
+      "status": "PASS",
+      "classificationReason": "All baseline metrics, fidelity score, and defect counts maintained or matched",
+      "baseline": {
+        "compilationStatus": "SUCCESS (ADVISORY)",
+        "auditStatus": "VALID",
+        "fidelity": 0,
+        "defects": {
+          "critical": 15,
+          "high": 36,
+          "medium": 18,
+          "low": 0,
+          "advisory": 42
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 84,
+        "htmlWidgetsCount": 9,
+        "microCssSizeBytes": 4769,
+        "scriptSizeBytes": 13768
+      },
+      "current": {
+        "compilationStatus": "SUCCESS (ADVISORY)",
+        "auditStatus": "VALID",
+        "fidelity": 0,
+        "defects": {
+          "critical": 15,
+          "high": 36,
+          "medium": 18,
+          "low": 0,
+          "advisory": 42
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 84,
+        "htmlWidgetsCount": 9,
+        "microCssSizeBytes": 4769,
+        "scriptSizeBytes": 13768
+      },
+      "delta": {
+        "fidelityDelta": 0,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 0,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 0,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": []
+      }
+    },
+    {
+      "fixtureId": "corpus/04-pricing-calculator",
+      "relativePath": "tests/corpus/04-pricing-calculator/input.html",
+      "contentHash": "ad6445cfd6ff",
+      "status": "PASS",
+      "classificationReason": "Fidelity score improved from 39 to 40",
+      "baseline": {
+        "compilationStatus": "SUCCESS (ADVISORY)",
+        "auditStatus": "VALID",
+        "fidelity": 39,
+        "defects": {
+          "critical": 0,
+          "high": 95,
+          "medium": 57,
+          "low": 39,
+          "advisory": 42
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 80,
+        "htmlWidgetsCount": 9,
+        "microCssSizeBytes": 7301,
+        "scriptSizeBytes": 19219
+      },
+      "current": {
+        "compilationStatus": "SUCCESS (ADVISORY)",
+        "auditStatus": "VALID",
+        "fidelity": 40,
+        "defects": {
+          "critical": 0,
+          "high": 95,
+          "medium": 57,
+          "low": 39,
+          "advisory": 35
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 80,
+        "htmlWidgetsCount": 9,
+        "microCssSizeBytes": 7403,
+        "scriptSizeBytes": 19219
+      },
+      "delta": {
+        "fidelityDelta": 1,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": -7
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 102,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 7,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": [
+          {
+            "key": "desktop|sid-34|RULE-GEO-01|width|MEDIUM|1",
+            "count": 1,
+            "defect": {
+              "viewport": "desktop",
+              "nodeSid": "sid-34",
+              "widgetId": null,
+              "rule": "RULE-GEO-01",
+              "property": "width",
+              "severity": "MEDIUM",
+              "advisory": true,
+              "original": null,
+              "rendered": null,
+              "message": "Width discrepancy on sid-34 at desktop: expected 30px, got 36px."
+            }
+          },
+          {
+            "key": "desktop|sid-37|RULE-GEO-01|width|MEDIUM|1",
+            "count": 1,
+            "defect": {
+              "viewport": "desktop",
+              "nodeSid": "sid-37",
+              "widgetId": null,
+              "rule": "RULE-GEO-01",
+              "property": "width",
+              "severity": "MEDIUM",
+              "advisory": true,
+              "original": null,
+              "rendered": null,
+              "message": "Width discrepancy on sid-37 at desktop: expected 31px, got 37px."
+            }
+          },
+          {
+            "key": "mobile|sid-34|RULE-GEO-01|width|MEDIUM|1",
+            "count": 1,
+            "defect": {
+              "viewport": "mobile",
+              "nodeSid": "sid-34",
+              "widgetId": null,
+              "rule": "RULE-GEO-01",
+              "property": "width",
+              "severity": "MEDIUM",
+              "advisory": true,
+              "original": null,
+              "rendered": null,
+              "message": "Width discrepancy on sid-34 at mobile: expected 30px, got 36px."
+            }
+          },
+          {
+            "key": "mobile|sid-37|RULE-GEO-01|width|MEDIUM|1",
+            "count": 1,
+            "defect": {
+              "viewport": "mobile",
+              "nodeSid": "sid-37",
+              "widgetId": null,
+              "rule": "RULE-GEO-01",
+              "property": "width",
+              "severity": "MEDIUM",
+              "advisory": true,
+              "original": null,
+              "rendered": null,
+              "message": "Width discrepancy on sid-37 at mobile: expected 31px, got 37px."
+            }
+          },
+          {
+            "key": "tablet|sid-31|RULE-GEO-01|width|MEDIUM|1",
+            "count": 1,
+            "defect": {
+              "viewport": "tablet",
+              "nodeSid": "sid-31",
+              "widgetId": null,
+              "rule": "RULE-GEO-01",
+              "property": "width",
+              "severity": "MEDIUM",
+              "advisory": true,
+              "original": null,
+              "rendered": null,
+              "message": "Width discrepancy on sid-31 at tablet: expected 23px, got 29px."
+            }
+          },
+          {
+            "key": "tablet|sid-34|RULE-GEO-01|width|MEDIUM|1",
+            "count": 1,
+            "defect": {
+              "viewport": "tablet",
+              "nodeSid": "sid-34",
+              "widgetId": null,
+              "rule": "RULE-GEO-01",
+              "property": "width",
+              "severity": "MEDIUM",
+              "advisory": true,
+              "original": null,
+              "rendered": null,
+              "message": "Width discrepancy on sid-34 at tablet: expected 30px, got 36px."
+            }
+          },
+          {
+            "key": "tablet|sid-37|RULE-GEO-01|width|MEDIUM|1",
+            "count": 1,
+            "defect": {
+              "viewport": "tablet",
+              "nodeSid": "sid-37",
+              "widgetId": null,
+              "rule": "RULE-GEO-01",
+              "property": "width",
+              "severity": "MEDIUM",
+              "advisory": true,
+              "original": null,
+              "rendered": null,
+              "message": "Width discrepancy on sid-37 at tablet: expected 31px, got 37px."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fixtureId": "corpus/05-feature-devices",
+      "relativePath": "tests/corpus/05-feature-devices/input.html",
+      "contentHash": "261575f7d151",
+      "status": "PASS",
+      "classificationReason": "All baseline metrics, fidelity score, and defect counts maintained or matched",
+      "baseline": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 99,
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 18
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 95,
+        "htmlWidgetsCount": 6,
+        "microCssSizeBytes": 12958,
+        "scriptSizeBytes": 7289
+      },
+      "current": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 99,
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 18
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 95,
+        "htmlWidgetsCount": 6,
+        "microCssSizeBytes": 12958,
+        "scriptSizeBytes": 7289
+      },
+      "delta": {
+        "fidelityDelta": 0,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 0,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 0,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": []
+      }
+    },
+    {
+      "fixtureId": "corpus/06-full-landing",
+      "relativePath": "tests/corpus/06-full-landing/input.html",
+      "contentHash": "f4041f3d68fa",
+      "status": "PASS",
+      "classificationReason": "All baseline metrics, fidelity score, and defect counts maintained or matched",
+      "baseline": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 79,
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 49
+        },
+        "invariantViolations": 1,
+        "nativeEditabilityPercentage": 83,
+        "htmlWidgetsCount": 4,
+        "microCssSizeBytes": 5452,
+        "scriptSizeBytes": 6662
+      },
+      "current": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 79,
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 49
+        },
+        "invariantViolations": 1,
+        "nativeEditabilityPercentage": 83,
+        "htmlWidgetsCount": 4,
+        "microCssSizeBytes": 5452,
+        "scriptSizeBytes": 6662
+      },
+      "delta": {
+        "fidelityDelta": 0,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 0,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 0,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": []
+      }
+    },
+    {
+      "fixtureId": "landing",
+      "relativePath": "landing.html",
+      "contentHash": "261575f7d151",
+      "status": "PASS",
+      "classificationReason": "All baseline metrics, fidelity score, and defect counts maintained or matched",
+      "baseline": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 99,
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 18
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 95,
+        "htmlWidgetsCount": 6,
+        "microCssSizeBytes": 12958,
+        "scriptSizeBytes": 7289
+      },
+      "current": {
+        "compilationStatus": "SUCCESS",
+        "auditStatus": "VALID",
+        "fidelity": 99,
+        "defects": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 18
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 95,
+        "htmlWidgetsCount": 6,
+        "microCssSizeBytes": 12958,
+        "scriptSizeBytes": 7289
+      },
+      "delta": {
+        "fidelityDelta": 0,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 0,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 0,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": []
+      }
+    },
+    {
+      "fixtureId": "landingv2",
+      "relativePath": "landingv2.html",
+      "contentHash": "9c98c99b11c6",
+      "status": "PASS",
+      "classificationReason": "All baseline metrics, fidelity score, and defect counts maintained or matched",
+      "baseline": {
+        "compilationStatus": "SUCCESS (ADVISORY)",
+        "auditStatus": "VALID",
+        "fidelity": 84,
+        "defects": {
+          "critical": 0,
+          "high": 63,
+          "medium": 36,
+          "low": 18,
+          "advisory": 133
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 88,
+        "htmlWidgetsCount": 13,
+        "microCssSizeBytes": 18095,
+        "scriptSizeBytes": 6155
+      },
+      "current": {
+        "compilationStatus": "SUCCESS (ADVISORY)",
+        "auditStatus": "VALID",
+        "fidelity": 84,
+        "defects": {
+          "critical": 0,
+          "high": 63,
+          "medium": 36,
+          "low": 18,
+          "advisory": 133
+        },
+        "invariantViolations": 2,
+        "nativeEditabilityPercentage": 88,
+        "htmlWidgetsCount": 13,
+        "microCssSizeBytes": 18276,
+        "scriptSizeBytes": 6155
+      },
+      "delta": {
+        "fidelityDelta": 0,
+        "defectCountDeltas": {
+          "critical": 0,
+          "high": 0,
+          "medium": 0,
+          "low": 0,
+          "advisory": 0
+        },
+        "nativeEditabilityDelta": 0,
+        "htmlWidgetsDelta": 0,
+        "microCssSizeDelta": 181,
+        "scriptSizeDelta": 0,
+        "invariantViolationsDelta": 0,
+        "addedInvariantViolations": [],
+        "removedInvariantViolations": [],
+        "addedDefectsCount": 0,
+        "removedDefectsCount": 0,
+        "addedAdvisoryCount": 0,
+        "addedAdvisoryRawHighCount": 0,
+        "addedNonAdvisoryHighCriticalCount": 0,
+        "addedDefects": [],
+        "removedDefects": []
+      }
+    }
+  ]
+}

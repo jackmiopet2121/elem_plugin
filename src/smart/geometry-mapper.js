@@ -20,7 +20,9 @@ const {
   createHtmlWidget
 } = require('../transformers/widget-transformer');
 const { gtFor } = require('./gt-link');
-const { normalizeColor } = require('./tolerances');
+const { normalizeColor, parseColorParts } = require('./tolerances');
+const { readComputedCssProperty, isFullyTransparentColor } = require('./computed-style-resolver');
+const { resolveComputedRadius } = require('./computed-radius-resolver');
 const { extractFirstGradientColor } = require('./style-router');
 const { parseBoxShadow } = require('../normalizers/css-style-resolver');
 const { detectUniversalBoxedWidth } = require('./boxed-width-detector');
@@ -31,6 +33,8 @@ const {
   ensureDeterministicClass,
   resolveElementSelector
 } = require('./semantic-scoper');
+const { resolveImageBackgroundGeometry } = require('./image-background-geometry');
+const { resolveGradientBackground } = require('./gradient-background-resolver');
 
 function extractFontFamily(fontFamilyStr) {
   if (!fontFamilyStr) return null;
@@ -300,8 +304,10 @@ function detectCircularOrSquareDecor(gt, styles, parentGt = null) {
   if (w < 24 || w > 84 || h < 24 || h > 84) return null;
   if (Math.abs(w - h) > Math.max(6, Math.round(w * 0.25))) return null;
 
-  const bg = normalizeColor(styles?.backgroundColor);
-  const hasVisualBg = bg && bg !== 'transparent' && bg !== 'rgba(0, 0, 0, 0)';
+  const rawBg = styles?.backgroundColor ? String(styles.backgroundColor).trim() : '';
+  const bg = normalizeColor(rawBg);
+  const isTransparent = isFullyTransparentColor(rawBg) || bg === 'transparent' || rawBg === 'transparent' || rawBg === 'rgba(0, 0, 0, 0)';
+  const hasVisualBg = Boolean(bg && !isTransparent);
   const hasBorder = hasAnyBorder(styles);
   const hasRadius = hasAnyBorderRadius(styles);
   const hasExplicitDim = Boolean(
@@ -336,13 +342,15 @@ function detectCircularOrSquareDecor(gt, styles, parentGt = null) {
     borderCss = `${bw}px ${bStyle} ${bColor}`;
   }
 
+  const resolvedBg = hasVisualBg ? bg : (isTransparent ? 'transparent' : (bg || ''));
+
   return {
     isCircular,
     type: isCircular ? 'circular' : 'boxed',
     width: Math.max(w, h),
     height: Math.max(w, h),
     alignSelf,
-    background: hasVisualBg ? bg : '#ffffff',
+    background: resolvedBg,
     hasVisualBg,
     hasBorder,
     border: borderCss,
@@ -1264,6 +1272,35 @@ function resolveAssetUrl(url, options = {}) {
   return trimmed;
 }
 
+function extractSingleImageUrl(bgImageStr) {
+  if (!bgImageStr || typeof bgImageStr !== 'string') return null;
+  const s = bgImageStr.trim();
+  if (!s || s === 'none') return null;
+
+  // Double-quoted URL: url("...")
+  const doubleMatch = s.match(/^url\(\s*"((?:[^"\\]|\\.)*)"\s*\)$/i);
+  if (doubleMatch) {
+    const url = doubleMatch[1].trim();
+    return url.length > 0 ? url : null;
+  }
+
+  // Single-quoted URL: url('...')
+  const singleMatch = s.match(/^url\(\s*'((?:[^'\\]|\\.)*)'\s*\)$/i);
+  if (singleMatch) {
+    const url = singleMatch[1].trim();
+    return url.length > 0 ? url : null;
+  }
+
+  // Unquoted URL: url(...) without quotes, commas, parens, or whitespace
+  const unquotedMatch = s.match(/^url\(\s*([^\s'"(),]+)\s*\)$/i);
+  if (unquotedMatch) {
+    const url = unquotedMatch[1].trim();
+    return url.length > 0 ? url : null;
+  }
+
+  return null;
+}
+
 function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', options = {}) {
   if (!node) return null;
 
@@ -1630,8 +1667,8 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
 
     case 'button': {
       const btnText = gt.directText || gt.fullText || 'Click Here';
-      const bgHex = normalizeColor(styles.backgroundColor);
-      const textHex = normalizeColor(styles.color);
+      const rawBg = readComputedCssProperty(gt, snapshot, viewport, 'background-color', 'backgroundColor');
+      const rawColor = readComputedCssProperty(gt, snapshot, viewport, 'color', 'color');
 
       const btnSettings = {
         ...commonMeta,
@@ -1640,19 +1677,25 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
         size: 'sm'
       };
 
-      if (bgHex) btnSettings.background_color = bgHex;
-      if (textHex) btnSettings.button_text_color = textHex;
+      if (rawBg) {
+        btnSettings.background_color = rawBg;
+      }
+      if (rawColor) {
+        btnSettings.button_text_color = rawColor;
+      }
 
       const pad = formatPaddingFromStyles(styles);
       btnSettings.button_padding = pad;
       btnSettings._padding = pad;
 
-      if (hasAnyBorderRadius(styles)) {
-        const rad = formatRadiusFromStyles(styles);
-        if (rad) {
-          rad.isLinked = false;
-          btnSettings.border_radius = rad;
-        }
+      const radiusDecision = resolveComputedRadius(gt, snapshot, viewport);
+      if (radiusDecision.mode === 'native') {
+        btnSettings.border_radius = radiusDecision.setting;
+      } else if (radiusDecision.mode === 'css') {
+        delete btnSettings.border_radius;
+        btnSettings._radius_route = 'css';
+      } else {
+        btnSettings.border_radius = { unit: 'px', top: '0', right: '0', bottom: '0', left: '0', isLinked: true };
       }
       const colGap = parsePx(styles.columnGap || styles.gap);
       const rowGap = parsePx(styles.rowGap || styles.gap);
@@ -1734,7 +1777,28 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
         if (gt.pseudo.hover.borderColor) btnSettings.button_hover_border_color = normalizeColor(gt.pseudo.hover.borderColor);
       }
 
-      return createButtonWidget(btnSettings);
+      const btnWidget = createButtonWidget(btnSettings);
+      if (radiusDecision.mode === 'css') {
+        if (!options.atomicRules || !Array.isArray(options.atomicRules)) {
+          const err = new Error(`[RADIUS_CSS_ROUTE_UNAVAILABLE] atomicRules array unavailable for CSS radius fallback on SID "${sid}"`);
+          err.code = 'RADIUS_CSS_ROUTE_UNAVAILABLE';
+          err.reason = 'RADIUS_CSS_ROUTE_UNAVAILABLE';
+          err.sid = sid;
+          throw err;
+        }
+        const scopedClass = ensureDeterministicClass(btnWidget, sid);
+        const c = radiusDecision.corners;
+        pushAtomicRule(
+          options,
+          `.${scopedClass} .elementor-button {\n` +
+          `  border-top-left-radius: ${c.topLeft} !important;\n` +
+          `  border-top-right-radius: ${c.topRight} !important;\n` +
+          `  border-bottom-right-radius: ${c.bottomRight} !important;\n` +
+          `  border-bottom-left-radius: ${c.bottomLeft} !important;\n` +
+          `}`
+        );
+      }
+      return btnWidget;
     }
 
     case 'heading': {
@@ -1771,10 +1835,15 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
           background: bgImage,
           clip: true
         };
-      } else if (colorHex && !isColorTransparent) {
-        headingSettings.title_color = colorHex;
       } else {
-        headingSettings.title_color = '#111827';
+        const rawTitleColor = readComputedCssProperty(gt, snapshot, viewport, 'color', 'color');
+        if (rawTitleColor) {
+          headingSettings.title_color = rawTitleColor;
+        } else if (colorHex && !isColorTransparent) {
+          headingSettings.title_color = colorHex;
+        } else {
+          headingSettings.title_color = '#111827';
+        }
       }
 
       if (styles.fontFamily) {
@@ -1938,8 +2007,13 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
       if (isGradientAtomic) {
         const firstStopColor = normalizeColor(extractFirstGradientColor(bgImage));
         textSettings.text_color = firstStopColor || (colorHex && !isColorTransparent ? colorHex : '#111827');
-      } else if (colorHex && !isColorTransparent) {
-        textSettings.text_color = colorHex;
+      } else {
+        const rawTextColor = readComputedCssProperty(gt, snapshot, viewport, 'color', 'color');
+        if (rawTextColor) {
+          textSettings.text_color = rawTextColor;
+        } else if (colorHex && !isColorTransparent) {
+          textSettings.text_color = colorHex;
+        }
       }
 
       if (styles.fontFamily) {
@@ -2362,23 +2436,36 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
       };
 
       // Surface styles
-      const bgHex = normalizeColor(styles.backgroundColor);
-      if (bgHex) {
+      const rawBg = readComputedCssProperty(gt, snapshot, viewport, 'background-color', 'backgroundColor');
+      if (rawBg && !isFullyTransparentColor(rawBg)) {
         containerSettings.background_background = 'classic';
-        containerSettings.background_color = bgHex;
+        containerSettings.background_color = rawBg;
       }
 
-      if (styles.backgroundImage && styles.backgroundImage.includes('url(')) {
-        const bgMatch = styles.backgroundImage.match(/url\(['"]?([^'"]+)['"]?\)/);
-        if (bgMatch) {
-          const bgUrl = resolveAssetUrl(bgMatch[1], options);
+      const rawBgImg = readComputedCssProperty(gt, snapshot, viewport, 'background-image', 'backgroundImage');
+
+      const singleImgUrl = extractSingleImageUrl(rawBgImg);
+      if (singleImgUrl) {
+        const resolvedBgUrl = resolveAssetUrl(singleImgUrl, options);
+        if (resolvedBgUrl) {
           containerSettings.background_background = 'classic';
-          containerSettings.background_image = { url: bgUrl, id: '' };
-        }
-      }
+          containerSettings.background_image = { url: resolvedBgUrl, id: '' };
 
-      if (hasAnyBorderRadius(styles)) {
-        containerSettings.border_radius = formatRadiusFromStyles(styles);
+          if (viewport === 'desktop') {
+            const geo = resolveImageBackgroundGeometry(gt, snapshot, viewport);
+            if (geo && geo.settings) {
+              if (geo.settings.background_size) containerSettings.background_size = geo.settings.background_size;
+              if (geo.settings.background_position) containerSettings.background_position = geo.settings.background_position;
+              if (geo.settings.background_repeat) containerSettings.background_repeat = geo.settings.background_repeat;
+            }
+          }
+        }
+      } else if (viewport === 'desktop') {
+        const gradResult = resolveGradientBackground(gt, snapshot, viewport);
+        if (gradResult && gradResult.mode === 'native-linear' && gradResult.settings) {
+          Object.assign(containerSettings, gradResult.settings);
+          delete containerSettings.background_image;
+        }
       }
 
       const containerBorder = resolveBorderSettings(styles);
@@ -2398,14 +2485,51 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
         containerSettings.max_height = { unit: 'px', size: decor.height };
         containerSettings.min_height = { unit: 'px', size: decor.height };
         containerSettings.overflow = 'hidden';
-        if (decor.hasVisualBg) {
+        if (decor.hasVisualBg && containerSettings.background_background !== 'gradient') {
           containerSettings.background_background = 'classic';
-          containerSettings.background_color = decor.background;
+          if (!containerSettings.background_color) {
+            containerSettings.background_color = decor.background;
+          }
         }
         if (decor.isCircular) {
           containerSettings.border_radius = { unit: '%', top: '50', right: '50', bottom: '50', left: '50', isLinked: true };
         }
       }
+
+      const radiusDecision = resolveComputedRadius(gt, snapshot, viewport);
+      if (radiusDecision.mode === 'native') {
+        containerSettings.border_radius = radiusDecision.setting;
+      } else if (radiusDecision.mode === 'css') {
+        delete containerSettings.border_radius;
+        containerSettings._radius_route = 'css';
+      } else {
+        delete containerSettings.border_radius;
+      }
+
+      const finalizeContainer = (settings) => {
+        const el = createContainer(settings);
+        if (radiusDecision.mode === 'css') {
+          if (!options.atomicRules || !Array.isArray(options.atomicRules)) {
+            const err = new Error(`[RADIUS_CSS_ROUTE_UNAVAILABLE] atomicRules array unavailable for CSS radius fallback on SID "${sid}"`);
+            err.code = 'RADIUS_CSS_ROUTE_UNAVAILABLE';
+            err.reason = 'RADIUS_CSS_ROUTE_UNAVAILABLE';
+            err.sid = sid;
+            throw err;
+          }
+          const scopedClass = ensureDeterministicClass(el, sid);
+          const c = radiusDecision.corners;
+          pushAtomicRule(
+            options,
+            `.${scopedClass} {\n` +
+            `  border-top-left-radius: ${c.topLeft} !important;\n` +
+            `  border-top-right-radius: ${c.topRight} !important;\n` +
+            `  border-bottom-right-radius: ${c.bottomRight} !important;\n` +
+            `  border-bottom-left-radius: ${c.bottomLeft} !important;\n` +
+            `}`
+          );
+        }
+        return el;
+      };
 
       containerSettings.padding = formatPaddingFromStyles(styles);
       containerSettings._padding = containerSettings.padding;
@@ -2664,7 +2788,7 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
           containerSettings.flex_gap = { unit: 'px', size: 0, column: 0, row: 0, isLinked: true };
           containerSettings.space_between_widgets = 0;
           containerSettings.elements = [mediaElement, bodyElement].filter(Boolean);
-          return createContainer(containerSettings);
+          return finalizeContainer(containerSettings);
         }
       }
 
@@ -2772,7 +2896,7 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
       // D3: Strict scoped exception for leaf containers (0 content children) with computed height > 0 and visual surface
       if (elements.length === 0 && !['html', 'body'].includes(node.tagName)) {
         const computedH = Math.round(parsePx(styles.height) || gt.rect?.h || 0);
-        const hasVisualBg = bgHex && bgHex !== 'transparent' && bgHex !== 'rgba(0, 0, 0, 0)';
+        const hasVisualBg = Boolean(rawBg && !isFullyTransparentColor(rawBg));
         const hasBgImg = styles.backgroundImage && styles.backgroundImage !== 'none' && styles.backgroundImage !== 'initial';
         const hasBorder = parsePx(styles.borderTopWidth) > 0 || parsePx(styles.borderBottomWidth) > 0 || parsePx(styles.borderLeftWidth) > 0 || parsePx(styles.borderRightWidth) > 0;
         const hasVisualSurface = Boolean(hasVisualBg || hasBgImg || hasBorder);
@@ -2784,11 +2908,23 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
         }
       }
 
-      const containerElement = createContainer(containerSettings);
+      const containerElement = finalizeContainer(containerSettings);
 
       if (decor && options.atomicRules && Array.isArray(options.atomicRules)) {
-        const scope = resolveElementSelector(containerElement, sid);
+        const scopedClass = ensureDeterministicClass(containerElement, sid);
+        const scope = scopedClass ? `.${scopedClass}` : resolveElementSelector(containerElement, sid);
         const bRule = decor.border ? `  border: ${decor.border} !important;\n` : '';
+
+        let bgRule = '';
+        if (rawBg && typeof rawBg === 'string') {
+          const trimmedBg = rawBg.trim();
+          if (isFullyTransparentColor(trimmedBg) || trimmedBg.toLowerCase() === 'transparent') {
+            bgRule = `  background-color: ${trimmedBg} !important;\n`;
+          } else if (parseColorParts(trimmedBg)) {
+            bgRule = `  background-color: ${trimmedBg} !important;\n`;
+          }
+        }
+
         pushAtomicRule(
           options,
           `${scope},\n` +
@@ -2798,8 +2934,7 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
           `  max-height: ${decor.height}px !important;\n` +
           `  flex-shrink: 0 !important;\n` +
           `  align-self: ${decor.alignSelf} !important;\n` +
-          `  border-radius: ${decor.borderRadius} !important;\n` +
-          `  background: ${decor.background} !important;\n` +
+          bgRule +
           bRule +
           `  display: flex !important;\n` +
           `  align-items: center !important;\n` +
@@ -2819,7 +2954,7 @@ function mapNodeToElementor(node, parentNode, snapshot, viewport = 'desktop', op
 function compileGroundTruthToElementor(astRoot, snapshot, options = {}) {
   const viewport = options.viewport || 'desktop';
   if (!options.unresolvedAssets) options.unresolvedAssets = [];
-  if (!options.atomicRules) options.atomicRules = [];
+  if (options.atomicRules === undefined) options.atomicRules = [];
   if (!options.assignedSids) options.assignedSids = new Set();
   const rootElement = mapNodeToElementor(astRoot, null, snapshot, viewport, options);
 
@@ -2844,5 +2979,6 @@ module.exports = {
   deduplicateContainerChildSpacing,
   detectIconDecor,
   detectInlineMixedContentSequence,
-  buildConsolidatedInlineTextWidget
+  buildConsolidatedInlineTextWidget,
+  resolveAssetUrl
 };

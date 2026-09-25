@@ -27,20 +27,35 @@ function mergeBoxModelSide(node, baseKey, side, value, viewport = "desktop") {
   const s = node.settings;
   const vpSuffix = viewport === "desktop" ? "" : "_" + viewport;
   const fullKey = baseKey + vpSuffix;
-  const px = String(Math.round(parseFloat(value)) || 0);
+  let sideValue = '';
+  let detectedUnit = null;
+
+  if (baseKey === 'border_radius') {
+    const valStr = String(value ?? '').trim();
+    const unitMatch = valStr.match(/(%|px)$/i);
+    if (unitMatch) {
+      detectedUnit = unitMatch[1].toLowerCase();
+    }
+    const num = parseFloat(valStr);
+    sideValue = isNaN(num) ? '0' : String(num);
+  } else {
+    sideValue = String(Math.round(parseFloat(value)) || 0);
+  }
 
   if (!s[fullKey] || typeof s[fullKey] !== "object") {
     const fallbackBox = (s[baseKey] && typeof s[baseKey] === "object") ? s[baseKey] : null;
     s[fullKey] = {
-      unit: fallbackBox?.unit || "px",
+      unit: detectedUnit || fallbackBox?.unit || "px",
       top: fallbackBox?.top !== undefined ? String(fallbackBox.top) : "0",
       right: fallbackBox?.right !== undefined ? String(fallbackBox.right) : "0",
       bottom: fallbackBox?.bottom !== undefined ? String(fallbackBox.bottom) : "0",
       left: fallbackBox?.left !== undefined ? String(fallbackBox.left) : "0",
       isLinked: false
     };
+  } else if (detectedUnit && baseKey === 'border_radius') {
+    s[fullKey].unit = detectedUnit;
   }
-  s[fullKey][side] = px;
+  s[fullKey][side] = sideValue;
   s[fullKey].isLinked = (
     s[fullKey].top === s[fullKey].right &&
     s[fullKey].right === s[fullKey].bottom &&
@@ -243,6 +258,9 @@ function applyR1Mutation(node, defect, gtSnapshot = null) {
   const isBoxDim = ["padding", "_padding", "button_padding", "margin", "_margin", "border_width", "border_radius"].includes(baseKey);
   if (isBoxDim) {
     if (baseKey === "border_radius") {
+      if (s._radius_route === 'css') {
+        return false;
+      }
       const radiusCorners = {
         top: 'borderTopLeftRadius',
         right: 'borderTopRightRadius',

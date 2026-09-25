@@ -33,6 +33,7 @@ const { runSmartSelfHealingLoop } = require('./smart/self-healing-loop');
 const { mergeResponsiveSettings } = require('./smart/responsive-merger');
 
 const { detectUniversalBoxedWidth, detectFallbackBoxedWidth } = require('./smart/boxed-width-detector');
+const { resolvePageCanvas } = require('./smart/page-canvas-resolver');
 
 function generateDelegationCode(traces = []) {
   if (!traces || !Array.isArray(traces) || traces.length === 0) return '';
@@ -444,12 +445,24 @@ async function compileHtmlToElementor(htmlContent, options = {}) {
     }
   }
 
+  let canvasReport = null;
+  if (isGroundTruthCompiled && gtSnapshot) {
+    canvasReport = resolvePageCanvas(gtSnapshot);
+  }
+
   let templateJson = {
     version: '0.4',
     title,
     type,
     content: contentElements
   };
+
+  if (canvasReport && canvasReport.status === 'SOLID_COLOR' && canvasReport.color) {
+    templateJson.page_settings = {
+      background_background: 'classic',
+      background_color: canvasReport.color
+    };
+  }
 
   // 4. Closed-Loop Autonomous Visual Self-Healing Inspection
   let visualReport = null;
@@ -529,6 +542,7 @@ async function compileHtmlToElementor(htmlContent, options = {}) {
     templateJson,
     auditReport,
     visualReport,
+    canvasReport,
     isAiCompiled,
     isGroundTruthCompiled,
     isFallbackLegacy,
@@ -536,6 +550,7 @@ async function compileHtmlToElementor(htmlContent, options = {}) {
       isAiCompiled,
       isGroundTruthCompiled,
       isFallbackLegacy,
+      canvas: canvasReport,
       model: isGroundTruthCompiled
         ? 'Single-Pass Ground Truth (Chromium, local)'
         : (isFallbackLegacy
@@ -550,7 +565,7 @@ async function compileHtmlToElementor(htmlContent, options = {}) {
       detectedFontFamily,
       detectedBoxedWidth
     }
-    };
+  };
   });
 }
 

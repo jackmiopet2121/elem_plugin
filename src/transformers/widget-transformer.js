@@ -363,14 +363,16 @@ function createButtonWidget(rawOptions = {}) {
         right: String(border_radius.right !== undefined ? border_radius.right : 0),
         bottom: String(border_radius.bottom !== undefined ? border_radius.bottom : 0),
         left: String(border_radius.left !== undefined ? border_radius.left : 0),
-        isLinked: false
+        isLinked: border_radius.isLinked !== undefined
+          ? Boolean(border_radius.isLinked)
+          : (border_radius.top === border_radius.right && border_radius.right === border_radius.bottom && border_radius.bottom === border_radius.left)
       } : {
         unit: 'px',
         top: String(border_radius),
         right: String(border_radius),
         bottom: String(border_radius),
         left: String(border_radius),
-        isLinked: false
+        isLinked: true
       }
     } : {}),
     ...(padding ? {

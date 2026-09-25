@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "8.2.0-visual-diagnosis",
+  "baselineCommit": "0d5d71de763bc839320cc0ef8e084434beb682ba",
+  "disclaimer": "Computed-style/render diagnosis based on headless Chromium computed styles and bounding rects; scoped strictly to selected (fixture, nodeSid, viewport, backgroundProperty) records. Does not prove full visual parity, live WordPress rendering parity, or the absence of all conversion regressions across the compiler.",
+  "summary": {
+    "totalDiagnosedFixtures": 0,
+    "totalDiagnosedRecords": 0,
+    "preexistingMismatchCount": 0,
+    "possibleConversionRegressionCount": 0,
+    "unresolvedCount": 0,
+    "unverifiableCount": 0
+  },
+  "fixtures": []
+}

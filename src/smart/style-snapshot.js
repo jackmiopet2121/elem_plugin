@@ -418,7 +418,7 @@ function inPageExtract(options = {}) {
     'width', 'height', 'minWidth', 'minHeight', 'maxWidth', 'maxHeight',
     'marginTop', 'marginRight', 'marginBottom', 'marginLeft',
     'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft',
-    'backgroundColor', 'backgroundImage',
+    'backgroundColor', 'backgroundImage', 'backgroundSize', 'backgroundPosition', 'backgroundRepeat',
     'color', 'fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing',
     'textAlign', 'textTransform', 'whiteSpace',
     'borderTopLeftRadius', 'borderTopRightRadius', 'borderBottomRightRadius', 'borderBottomLeftRadius',
