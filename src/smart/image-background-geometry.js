@@ -301,7 +301,10 @@ function classifyImageBackgroundState(bgImageStr) {
   }
 
   const s = bgImageStr.trim();
-  if (s === '' || s.toLowerCase() === 'none') {
+  if (s === '') {
+    return { state: 'unsupported', url: null, reason: 'empty_computed_style' };
+  }
+  if (s.toLowerCase() === 'none') {
     return { state: 'none', url: null, reason: null };
   }
 

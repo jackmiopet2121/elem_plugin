@@ -22,7 +22,7 @@ const { captureGroundTruth } = require('../src/smart/style-snapshot');
 const { captureRenderSnapshot } = require('../src/smart/render-snapshot');
 const { renderElementorToHtml, isSafeCssUrl } = require('../src/emulator/elementor-virtual-renderer');
 const { compileHtmlToElementor } = require('../src/engine');
-const { auditVerificationMatrix } = require('../src/smart/verification-matrix');
+const { auditVerificationMatrix, findScopedImageCssDeclaration } = require('../src/smart/verification-matrix');
 
 (async () => {
   console.log('========================================================================');
@@ -871,6 +871,157 @@ const { auditVerificationMatrix } = require('../src/smart/verification-matrix');
     assert(tabDefects[0].message.includes('rendered with unexpected backgroundImage at tablet: expected "none"'));
   });
 
+  let printedPrefixSidDefect = null;
+  runTest('2.17. Negative: Prefix SID rule (.e-sid-foobar vs sid-foo) returns null and flags HIGH defect', () => {
+    const urlA = 'https://example.com/hero.jpg';
+    const sid = 'sid-foo';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    // Template for sid-foo only has .e-sid-foobar rule
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: 'e-sid-foobar'
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-foobar {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const decl = findScopedImageCssDeclaration(tpl, sid, 'tablet');
+    assert.strictEqual(decl, null, 'findScopedImageCssDeclaration must return null for prefix-only SID rule (.e-sid-foobar vs sid-foo)');
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    const tabDefects = defects.filter(d => d.viewport === 'tablet');
+    assert.strictEqual(tabDefects.length, 1, 'Must flag missing scoped CSS route for sid-foo when only prefix rule exists');
+    assert.strictEqual(tabDefects[0].severity, 'HIGH', 'Defect severity must be HIGH');
+    printedPrefixSidDefect = tabDefects[0];
+  });
+
+  runTest('2.18. Positive: Exact SID rule (.e-sid-foo) produces 0 defects', () => {
+    const urlA = 'https://example.com/hero.jpg';
+    const sid = 'sid-foo';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: 'e-sid-foo'
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-foo {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const decl = findScopedImageCssDeclaration(tpl, sid, 'tablet');
+    assert.ok(decl && decl.value === 'none' && decl.isImportant === true, 'Exact SID rule must be found');
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Exact SID rule must produce zero RULE-SURFACE-01 defects');
+  });
+
+  let printedCompoundMediaDefect = null;
+  runTest('2.19. Negative: Compound media query does not cascade to mobile and flags HIGH defect', () => {
+    const urlA = 'https://example.com/hero.jpg';
+    const sid = 'sid-foo';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    // Tablet rule has compound query (max-width: 1024px) and (min-width: 768px)
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: 'e-sid-foo'
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) and (min-width: 768px) {\n  .e-sid-foo {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const mobDecl = findScopedImageCssDeclaration(tpl, sid, 'mobile');
+    assert.strictEqual(mobDecl, null, 'Scoped declaration mobile must be null for compound tablet query');
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    const mobDefects = defects.filter(d => d.viewport === 'mobile');
+    assert.strictEqual(mobDefects.length, 1, 'Must flag missing mobile rule because compound query does not cascade');
+    assert.strictEqual(mobDefects[0].severity, 'HIGH', 'Defect severity must be HIGH');
+    printedCompoundMediaDefect = mobDefects[0];
+  });
+
+  runTest('2.20. Positive: Simple media query cascades to mobile and produces 0 defects', () => {
+    const urlA = 'https://example.com/hero.jpg';
+    const sid = 'sid-foo';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: 'none',
+      mobileImg: 'none'
+    });
+    // Tablet rule has simple max-width 1024px query
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: 'e-sid-foo'
+      },
+      atomicRules: [
+        `@media (max-width: 1024px) {\n  .e-sid-foo {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const mobDecl = findScopedImageCssDeclaration(tpl, sid, 'mobile');
+    assert.ok(mobDecl && mobDecl.value === 'none' && mobDecl.cascaded === true, 'Simple tablet media query must cascade to mobile');
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Simple media query cascade must produce zero RULE-SURFACE-01 defects');
+  });
+
   // ---------------------------------------------------------------------------
   // Real Headless Chromium Fixture
   // ---------------------------------------------------------------------------
@@ -1143,6 +1294,12 @@ const { auditVerificationMatrix } = require('../src/smart/verification-matrix');
 
   console.log('\n[DEFECT 3] Unsupported Transition to "none":');
   console.log(JSON.stringify(printedNoneTransitionDefect, null, 2));
+
+  console.log('\n[DEFECT 4] Prefix SID Selector Mismatch (.e-sid-foobar vs sid-foo):');
+  console.log(JSON.stringify(printedPrefixSidDefect, null, 2));
+
+  console.log('\n[DEFECT 5] Compound Media Query Failure to Cascade (@media (max-width: 1024px) and (min-width: 768px)):');
+  console.log(JSON.stringify(printedCompoundMediaDefect, null, 2));
 
   // ---------------------------------------------------------------------------
   // Summary

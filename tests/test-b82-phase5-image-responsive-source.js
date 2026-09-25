@@ -22,6 +22,7 @@ const { renderElementorToHtml, isSafeCssUrl } = require('../src/emulator/element
 const { parseHtmlToAst } = require('../src/parser/html-parser');
 const { compileGroundTruthToElementor, resolveAssetUrl } = require('../src/smart/geometry-mapper');
 const { mergeNodeResponsive } = require('../src/smart/responsive-merger');
+const { classifyImageBackgroundState } = require('../src/smart/image-background-geometry');
 const { compileHtmlToElementor } = require('../src/engine');
 
 (async () => {
@@ -618,6 +619,44 @@ const { compileHtmlToElementor } = require('../src/engine');
     elements[0].settings.background_image_tablet = { url: jsUrl, id: '' };
     const preview = renderElementorToHtml({ content: elements, page_settings: {} });
     assert(!preview.includes('javascript:alert(1)'), 'Virtual preview must not emit javascript URL');
+  });
+
+  runTest('6.8. Fail closed on empty computed image: empty strings return unsupported and emit zero native or CSS none reset', () => {
+    // 1. Classification assertions
+    const emptyRes = classifyImageBackgroundState('');
+    assert.deepStrictEqual(emptyRes, { state: 'unsupported', url: null, reason: 'empty_computed_style' }, 'Empty string must be unsupported empty_computed_style');
+
+    const whitespaceRes = classifyImageBackgroundState('   ');
+    assert.deepStrictEqual(whitespaceRes, { state: 'unsupported', url: null, reason: 'empty_computed_style' }, 'Whitespace string must be unsupported empty_computed_style');
+
+    const noneRes = classifyImageBackgroundState('none');
+    assert.deepStrictEqual(noneRes, { state: 'none', url: null, reason: null }, 'Literal none must return state none');
+
+    const noneUpperRes = classifyImageBackgroundState('NONE');
+    assert.deepStrictEqual(noneUpperRes, { state: 'none', url: null, reason: null }, 'Case-insensitive NONE must return state none');
+
+    const validRes = classifyImageBackgroundState('url("https://example.com/valid.jpg")');
+    assert.deepStrictEqual(validRes, { state: 'url', url: 'https://example.com/valid.jpg', reason: null }, 'Valid URL must return state url');
+
+    // 2. Integration with responsive merger: zero native tablet override, zero CSS none reset
+    const gt = make3VpGtImageSnapshot({
+      sid: 'c_empty_tab',
+      desktopImg: 'url("https://example.com/hero.jpg")',
+      tabletImg: '',
+      mobileImg: 'url("https://example.com/hero.jpg")'
+    });
+    const ast = parseHtmlToAst(gt.annotatedHtml);
+    const elements = compileGroundTruthToElementor(ast, gt, { viewport: 'desktop', atomicRules: [] });
+    const atomicRules = [];
+    mergeNodeResponsive(elements[0], null, gt, { atomicRules });
+
+    assert.strictEqual(elements[0].settings.background_image_tablet, undefined, 'Must not emit native background_image_tablet for empty computed style');
+    assert.strictEqual(elements[0].settings.background_image_mobile, undefined, 'Must not emit native background_image_mobile');
+    assert.strictEqual(
+      atomicRules.some(r => r.includes('none !important')),
+      false,
+      'Must NOT emit CSS none reset when computed style is empty string'
+    );
   });
 
   // ---------------------------------------------------------------------------

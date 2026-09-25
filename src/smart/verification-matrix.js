@@ -265,41 +265,21 @@ function parsePx(val) {
 
 const EDITABLE_RELAX = 2.5;
 
-function hasContainerCssRoute(templateJson, sid, options = {}) {
-  if (!sid) return false;
-  const cleanSid = String(sid).replace(/^sid-/, '');
-  const targetClass = `e-sid-${cleanSid}`;
+function isExactBaseContainerSelector(selectorStr, targetClass) {
+  if (!selectorStr || typeof selectorStr !== 'string') return false;
+  const targetSelector = `.${targetClass}`;
+  const parts = selectorStr.split(',');
+  return parts.some(part => part.trim() === targetSelector);
+}
 
-  const atomicRules = Array.isArray(templateJson?.atomicRules)
-    ? templateJson.atomicRules
-    : (Array.isArray(options?.atomicRules) ? options.atomicRules : null);
+function isSimpleTabletMedia(mediaQuery) {
+  if (!mediaQuery || typeof mediaQuery !== 'string') return false;
+  return /^@media\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(?:1024|1024\.98)px\s*\)$/i.test(mediaQuery.trim());
+}
 
-  if (atomicRules && atomicRules.some(r => typeof r === 'string' && r.includes(targetClass))) {
-    return true;
-  }
-  if (typeof templateJson?.microCss === 'string' && templateJson.microCss.includes(targetClass)) {
-    return true;
-  }
-  if (typeof options?.microCss === 'string' && options.microCss.includes(targetClass)) {
-    return true;
-  }
-
-  let foundInStylesheet = false;
-  function walk(els) {
-    if (!Array.isArray(els) || foundInStylesheet) return;
-    for (const el of els) {
-      if (el && el.widgetType === 'html') {
-        const html = el.settings?.html;
-        if (typeof html === 'string' && html.includes(targetClass)) {
-          foundInStylesheet = true;
-          return;
-        }
-      }
-      if (el && el.elements) walk(el.elements);
-    }
-  }
-  walk(templateJson?.content || (Array.isArray(templateJson) ? templateJson : []));
-  return foundInStylesheet;
+function isSimpleMobileMedia(mediaQuery) {
+  if (!mediaQuery || typeof mediaQuery !== 'string') return false;
+  return /^@media\s*(?:(?:only\s+)?screen\s+and\s+)?\(\s*max-width\s*:\s*(?:767|767\.98)px\s*\)$/i.test(mediaQuery.trim());
 }
 
 /**
@@ -373,6 +353,56 @@ function extractBackgroundImageFromCssBody(body) {
   return { value, isImportant };
 }
 
+function hasContainerCssRoute(templateJson, sid, options = {}) {
+  if (!sid) return false;
+  const cleanSid = String(sid).replace(/^sid-/, '');
+  const targetClass = `e-sid-${cleanSid}`;
+
+  const allCssTexts = [];
+  if (Array.isArray(templateJson?.atomicRules)) {
+    allCssTexts.push(...templateJson.atomicRules);
+  }
+  if (Array.isArray(options?.atomicRules)) {
+    allCssTexts.push(...options.atomicRules);
+  }
+  if (typeof templateJson?.microCss === 'string') {
+    allCssTexts.push(templateJson.microCss);
+  }
+  if (typeof options?.microCss === 'string') {
+    allCssTexts.push(options.microCss);
+  }
+
+  function walk(els) {
+    if (!Array.isArray(els)) return;
+    for (const el of els) {
+      if (el && el.widgetType === 'html') {
+        const html = el.settings?.html;
+        if (typeof html === 'string' && html.includes('<style')) {
+          const match = html.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
+          if (match && match[1]) {
+            allCssTexts.push(match[1]);
+          }
+        } else if (typeof html === 'string' && html.includes('{')) {
+          allCssTexts.push(html);
+        }
+      }
+      if (el && el.elements) walk(el.elements);
+    }
+  }
+  walk(templateJson?.content || (Array.isArray(templateJson) ? templateJson : []));
+
+  for (const text of allCssTexts) {
+    if (!text || typeof text !== 'string') continue;
+    const rules = parseCssRules(text);
+    for (const rule of rules) {
+      if (isExactBaseContainerSelector(rule.selector, targetClass) && /background(?:-image)?\s*:/i.test(rule.body)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
 /**
  * Finds the effective scoped CSS background-image declaration for a given SID and viewport.
  *
@@ -411,6 +441,8 @@ function findScopedImageCssDeclaration(templateJson, sid, vp, options = {}) {
           if (match && match[1]) {
             allCssTexts.push(match[1]);
           }
+        } else if (typeof html === 'string' && html.includes('{')) {
+          allCssTexts.push(html);
         }
       }
       if (el && el.elements) walk(el.elements);
@@ -420,21 +452,26 @@ function findScopedImageCssDeclaration(templateJson, sid, vp, options = {}) {
 
   let desktopDecl = null;
   let tabletDecl = null;
+  let tabletIsSimple = false;
   let mobileDecl = null;
 
   for (const text of allCssTexts) {
-    if (!text || typeof text !== 'string' || !text.includes(targetClass)) continue;
+    if (!text || typeof text !== 'string') continue;
     const rules = parseCssRules(text);
     for (const rule of rules) {
-      if (!rule.selector || !rule.selector.includes(targetClass)) continue;
+      if (!isExactBaseContainerSelector(rule.selector, targetClass)) continue;
       const decl = extractBackgroundImageFromCssBody(rule.body);
       if (!decl) continue;
 
       if (!rule.media) {
         desktopDecl = decl;
+      } else if (isSimpleTabletMedia(rule.media)) {
+        tabletDecl = decl;
+        tabletIsSimple = true;
       } else if (/max-width\s*:\s*(?:1024|1024\.98)px/i.test(rule.media)) {
         tabletDecl = decl;
-      } else if (/max-width\s*:\s*(?:767|767\.98)px/i.test(rule.media)) {
+        tabletIsSimple = false;
+      } else if (isSimpleMobileMedia(rule.media)) {
         mobileDecl = decl;
       }
     }
@@ -458,8 +495,8 @@ function findScopedImageCssDeclaration(templateJson, sid, vp, options = {}) {
     if (mobileDecl) {
       return { found: true, explicit: true, value: mobileDecl.value, isImportant: mobileDecl.isImportant, cascaded: false };
     }
-    // Mobile cascades from tablet max-width 1024px rule if tablet has declaration
-    if (tabletDecl) {
+    // Mobile cascades from tablet ONLY if tablet rule is a simple max-width query
+    if (tabletDecl && tabletIsSimple) {
       return { found: true, explicit: false, value: tabletDecl.value, isImportant: tabletDecl.isImportant, cascaded: true };
     }
     return null;
@@ -1065,10 +1102,12 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
 
       const rawSid = containerEl._sid || tmplSettings._sid || containerEl._dom_id || tmplSettings._dom_id || sid || '';
       const cleanSid = String(rawSid).replace(/^sid-/, '');
-      const hasSidClass = Boolean(
-        (tmplSettings._css_classes && tmplSettings._css_classes.includes(`e-sid-${cleanSid}`)) ||
-        (tmplSettings.css_classes && tmplSettings.css_classes.includes(`e-sid-${cleanSid}`))
-      );
+      const expectedSidClass = `e-sid-${cleanSid}`;
+      const classTokens = [
+        ...(typeof tmplSettings._css_classes === 'string' ? tmplSettings._css_classes.trim().split(/\s+/) : []),
+        ...(typeof tmplSettings.css_classes === 'string' ? tmplSettings.css_classes.trim().split(/\s+/) : [])
+      ];
+      const hasSidClass = classTokens.includes(expectedSidClass);
 
       const hasCssRoute = hasContainerCssRoute(templateJson, sid, options);
       const isCssControlled = Boolean(
@@ -2471,5 +2510,8 @@ function auditVerificationMatrix(gtSnapshot, renderSnapshot, templateJson, optio
 module.exports = {
   AVAILABLE_RULES,
   auditVerificationMatrix,
-  findScopedImageCssDeclaration
+  findScopedImageCssDeclaration,
+  isExactBaseContainerSelector,
+  isSimpleTabletMedia,
+  isSimpleMobileMedia
 };
