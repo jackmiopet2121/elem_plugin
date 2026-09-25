@@ -452,7 +452,6 @@ function findScopedImageCssDeclaration(templateJson, sid, vp, options = {}) {
 
   let desktopDecl = null;
   let tabletDecl = null;
-  let tabletIsSimple = false;
   let mobileDecl = null;
 
   for (const text of allCssTexts) {
@@ -467,10 +466,6 @@ function findScopedImageCssDeclaration(templateJson, sid, vp, options = {}) {
         desktopDecl = decl;
       } else if (isSimpleTabletMedia(rule.media)) {
         tabletDecl = decl;
-        tabletIsSimple = true;
-      } else if (/max-width\s*:\s*(?:1024|1024\.98)px/i.test(rule.media)) {
-        tabletDecl = decl;
-        tabletIsSimple = false;
       } else if (isSimpleMobileMedia(rule.media)) {
         mobileDecl = decl;
       }
@@ -496,7 +491,7 @@ function findScopedImageCssDeclaration(templateJson, sid, vp, options = {}) {
       return { found: true, explicit: true, value: mobileDecl.value, isImportant: mobileDecl.isImportant, cascaded: false };
     }
     // Mobile cascades from tablet ONLY if tablet rule is a simple max-width query
-    if (tabletDecl && tabletIsSimple) {
+    if (tabletDecl) {
       return { found: true, explicit: false, value: tabletDecl.value, isImportant: tabletDecl.isImportant, cascaded: true };
     }
     return null;

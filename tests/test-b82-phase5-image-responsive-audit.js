@@ -947,7 +947,7 @@ const { auditVerificationMatrix, findScopedImageCssDeclaration } = require('../s
   });
 
   let printedCompoundMediaDefect = null;
-  runTest('2.19. Negative: Compound media query does not cascade to mobile and flags HIGH defect', () => {
+  runTest('2.19. Negative: Non-applicable compound media query (@media (max-width: 1024px) and (min-width: 900px)) returns null for tablet/mobile and flags HIGH defect', () => {
     const urlA = 'https://example.com/hero.jpg';
     const sid = 'sid-foo';
     const gt = make3VpGtImageSnapshot({
@@ -956,13 +956,14 @@ const { auditVerificationMatrix, findScopedImageCssDeclaration } = require('../s
       tabletImg: 'none',
       mobileImg: 'none'
     });
+    // Render snapshot has desktop on desktop, and none on tablet/mobile
     const render = makeRenderSnapshotMatching({
       sid,
       desktopImg: `url("${urlA}")`,
       tabletImg: 'none',
       mobileImg: 'none'
     });
-    // Tablet rule has compound query (max-width: 1024px) and (min-width: 768px)
+    // Template for sid-foo only has compound query @media (max-width: 1024px) and (min-width: 900px)
     const tpl = makeTemplateJson({
       sid,
       settings: {
@@ -971,22 +972,25 @@ const { auditVerificationMatrix, findScopedImageCssDeclaration } = require('../s
         _css_classes: 'e-sid-foo'
       },
       atomicRules: [
-        `@media (max-width: 1024px) and (min-width: 768px) {\n  .e-sid-foo {\n    background-image: none !important;\n  }\n}`
+        `@media (max-width: 1024px) and (min-width: 900px) {\n  .e-sid-foo {\n    background-image: none !important;\n  }\n}`
       ]
     });
 
+    const tabDecl = findScopedImageCssDeclaration(tpl, sid, 'tablet');
+    assert.strictEqual(tabDecl, null, 'findScopedImageCssDeclaration must return null for tablet when media is compound (min-width: 900px)');
+
     const mobDecl = findScopedImageCssDeclaration(tpl, sid, 'mobile');
-    assert.strictEqual(mobDecl, null, 'Scoped declaration mobile must be null for compound tablet query');
+    assert.strictEqual(mobDecl, null, 'findScopedImageCssDeclaration must return null for mobile when media is compound');
 
     const audit = auditVerificationMatrix(gt, render, tpl);
     const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
-    const mobDefects = defects.filter(d => d.viewport === 'mobile');
-    assert.strictEqual(mobDefects.length, 1, 'Must flag missing mobile rule because compound query does not cascade');
-    assert.strictEqual(mobDefects[0].severity, 'HIGH', 'Defect severity must be HIGH');
-    printedCompoundMediaDefect = mobDefects[0];
+    const tabDefects = defects.filter(d => d.viewport === 'tablet');
+    assert.strictEqual(tabDefects.length, 1, 'Matrix must flag HIGH RULE-SURFACE-01 defect on tablet because route does not apply to 768px');
+    assert.strictEqual(tabDefects[0].severity, 'HIGH', 'Defect severity must be HIGH');
+    printedCompoundMediaDefect = tabDefects[0];
   });
 
-  runTest('2.20. Positive: Simple media query cascades to mobile and produces 0 defects', () => {
+  runTest('2.20. Positive: Simple tablet media query (@media (max-width: 1024px)) is valid tablet route and cascades to mobile with 0 defects', () => {
     const urlA = 'https://example.com/hero.jpg';
     const sid = 'sid-foo';
     const gt = make3VpGtImageSnapshot({
@@ -1001,7 +1005,6 @@ const { auditVerificationMatrix, findScopedImageCssDeclaration } = require('../s
       tabletImg: 'none',
       mobileImg: 'none'
     });
-    // Tablet rule has simple max-width 1024px query
     const tpl = makeTemplateJson({
       sid,
       settings: {
@@ -1014,12 +1017,53 @@ const { auditVerificationMatrix, findScopedImageCssDeclaration } = require('../s
       ]
     });
 
+    const tabDecl = findScopedImageCssDeclaration(tpl, sid, 'tablet');
+    assert.ok(tabDecl && tabDecl.value === 'none' && tabDecl.isImportant === true, 'Simple tablet media query must be a valid tablet route');
+
     const mobDecl = findScopedImageCssDeclaration(tpl, sid, 'mobile');
     assert.ok(mobDecl && mobDecl.value === 'none' && mobDecl.cascaded === true, 'Simple tablet media query must cascade to mobile');
 
     const audit = auditVerificationMatrix(gt, render, tpl);
     const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
-    assert.strictEqual(defects.length, 0, 'Simple media query cascade must produce zero RULE-SURFACE-01 defects');
+    assert.strictEqual(defects.length, 0, 'Simple tablet media query must produce zero RULE-SURFACE-01 defects');
+  });
+
+  runTest('2.21. Positive: Simple mobile media query (@media (max-width: 767px)) is valid mobile route with 0 defects', () => {
+    const urlA = 'https://example.com/hero.jpg';
+    const sid = 'sid-foo';
+    const gt = make3VpGtImageSnapshot({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: `url("${urlA}")`,
+      mobileImg: 'none'
+    });
+    const render = makeRenderSnapshotMatching({
+      sid,
+      desktopImg: `url("${urlA}")`,
+      tabletImg: `url("${urlA}")`,
+      mobileImg: 'none'
+    });
+    const tpl = makeTemplateJson({
+      sid,
+      settings: {
+        background_background: 'classic',
+        background_image: { url: urlA, id: '' },
+        _css_classes: 'e-sid-foo'
+      },
+      atomicRules: [
+        `@media (max-width: 767px) {\n  .e-sid-foo {\n    background-image: none !important;\n  }\n}`
+      ]
+    });
+
+    const tabDecl = findScopedImageCssDeclaration(tpl, sid, 'tablet');
+    assert.strictEqual(tabDecl, null, 'Tablet must not match mobile media query');
+
+    const mobDecl = findScopedImageCssDeclaration(tpl, sid, 'mobile');
+    assert.ok(mobDecl && mobDecl.value === 'none' && mobDecl.isImportant === true, 'Simple mobile media query must be a valid mobile route');
+
+    const audit = auditVerificationMatrix(gt, render, tpl);
+    const defects = audit.defects.filter(d => d.nodeSid === sid && d.rule === 'RULE-SURFACE-01');
+    assert.strictEqual(defects.length, 0, 'Simple mobile media query must produce zero RULE-SURFACE-01 defects');
   });
 
   // ---------------------------------------------------------------------------
@@ -1298,7 +1342,7 @@ const { auditVerificationMatrix, findScopedImageCssDeclaration } = require('../s
   console.log('\n[DEFECT 4] Prefix SID Selector Mismatch (.e-sid-foobar vs sid-foo):');
   console.log(JSON.stringify(printedPrefixSidDefect, null, 2));
 
-  console.log('\n[DEFECT 5] Compound Media Query Failure to Cascade (@media (max-width: 1024px) and (min-width: 768px)):');
+  console.log('\n[DEFECT 5] Non-Applicable Compound Media Query Failure (@media (max-width: 1024px) and (min-width: 900px)):');
   console.log(JSON.stringify(printedCompoundMediaDefect, null, 2));
 
   // ---------------------------------------------------------------------------
